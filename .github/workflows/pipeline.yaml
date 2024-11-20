@@ -23,5 +23,6 @@ jobs:
         run: |
           cd android
           java -version
+          javac --version
           mvn -v
 
