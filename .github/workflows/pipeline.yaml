@@ -19,18 +19,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Set JAVA_HOME
-        run: |
-          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
-          export PATH=$JAVA_HOME/bin:$PATH
-          java -version
-          javac --version
         
-      - name: Run Tests on BrowserStack
+      - name: Run Tests on BrowserStack(android)
         run: |
           export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
           export PATH=$JAVA_HOME/bin:$PATH
           export PATH="~/apache-maven-3.9.9/bin:$PATH"
           cd android
+          mvn test
+
+      - name: Run Tests on BrowserStack(ios)
+        run: |
+          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
+          export PATH=$JAVA_HOME/bin:$PATH
+          export PATH="~/apache-maven-3.9.9/bin:$PATH"
+          cd ios
           mvn test
 

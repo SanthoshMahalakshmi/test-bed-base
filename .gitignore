@@ -20,6 +20,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
+/android/logs/
+/ios/logs/
+/android/target/
+/target/
 
 ### NetBeans ###
 /nbproject/private/
