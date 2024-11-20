@@ -22,5 +22,6 @@ jobs:
       - name: Run Tests on BrowserStack
         run: |
           cd android
-          mvn test 
+          java -version
+          mvn -v
 
