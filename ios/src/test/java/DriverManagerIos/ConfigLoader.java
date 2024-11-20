@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.Map;
 
 public class ConfigLoader {
-
+            /*Ios config class*/
     public static Map<String, Object> loadConfig(String filePath) {
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());

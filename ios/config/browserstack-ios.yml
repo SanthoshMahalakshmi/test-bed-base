@@ -1,0 +1,12 @@
+userName: santhoshkrishnan_w9cGeV
+accessKey: bj1wKFBJqyxY8Umh1fzt
+framework: testng
+app: bs://4037823ab6d4a51936605515c118fc33465445fa
+platforms:
+  - platformName: iOS
+    deviceName: iPhone 14 Pro Max
+    platformVersion: 16.0
+parallelsPerPlatform: 1
+browserstackLocal: true
+buildName: Test bed run for ios
+projectName: MoAI_Mobile_Test_Automation

@@ -1,10 +1,14 @@
 package DriverManagerIos;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.List;
@@ -40,45 +44,62 @@ public class DriverManager {
 
     @BeforeMethod
     public void initializeDriverForIOS() throws Exception {
-        // Load JSON configuration
-        String jsonFilePath = "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/ios/config/browserstack.json";
-        Map<String, Object> config = ConfigLoader.loadConfig(jsonFilePath);
+        try {
+            InputStream inputStream = new FileInputStream("config/browserstack-ios.yml");
 
-        // Extract platform-specific capabilities
-        Map<String, String> platforms = getPlatformDetails(config);
+            if (inputStream == null) {
+                throw new IllegalArgumentException("YAML file not found in resources.");
+            }
 
-        // Use MutableCapabilities for BrowserStack
-        MutableCapabilities capabilities = new MutableCapabilities();
+            // Parse YAML content
+            Yaml yaml = new Yaml();
+            Map<String, Object> config = yaml.load(inputStream);
 
-        // Set BrowserStack options
-        MutableCapabilities browserStackOptions = new MutableCapabilities();
-        browserStackOptions.setCapability("browserstack.user", config.get("browserstack.user"));
-        browserStackOptions.setCapability("browserstack.key", config.get("browserstack.key"));
-        browserStackOptions.setCapability("appiumVersion", "1.22.0");
-        browserStackOptions.setCapability("debug", "true");
+            // Extract details from the YAML
+            String userName = (String) config.get("userName");
+            String accessKey = (String) config.get("accessKey");
+            String app = (String) config.get("app");
+            String buildName = (String) config.get("buildName");
+            String projectName = (String) config.get("projectName");
 
-        // Set platform-specific capabilities
-        browserStackOptions.setCapability("deviceName", platforms.get("deviceName"));
-        browserStackOptions.setCapability("platformVersion", platforms.get("platformVersion"));
-        browserStackOptions.setCapability("app", config.get("app"));
+            // Get platform-specific capabilities
+            List<Map<String, Object>> platforms = (List<Map<String, Object>>) config.get("platforms");
+            Map<String, Object> platform = platforms.get(0);
+            String platformName = (String) platform.get("platformName");
+            String deviceName = (String) platform.get("deviceName");
 
-        // Combine capabilities into a single object
-        capabilities.setCapability("bstack:options", browserStackOptions);
+            // Handle platformVersion as String or Double
+            Object platformVersion = platform.get("platformVersion");
+            String platformVersionString = platformVersion instanceof Double
+                    ? String.valueOf(platformVersion)
+                    : (String) platformVersion;
 
-        // Additional capabilities if needed
-        capabilities.setCapability("buildName", config.get("build"));
-        capabilities.setCapability("projectName", config.get("project"));
+            // Setup BrowserStack capabilities
+            MutableCapabilities capabilities = new MutableCapabilities();
+            capabilities.setCapability("app", app);
 
-        // Debugging logs to verify capabilities
-        logger.info("Loaded JSON File: " + jsonFilePath);
-        logger.info("BrowserStack User: " + config.get("browserstack.user"));
-        logger.info("BrowserStack Key: " + config.get("browserstack.key"));
-        logger.info("Parsed Platform Details: " + platforms.toString());
-        logger.info("Final Capabilities Sent to BrowserStack: " + capabilities.toString());
+            Map<String, Object> browserstackOptions = new java.util.HashMap<>();
+            browserstackOptions.put("userName", userName);
+            browserstackOptions.put("accessKey", accessKey);
+            browserstackOptions.put("osVersion", platformVersionString);
+            browserstackOptions.put("deviceName", deviceName);
+            browserstackOptions.put("projectName", projectName);
+            browserstackOptions.put("buildName", buildName);
+            browserstackOptions.put("sessionName", "iOS Test Session");
+            browserstackOptions.put("appiumVersion", "2.0.0");
+            browserstackOptions.put("local", "false");
+            browserstackOptions.put("debug", "true");
 
-        // Initialize RemoteWebDriver
-        driver = new IOSDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities);
-        setDriverForIOS(driver); // Set the driver for thread-safe access
+            capabilities.setCapability("bstack:options", browserstackOptions);
+
+            setDriverForIOS(driver = new IOSDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
+            logger.info("iOS Driver initialized successfully.");
+            inputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to initialize iOS driver.", e);
+        }
     }
 
     @AfterMethod

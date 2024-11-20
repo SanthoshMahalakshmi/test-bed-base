@@ -2,7 +2,7 @@
 <suite name="iOS Automation Suite" parallel="false">
     <test name="iOS Tests">
         <classes>
-<!--            <class name=""/>-->
+            <class name="WelcomePageIos.WelcomePage"/>
         </classes>
     </test>
 </suite>

@@ -5,27 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9103ce74-82bf-4b04-bce9-ddb3d2a4c075" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/config/browserstack-android.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/config/browserstack.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/ConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/DriverManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/test/java/WelcomePageAndroid/WelcomePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/test/resources/android-testng.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/config/browserstack.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/ConfigLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/DriverManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/src/test/java/WelcomePageIos/WelcomePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/src/test/resources/ios-testng.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mobile/automation/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/config/browserstack-ios.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/config/browserstack.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/logs/browserstack-javaagent.debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/android/logs/browserstack-javaagent.debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/logs/browserstack-javaagent.log" beforeDir="false" afterPath="$PROJECT_DIR$/android/logs/browserstack-javaagent.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/DriverManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/DriverManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/config/browserstack.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ios/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/ConfigLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/DriverManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/DriverManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/src/test/resources/ios-testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ios/src/test/resources/ios-testng.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,30 +33,30 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2p4LIos4DOww9fUBkQVqkXa5kBv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TestNG.WelcomePage.BaseLogin.executor": "Run",
-    "git-widget-placeholder": "Final",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/android/config",
-    "onboarding.tips.debug.path": "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/ios/src/main/java/com/mobile/automation/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.16943231",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TestNG.WelcomePage.BaseLogin.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Final&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/santhosh/Mobile_Automation_Project/MoAI_Mobile_Test_Automation&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/ios/src/main/java/com/mobile/automation/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.16943231&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/android/config" />

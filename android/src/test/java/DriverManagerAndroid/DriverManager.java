@@ -80,7 +80,7 @@ public class DriverManager {
             browserstackOptions.put("deviceName", deviceName);
             browserstackOptions.put("projectName", projectName);
             browserstackOptions.put("buildName", buildName);
-            browserstackOptions.put("sessionName", "Session Name");
+            browserstackOptions.put("sessionName", "Android Test Session");
             browserstackOptions.put("appiumVersion", "2.0.0");
             browserstackOptions.put("local", "false");
             browserstackOptions.put("debug", "true");
