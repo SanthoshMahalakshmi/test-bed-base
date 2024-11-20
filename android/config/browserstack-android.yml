@@ -1,0 +1,12 @@
+userName: santhoshkrishnan_w9cGeV
+accessKey: bj1wKFBJqyxY8Umh1fzt
+framework: testng
+app: bs://71ab533d8c60d69504cfe1cc36f864b116944d07
+platforms:
+  - platformName: android
+    deviceName: Samsung Galaxy S22 Ultra
+    platformVersion: 12.0
+parallelsPerPlatform: 1
+browserstackLocal: true
+buildName: Test bed run for android
+projectName: com.MoAI.healthCare

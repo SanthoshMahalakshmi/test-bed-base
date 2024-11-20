@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9103ce74-82bf-4b04-bce9-ddb3d2a4c075" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/config/browserstack-android.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/config/browserstack.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/ConfigLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/DriverManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/test/java/WelcomePageAndroid/WelcomePage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/test/resources/android-testng.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/config/browserstack.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/ConfigLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/DriverManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/src/test/java/WelcomePageIos/WelcomePage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/src/test/resources/ios-testng.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mobile/automation/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2p4LIos4DOww9fUBkQVqkXa5kBv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TestNG.WelcomePage.BaseLogin.executor": "Run",
+    "git-widget-placeholder": "Final",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/android/config",
+    "onboarding.tips.debug.path": "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/ios/src/main/java/com/mobile/automation/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.16943231",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/android/config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ios/config" />
+      <recent name="$PROJECT_DIR$/ios/src/test/resources" />
+      <recent name="$PROJECT_DIR$/android/src/test/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="DriverManagerIos" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TestNG.WelcomePage.BaseLogin">
+    <configuration name="Android TestNG" type="TestNG">
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/android/testng.xml" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WelcomePage.BaseLogin" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="android-automation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="WelcomePageAndroid.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="WelcomePage" />
+      <option name="MAIN_CLASS_NAME" value="WelcomePageAndroid.WelcomePage" />
+      <option name="METHOD_NAME" value="BaseLogin" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ios TestNG" type="TestNG">
+      <shortenClasspath name="NONE" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/ios/testng.xml" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="TestNG.Android TestNG" />
+      <item itemvalue="TestNG.ios TestNG" />
+      <item itemvalue="TestNG.WelcomePage.BaseLogin" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.WelcomePage.BaseLogin" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9103ce74-82bf-4b04-bce9-ddb3d2a4c075" name="Changes" comment="" />
+      <created>1732020325602</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732020325602</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mobile/automation/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/android/src/main/java/com/mobile/automation/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ios/src/main/java/com/mobile/automation/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

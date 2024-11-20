@@ -1,0 +1,60 @@
+18:57:31.631 [AWT-EventQueue-0] INFO  c.b.actions.DisableBrowserStack - Setting disable browserstack run update
+18:57:31.635 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+18:57:31.636 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+18:57:31.647 [AWT-EventQueue-0] INFO  c.b.actions.EnableBrowserStack - Setting enable browserstack run update
+18:57:31.647 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+18:57:31.647 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+19:10:38.847 [AWT-EventQueue-0] INFO  c.b.actions.EnableBrowserStack - Setting enable browserstack run update
+19:10:38.847 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+19:10:38.847 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+19:10:38.849 [AWT-EventQueue-0] INFO  c.b.actions.DisableBrowserStack - Setting disable browserstack run update
+19:10:38.849 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+19:10:38.849 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+19:15:49.283 [AWT-EventQueue-0] INFO  c.b.actions.EnableBrowserStack - Setting enable browserstack run update
+19:15:49.283 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+19:15:49.283 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+19:15:49.285 [AWT-EventQueue-0] INFO  c.b.actions.DisableBrowserStack - Setting disable browserstack run update
+19:15:49.285 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+19:15:49.285 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+19:16:57.136 [AWT-EventQueue-0] INFO  c.b.actions.EnableBrowserStack - Setting enable browserstack run update
+19:16:57.137 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+19:16:57.137 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+19:16:57.138 [AWT-EventQueue-0] INFO  c.b.actions.DisableBrowserStack - Setting disable browserstack run update
+19:16:57.139 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+19:16:57.139 [AWT-EventQueue-0] INFO  com.browserstack.utils.Helpers - null
+22:38:29.384 [ApplicationImpl pooled thread 731] INFO  c.b.l.BrowserStackRunExtension - testng
+22:38:29.384 [ApplicationImpl pooled thread 731] INFO  com.browserstack.utils.Helpers - null
+22:38:29.384 [ApplicationImpl pooled thread 731] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+22:38:29.384 [ApplicationImpl pooled thread 731] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+22:38:29.384 [ApplicationImpl pooled thread 731] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
+22:38:29.384 [ApplicationImpl pooled thread 731] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6
+22:40:24.097 [ApplicationImpl pooled thread 736] INFO  c.b.l.BrowserStackRunExtension - testng
+22:40:24.097 [ApplicationImpl pooled thread 736] INFO  com.browserstack.utils.Helpers - null
+22:40:24.097 [ApplicationImpl pooled thread 736] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+22:40:24.098 [ApplicationImpl pooled thread 736] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+22:40:24.098 [ApplicationImpl pooled thread 736] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
+22:40:24.098 [ApplicationImpl pooled thread 736] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6
+23:22:22.703 [ApplicationImpl pooled thread 755] INFO  c.b.l.BrowserStackRunExtension - testng
+23:22:22.703 [ApplicationImpl pooled thread 755] INFO  com.browserstack.utils.Helpers - null
+23:22:22.707 [ApplicationImpl pooled thread 755] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+23:22:22.707 [ApplicationImpl pooled thread 755] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+23:22:22.707 [ApplicationImpl pooled thread 755] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
+23:22:22.707 [ApplicationImpl pooled thread 755] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6
+23:23:24.770 [ApplicationImpl pooled thread 756] INFO  c.b.l.BrowserStackRunExtension - testng
+23:23:24.770 [ApplicationImpl pooled thread 756] INFO  com.browserstack.utils.Helpers - null
+23:23:24.774 [ApplicationImpl pooled thread 756] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+23:23:24.774 [ApplicationImpl pooled thread 756] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+23:23:24.774 [ApplicationImpl pooled thread 756] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
+23:23:24.774 [ApplicationImpl pooled thread 756] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6
+23:29:47.703 [ApplicationImpl pooled thread 764] INFO  c.b.l.BrowserStackRunExtension - testng
+23:29:47.704 [ApplicationImpl pooled thread 764] INFO  com.browserstack.utils.Helpers - null
+23:29:47.704 [ApplicationImpl pooled thread 764] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+23:29:47.704 [ApplicationImpl pooled thread 764] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+23:29:47.704 [ApplicationImpl pooled thread 764] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
+23:29:47.704 [ApplicationImpl pooled thread 764] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6
+10:46:54.474 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - testng
+10:46:54.475 [ApplicationImpl pooled thread 845] INFO  com.browserstack.utils.Helpers - null
+10:46:54.475 [ApplicationImpl pooled thread 845] INFO  com.browserstack.utils.Helpers - /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+10:46:54.475 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
+10:46:54.475 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
+10:46:54.475 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6

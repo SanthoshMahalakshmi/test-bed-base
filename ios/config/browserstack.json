@@ -1,0 +1,16 @@
+{
+  "capabilities": {
+    "bstack:options": {
+      "browserstack.user": "santhoshkrishnan_w9cGeV",
+      "browserstack.key": "bj1wKFBJqyxY8Umh1fzt",
+      "build": "Test Build for iOS",
+      "project": "MoAI_Mobile_Test_Automation",
+      "deviceName": "iPhone 14 Pro Max",
+      "platformName": "iOS",
+      "platformVersion": "16.0",
+      "browserstack.debug": true,
+      "browserstack.appium_version": "1.22.0"
+    },
+    "appium:app": "bs://4037823ab6d4a51936605515c118fc33465445fa"
+  }
+}

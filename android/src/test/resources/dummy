@@ -1,0 +1,164 @@
+@BeforeMethod
+    public void initializeDriverForAndroid() throws Exception {
+        UiAutomator2Options options = new UiAutomator2Options();
+        setDriverForAndroid(driver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), options));
+    }
+
+
+ ----------------------------------------------------------------------------------------------------------------------------------------
+
+ /*@BeforeMethod
+     public void initializeDriverForAndroid() throws Exception {
+         // Load YAML configuration
+         String yamlFilePath = "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/android/browserstack.yml";
+         Map<String, Object> config = ConfigLoader.loadConfig(yamlFilePath);
+
+         // Extract platform-specific capabilities
+         Map<String, String> platforms = getPlatformDetails(config);
+
+         // Use DesiredCapabilities for debugging
+         DesiredCapabilities capabilities = new DesiredCapabilities();
+         capabilities.setCapability("browserstack.appium_version", "1.22.0");
+         capabilities.setCapability("browserstack.debug", "true");
+         capabilities.setCapability("platformName", "android");
+         capabilities.setCapability("deviceName", platforms.get("deviceName"));
+         capabilities.setCapability("platformVersion", platforms.get("platformVersion").toString());
+         capabilities.setCapability("app", config.get("app"));
+         capabilities.setCapability("browserstack.user", config.get("userName"));
+         capabilities.setCapability("browserstack.key", config.get("accessKey"));
+
+         // Debugging logs to verify capabilities
+         logger.info("Loaded YAML File: " + yamlFilePath);
+         logger.info("BrowserStack User: " + config.get("userName"));
+         logger.info("BrowserStack Key: " + config.get("accessKey"));
+         logger.info("Parsed Platform Details: " + platforms.toString());
+         logger.info("Final Capabilities Sent to BrowserStack: " + capabilities.toString());
+
+         // Initialize RemoteWebDriver
+         driver = new RemoteWebDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities);
+         setDriverForAndroid(driver); // Set the driver for thread-safe access
+     }*/
+
+     ---------------------------------------------------------------------------------------------------------------------------
+
+     package DriverManagerPackage;
+
+     import io.appium.java_client.AppiumDriver;
+     import org.openqa.selenium.MutableCapabilities;
+     import org.openqa.selenium.remote.RemoteWebDriver;
+     import org.testng.annotations.AfterMethod;
+     import org.testng.annotations.BeforeMethod;
+
+     import java.io.PrintStream;
+     import java.net.URL;
+     import java.util.List;
+     import java.util.Map;
+     import java.util.logging.Logger;
+
+     public class driverManager {
+
+         private static PrintStream originalConsole;
+         public static Logger logger = Logger.getLogger("MyLog");
+
+         private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
+
+         protected static AppiumDriver getDriver() {
+             return appiumDriverThreadLocal.get();
+         }
+
+         public static RemoteWebDriver driver; // Changed to RemoteWebDriver for debugging
+
+         public void setDriverForAndroid(RemoteWebDriver driver) {
+             appiumDriverThreadLocal.set((AppiumDriver) driver); // Set the ThreadLocal variable
+             driverManager.driver = driver; // Assign to the static driver variable
+         }
+
+         @SuppressWarnings("unchecked")
+         private Map<String, String> getPlatformDetails(Map<String, Object> config) {
+             List<Object> platformsList = (List<Object>) config.get("platforms");
+             if (platformsList == null || platformsList.isEmpty()) {
+                 throw new IllegalArgumentException("No platforms defined in the configuration.");
+             }
+             return (Map<String, String>) platformsList.get(0);
+         }
+
+         @BeforeMethod
+         public void initializeDriverForAndroid() throws Exception {
+             // Load YAML configuration
+             String yamlFilePath = "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/android/browserstack.yml";
+             Map<String, Object> config = ConfigLoader.loadConfig(yamlFilePath);
+
+             // Extract platform-specific capabilities
+             Map<String, String> platforms = getPlatformDetails(config);
+
+             // Build Desired Capabilities for BrowserStack
+             MutableCapabilities browserStackCapabilities = new MutableCapabilities();
+             browserStackCapabilities.setCapability("browserstack.appium_version", "1.22.0");
+             browserStackCapabilities.setCapability("browserstack.debug", true);
+             browserStackCapabilities.setCapability("browserstack.user", config.get("userName"));
+             browserStackCapabilities.setCapability("browserstack.key", config.get("accessKey"));
+             browserStackCapabilities.setCapability("platformName", "android");
+             browserStackCapabilities.setCapability("deviceName", platforms.get("deviceName"));
+             browserStackCapabilities.setCapability("platformVersion", platforms.get("platformVersion").toString());
+             browserStackCapabilities.setCapability("app", config.get("app"));
+             browserStackCapabilities.setCapability("build", "Test build for Android");
+             browserStackCapabilities.setCapability("project", "MoAI_Mobile_Test_Automation");
+
+             // Build W3C-Compliant Capabilities
+             MutableCapabilities w3cCapabilities = new MutableCapabilities();
+             w3cCapabilities.setCapability("bstack:options", browserStackCapabilities);
+
+             // Debugging logs to verify capabilities
+             logger.info("Capabilities sent to BrowserStack: " + w3cCapabilities);
+
+             // Initialize RemoteWebDriver
+             driver = new RemoteWebDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), w3cCapabilities);
+             setDriverForAndroid(driver); // Set the driver for thread-safe access
+         }
+
+         @AfterMethod
+         public void quitDriver() {
+             AppiumDriver driver = getDriver();
+             if (driver != null) {
+                 driver.quit();
+                 appiumDriverThreadLocal.remove();
+             }
+         }
+     }
+
+     -----------------------------------------------------------------------------------------
+
+     @BeforeMethod
+         public void initializeDriverForAndroid() throws Exception {
+             // Load YAML configuration
+             String yamlFilePath = "/home/santhosh/RealProjects/MoAI_Mobile_Test_Automation/android/browserstack.yml";
+             Map<String, Object> config = ConfigLoader.loadConfig(yamlFilePath);
+
+             // Extract platform-specific capabilities
+             Map<String, String> platforms = getPlatformDetails(config);
+
+             // Build Desired Capabilities for BrowserStack
+             MutableCapabilities browserStackOptions = new MutableCapabilities();
+             browserStackOptions.setCapability("browserstack.user", config.get("userName"));
+             browserStackOptions.setCapability("browserstack.key", config.get("accessKey"));
+             browserStackOptions.setCapability("appiumVersion", "1.22.0");
+             browserStackOptions.setCapability("build", "Test build for Android");
+             browserStackOptions.setCapability("project", "MoAI_Mobile_Test_Automation");
+
+             // Add platform-specific capabilities
+             MutableCapabilities capabilities = new MutableCapabilities();
+             capabilities.setCapability("platformName", "ANDROID");
+             capabilities.setCapability("deviceName", platforms.get("deviceName"));
+             capabilities.setCapability("platformVersion", platforms.get("platformVersion").toString());
+             capabilities.setCapability("app", config.get("app"));
+
+             // Combine both sets of capabilities
+             capabilities.setCapability("bstack:options", browserStackOptions);
+
+             // Debugging logs to verify capabilities
+             logger.info("Capabilities sent to BrowserStack: " + capabilities);
+
+             // Initialize RemoteWebDriver
+             driver = new RemoteWebDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities);
+             setDriverForAndroid(driver); // Set the driver for thread-safe access
+         }
