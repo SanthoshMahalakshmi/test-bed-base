@@ -28,6 +28,10 @@ jobs:
         
       - name: Run Tests on BrowserStack
         run: |
+          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
+          export PATH=$JAVA_HOME/bin:$PATH
+          java -version
+          javac --version
           cd android
           java -version
           javac --version
