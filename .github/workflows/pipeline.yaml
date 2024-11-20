@@ -1,0 +1,29 @@
+name: BrowserStack TestNG Tests on Final Branch 
+on:
+  push:
+    branches:
+      - Final
+jobs:
+  test:
+    runs-on: [self-hosted, Test_Bed]
+    steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+            
+      - name: Install dependencies
+        run: mvn install -DskipTests
+        
+      - name: Run Tests on BrowserStack
+        run: |
+          cd android
+          mvn test 
+
