@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9103ce74-82bf-4b04-bce9-ddb3d2a4c075" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ios/config/browserstack-ios.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pipeline.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/config/browserstack.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/logs/browserstack-javaagent.debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/android/logs/browserstack-javaagent.debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/logs/browserstack-javaagent.log" beforeDir="false" afterPath="$PROJECT_DIR$/android/logs/browserstack-javaagent.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/DriverManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/test/java/DriverManagerAndroid/DriverManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/config/browserstack.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ios/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/ConfigLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/DriverManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/ios/src/test/java/DriverManagerIos/DriverManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/test/resources/ios-testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ios/src/test/resources/ios-testng.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,5 +157,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.util.TreeMap$Entry" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
