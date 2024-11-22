@@ -577,7 +577,7 @@ public class DashBoardPage extends DriverManager {
 
     @Test
     public void TC_026() {
-      //  BaseLogin();
+       // BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -597,7 +597,7 @@ public class DashBoardPage extends DriverManager {
     @Test
     public void TC_027() {
         /*Adding the reminder for Blood pressure.*/
-        //BaseLogin();
+      //  BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -770,7 +770,7 @@ public class DashBoardPage extends DriverManager {
     @Test
     public void TC_030() {
 
-      //  BaseLogin(); //Login process.
+        //BaseLogin(); //Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
