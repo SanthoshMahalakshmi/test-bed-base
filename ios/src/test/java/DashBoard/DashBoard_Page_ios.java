@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class DashBoard_Page_Android extends DriverManager {
+public class DashBoard_Page_ios extends DriverManager {
 
     @Test(enabled = false)
     public void Login() {
@@ -139,7 +139,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_011() {
-        lo();
 
         /*Login(); // To complete the login process.
 
@@ -194,7 +193,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_012() {
-        lo();
 
         /*Login(); // To complete the login process.
 
@@ -226,7 +224,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_013() {
-        lo();
 
         /*TC_012();  // To complete the previous steps.
 
@@ -255,7 +252,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_014() {
-        lo();
+
 
         /*Login();// To complete the login scenario.
 
@@ -313,7 +310,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_015() {
-        lo();
+
 
         /*Login(); // To complete the login process.
 
@@ -399,7 +396,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_016() {
-        lo();
+
 
         /*Login();// To complete the login process.
 
@@ -467,7 +464,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_017() {
-        lo();
 
         /*Login(); // To complete the login process.
 
@@ -517,8 +513,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_018() {
-        lo();
-
        /* Login();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -572,7 +566,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_019() {
-        lo();
 
         /*Login();
 
@@ -611,8 +604,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_025() {
-        lo();
-
        // BaseLogin();
 
        /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -648,7 +639,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_026() {
-        lo();
+
 
        /*// BaseLogin();
 
@@ -669,7 +660,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_027() {
-        lo();
+
 
         /*Adding the reminder for Blood pressure.*/
       //  BaseLogin();
@@ -735,7 +726,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_028() {
-        lo();
+
 
       //  BaseLogin(); // Login process.
 
@@ -782,7 +773,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test
     public void TC_029() {
-        lo();
+
 
        // BaseLogin(); //Login process from base class.
 
@@ -848,8 +839,6 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test
     public void TC_030()
     {
-
-        lo();
 
         //BaseLogin(); //Login process.
 

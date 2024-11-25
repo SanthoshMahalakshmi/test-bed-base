@@ -1,16 +1,23 @@
 package DriverManagerIos;
 
+import UtilitiesForIos.RetryAnalyzerios;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -109,6 +116,55 @@ public class DriverManager {
             driver.quit();
             appiumDriverThreadLocal.remove();
             logger.info("Driver quit successfully.");
+        }
+    }
+
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void BaseLoginForIos() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        //Clicking the Get started button
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
+
+        //clicking the mobile number input field and send the keys to it.
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
+                ("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
+
+        //Clicking the continue button
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+
+        WebElement Ok = null;
+        try
+        {
+            Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
+            Ok.click();
+            logger.info("*OK Button is found and its clicked");
+        }
+        catch (Exception e)
+        {
+            logger.warning("Ok button is not found, we good to go with login");
+        }
+
+        //Fill the OTP into input field.
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP1"))).sendKeys("1");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP2"))).sendKeys("2");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP3"))).sendKeys("3");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP4"))).sendKeys("4");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP5"))).sendKeys("5");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP6"))).sendKeys("6");
+
+        //Verify the OTP
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtVerify"))).click();
+
+        WebElement AllowNotificationButton = null;
+        try {
+            AllowNotificationButton =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
+            AllowNotificationButton.click();
+            logger.info("Allow button is visible and its clicked Allow");
+        }
+        catch (Exception e)
+        {
+            logger.info("Notification allow Button is not pop-up to accept allow.");
         }
     }
 }
