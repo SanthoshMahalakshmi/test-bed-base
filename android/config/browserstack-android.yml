@@ -1,7 +1,7 @@
-userName: srinathr_6xBmwu
-accessKey: 83qECYDqfsNawqciLDcE
+userName: santhoshphotos_GFC8Zz
+accessKey: qjBJz3w8Gjxqi1bTs69J
 framework: testng
-app: bs://09c040a2183563b6053d888e5ba5e012c9e4a352
+app: bs://55c90da9ee28e6be8b2f2d2fa9e7ade8e1c39a9d
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S22 Ultra

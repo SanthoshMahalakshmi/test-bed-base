@@ -1,4 +1,4 @@
-package WelcomePageIos;
+package Welcome;
 
 import DriverManagerIos.DriverManager;
 import io.appium.java_client.AppiumBy;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class WelcomePage extends DriverManager
+public class Welcome_Page_iOS extends DriverManager
 {
 
     @Test
