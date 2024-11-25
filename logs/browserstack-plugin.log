@@ -58,3 +58,5 @@
 10:46:54.475 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - Agent path: /home/santhosh/.m2/repository/com/browserstack/browserstack-java-sdk/1.26.4/browserstack-java-sdk-1.26.4.jar
 10:46:54.475 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - Adding Browserstack SDK javaagent argline
 10:46:54.475 [ApplicationImpl pooled thread 845] INFO  c.b.l.BrowserStackRunExtension - Plugin version: v1.1.6
+13:20:54.128 [ApplicationImpl pooled thread 274] INFO  c.b.l.BrowserStackRunExtension - maven
+13:20:54.130 [ApplicationImpl pooled thread 274] INFO  com.browserstack.utils.Helpers - null

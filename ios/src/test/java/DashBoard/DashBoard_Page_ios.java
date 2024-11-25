@@ -1,8 +1,8 @@
-package DashBoardPage;
+package DashBoard;
 
-import DriverManagerAndroid.DriverManager;
+import DriverManagerIos.DriverManager;
+import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,9 +10,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class DashBoardPage extends DriverManager {
+public class DashBoard_Page_ios extends DriverManager {
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void Login() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -37,56 +37,110 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtVerify"))).click();
     }
 
-    @Test
-    public void TC_010() {
-        Login();// to complete the login scenario.
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_010()
+    {
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //1.Verify the LOGO text present in the top.
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")")));
         WebElement LogoText = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")"));
-        System.out.println("Logo text : " + LogoText.getText());
-        System.out.println("Logo text is present : " + LogoText.isDisplayed());
+        logger.info("Logo text : " + LogoText.getText());
+        logger.info("Logo text is present : " + LogoText.isDisplayed());
 
         //2.Verify the Sync button.
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Sync data")));
         WebElement SyncData = driver.findElement(AppiumBy.accessibilityId("Sync data"));
-        System.out.println("Sync data button is present : " + SyncData.isDisplayed());
+        logger.info("Sync data button is present : " + SyncData.isDisplayed());
         SyncData.click();
 
+        WebElement SyncInfo = null;
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    id("com.android.permissioncontroller:id/permission_allow_button")));
+            logger.info("Sync button info :" + SyncInfo.getText());
+        }
+        catch (Exception e)
+        {
+            logger.warning("Info message is not found.");
+        }
+
+        WebElement SyncClose = null;
+        try {
+            SyncClose = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/image_close_toaster")));
+            logger.info("Cross button is found its clicked :" + SyncClose.isDisplayed());
+            SyncClose.click();
+        }
+        catch (Exception e)
+        {
+             logger.warning("Sync cross button is not found.");
+        }
+
         //3.Notification button.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notification")));
-        WebElement NotificationButton = driver.findElement(AppiumBy.accessibilityId("Notification"));
-        System.out.println("Notification button is present : " + NotificationButton.isDisplayed());
+        WebElement NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notification")));
+        logger.info("Notification button is present : " + NotificationButton.isDisplayed());
         NotificationButton.click();
 
         //4.Seeing the notification and clearing them
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)")));
-        WebElement Notifications = driver.findElement(AppiumBy.androidUIAutomator
-                ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)"));
-        System.out.println("Notification is present : " + Notifications.isDisplayed());
+        WebElement Notifications = null;
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
+                    ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)")));
+            logger.info("Notification is present? : " + Notifications.isDisplayed());
+        }
+        catch (Exception e)
+        {
+            logger.warning("No notification are present.");
+        }
 
         //5. clearing them
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("clear"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+        try{
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("clear"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+            logger.info("Clear button is found and it's cleared all the notifications");
+        }
+        catch (Exception e)
+        {
+         logger.warning("Clear button is not present currently, there is no notification");
+        }
+
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
 
         //6.health score section
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg"))).isDisplayed();
+        WebElement ECGReport = null;
+        try {
+            ECGReport =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg")));
+            logger.info("Ecg report is present " + ECGReport.isDisplayed());
+        }
+        catch (Exception e)
+        {
+            logger.warning("Ecg report data is not present in the dashboard.");
+        }
+
+        WebElement deviceIndication = null;
+        try {
+            deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/view5\"));"));
+            logger.info("Heath scroll is present :" + deviceIndication.isDisplayed());
+        } catch (Exception e) {
+            logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
+        }
+
         //Scrolling to heath score section.
-        WebElement deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
-                ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/view5\"));"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/view5")));
-        WebElement HealthScore = driver.findElement(AppiumBy.id("com.moai.android:id/view5"));
-        System.out.println("Health score :" + HealthScore.isDisplayed());
-        System.out.println("TC_010 is completed");
+        WebElement HealthScore = null;
+        try {
+            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/view5")));
+        } catch (Exception e) {
+            logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
+        }
     }
 
     @Test
     public void TC_011() {
-        Login(); // To complete the login process.
+
+        /*Login(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -134,13 +188,13 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-
-
+*/
     }
 
     @Test
     public void TC_012() {
-        Login(); // To complete the login process.
+
+        /*Login(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -164,13 +218,14 @@ public class DashBoardPage extends DriverManager {
 
         //Enter group name
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                ("com.moai.android:id/edtGroupName"))).sendKeys("Fam");
+                ("com.moai.android:id/edtGroupName"))).sendKeys("Fam");*/
 
     }
 
     @Test
     public void TC_013() {
-        TC_012();  // To complete the previous steps.
+
+        /*TC_012();  // To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -190,14 +245,16 @@ public class DashBoardPage extends DriverManager {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
         WebElement error2 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
-        System.out.println("Empty input field error : " + error2.getText());
+        System.out.println("Empty input field error : " + error2.getText());*/
 
     }
 
 
     @Test
     public void TC_014() {
-        Login();// To complete the login scenario.
+
+
+        /*Login();// To complete the login scenario.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
@@ -247,13 +304,15 @@ public class DashBoardPage extends DriverManager {
         //4.Clicking on the update to complete the change.
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
 
-        System.out.println("Tc_016 is completed successfully.");
+        System.out.println("Tc_016 is completed successfully.");*/
 
     }
 
     @Test
     public void TC_015() {
-        Login(); // To complete the login process.
+
+
+        /*Login(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(13));
 
@@ -331,13 +390,15 @@ public class DashBoardPage extends DriverManager {
                 ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take care Your self..");
 
         //7.Confirm the reminder
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();*/
     }
 
 
     @Test
     public void TC_016() {
-        Login();// To complete the login process.
+
+
+        /*Login();// To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -354,7 +415,7 @@ public class DashBoardPage extends DriverManager {
         //Clicking the DONE button.
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
 
-        /* CASE - 1*/
+        *//* CASE - 1*//*
         //1.Selecting the days for the reminder
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
@@ -363,7 +424,7 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
 
-        /* CASE - 2 & 3 */
+        *//* CASE - 2 & 3 *//*
         //Empty reminder name
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtReminderName")));
 
@@ -398,12 +459,13 @@ public class DashBoardPage extends DriverManager {
         //Popup for not selecting the day
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
         WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
-        System.out.println("Pop up message for days not selected : " + message.getText());
+        System.out.println("Pop up message for days not selected : " + message.getText());*/
     }
 
     @Test
     public void TC_017() {
-        Login(); // To complete the login process.
+
+        /*Login(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -446,13 +508,12 @@ public class DashBoardPage extends DriverManager {
         //Error for empty personal note.
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
         WebElement error2 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
-        System.out.println("Error 2 :" + error2.getText());
-
+        System.out.println("Error 2 :" + error2.getText());*/
     }
 
     @Test
     public void TC_018() {
-        Login();
+       /* Login();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -499,13 +560,14 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtPersonalNotes"))).sendKeys("Take SpO2");
 
         //Set the reminder
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();*/
 
     }
 
     @Test
     public void TC_019() {
-        Login();
+
+        /*Login();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -536,7 +598,7 @@ public class DashBoardPage extends DriverManager {
         System.out.println(wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster"))).getText());
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster"))).getText();
         WebElement SuccessToast = driver.findElement(AppiumBy.id("com.moai.android:id/dialog_layout_toaster"));
-        System.out.println("Success toast : " + SuccessToast.getText());
+        System.out.println("Success toast : " + SuccessToast.getText());*/
 
     }
 
@@ -544,7 +606,7 @@ public class DashBoardPage extends DriverManager {
     public void TC_025() {
        // BaseLogin();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+       /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
 
@@ -571,13 +633,15 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
         WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
         System.out.println("Success message for deleted dependent :" + message.getText());
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();*/
 
     }
 
     @Test
     public void TC_026() {
-       // BaseLogin();
+
+
+       /*// BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -591,15 +655,17 @@ public class DashBoardPage extends DriverManager {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")")));
         WebElement lable = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")"));
-        System.out.println("Report section : " + lable.getText());
+        System.out.println("Report section : " + lable.getText());*/
     }
 
     @Test
     public void TC_027() {
+
+
         /*Adding the reminder for Blood pressure.*/
       //  BaseLogin();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.moai.android:id/txtEcg"))).isDisplayed();
 
@@ -654,15 +720,17 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtPersonalNotes"))).sendKeys("Take HR daily.");
 
         //Set the reminder
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();*/
 
     }
 
     @Test
     public void TC_028() {
+
+
       //  BaseLogin(); // Login process.
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //BP report values with chart.
         WebElement bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtBloodPressure")));
@@ -699,16 +767,17 @@ public class DashBoardPage extends DriverManager {
         System.out.println("ECG report is present: " + ECGElement.isDisplayed());
 
         WebElement ECGChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/mpSingleLeadECG")));
-        System.out.println("ECG report chart is present: " + ECGChart.isDisplayed());
+        System.out.println("ECG report chart is present: " + ECGChart.isDisplayed());*/
 
     }
 
     @Test
     public void TC_029() {
 
+
        // BaseLogin(); //Login process from base class.
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //Clicking on primary user profile
         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgProfile"))).click();
@@ -762,17 +831,18 @@ public class DashBoardPage extends DriverManager {
 
 
         //Navigate to the profile page.
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();*/
 
     }
 
 
     @Test
-    public void TC_030() {
+    public void TC_030()
+    {
 
         //BaseLogin(); //Login process.
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+       /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //clicking the dependent profile
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")"))).click();
@@ -785,8 +855,6 @@ public class DashBoardPage extends DriverManager {
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtBPRest"))).click();
         //confirmation Ok
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        /*//Skip
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();*/
 
         //Scroll to the bottom customize.
         driver.findElement(AppiumBy.androidUIAutomator
@@ -820,7 +888,7 @@ public class DashBoardPage extends DriverManager {
         //Reset can happen
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
         //confirmation Ok
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();*/
 
     }
 

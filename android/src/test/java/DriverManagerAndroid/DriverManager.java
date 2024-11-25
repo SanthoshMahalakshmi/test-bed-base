@@ -1,19 +1,28 @@
 package DriverManagerAndroid;
 
+import UtilitiesForAndroid.RetryAnalyzer;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+
 
 public class DriverManager {
 
@@ -43,7 +52,7 @@ public class DriverManager {
     }
 
     @BeforeMethod
-    public void initializeDriverForAndroid() throws Exception {
+    public void initializeDriverForAndroid(ITestResult testResult) throws Exception {
         try {
             InputStream inputStream = new FileInputStream("config/browserstack-android.yml");
 
@@ -69,6 +78,9 @@ public class DriverManager {
             String deviceName = (String) platform.get("deviceName");
             Double platformVersion = (Double) platform.get("platformVersion");
 
+            // Extracting test case name dynamically
+            String testName = testResult.getMethod().getMethodName();
+
             // Setup BrowserStack capabilities
             MutableCapabilities capabilities = new MutableCapabilities();
             capabilities.setCapability("app", app);
@@ -80,14 +92,13 @@ public class DriverManager {
             browserstackOptions.put("deviceName", deviceName);
             browserstackOptions.put("projectName", projectName);
             browserstackOptions.put("buildName", buildName);
-            browserstackOptions.put("sessionName", "Android Test Session");
+            browserstackOptions.put("sessionName", testName);
             browserstackOptions.put("appiumVersion", "2.0.0");
             browserstackOptions.put("local", "false");
             browserstackOptions.put("debug", "true");
 
             capabilities.setCapability("bstack:options", browserstackOptions);
 
-            capabilities.setCapability("bstack:options", browserstackOptions);
             setDriverForAndroid(driver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
             inputStream.close();
 
@@ -105,4 +116,70 @@ public class DriverManager {
                 logger.info("Driver quit successfully.");
             }
         }
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void BaseLogin() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        //Clicking the Get started button
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
+
+        //clicking the mobile number input field and send the keys to it.
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
+                ("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
+
+        //Clicking the continue button
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+
+        WebElement Ok = null;
+        try
+        {
+           Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
+           Ok.click();
+           logger.info("*OK Button is found and its clicked");
+        }
+        catch (Exception e)
+        {
+            logger.warning("Ok button is not found, we good to go with login");
+        }
+
+        //Fill the OTP into input field.
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP1"))).sendKeys("1");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP2"))).sendKeys("2");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP3"))).sendKeys("3");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP4"))).sendKeys("4");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP5"))).sendKeys("5");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP6"))).sendKeys("6");
+
+        //Verify the OTP
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtVerify"))).click();
+
+        WebElement AllowNotificationButton = null;
+        try {
+            AllowNotificationButton =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
+            AllowNotificationButton.click();
+            logger.info("Allow button is visible and its clicked Allow");
+        }
+        catch (Exception e)
+        {
+            logger.info("Notification allow Button is not pop-up to accept allow.");
+        }
     }
+
+    @Test(enabled = false)
+    public void lo()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        //Clicking the Get started button
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
+
+        //clicking the mobile number input field and send the keys to it.
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
+                ("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
+
+        //Clicking the continue button
+      WebElement cn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue")));
+      logger.info("present " + cn.isDisplayed());
+    }
+}
