@@ -1,6 +1,6 @@
 package Devices;
 
-import DriverManagerAndroid.DriverManager;
+import DriverManagerIos.DriverManager;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Devices_Page_Android extends DriverManager
+public class Devices_Page_Ios extends DriverManager
 {
     @Test
     public void TC_023()
     {
-        BaseLogin();
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

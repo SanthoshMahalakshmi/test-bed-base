@@ -1,19 +1,24 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Android Test Suite" verbose="3">
     <test name="Android Tests">
+        <groups>
+            <run>
+                <exclude name="FirstTime login page"></exclude>
+            </run>
+        </groups>
         <classes>
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <exclude name="TC_001"/> <!--Done-->
+                    <include name="TC_001"/> <!--Done-->
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Android">
                 <methods>
-                    <exclude name="TC_002"/> <!--Done-->
-                    <exclude name="TC_003"/> <!--Done-->
+                    <include name="TC_002"/> <!--Done-->
+                    <include name="TC_003"/> <!--Done-->
                     <exclude name="TC_004"/> <!--Basic page-->
                     <exclude name="TC_005"/> <!--Select Gender-->
                     <exclude name="TC_006"/> <!--Select Height-->
@@ -26,56 +31,56 @@
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Android">
                 <methods>
-                    <exclude name="TC_010"/> <!--Done-->
-                    <exclude name="TC_011"/>
-                    <exclude name="TC_012"/>
-                    <exclude name="TC_013"/>
-                    <exclude name="TC_014"/>
-                    <exclude name="TC_015"/>
-                    <exclude name="TC_016"/>
-                    <exclude name="TC_017"/>
-                    <exclude name="TC_018"/>
-                    <exclude name="TC_019"/>
-                    <exclude name="TC_025"/>
-                    <exclude name="TC_026"/>
-                    <exclude name="TC_027"/>
-                    <exclude name="TC_028"/>
-                    <exclude name="TC_029"/>
-                    <exclude name="TC_030"/>
+                    <include name="TC_010"/> <!--Done-->
+                    <include name="TC_011"/> <!--Done-27/11-->
+                    <include name="TC_012"/> <!--Done-27/11-->
+                    <include name="TC_013"/> <!--Done-27/11-->
+                    <include name="TC_014"/> <!--Done-27/11-->
+                    <include name="TC_015"/> <!--Done-27/11-->
+                    <include name="TC_016"/> <!--Done-27/11-->
+                    <include name="TC_017"/> <!--Done-27/11-->
+                    <include name="TC_018"/> <!--Done-27/11-->
+                    <include name="TC_019"/> <!--Done-27/11-->
+                    <include name="TC_025"/> <!--Done-27/11-->
+                    <include name="TC_026"/> <!--Done-27/11-->
+                    <include name="TC_027"/> <!--Done-27/11-->
+                    <include name="TC_028"/> <!--Done-27/11-->
+                    <include name="TC_029"/> <!--Done-27/11-->
+                    <include name="TC_030"/> <!--Done-27/11-->
                 </methods>
             </class>
 
             <class name="Profile.Profile_Page_Android">
                 <methods>
-                    <exclude name="TC_031"/> <!--Done-->
-                    <exclude name="TC_032"/> <!--Done-->
+                    <include name="TC_031"/> <!--Done-->
+                    <include name="TC_032"/> <!--Done-->
                 </methods>
             </class>
 
             <!--More section -->
             <class name="More.More_page_Android">
                 <methods>
-                    <exclude name="TC_033"/> <!--Done-->
-                    <exclude name="TC_034"/> <!--Done-->
-                    <exclude name="TC_035"/> <!--Done-->
-                    <exclude name="TC_036"/> <!--Done-->
+                    <include name="TC_033"/> <!--Done-->
+                    <include name="TC_034"/> <!--Done-->
+                    <include name="TC_035"/> <!--Done-->
+                    <include name="TC_036"/> <!--Done-->
                 </methods>
             </class>
 
             <!--Downloading the report.-->
             <class name="Reports_Page.DownloadingReports_Page_Android">
                 <methods>
-                    <exclude name="TC_020"/>
-                    <exclude name="TC_021"/>
-                    <exclude name="TC_022"/>
+                    <include name="TC_020"/> <!--Done-->
+                    <include name="TC_021"/> <!--Done-->
+                    <include name="TC_022"/> <!--Done-->
                 </methods>
             </class>
 
             <!--Device connection-->
             <class name="Devices.Devices_Page_Android">
                 <methods>
-                    <exclude name="TC_023"/>
-                    <exclude name="TC_024"/>
+                    <include name="TC_023"/>
+                    <include name="TC_024"/>
                 </methods>
             </class>
         </classes>

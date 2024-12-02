@@ -133,3 +133,5 @@
 
 
 16:03:11.748 [main] DEBUG c.b.utils.FunnelInstrumentation - API Event Observability_Crash_Report_Upload response - OK
+12:25:17.203 [main] WARN  c.b.config.BrowserStackConfig - Test Observability could not be enabled because framework detected is null. We currently support frameworks testng, cucumber-testng & serenity
+15:55:11.854 [main] WARN  c.b.config.BrowserStackConfig - Test Observability could not be enabled because framework detected is null. We currently support frameworks testng, cucumber-testng & serenity

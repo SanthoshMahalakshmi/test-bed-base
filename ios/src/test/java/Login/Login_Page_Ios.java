@@ -1,7 +1,7 @@
 package Login;
 
-import DriverManagerAndroid.DriverManager;
-import UtilitiesForAndroid.RetryAnalyzer;
+import DriverManagerIos.DriverManager;
+import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,12 +12,12 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Login_Page_Android extends DriverManager
+public class Login_Page_Ios extends DriverManager
 {
 
-    private static final Logger log = LoggerFactory.getLogger(Login_Page_Android.class);
+    private static final Logger log = LoggerFactory.getLogger(Login_Page_Ios.class);
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_002()
     {
         /*Global wait.*/
@@ -80,7 +80,7 @@ public class Login_Page_Android extends DriverManager
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_003()
     {
         /*Global wait.*/
@@ -172,12 +172,12 @@ public class Login_Page_Android extends DriverManager
         }
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_004()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        BaseLogin();
+        BaseLoginForIos();
 
         try {
             //2.Full name
@@ -201,7 +201,7 @@ public class Login_Page_Android extends DriverManager
         }
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_005()
     {
 
@@ -231,7 +231,7 @@ public class Login_Page_Android extends DriverManager
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_006()
     {
 
@@ -254,7 +254,7 @@ public class Login_Page_Android extends DriverManager
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_007()
     {
         TC_006(); //To complete the previous steps.
@@ -275,7 +275,7 @@ public class Login_Page_Android extends DriverManager
         }
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_008()
     {
 
@@ -297,7 +297,7 @@ public class Login_Page_Android extends DriverManager
         }
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_009()
     {
         TC_008(); // To complete the previous steps.

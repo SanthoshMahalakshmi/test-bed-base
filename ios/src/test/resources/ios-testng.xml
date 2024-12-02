@@ -6,15 +6,15 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_iOS" >
                 <methods>
-                    <exclude name="TC_001"/> <!--Done-->
+                    <exclude name="TC_001"/> <!--Most of the elements values are changed and bug noted--> 
                 </methods>
             </class>
 
             <!--Login pages-->
-            <class name="Login.Login_Page_iOS">
+            <class name="Login.Login_Page_Ios">
                 <methods>
-                    <exclude name="TC_002"/> <!--Done-->
-                    <exclude name="TC_003"/> <!--Done-->
+                    <exclude name="TC_002"/>
+                    <exclude name="TC_003"/>
                     <exclude name="TC_004"/> <!--Basic page-->
                     <exclude name="TC_005"/> <!--Select Gender-->
                     <exclude name="TC_006"/> <!--Select Height-->
@@ -25,9 +25,9 @@
             </class>
 
             <!--Dashboard section-->
-            <class name="DashBoard.DashBoard_Page_ios">
+            <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <exclude name="TC_010"/> <!--Done-->
+                    <exclude name="TC_010"/>
                     <exclude name="TC_011"/>
                     <exclude name="TC_012"/>
                     <exclude name="TC_013"/>
@@ -46,34 +46,34 @@
                 </methods>
             </class>
 
-            <class name="Profile.Profile_Page_iOS">
+            <class name="Profile.Profile_Page_Ios">
                 <methods>
-                    <exclude name="TC_031"/> <!--Done-->
-                    <exclude name="TC_032"/> <!--Done-->
+                    <exclude name="TC_031"/> <!--Most of the elements values are changed and bug noted--> 
+                    <exclude name="TC_032"/> <!--Most of the elements values are changed and bug noted--> 
                 </methods>
             </class>
 
             <!--More section -->
-            <class name="More.More_page_iOS">
+            <class name="More.More_page_Ios">
                 <methods>
-                    <exclude name="TC_033"/> <!--Done-->
-                    <exclude name="TC_034"/> <!--Done-->
-                    <exclude name="TC_035"/> <!--Done-->
-                    <exclude name="TC_036"/> <!--Done-->
+                    <exclude name="TC_033"/> <!--Most of the elements values are changed and bug noted--> 
+                    <exclude name="TC_034"/> <!--Most of the elements values are changed and bug noted--> 
+                    <exclude name="TC_035"/> <!--Most of the elements values are changed and bug noted--> 
+                    <exclude name="TC_036"/> <!--Most of the elements values are changed and bug noted--> 
                 </methods>
             </class>
 
             <!--Downloading the report.-->
-            <class name="Reports_Page.DownloadingReports_Page_iOS">
+            <class name="Reports_Page.DownloadingReports_Page_Ios">
                 <methods>
-                    <exclude name="TC_020"/>
-                    <exclude name="TC_021"/>
-                    <exclude name="TC_022"/>
+                    <exclude name="TC_020"/> <!--Most of the elements values are changed and bug noted-->
+                    <exclude name="TC_021"/> <!--Most of the elements values are changed and bug noted-->
+                    <exclude name="TC_022"/> <!--Most of the elements values are changed and bug noted-->
                 </methods>
             </class>
 
             <!--Device connection-->
-            <class name="Devices.Devices_Page_iOS">
+            <class name="Devices.Devices_Page_Ios">
                 <methods>
                     <exclude name="TC_023"/>
                     <exclude name="TC_024"/>

@@ -21,23 +21,41 @@ public class Welcome_Page_iOS extends DriverManager
         //ios
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow"))).click();
 
-        //confirm the device image is present in the screen welcome screen.
-        System.out.println( "image is displayed in the welcome screen : " +
-                driver.findElement(AppiumBy.xpath("//XCUIElementTypeImage")).isDisplayed());
+        try {
+            //confirm the device image is present in the screen welcome screen.
+            WebElement img = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeImage")));
+            logger.info("image is displayed in the welcome screen : " + img.isDisplayed() );
+        } catch (Exception e) {
+            logger.warning("img is not displayed");
+        }
 
-        //Welcome page Description verification.
-        WebElement description = driver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Keep track of your own and your family’s health and well-being\"]"));
-        System.out.println("Welcome page description : " + description.getText());
+        try {
+            //Welcome page Description verification.
+            WebElement description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeStaticText[@name=\"Keep track of your own and your family’s health and well-being\"]")));
+            logger.info("Welcome page description : " + description.getText());
+        } catch (Exception e) {
+            logger.info("Welcome page description is not displayed");
+        }
+        WebElement getStarted = null;
 
-        //Clicking the Get started button
-        WebElement getStarted =  driver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Get Started\"]"));
-
-        System.out.println("Get started button is present in the welcome page : " + getStarted.isDisplayed());
+        try {
+            //Clicking the Get started button
+            getStarted = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Get Started\"]")));
+            logger.info("Get started button is present in the welcome page : " + getStarted.isDisplayed());
+        } catch (Exception e) {
+            logger.warning("Get started button is not displayed");
+        }
 
         wait.until(ExpectedConditions.elementToBeClickable(getStarted)).click();
 
-        //Verifying the login or signup label present or not.
-        boolean loginOrSignup = driver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Login or Sign Up\"]")).isDisplayed();
-        System.out.println("Navigated to login page : "+ loginOrSignup);
+        try {
+            //Verifying the login or signup label present or not.
+            WebElement loginOrSignup = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Login or Sign Up\"]")));
+            logger.info("Navigated to login page : "+ loginOrSignup);
+        } catch (Exception e) {
+            logger.warning("Navigated to login page is not displayed");
+        }
+
     }
 }

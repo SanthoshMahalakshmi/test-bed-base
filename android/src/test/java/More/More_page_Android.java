@@ -1,6 +1,7 @@
 package More;
 
 import DriverManagerAndroid.DriverManager;
+import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
@@ -12,13 +13,11 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class More_page_Android extends DriverManager
-{
+public class More_page_Android extends DriverManager {
     private static final Logger log = LoggerFactory.getLogger(More_page_Android.class);
 
-    @Test
-    public void TC_033()
-    {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_033() {
         BaseLogin(); // Login process
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -83,7 +82,7 @@ public class More_page_Android extends DriverManager
         //notification time
         try {
             WebElement time = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCurrentTime")));
-            logger.info("Notification time : " +time.getText());
+            logger.info("Notification time : " + time.getText());
         } catch (Exception e) {
             logger.warning("No notification Time is visible.");
         }
@@ -91,7 +90,7 @@ public class More_page_Android extends DriverManager
         //Notification personal note
         try {
             WebElement PersonalNote = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCurrentTime")));
-            logger.info("Notification personal note : " +PersonalNote.getText());
+            logger.info("Notification personal note : " + PersonalNote.getText());
         } catch (Exception e) {
             logger.warning("NO Notification personal note is visible.");
         }
@@ -99,7 +98,7 @@ public class More_page_Android extends DriverManager
         //Notification Days
         try {
             WebElement NotificationDays = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/tvWeekDay")));
-            logger.info("Notification personal note : " +NotificationDays.getText());
+            logger.info("Notification personal note : " + NotificationDays.getText());
         } catch (Exception e) {
             logger.warning("No Notification days is visible.");
         }
@@ -195,7 +194,7 @@ public class More_page_Android extends DriverManager
                     androidUIAutomator("new UiSelector().text(\"Contact Us\")")));
             logger.info("User currently present in : " + ContactUs.getText() + " page.");
         } catch (Exception e) {
-           logger.warning("Contact us header is not visible");
+            logger.warning("Contact us header is not visible");
         }
 
         //To email address.
@@ -240,7 +239,7 @@ public class More_page_Android extends DriverManager
         try {
             //Write your message
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtMessage"))).
+                            ("com.moai.android:id/edtMessage"))).
                     sendKeys("Thanks for developing the application and try to resolve all the conflict.");
             logger.info("Write a message is happening.");
         } catch (Exception e) {
@@ -271,9 +270,8 @@ public class More_page_Android extends DriverManager
 
     }
 
-    @Test
-    public void TC_034()
-    {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_034() {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -391,9 +389,8 @@ public class More_page_Android extends DriverManager
         }
     }
 
-    @Test
-    public void TC_035()
-    {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_035() {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -438,9 +435,8 @@ public class More_page_Android extends DriverManager
 
     }
 
-    @Test
-    public void TC_036()
-    {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_036() {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -472,7 +468,7 @@ public class More_page_Android extends DriverManager
 
         //Confirmation message
         try {
-            WebElement DeleteMessage =wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
+            WebElement DeleteMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
             logger.info("Delete account confirmation message : " + DeleteMessage.getText());
         } catch (Exception e) {
             logger.warning("delete account confirmation is not visible. ");
