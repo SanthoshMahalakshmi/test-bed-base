@@ -41,7 +41,8 @@ public class Welcome_Page_iOS extends DriverManager
 
         try {
             //Clicking the Get started button
-            getStarted = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Get Started\"]")));
+            getStarted = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeStaticText[@name=\"Get Started\"]")));
             logger.info("Get started button is present in the welcome page : " + getStarted.isDisplayed());
         } catch (Exception e) {
             logger.warning("Get started button is not displayed");
@@ -51,11 +52,11 @@ public class Welcome_Page_iOS extends DriverManager
 
         try {
             //Verifying the login or signup label present or not.
-            WebElement loginOrSignup = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Login or Sign Up\"]")));
+            WebElement loginOrSignup = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeStaticText[@name=\"Login or Sign Up\"]")));
             logger.info("Navigated to login page : "+ loginOrSignup);
         } catch (Exception e) {
             logger.warning("Navigated to login page is not displayed");
         }
-
     }
 }

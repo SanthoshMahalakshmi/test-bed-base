@@ -13,14 +13,14 @@
             <!--Login pages-->
             <class name="Login.Login_Page_Ios">
                 <methods>
-                    <exclude name="TC_002"/>
-                    <exclude name="TC_003"/>
-                    <exclude name="TC_004"/> <!--Basic page-->
-                    <exclude name="TC_005"/> <!--Select Gender-->
-                    <exclude name="TC_006"/> <!--Select Height-->
-                    <exclude name="TC_007"/> <!--Select Weight-->
-                    <exclude name="TC_008"/> <!--Select DOB-->
-                    <exclude name="TC_009"/> <!--Submit page with smoke and alcohol -->
+                    <exclude name="TC_002"/> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_003"/> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_004"/> <!--Basic page--> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_005"/> <!--Select Gender--> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_006"/> <!--Select Height--> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_007"/> <!--Select Weight--> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_008"/> <!--Select DOB--> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
+                    <exclude name="TC_009"/> <!--Submit page with smoke and alcohol --> <!--Most of the elements values are changed and bug noted--> <!--Need to push this change to the branch and pull them into mac-->
                 </methods>
             </class>
 

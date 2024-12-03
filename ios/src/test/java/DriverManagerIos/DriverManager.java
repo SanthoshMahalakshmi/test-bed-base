@@ -129,7 +129,7 @@ public class DriverManager {
 
         WebElement AllowNotificationButton_1 = null;
         try {
-            AllowNotificationButton_1 =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
+            AllowNotificationButton_1 =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow")));
             AllowNotificationButton_1.click();
             logger.info("before login->Allow button is visible and its clicked Allow");
         }
@@ -212,7 +212,7 @@ public class DriverManager {
 
         WebElement AllowNotificationButton_2 = null;
         try {
-            AllowNotificationButton_2 =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
+            AllowNotificationButton_2 =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow")));
             AllowNotificationButton_2.click();
             logger.info("Allow button is visible and its clicked Allow");
         }
