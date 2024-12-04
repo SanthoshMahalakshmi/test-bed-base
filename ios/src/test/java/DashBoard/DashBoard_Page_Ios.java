@@ -16,59 +16,56 @@ import java.time.Duration;
 public class DashBoard_Page_Ios extends DriverManager {
 
     private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Ios.class);
-    
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_010()
-    {
+
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_010() {
         BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //1.Verify the LOGO text present in the top.
+        WebElement LogoText = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")")));
-            WebElement LogoText = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")"));
+            LogoText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"MoAI\"`]")));
             logger.info("Logo text : " + LogoText.getText());
             logger.info("Logo text is present : " + LogoText.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Logo is not present.");
+            logger.warning("Logo is not present in dash board");
         }
 
         //2.Verify the Sync button.
+        WebElement SyncData = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Sync data")));
-            WebElement SyncData = driver.findElement(AppiumBy.accessibilityId("Sync data"));
+            SyncData = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic sync")));
             logger.info("Sync data button is present : " + SyncData.isDisplayed());
             SyncData.click();
         } catch (Exception e) {
-            logger.warning("Sync button is not present.");
+            logger.warning("Sync button is not present dash board.");
         }
 
-        WebElement SyncInfo = null;
+        WebElement SyncInfo_Message = null;
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.android.permissioncontroller:id/permission_allow_button")));
-            logger.info("Sync button info :" + SyncInfo.getText());
-        }
-        catch (Exception e)
-        {
-            logger.warning("Info message is not found.");
+                    accessibilityId("Device disconnected")));
+            logger.info("Sync button info message for device not connected :" + SyncInfo_Message.getText());
+        } catch (Exception e) {
+            logger.warning("Info message for device not connected is not found.");
         }
 
-        WebElement SyncClose = null;
+        WebElement SyncClose_icon = null;
         try {
-            SyncClose = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/image_close_toaster")));
-            logger.info("Cross button is found its clicked :" + SyncClose.isDisplayed());
-            SyncClose.click();
-        }
-        catch (Exception e)
-        {
-             logger.warning("Sync cross button is not found.");
+            SyncClose_icon = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("error_icon")));
+            logger.info("error_icon button is found its clicked :" + SyncClose_icon.isDisplayed());
+            SyncClose_icon.click();
+        } catch (Exception e) {
+            logger.warning("error_icon button is not found.");
         }
 
         //3.Notification button.
+        WebElement NotificationButton = null;
         try {
-            WebElement NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notification")));
+            NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic notification")));
             logger.info("Notification button is present : " + NotificationButton.isDisplayed());
             NotificationButton.click();
         } catch (Exception e) {
@@ -76,41 +73,31 @@ public class DashBoard_Page_Ios extends DriverManager {
         }
 
         //4.Seeing the notification and clearing them
-        WebElement Notifications = null;
-        try{
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)")));
-            logger.info("Notification is present? : " + Notifications.isDisplayed());
-        }
-        catch (Exception e)
-        {
-            logger.warning("No notification are present.");
+        WebElement Actual_Notifications = null;
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Decline\"`][1]")));
+            logger.info("Notification is present? : " + Actual_Notifications.isDisplayed());
+        } catch (Exception e) {
+            logger.warning("No notification are present currently.");
         }
 
         //5. clearing them
-        try{
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("clear"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            logger.info("Clear button is found and it's cleared all the notifications");
-        }
-        catch (Exception e)
-        {
-         logger.warning("Clear button is not present currently, there is no notification");
-        }
-
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        //6.health score section
-        WebElement ECGReport = null;
         try {
-            ECGReport =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg")));
-            logger.info("Ecg report is present " + ECGReport.isDisplayed());
-        }
-        catch (Exception e)
-        {
-            logger.warning("Ecg report data is not present in the dashboard.");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic clearAllNotification"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes"))).click();
+            logger.info("Clear button is found and it's cleared all the notifications");
+        } catch (Exception e) {
+            logger.warning("Clear button is not present currently, there is no notification");
         }
 
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
+        } catch (Exception e) {
+            logger.warning("Navigate back is not happen currently.");
+        }
+
+        //6.Device indication¡ /*in process*/
         WebElement deviceIndication = null;
         try {
             deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
@@ -123,13 +110,14 @@ public class DashBoard_Page_Ios extends DriverManager {
         //Scrolling to heath score section.
         WebElement HealthScore = null;
         try {
-            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/view5")));
+            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Health Score")));
+            logger.info("Health Score is present : " + HealthScore.getText());
         } catch (Exception e) {
             logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_011() {
 
         BaseLoginForIos(); // To complete the login process.
@@ -137,94 +125,102 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //1.Verify My dependent section.
+        WebElement MyDependent = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtMyDependent")));
-            WebElement MyDependent = driver.findElement(AppiumBy.id("com.moai.android:id/txtMyDependent"));
+            MyDependent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("My Dependents")));
             logger.info("My dependent section is present : " + MyDependent.isDisplayed());
         } catch (Exception e) {
             logger.warning("My dependent section is not visible.");
         }
 
-        //2.Add new dependent
+        //2.Add new dependent plus.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("+2"))).click();
             //My Dependent details page, new journey for adding dependent. user should cross all the 5 pages.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")")));
-            WebElement MyDependentSection = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")"));
-            logger.info("My Dependent page is present : " + MyDependentSection.isDisplayed());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Basic Details")));
+            logger.info("User can add new Dependent ");
         } catch (Exception e) {
             logger.warning("Add new dependent is not happening.");
         }
 
         //Home button, moving back to dashboard.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
+            logger.info("Moving back to dashboard.");
         } catch (Exception e) {
             logger.warning("Moving back to home is not happening.");
         }
 
-        //3.Verify added dependent in the dashboard
-        WebElement AddedDependent = null;
+        //3.Verify new dependent in the dashboard
+        WebElement NewDependent = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")")));
-            AddedDependent = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")"));
-            logger.warning("Newly added dependent profile is visible : " + AddedDependent.isDisplayed());
+            NewDependent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[1]" +
+                            "/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]")));
+            logger.warning("Newly added dependent profile is visible : " + NewDependent.isDisplayed());
         } catch (Exception e) {
             logger.warning("New dependent is not added.");
         }
 
         //4.Dependent profile
+        WebElement dependent_profile = null;
         try {
-            AddedDependent.click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtUserName")));
-            WebElement userName = driver.findElement(AppiumBy.id("com.moai.android:id/txtUserName"));
-            logger.info("Dependent profile name : " + userName.getText());
+            NewDependent.click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeOther")));
+            logger.info("Dependent profile is visible : " + dependent_profile.isDisplayed());
         } catch (Exception e) {
-            logger.warning("New dependent profile is ");
+            logger.warning("New dependent profile is not visible");
         }
 
         //Navigate back to the DB
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
             logger.warning("Navigating back dashboard is not happening.");
         }
 
         //6.Sharing the report detail
-
         try {
             /*Clicking on share in DB*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgShare"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic share"))).click();
             /*Selecting the ECG*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
-            /*Selecting the Submit*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-            /*Selecting the message*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    xpath("//android.widget.TextView[@resource-id=\"android:id/text1\" and @text=\"Messages\"]"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"ECG\"`][2]"))).click();
+            /*Selecting the done*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Done \"`]"))).click();
+            /*Selecting the close button*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("UICloseButtonBackground"))).click();
             logger.info("Sharing the report is working.");
         } catch (Exception e) {
-            logger.warning("Sharing option is not happening.");
+            logger.warning("Sharing option click is not happening.");
         }
 
 
         //7.downloading the reports and sharing to the people from DB.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgDownload"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
+            /*Selecting BP for download*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[1]"))).click();
             /*Selecting ECG for download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[2]"))).click();
             /*Selecting the SPO2 download.*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[3]"))).click();
             /*Selecting the HR download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[4]"))).click();
             /*Clicking on done*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Done \"`]"))).click();
+            logger.info("Sharing the report is working.");
         } catch (Exception e) {
             logger.warning("Downloading the report not working.");
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_012() {
 
         BaseLoginForIos(); // To complete the login process.
@@ -280,7 +276,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_013() {
 
         TC_012();  // To complete the previous steps.
@@ -329,7 +325,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_014() {
 
         BaseLoginForIos();// To complete the login scenario.
@@ -434,7 +430,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_015() {
 
         BaseLoginForIos(); // To complete the login process.
@@ -619,7 +615,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_016() {
 
         BaseLoginForIos();// To complete the login process.
@@ -730,7 +726,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_017() {
 
         BaseLoginForIos(); // To complete the login process.
@@ -778,7 +774,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         //Empty Personal note less character.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"))
+                            ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"))
                     .sendKeys("Take");
         } catch (Exception e) {
             logger.warning("Empty personal note is not");
@@ -819,7 +815,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_018() {
 
         BaseLoginForIos();
@@ -876,7 +872,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Checking whether the reminder time is added or not.
         WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
-        logger.info("Timer is added :"+timer.isDisplayed());
+        logger.info("Timer is added :" + timer.isDisplayed());
 
         try {
             driver.findElement(AppiumBy.androidUIAutomator
@@ -898,7 +894,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_019() {
 
         BaseLoginForIos();
@@ -950,14 +946,14 @@ public class DashBoard_Page_Ios extends DriverManager {
         //Confirmation for deleting the care circle
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster")));
+            WebElement SuccessToast = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster")));
             logger.info("Success toast : " + SuccessToast.getText());
         } catch (Exception e) {
             logger.warning("Confirmation Ok for delete care circle is not happen.");
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_025() {
         BaseLoginForIos();
 
@@ -1004,7 +1000,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_026() {
 
         BaseLoginForIos();
@@ -1028,7 +1024,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_027() {
 
         /*Adding the reminder for Blood pressure.*/
@@ -1094,7 +1090,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         //Checking whether the reminder time is added or not.
         try {
             WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
-            logger.info("just checking whether the reminder time is added or not: " +timer.isDisplayed());
+            logger.info("just checking whether the reminder time is added or not: " + timer.isDisplayed());
         } catch (Exception e) {
             logger.warning("Timer is not visible.");
         }
@@ -1131,9 +1127,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_028() {
-       BaseLoginForIos(); // Login process.
+        BaseLoginForIos(); // Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1191,7 +1187,7 @@ public class DashBoard_Page_Ios extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_029() {
 
         BaseLoginForIos(); //Login process from base class.
@@ -1291,9 +1287,8 @@ public class DashBoard_Page_Ios extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_030()
-    {
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_030() {
         BaseLoginForIos(); //Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

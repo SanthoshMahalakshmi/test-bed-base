@@ -27,8 +27,8 @@
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <exclude name="TC_010"/>
-                    <exclude name="TC_011"/>
+                    <exclude name="TC_010"/> <!--Most of the elements values are changed and bug noted-->   <!--changes are done in mac-->
+                    <exclude name="TC_011"/> <!--Most of the elements values are changed and bug noted-->   <!--changes are done in mac-->
                     <exclude name="TC_012"/>
                     <exclude name="TC_013"/>
                     <exclude name="TC_014"/>
