@@ -2,6 +2,7 @@ package DashBoard;
 
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.RetryAnalyzerios;
+import browserstack.shaded.org.eclipse.jgit.diff.Edit;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -195,7 +196,6 @@ public class DashBoard_Page_Ios extends DriverManager {
             logger.warning("Sharing option click is not happening.");
         }
 
-
         //7.downloading the reports and sharing to the people from DB.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
@@ -228,9 +228,9 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         //verify the care circle section label.
+        WebElement careCircleLabel = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCareCirclesLabel")));
-            WebElement careCircleLabel = driver.findElement(AppiumBy.id("com.moai.android:id/txtCareCirclesLabel"));
+            careCircleLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Care Circles")));
             logger.info("Care circle label is present : " + careCircleLabel.isDisplayed());
         } catch (Exception e) {
             logger.warning("Care section label is not visible.");
@@ -238,85 +238,144 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //2.Clicking the Get stared button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtCareCircle"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
         } catch (Exception e) {
             logger.warning("Clicking on get started is not happening.");
         }
 
-        //Permission
+        //Allow the permission for accessing the contact list.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("Before clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("Permission allow is not happening.");
+            logger.warning("Before clicking the plus to add contact, Permission access is not popping-up");
+        }
+
+        //Add group name for care circle.
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"Group Name\"`]"))).sendKeys("New group");
+            logger.info("group name is added");
+        } catch (Exception e) {
+            logger.warning("Group name is not added");
+        }
+
+        //Clicking the Plus to add contact.
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    accessibilityId("Plus"))).click();
+        } catch (Exception e) {
+            logger.warning("Clicking the plus button is not happening.");
+        }
+
+        //Allow the permission for accessing the contact list.
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("After clicking the plus to add contact, Permission access is popping-up.");
+        } catch (Exception e) {
+            logger.warning("After clicking the plus to add contact, Permission access is not popping-up");
         }
 
         //Selecting the contact
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"A\")"))).click();
+                    xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
+            logger.info("Contact is selected for care circle");
         } catch (Exception e) {
-            logger.warning("Selecting contact os not happening.");
+            logger.warning("Selecting contact for care circle is not happening.");
         }
 
         //Add member
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Add Members\"`][3]"))).click();
+            logger.info("Add member button is clicked after selected the contact.");
         } catch (Exception e) {
-            logger.warning("Adding member is not happening");
+            logger.warning("Add member button is not clicked after selected the contact.");
         }
 
-        //Enter group name
+        //Submit click to create a care circle.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).sendKeys("Fam");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Submit\"`]"))).click();
+            logger.info("Submit button is clicked and care circle is created");
         } catch (Exception e) {
-            logger.warning("Adding new name for the care circle is not happening.");
+            logger.warning("Submit button is not clicked and care circle is not created.");
         }
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_013() {
 
-        TC_012();  // To complete the previous steps.
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //Click the submit to get the error, not enough character.
+        //To enter into care circle.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
+            logger.info("Enter into care circle happening..");
         } catch (Exception e) {
-            logger.warning("Submit button is not working for getting the error for not enough character.");
+            logger.warning("Enter into care circle is not happening.");
         }
 
+        //Kebab menu clicking to select the edit care circle option
+        try
+        {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
+            logger.info("Kebab menu is clicked to access the edit care circle option");
+
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
+            logger.info("Clicking the edit care circle option.");
+
+        }catch (Exception e)
+        {
+            logger.warning("Kebab menu is not clicked to access the edit care circle option");
+            logger.warning("Clicking the edit care circle is not happening.");
+        }
+
+        //Edit the care circle name with less character and Click the submit to get the error for not enough character.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error1 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    className("XCUIElementTypeTextField"))).sendKeys("R");
+            logger.info("Care circle name is changed with less character.");
+
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
+            logger.info("clicking the update button with less group name.");
+        } catch (Exception e) {
+            logger.warning("Submit button is not working for getting the error of not enough character for group name.");
+        }
+
+        //Actual error.
+        WebElement error1 = null;
+        try {
+            error1 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Group name at least 5 characters.")));
             logger.info("Not enough character error : " + error1.getText());
         } catch (Exception e) {
-            logger.warning("error message is not pop-up");
+            logger.warning("Error message is not pop-up for less character for care circle group name.");
         }
 
         //Clearing the input field.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).clear();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.className("XCUIElementTypeTextField"))).clear();
+            logger.info("Clearing the group name");
         } catch (Exception e) {
-            logger.warning("Clearing the input field is not working.");
+            logger.warning("Clearing the group name field is not working.");
         }
 
-        //To get empty input field error.
+        //To get empty input field error, clicking the update.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
-            logger.info("Empty input for the care circle name");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
+            logger.info("Update click is happen with empty group name");
         } catch (Exception e) {
-            logger.warning("Empty input field error is not pop-up.");
+            logger.warning("Update click is not happen with empty group name");
         }
 
+        //Empty group name error.
+        WebElement error2 = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error2 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter group name")));
             logger.info("Empty input field error : " + error2.getText());
         } catch (Exception e) {
             logger.warning("Empty input field error message is not visible.");
@@ -332,62 +391,55 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        //Care circle button.
+        //To enter into care circle.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
+            logger.info("Enter into care circle happening..");
         } catch (Exception e) {
-            logger.warning("Care circle button is not visible for a click.");
+            logger.warning("Enter into care circle is not happening.");
         }
 
-        //permission
+        //Allow the permission for accessing the contact list.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-            logger.info("Permission is given for allow button");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("After clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("Permission is not happening");
+            logger.warning("After clicking the plus to add contact, Permission access is not popping-up");
         }
 
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
-            logger.info("Add member is happened");
-        } catch (Exception e) {
-            logger.warning("Add member is not happen.");
+        //Kebab menu clicking.
+        try
+        {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
+            logger.info("Kebab menu is clicked to access the edit care circle option");
+        }catch (Exception e)
+        {
+            logger.warning("Kebab menu is not clicked to access the edit care circle option");
         }
 
-        //1.clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
+        //2.(i)Edit care circle option
+        WebElement Edit_Care_circle = null;
+        try
+        {
+            Edit_Care_circle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle")));
+            logger.info("Edit care circle option is present " + Edit_Care_circle.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Clicking the more options is not happen.");
-        }
-
-        //2.(i)Kebab menu list with edit care circle.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Care Circle\")")));
-            WebElement EditCareCircle = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Edit Care Circle\")"));
-            logger.info("Edit care circle option is present in the list : " + EditCareCircle.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("Edit care circle is not visible.");
+            logger.warning("");
         }
 
         //2.(ii)Kebab menu list with set reminder
+        WebElement SetReminder = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Set Reminder\")")));
-            WebElement SetReminder = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Set Reminder\")"));
+            SetReminder = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Set Reminders")));
             logger.info("Set reminder option is present in the list : " + SetReminder.isDisplayed());
         } catch (Exception e) {
             logger.warning("Set reminder is not visible.");
         }
 
         //2.(iii)Kebab menu list with Delete care circle
+        WebElement DeleteCareCircle = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Delete Care Circle\")")));
-            WebElement DeleteCareCircle = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete Care Circle\")"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Delete Care Circle")));
             logger.info("Delete care circle option is present in the list : " + DeleteCareCircle.isDisplayed());
         } catch (Exception e) {
             logger.warning("Delete care circle is not visible");
@@ -395,37 +447,19 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //3.Clicking on the edit care circle option in the kebab menu
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Care Circle\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
             logger.info("Clicking the edit care circle");
         } catch (Exception e) {
             logger.warning("Edit care circle click is not happening.");
         }
 
-        //Clearing the input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).clear();
-            logger.info("Clearing the previous input.");
-        } catch (Exception e) {
-            logger.warning("Clearing the previous input is not happening");
-        }
-
-        //Editing the care circle name.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).sendKeys("SANTH");
-            logger.info("Editing the care circle name");
-        } catch (Exception e) {
-            logger.warning("Edit the care circle name is not happen.");
-        }
-
         //4.Clicking on the update to complete the change.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
-            logger.info("name is changed.");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
+            logger.info("Care circle is updated with existing values.");
         } catch (Exception e) {
-            logger.warning("Name changed newly.");
+            logger.warning("Care circle is not updated with existing values.");
         }
 
     }
