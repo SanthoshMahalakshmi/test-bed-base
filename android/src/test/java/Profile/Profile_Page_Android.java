@@ -580,7 +580,7 @@ public class Profile_Page_Android extends DriverManager {
             //Confirm ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
         } catch (Exception e) {
-           logger.warning("Deleted message is not coming bcz none of the delete reminder is deleted.");
+            logger.warning("Deleted message is not coming bcz none of the delete reminder is deleted.");
         }
 
         //Back to home page

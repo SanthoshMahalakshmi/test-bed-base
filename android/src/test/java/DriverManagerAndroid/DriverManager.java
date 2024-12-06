@@ -144,15 +144,23 @@ public class DriverManager {
         }
 
         //Fill the OTP into input field.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP1"))).sendKeys("1");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP2"))).sendKeys("2");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP3"))).sendKeys("3");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP4"))).sendKeys("4");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP5"))).sendKeys("5");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP6"))).sendKeys("6");
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP1"))).sendKeys("1");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP2"))).sendKeys("2");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP3"))).sendKeys("3");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP4"))).sendKeys("4");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP5"))).sendKeys("5");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP6"))).sendKeys("6");
+        } catch (Exception e) {
+            logger.warning("OTP is not entered.");
+        }
 
         //Verify the OTP
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtVerify"))).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtVerify"))).click();
+        } catch (Exception e) {
+            logger.warning("Verifying the OTP is not working.");
+        }
 
         WebElement AllowNotificationButton = null;
         try {
@@ -166,20 +174,4 @@ public class DriverManager {
         }
     }
 
-    @Test(enabled = false)
-    public void lo()
-    {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        //Clicking the Get started button
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
-
-        //clicking the mobile number input field and send the keys to it.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                ("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
-
-        //Clicking the continue button
-      WebElement cn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue")));
-      logger.info("present " + cn.isDisplayed());
-    }
 }

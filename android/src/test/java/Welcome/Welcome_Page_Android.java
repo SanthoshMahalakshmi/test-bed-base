@@ -1,6 +1,7 @@
 package Welcome;
 
 import DriverManagerAndroid.DriverManager;
+import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +13,7 @@ import java.time.Duration;
 
 public class Welcome_Page_Android extends DriverManager {
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_001() {
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -1,7 +1,8 @@
 package DashBoard;
 
-import DriverManagerAndroid.DriverManager;
-import UtilitiesForAndroid.RetryAnalyzer;
+import DriverManagerIos.DriverManager;
+import UtilitiesForIos.RetryAnalyzerios;
+import browserstack.shaded.org.eclipse.jgit.diff.Edit;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,62 +14,59 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class DashBoard_Page_Android extends DriverManager {
+public class DashBoard_Page_Ios extends DriverManager {
 
-    private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Android.class);
-    
-     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_010()
-    {
-        BaseLogin();
+    private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Ios.class);
+
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_010() {
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //1.Verify the LOGO text present in the top.
+        WebElement LogoText = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")")));
-            WebElement LogoText = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")"));
+            LogoText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"MoAI\"`]")));
             logger.info("Logo text : " + LogoText.getText());
             logger.info("Logo text is present : " + LogoText.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Logo is not present.");
+            logger.warning("Logo is not present in dash board");
         }
 
         //2.Verify the Sync button.
+        WebElement SyncData = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Sync data")));
-            WebElement SyncData = driver.findElement(AppiumBy.accessibilityId("Sync data"));
+            SyncData = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic sync")));
             logger.info("Sync data button is present : " + SyncData.isDisplayed());
             SyncData.click();
         } catch (Exception e) {
-            logger.warning("Sync button is not present.");
+            logger.warning("Sync button is not present dash board.");
         }
 
-        WebElement SyncInfo = null;
+        WebElement SyncInfo_Message = null;
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.android.permissioncontroller:id/permission_allow_button")));
-            logger.info("Sync button info :" + SyncInfo.getText());
-        }
-        catch (Exception e)
-        {
-            logger.warning("Info message is not found.");
+                    accessibilityId("Device disconnected")));
+            logger.info("Sync button info message for device not connected :" + SyncInfo_Message.getText());
+        } catch (Exception e) {
+            logger.warning("Info message for device not connected is not found.");
         }
 
-        WebElement SyncClose = null;
+        WebElement SyncClose_icon = null;
         try {
-            SyncClose = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/image_close_toaster")));
-            logger.info("Cross button is found its clicked :" + SyncClose.isDisplayed());
-            SyncClose.click();
-        }
-        catch (Exception e)
-        {
-             logger.warning("Sync cross button is not found.");
+            SyncClose_icon = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("error_icon")));
+            logger.info("error_icon button is found its clicked :" + SyncClose_icon.isDisplayed());
+            SyncClose_icon.click();
+        } catch (Exception e) {
+            logger.warning("error_icon button is not found.");
         }
 
         //3.Notification button.
+        WebElement NotificationButton = null;
         try {
-            WebElement NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notification")));
+            NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic notification")));
             logger.info("Notification button is present : " + NotificationButton.isDisplayed());
             NotificationButton.click();
         } catch (Exception e) {
@@ -76,41 +74,31 @@ public class DashBoard_Page_Android extends DriverManager {
         }
 
         //4.Seeing the notification and clearing them
-        WebElement Notifications = null;
-        try{
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)")));
-            logger.info("Notification is present? : " + Notifications.isDisplayed());
-        }
-        catch (Exception e)
-        {
-            logger.warning("No notification are present.");
+        WebElement Actual_Notifications = null;
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Decline\"`][1]")));
+            logger.info("Notification is present? : " + Actual_Notifications.isDisplayed());
+        } catch (Exception e) {
+            logger.warning("No notification are present currently.");
         }
 
         //5. clearing them
-        try{
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("clear"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            logger.info("Clear button is found and it's cleared all the notifications");
-        }
-        catch (Exception e)
-        {
-         logger.warning("Clear button is not present currently, there is no notification");
-        }
-
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        //6.health score section
-        WebElement ECGReport = null;
         try {
-            ECGReport =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg")));
-            logger.info("Ecg report is present " + ECGReport.isDisplayed());
-        }
-        catch (Exception e)
-        {
-            logger.warning("Ecg report data is not present in the dashboard.");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic clearAllNotification"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes"))).click();
+            logger.info("Clear button is found and it's cleared all the notifications");
+        } catch (Exception e) {
+            logger.warning("Clear button is not present currently, there is no notification");
         }
 
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
+        } catch (Exception e) {
+            logger.warning("Navigate back is not happen currently.");
+        }
+
+        //6.Device indication¡ /*in process*/
         WebElement deviceIndication = null;
         try {
             deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
@@ -123,118 +111,126 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scrolling to heath score section.
         WebElement HealthScore = null;
         try {
-            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/view5")));
+            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Health Score")));
+            logger.info("Health Score is present : " + HealthScore.getText());
         } catch (Exception e) {
             logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_011() {
 
-        BaseLogin(); // To complete the login process.
+        BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //1.Verify My dependent section.
+        WebElement MyDependent = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtMyDependent")));
-            WebElement MyDependent = driver.findElement(AppiumBy.id("com.moai.android:id/txtMyDependent"));
+            MyDependent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("My Dependents")));
             logger.info("My dependent section is present : " + MyDependent.isDisplayed());
         } catch (Exception e) {
             logger.warning("My dependent section is not visible.");
         }
 
-        //2.Add new dependent
+        //2.Add new dependent plus.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("+2"))).click();
             //My Dependent details page, new journey for adding dependent. user should cross all the 5 pages.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")")));
-            WebElement MyDependentSection = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")"));
-            logger.info("My Dependent page is present : " + MyDependentSection.isDisplayed());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Basic Details")));
+            logger.info("User can add new Dependent ");
         } catch (Exception e) {
             logger.warning("Add new dependent is not happening.");
         }
 
         //Home button, moving back to dashboard.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
+            logger.info("Moving back to dashboard.");
         } catch (Exception e) {
             logger.warning("Moving back to home is not happening.");
         }
 
-        //3.Verify added dependent in the dashboard
-        WebElement AddedDependent = null;
+        //3.Verify new dependent in the dashboard
+        WebElement NewDependent = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")")));
-            AddedDependent = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")"));
-            logger.warning("Newly added dependent profile is visible : " + AddedDependent.isDisplayed());
+            NewDependent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[1]" +
+                            "/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]")));
+            logger.warning("Newly added dependent profile is visible : " + NewDependent.isDisplayed());
         } catch (Exception e) {
             logger.warning("New dependent is not added.");
         }
 
         //4.Dependent profile
+        WebElement dependent_profile = null;
         try {
-            AddedDependent.click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtUserName")));
-            WebElement userName = driver.findElement(AppiumBy.id("com.moai.android:id/txtUserName"));
-            logger.info("Dependent profile name : " + userName.getText());
+            NewDependent.click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    xpath("//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeOther")));
+            logger.info("Dependent profile is visible : " + dependent_profile.isDisplayed());
         } catch (Exception e) {
-            logger.warning("New dependent profile is ");
+            logger.warning("New dependent profile is not visible");
         }
 
         //Navigate back to the DB
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
             logger.warning("Navigating back dashboard is not happening.");
         }
 
         //6.Sharing the report detail
-
         try {
             /*Clicking on share in DB*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgShare"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic share"))).click();
             /*Selecting the ECG*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
-            /*Selecting the Submit*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-            /*Selecting the message*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    xpath("//android.widget.TextView[@resource-id=\"android:id/text1\" and @text=\"Messages\"]"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"ECG\"`][2]"))).click();
+            /*Selecting the done*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Done \"`]"))).click();
+            /*Selecting the close button*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("UICloseButtonBackground"))).click();
             logger.info("Sharing the report is working.");
         } catch (Exception e) {
-            logger.warning("Sharing option is not happening.");
+            logger.warning("Sharing option click is not happening.");
         }
-
 
         //7.downloading the reports and sharing to the people from DB.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgDownload"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
+            /*Selecting BP for download*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[1]"))).click();
             /*Selecting ECG for download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[2]"))).click();
             /*Selecting the SPO2 download.*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[3]"))).click();
             /*Selecting the HR download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    xpath("(//XCUIElementTypeButton[@name=\"ic UnCheckBoxShareReportIcon\"])[4]"))).click();
             /*Clicking on done*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Done \"`]"))).click();
+            logger.info("Sharing the report is working.");
         } catch (Exception e) {
             logger.warning("Downloading the report not working.");
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_012() {
 
-        BaseLogin(); // To complete the login process.
+        BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         //verify the care circle section label.
+        WebElement careCircleLabel = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCareCirclesLabel")));
-            WebElement careCircleLabel = driver.findElement(AppiumBy.id("com.moai.android:id/txtCareCirclesLabel"));
+            careCircleLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Care Circles")));
             logger.info("Care circle label is present : " + careCircleLabel.isDisplayed());
         } catch (Exception e) {
             logger.warning("Care section label is not visible.");
@@ -242,85 +238,144 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //2.Clicking the Get stared button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtCareCircle"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
         } catch (Exception e) {
             logger.warning("Clicking on get started is not happening.");
         }
 
-        //Permission
+        //Allow the permission for accessing the contact list.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("Before clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("Permission allow is not happening.");
+            logger.warning("Before clicking the plus to add contact, Permission access is not popping-up");
+        }
+
+        //Add group name for care circle.
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"Group Name\"`]"))).sendKeys("New group");
+            logger.info("group name is added");
+        } catch (Exception e) {
+            logger.warning("Group name is not added");
+        }
+
+        //Clicking the Plus to add contact.
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    accessibilityId("Plus"))).click();
+        } catch (Exception e) {
+            logger.warning("Clicking the plus button is not happening.");
+        }
+
+        //Allow the permission for accessing the contact list.
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("After clicking the plus to add contact, Permission access is popping-up.");
+        } catch (Exception e) {
+            logger.warning("After clicking the plus to add contact, Permission access is not popping-up");
         }
 
         //Selecting the contact
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"A\")"))).click();
+                    xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
+            logger.info("Contact is selected for care circle");
         } catch (Exception e) {
-            logger.warning("Selecting contact os not happening.");
+            logger.warning("Selecting contact for care circle is not happening.");
         }
 
         //Add member
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Add Members\"`][3]"))).click();
+            logger.info("Add member button is clicked after selected the contact.");
         } catch (Exception e) {
-            logger.warning("Adding member is not happening");
+            logger.warning("Add member button is not clicked after selected the contact.");
         }
 
-        //Enter group name
+        //Submit click to create a care circle.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).sendKeys("Fam");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Submit\"`]"))).click();
+            logger.info("Submit button is clicked and care circle is created");
         } catch (Exception e) {
-            logger.warning("Adding new name for the care circle is not happening.");
+            logger.warning("Submit button is not clicked and care circle is not created.");
         }
-
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_013() {
-
-        TC_012();  // To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //Click the submit to get the error, not enough character.
+        //To enter into care circle.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
+            logger.info("Enter into care circle happening..");
         } catch (Exception e) {
-            logger.warning("Submit button is not working for getting the error for not enough character.");
+            logger.warning("Enter into care circle is not happening.");
         }
 
+        //Kebab menu clicking to select the edit care circle option
+        try
+        {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
+            logger.info("Kebab menu is clicked to access the edit care circle option");
+
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
+            logger.info("Clicking the edit care circle option.");
+
+        }catch (Exception e)
+        {
+            logger.warning("Kebab menu is not clicked to access the edit care circle option");
+            logger.warning("Clicking the edit care circle is not happening.");
+        }
+
+        //Edit the care circle name with less character and Click the submit to get the error for not enough character.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error1 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    className("XCUIElementTypeTextField"))).sendKeys("R");
+            logger.info("Care circle name is changed with less character.");
+
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
+            logger.info("clicking the update button with less group name.");
+        } catch (Exception e) {
+            logger.warning("Submit button is not working for getting the error of not enough character for group name.");
+        }
+
+        //Actual error.
+        WebElement error1 = null;
+        try {
+            error1 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Group name at least 5 characters.")));
             logger.info("Not enough character error : " + error1.getText());
         } catch (Exception e) {
-            logger.warning("error message is not pop-up");
+            logger.warning("Error message is not pop-up for less character for care circle group name.");
         }
 
         //Clearing the input field.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).clear();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.className("XCUIElementTypeTextField"))).clear();
+            logger.info("Clearing the group name");
         } catch (Exception e) {
-            logger.warning("Clearing the input field is not working.");
+            logger.warning("Clearing the group name field is not working.");
         }
 
-        //To get empty input field error.
+        //To get empty input field error, clicking the update.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
-            logger.info("Empty input for the care circle name");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
+            logger.info("Update click is happen with empty group name");
         } catch (Exception e) {
-            logger.warning("Empty input field error is not pop-up.");
+            logger.warning("Update click is not happen with empty group name");
         }
 
+        //Empty group name error.
+        WebElement error2 = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error2 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter group name")));
             logger.info("Empty input field error : " + error2.getText());
         } catch (Exception e) {
             logger.warning("Empty input field error message is not visible.");
@@ -329,69 +384,62 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_014() {
 
-        BaseLogin();// To complete the login scenario.
+        BaseLoginForIos();// To complete the login scenario.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        //Care circle button.
+        //To enter into care circle.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
+            logger.info("Enter into care circle happening..");
         } catch (Exception e) {
-            logger.warning("Care circle button is not visible for a click.");
+            logger.warning("Enter into care circle is not happening.");
         }
 
-        //permission
+        //Allow the permission for accessing the contact list.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-            logger.info("Permission is given for allow button");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("After clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("Permission is not happening");
+            logger.warning("After clicking the plus to add contact, Permission access is not popping-up");
         }
 
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
-            logger.info("Add member is happened");
-        } catch (Exception e) {
-            logger.warning("Add member is not happen.");
+        //Kebab menu clicking.
+        try
+        {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
+            logger.info("Kebab menu is clicked to access the edit care circle option");
+        }catch (Exception e)
+        {
+            logger.warning("Kebab menu is not clicked to access the edit care circle option");
         }
 
-        //1.clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
+        //2.(i)Edit care circle option
+        WebElement Edit_Care_circle = null;
+        try
+        {
+            Edit_Care_circle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle")));
+            logger.info("Edit care circle option is present " + Edit_Care_circle.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Clicking the more options is not happen.");
-        }
-
-        //2.(i)Kebab menu list with edit care circle.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Care Circle\")")));
-            WebElement EditCareCircle = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Edit Care Circle\")"));
-            logger.info("Edit care circle option is present in the list : " + EditCareCircle.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("Edit care circle is not visible.");
+            logger.warning("");
         }
 
         //2.(ii)Kebab menu list with set reminder
+        WebElement SetReminder = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Set Reminder\")")));
-            WebElement SetReminder = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Set Reminder\")"));
+            SetReminder = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Set Reminders")));
             logger.info("Set reminder option is present in the list : " + SetReminder.isDisplayed());
         } catch (Exception e) {
             logger.warning("Set reminder is not visible.");
         }
 
         //2.(iii)Kebab menu list with Delete care circle
+        WebElement DeleteCareCircle = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Delete Care Circle\")")));
-            WebElement DeleteCareCircle = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete Care Circle\")"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Delete Care Circle")));
             logger.info("Delete care circle option is present in the list : " + DeleteCareCircle.isDisplayed());
         } catch (Exception e) {
             logger.warning("Delete care circle is not visible");
@@ -399,45 +447,27 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //3.Clicking on the edit care circle option in the kebab menu
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Care Circle\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
             logger.info("Clicking the edit care circle");
         } catch (Exception e) {
             logger.warning("Edit care circle click is not happening.");
         }
 
-        //Clearing the input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).clear();
-            logger.info("Clearing the previous input.");
-        } catch (Exception e) {
-            logger.warning("Clearing the previous input is not happening");
-        }
-
-        //Editing the care circle name.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).sendKeys("SANTH");
-            logger.info("Editing the care circle name");
-        } catch (Exception e) {
-            logger.warning("Edit the care circle name is not happen.");
-        }
-
         //4.Clicking on the update to complete the change.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
-            logger.info("name is changed.");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
+            logger.info("Care circle is updated with existing values.");
         } catch (Exception e) {
-            logger.warning("Name changed newly.");
+            logger.warning("Care circle is not updated with existing values.");
         }
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_015() {
 
-        BaseLogin(); // To complete the login process.
+        BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(13));
 
@@ -464,13 +494,6 @@ public class DashBoard_Page_Android extends DriverManager {
         } catch (Exception e) {
             logger.warning("Add member is not happening.");
         }
-
-         try {
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                     ("com.android.packageinstaller:id/permission_allow_button"))).click();
-         } catch (Exception e) {
-             logger.warning("permission is not accepted for allow.");
-         }
 
         //pre - clicking the kebab menu
         try {
@@ -626,10 +649,10 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_016() {
 
-        BaseLogin();// To complete the login process.
+        BaseLoginForIos();// To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -737,10 +760,10 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_017() {
 
-        BaseLogin(); // To complete the login process.
+        BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -785,7 +808,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Empty Personal note less character.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"))
+                            ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"))
                     .sendKeys("Take");
         } catch (Exception e) {
             logger.warning("Empty personal note is not");
@@ -826,10 +849,10 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_018() {
 
-        BaseLogin();
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -883,7 +906,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Checking whether the reminder time is added or not.
         WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
-        logger.info("Timer is added :"+timer.isDisplayed());
+        logger.info("Timer is added :" + timer.isDisplayed());
 
         try {
             driver.findElement(AppiumBy.androidUIAutomator
@@ -905,10 +928,10 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_019() {
 
-        BaseLogin();
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -957,16 +980,16 @@ public class DashBoard_Page_Android extends DriverManager {
         //Confirmation for deleting the care circle
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster")));
+            WebElement SuccessToast = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster")));
             logger.info("Success toast : " + SuccessToast.getText());
         } catch (Exception e) {
             logger.warning("Confirmation Ok for delete care circle is not happen.");
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_025() {
-        BaseLogin();
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1011,10 +1034,10 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_026() {
 
-        BaseLogin();
+        BaseLoginForIos();
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1035,11 +1058,11 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_027() {
 
         /*Adding the reminder for Blood pressure.*/
-        BaseLogin();
+        BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1101,7 +1124,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Checking whether the reminder time is added or not.
         try {
             WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
-            logger.info("just checking whether the reminder time is added or not: " +timer.isDisplayed());
+            logger.info("just checking whether the reminder time is added or not: " + timer.isDisplayed());
         } catch (Exception e) {
             logger.warning("Timer is not visible.");
         }
@@ -1138,9 +1161,9 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_028() {
-       BaseLogin(); // Login process.
+        BaseLoginForIos(); // Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1198,10 +1221,10 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_029() {
 
-        BaseLogin(); //Login process from base class.
+        BaseLoginForIos(); //Login process from base class.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1298,10 +1321,9 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_030()
-    {
-        BaseLogin(); //Login process.
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_030() {
+        BaseLoginForIos(); //Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

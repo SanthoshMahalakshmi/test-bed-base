@@ -4,79 +4,80 @@
         <classes>
 
             <!--Welcome page-->
-            <class name="Welcome.Welcome_Page_iOS" >
+            <class name="Welcome.Welcome_Page_iOS">
                 <methods>
-                    <exclude name="TC_001"/> <!--Done-->
+                    <include  name="TC_001"/>
                 </methods>
             </class>
 
             <!--Login pages-->
-            <class name="Login.Login_Page_iOS">
+            <class name="Login.Login_Page_Ios">
                 <methods>
-                    <exclude name="TC_002"/> <!--Done-->
-                    <exclude name="TC_003"/> <!--Done-->
-                    <exclude name="TC_004"/> <!--Basic page-->
-                    <exclude name="TC_005"/> <!--Select Gender-->
-                    <exclude name="TC_006"/> <!--Select Height-->
-                    <exclude name="TC_007"/> <!--Select Weight-->
-                    <exclude name="TC_008"/> <!--Select DOB-->
-                    <exclude name="TC_009"/> <!--Submit page with smoke and alcohol -->
+                    <include  name="TC_002"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_003"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_004"/> <!--Basic page--> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_005"/> <!--Select Gender--> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_006"/> <!--Select Height--> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_007"/> <!--Select Weight--> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_008"/> <!--Select DOB--> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_009"/> <!--Submit page with smoke and alcohol --> <!--iOS element changes are done & mac and ubuntu is up to date -->
                 </methods>
             </class>
 
             <!--Dashboard section-->
-            <class name="DashBoard.DashBoard_Page_ios">
+            <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <exclude name="TC_010"/> <!--Done-->
-                    <exclude name="TC_011"/>
-                    <exclude name="TC_012"/>
-                    <exclude name="TC_013"/>
-                    <exclude name="TC_014"/>
-                    <exclude name="TC_015"/>
-                    <exclude name="TC_016"/>
-                    <exclude name="TC_017"/>
-                    <exclude name="TC_018"/>
-                    <exclude name="TC_019"/>
-                    <exclude name="TC_025"/>
-                    <exclude name="TC_026"/>
-                    <exclude name="TC_027"/>
-                    <exclude name="TC_028"/>
-                    <exclude name="TC_029"/>
-                    <exclude name="TC_030"/>
+                    <include  name="TC_010"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_011"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_012"/> <!--Dec-4 changes on ubuntu-->
+                    <include  name="TC_013"/> <!--Dec-4 changes on ubuntu-->
+                    <include  name="TC_014"/> <!--Dec-4 changes on ubuntu-->
+                    <include  name="TC_015"/>
+                    <include  name="TC_016"/>
+                    <include  name="TC_017"/>
+                    <include  name="TC_018"/>
+                    <include  name="TC_019"/>
+                    <include  name="TC_025"/>
+                    <include  name="TC_026"/>
+                    <include  name="TC_027"/>
+                    <include  name="TC_028"/>
+                    <include  name="TC_029"/>
+                    <include  name="TC_030"/>
                 </methods>
             </class>
 
-            <class name="Profile.Profile_Page_iOS">
+            <!--Profile Section-->
+            <class name="Profile.Profile_Page_Ios">
                 <methods>
-                    <exclude name="TC_031"/> <!--Done-->
-                    <exclude name="TC_032"/> <!--Done-->
+                    <include  name="TC_031"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_032"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                 </methods>
             </class>
 
-            <!--More section -->
-            <class name="More.More_page_iOS">
+            <!--More section-->
+            <class name="More.More_page_Ios">
                 <methods>
-                    <exclude name="TC_033"/> <!--Done-->
-                    <exclude name="TC_034"/> <!--Done-->
-                    <exclude name="TC_035"/> <!--Done-->
-                    <exclude name="TC_036"/> <!--Done-->
+                    <include  name="TC_033"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_034"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_035"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_036"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                 </methods>
             </class>
 
-            <!--Downloading the report.-->
-            <class name="Reports_Page.DownloadingReports_Page_iOS">
+            <!--Downloading the report-->
+            <class name="Reports_Page.DownloadingReports_Page_Ios">
                 <methods>
-                    <exclude name="TC_020"/>
-                    <exclude name="TC_021"/>
-                    <exclude name="TC_022"/>
+                    <include  name="TC_020"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_021"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <include  name="TC_022"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                 </methods>
             </class>
 
             <!--Device connection-->
-            <class name="Devices.Devices_Page_iOS">
+            <class name="Devices.Devices_Page_Ios">
                 <methods>
-                    <exclude name="TC_023"/>
-                    <exclude name="TC_024"/>
+                    <include  name="TC_023"/>
+                    <include  name="TC_024"/>
                 </methods>
             </class>
 
