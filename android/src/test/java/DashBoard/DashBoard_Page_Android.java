@@ -465,6 +465,13 @@ public class DashBoard_Page_Android extends DriverManager {
             logger.warning("Add member is not happening.");
         }
 
+         try {
+             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
+                     ("com.android.packageinstaller:id/permission_allow_button"))).click();
+         } catch (Exception e) {
+             logger.warning("permission is not accepted for allow.");
+         }
+
         //pre - clicking the kebab menu
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();

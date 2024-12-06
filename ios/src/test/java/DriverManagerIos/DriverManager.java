@@ -127,10 +127,8 @@ public class DriverManager {
     public void BaseLoginForIos() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        WebElement AllowNotificationButton_1 = null;
         try {
-            AllowNotificationButton_1 =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow")));
-            AllowNotificationButton_1.click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
             logger.info("before login->Allow button is visible and its clicked Allow");
         }
         catch (Exception e)

@@ -13,13 +13,20 @@ public class Welcome_Page_iOS extends DriverManager
 {
 
     @Test
-    public void ios_TC_001()
+    public void TC_001()
     {
         //Global wait.
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        //ios
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow"))).click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
+            logger.info("before login->Allow button is visible and its clicked Allow");
+        }
+        catch (Exception e)
+        {
+            logger.info("Before login-> Notification allow Button is not pop-up to accept allow.");
+        }
 
         try {
             //confirm the device image is present in the screen welcome screen.

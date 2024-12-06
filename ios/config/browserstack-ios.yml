@@ -1,12 +1,12 @@
-userName: santhoshkrishnan_w9cGeV
-accessKey: bj1wKFBJqyxY8Umh1fzt
+userName: connectedhealth_0ZAka9
+accessKey: 795Qi1UYRtf2G6eqDYYQ
 framework: testng
-app: bs://4037823ab6d4a51936605515c118fc33465445fa
+app: bs://ce20e4010bb6e3cac2fe0c246923822a04f6455e
 platforms:
   - platformName: iOS
     deviceName: iPhone 14 Pro Max
     platformVersion: 16.0
 parallelsPerPlatform: 1
 browserstackLocal: true
-buildName: Test bed run for ios
+buildName: Test run for ios
 projectName: MoAI_Mobile_Test_Automation

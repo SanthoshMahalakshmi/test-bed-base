@@ -22,6 +22,15 @@ public class Login_Page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
+            logger.info("before login->Allow button is visible and its clicked Allow");
+        }
+        catch (Exception e)
+        {
+            logger.info("Before login-> Notification allow Button is not pop-up to accept allow.");
+        }
+
+        try {
             /*Clicking the Get started button*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
@@ -89,6 +98,15 @@ public class Login_Page_Ios extends DriverManager {
     public void TC_003() {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
+            logger.info("before login->Allow button is visible and its clicked Allow");
+        }
+        catch (Exception e)
+        {
+            logger.info("Before login-> Notification allow Button is not pop-up to accept allow.");
+        }
 
         try {
             /*Clicking the Get started button*/
