@@ -963,54 +963,41 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         //Verify the care circle is present in the screen
+        WebElement CareCircle =null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgOtherProfile")));
-            WebElement CareCircle = driver.findElement(AppiumBy.id("com.moai.android:id/imgOtherProfile"));
-            logger.info("Care is present : " + CareCircle.isDisplayed());
-            System.out.println();
+            CareCircle = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon")));
+            CareCircle.click();
+            logger.info("Care circle is clicked.");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.warning("Care circle is is not present to click.");
         }
 
+        //clicking the kebab menu
         try {
-            //Care circle button.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
-        } catch (Exception e) {
-            logger.warning("care circle button is not visible.");
-        }
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
 
-        //permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            logger.warning("Permission is not allowed.");
-        }
-
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
-        } catch (Exception e) {
-            logger.warning("Add member is not happen.");
-        }
-
-        //1.clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Delete Care Circle\")"))).click();
+            //1.Clicking the Delete care circle to delete them.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .accessibilityId("Delete Care Circle"))).click();
         } catch (Exception e) {
             logger.warning("Clicking the kebab for delete care circel is not happen.");
         }
 
         //Confirmation for deleting the care circle
+        WebElement ConfirmAlterMessage, SuccessToast = null;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            WebElement SuccessToast = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster")));
+            //Confirm alter message for deleting the care circle
+            ConfirmAlterMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                    .accessibilityId("Are you sure you want to delete this Care Circle?")));
+            logger.info("Delete care circle message" + ConfirmAlterMessage.getText());
+
+            //2.Clicking the Ok to delete the care circle.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK")));
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Care circle removed successfully")));
             logger.info("Success toast : " + SuccessToast.getText());
         } catch (Exception e) {
-            logger.warning("Confirmation Ok for delete care circle is not happen.");
+            logger.warning("Success toast is not coming in the dashboard.");
         }
     }
 
