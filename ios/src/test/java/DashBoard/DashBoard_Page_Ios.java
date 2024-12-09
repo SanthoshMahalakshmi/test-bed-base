@@ -639,17 +639,11 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //Scrolling to the plus button.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgAddReminder\"));"));
-        } catch (Exception e) {
-            logger.warning("Scroll to the add reminder in the DB is not working");
-        }
-
         //Clicking the plus button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
+                            .click();
             logger.info("Clicking the plus is working");
         } catch (Exception e) {
             logger.warning("plus button is not clicked");
@@ -657,7 +651,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Clicking the SpO2 radio button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")))
+                    .click();
             logger.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
             logger.warning("Spo2 radio button is not visible for a click.");
@@ -665,7 +661,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Clicking the DONE button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]")))
+                    .click();
             logger.info("Done is clicked");
         } catch (Exception e) {
             logger.warning("Done is nor clicked.");
@@ -674,8 +672,8 @@ public class DashBoard_Page_Ios extends DriverManager {
         //CASE - 1
         //1.Selecting the days for the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("WED"))).click();
             logger.info("Days are selected for reminder.");
         } catch (Exception e) {
             logger.warning("Selecting day is not working.");
@@ -683,8 +681,8 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //2.Unselect the days in the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("WED"))).click();
             logger.info("De-Selecting the days is happen.");
         } catch (Exception e) {
             logger.warning("De-Selecting the days is not working. ");
@@ -692,55 +690,69 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         // CASE - 2 & 3
         //Empty reminder name
+        WebElement EmptyReminderName =null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtReminderName")));
             //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]")))
+                    .click();
             //Empty reminder name error will be shown up.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement EmptyReminderName = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter reminder name")));
             logger.info("Error 1 :" + EmptyReminderName.getText());
         } catch (Exception e) {
             logger.warning("Empty reminder name error is not visible.");
         }
 
         //Less character error on reminder name.
+        WebElement LessCharacterError =null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("sa");
+            //Reminder name is added.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeTextField[`value == \"Reminder Name\"`]")))
+                    .sendKeys("sa");
+            //Adding personal note.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .className("XCUIElementTypeTextView")))
+                    .sendKeys("Take care");
+
             //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
-            //Error for less charscter.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement LessCharacterError = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]")))
+                            .click();
+
+            //Error for less character.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                    .accessibilityId("Reminder name should be at least 3 characters")));
             logger.info("Error 2 :" + LessCharacterError.getText());
         } catch (Exception e) {
             logger.warning("Less character error is not visible");
         }
 
-        //3.
+        //3. error message for not selected day.
+        WebElement DaysNotSelected =null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("Sant");
+            //Reminder name is added.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeTextField[`value == \"Reminder Name\"`]")))
+                    .sendKeys("reminder");
+            //Adding personal note.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .className("XCUIElementTypeTextView")))
+                    .sendKeys("Take care");
+
+            //Confirm the reminder using set reminder button.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]")))
+                    .click();
+
+            //Error for less character.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                    .accessibilityId("Please select day(s)")));
+            logger.info("Error 2 :" + DaysNotSelected.getText());
         } catch (Exception e) {
             logger.warning("name is added");
         }
 
-        //Empty Personal note less character.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take care");
-
-            //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
-
-            //Popup for not selecting the day
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
-            logger.info("Pop up message for days not selected : " + message.getText());
-        } catch (Exception e) {
-            logger.warning("Days not selected error is not visible.");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
