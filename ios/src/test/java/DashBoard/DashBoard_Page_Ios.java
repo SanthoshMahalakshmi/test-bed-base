@@ -635,7 +635,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //Clicking the plus button
+        //Clicking the plus button for set reminder.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
@@ -662,7 +662,7 @@ public class DashBoard_Page_Ios extends DriverManager {
                     .click();
             logger.info("Done is clicked");
         } catch (Exception e) {
-            logger.warning("Done is nor clicked.");
+            logger.warning("Done is not clicked.");
         }
 
         //CASE - 1
@@ -758,7 +758,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        //Clicking the plus button
+        //Clicking the plus button for set reminder.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
@@ -785,7 +785,7 @@ public class DashBoard_Page_Ios extends DriverManager {
                     .click();
             logger.info("Done is clicked");
         } catch (Exception e) {
-            logger.warning("Done is nor clicked.");
+            logger.warning("Done is not clicked.");
         }
 
         //1.Empty Personal note less character.
@@ -856,76 +856,103 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //Scrolling to the plus button.
+        //Clicking the plus button for set reminder.
         try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgAddReminder\"));"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
+                    .click();
+            logger.info("Clicking the plus is working");
+        } catch (NoSuchElementException e) {
+            logger.warning("Plus button for set reminder is not found.");
+        }
+
+        //Clicking the SpO2 radio button.
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")))
+                    .click();
+            logger.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
-            logger.warning("Scroll to the element is not happen.");
+            logger.warning("Spo2 radio button is not visible for a click.");
+        }
+
+        //Clicking the DONE button.
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]")))
+                    .click();
+            logger.info("Done is clicked");
+        } catch (Exception e) {
+            logger.warning("Done is not clicked.");
         }
 
         try {
-            //Clicking the plus button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            //Reminder name is added.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeTextField[`value == \"Reminder Name\"`]")))
+                    .sendKeys("reminder");
 
-            //Clicking the SpO2 radio button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            //Selecting the days
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("WED"))).click();
 
-            //Clicking the DONE button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            logger.warning("New reminder selection for spo2 is not happen.");
-        }
-
-        try {
-            //reminder name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("SpO2 reminder ");
-            //Selecting the required days
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSUN"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-        } catch (Exception e) {
-            logger.warning("Reminder name and days are not selected.");
-        }
-
-        try {
-            //Click add Button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/chipAdd"))).click();
-
-            //Selecting the Hour.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("9"))).click();
-
-            //Selecting the Minutes.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("15"))).click();
-
-            //Clicking the ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+            //Adding personal note with less character for another error.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                            .className("XCUIElementTypeTextView")))
+                    .sendKeys("Take care.");
+            logger.info("Reminder name date and reminder personal note is added.");
         } catch (Exception e) {
             logger.warning("Set time for the reminder is not happen.");
         }
 
-        //Checking whether the reminder time is added or not.
-        WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
-        logger.info("Timer is added :" + timer.isDisplayed());
-
+        //1.Adding reminder time.
         try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take");
-        } catch (Exception e) {
-            logger.warning("Scroll is not happen.");
+            //Clicking the add button to add tome.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Add"))).click();
+
+            //5.clicking the done set the current time for the reminder.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done"))).click();
+
+            logger.info("Reminder time is added.") ;
+
+        }catch (Exception e)
+        {
+            logger.info("Reminder time is not added.");
         }
 
+        //2.Editing the reminder time.
         try {
-            //Adding personal notes.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtPersonalNotes"))).sendKeys("Take SpO2");
+            //Clicking the add button to add tome.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .xpath("//XCUIElementTypeScrollView/XCUIElementTypeCollectionView[2]" +
+                            "/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeButton"))).click();
 
-            //Set the reminder
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
-            logger.info("Personal note is added.");
-        } catch (Exception e) {
-            logger.warning("Adding personal note is not happen.");
+            //clicking the done set the current time for the reminder.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done"))).click();
+
+            logger.info("Reminder time is edited.");
+
+        }catch (Exception e)
+        {
+            logger.info("Reminder time is not edited.");
         }
+
+        //User click the cancel button to avoid setting time for reminder.
+        WebElement Cancel = null;
+        try
+        {
+            //Clicking the add button to add tome.
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Add"))).click();
+
+            //Cancel button click
+            Cancel = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Cancel")));
+            logger.info("Canceling the time set for reminder.");
+
+        } catch (Exception e) {
+            logger.warning("Cancel button is not visible.");
+        }
+
+
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
