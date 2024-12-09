@@ -6,15 +6,15 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <include  name="TC_001"/> <!--Done-->
+                    <exclude  name="TC_001"/> <!--Done-->
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Android">
                 <methods>
-                    <include  name="TC_002"/> <!--Done-->
-                    <include  name="TC_003"/> <!--Done-->
+                    <exclude  name="TC_002"/> <!--Done-->
+                    <exclude  name="TC_003"/> <!--Done-->
                     <exclude  name="TC_004"/> <!--Basic page-->
                     <exclude  name="TC_005"/> <!--Select Gender-->
                     <exclude  name="TC_006"/> <!--Select Height-->
