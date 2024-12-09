@@ -32,9 +32,9 @@
                     <exclude  name="TC_012"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                     <exclude  name="TC_013"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                     <exclude  name="TC_014"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
-                    <exclude  name="TC_015"/> <!--Done-->
-                    <exclude  name="TC_016"/>
-                    <exclude  name="TC_017"/>
+                    <exclude  name="TC_015"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <exclude  name="TC_016"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
+                    <exclude  name="TC_017"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                     <exclude  name="TC_018"/>
                     <exclude  name="TC_019"/>
                     <exclude  name="TC_025"/>

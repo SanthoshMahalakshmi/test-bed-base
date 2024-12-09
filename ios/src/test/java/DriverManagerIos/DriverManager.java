@@ -127,8 +127,11 @@ public class DriverManager {
     public void BaseLoginForIos() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
+        //Need add skip button handling.
+
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
             logger.info("before login->Allow button is visible and its clicked Allow");
         }
         catch (Exception e)
