@@ -473,75 +473,69 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //pre - Care circle button.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
             logger.info("clicking the care circle.");
         } catch (Exception e) {
             logger.warning("Care circle is not visible ");
         }
 
-        //pre - permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            logger.warning("permission is not accepted for allow.");
-        }
-
-        //pre - Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
-            logger.info("Adding member is working");
-        } catch (Exception e) {
-            logger.warning("Add member is not happening.");
-        }
 
         //pre - clicking the kebab menu
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
+            logger.info("Kebab menu is clicked in the care circle page.");
         } catch (Exception e) {
-            logger.warning("clicking kebab menu is not happening.");
+            logger.warning("clicking kebab menu is not happening in the care circle page.");
         }
 
         //1.clicking the Set reminder button in the kebab menu
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Set Reminder\")"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    accessibilityId("Set Reminders"))).click();
             logger.info("Set reminder is working.");
         } catch (Exception e) {
             logger.warning("Set reminder from care circle is not happening");
         }
 
         //2.Verify the blood pressure radio button is selected by default.
+        WebElement BP = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/rbBp")));
-            WebElement BP = driver.findElement(AppiumBy.id("com.moai.android:id/rbBp"));
+            BP =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][1]")));
+            BP.click();
             logger.info("Bp reminder is selected default : " + BP.isDisplayed());
         } catch (Exception e) {
             logger.warning("Bp radio button is not Enabled.");
         }
 
         //3.verify the ECG radio button is selectable
+        WebElement ECG = null;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
-            WebElement ECG = driver.findElement(AppiumBy.id("com.moai.android:id/rbECG"));
+            ECG = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][2]")));
+            ECG.click();
             logger.info("Ecg is selected : " + ECG.isDisplayed());
         } catch (Exception e) {
             logger.warning("ECG radio button is not displayed.");
         }
 
         //4. verify the Spo2 reminder radio button is selectable
+        WebElement Spo2 =null;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
-            WebElement Spo2 = driver.findElement(AppiumBy.id("com.moai.android:id/rbSpo2"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")));
+            Spo2.click();
             logger.info("Spo2 is selected : " + Spo2.isDisplayed());
         } catch (Exception e) {
             logger.warning("Spo2 radio button is not selectable.");
         }
 
         //5.Heart rate reminder radio button is selectable
+        WebElement HR =null;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
-            WebElement HR = driver.findElement(AppiumBy.id("com.moai.android:id/rbHR"));
+            HR = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][4]")));
+            HR.click();
             logger.info("HR is selected : " + HR.isDisplayed());
         } catch (Exception e) {
             logger.warning("Hr reminder radio is not visible");
@@ -549,7 +543,8 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Done button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]"))).click();
             logger.info("Done button click is working.");
         } catch (Exception e) {
             logger.warning("Done button click is not working");
@@ -557,8 +552,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Add reminder name
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtReminderName"))).sendKeys("Take Heart rate.");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                            .iOSClassChain("**/XCUIElementTypeTextField[`value == \"Reminder Name\"`]")))
+                            .sendKeys("Take Heart rate.");
             logger.info("Reminder name is added.");
         } catch (Exception e) {
             logger.warning("Add reminder name is not working.");
@@ -566,8 +562,8 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Selecting the days for the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("TUE"))).click();
             logger.info("Selecting the days for reminder is working.");
         } catch (Exception e) {
             logger.warning("Selecting days for the reminder is not working.");
@@ -575,39 +571,23 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Set the time for the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/chipAdd"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Add"))).click();
             logger.info("Set time for reminder is working");
         } catch (Exception e) {
             logger.warning("Set time for reminder is not working.");
         }
 
-        //Choose the hour time for the reminder
+        //clicking the done to Choose the Current time for the reminder.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("6"))).click();
-            logger.info("Choose hour is happen.");
-        } catch (Exception e) {
-            logger.warning("Choose hour is not happening");
-        }
-
-        //Choose the minute time for the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("0"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done"))).click();
             logger.info("choose minutes is working");
         } catch (Exception e) {
             logger.warning("Choose minute is not working");
         }
 
-        //Confirm the with OK
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            logger.info("Clicking Ok is working.");
-        } catch (Exception e) {
-            logger.warning("Clicking Ok is not working");
-        }
-
         //Using + to Adding invite to the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Plus"))).click();
             logger.info("invite the people is working.");
         } catch (Exception e) {
             logger.warning("Invite the people is not working.");
@@ -615,8 +595,8 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //6.Add the invite to the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"Kavya\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
             logger.info("Care circle people is added to the reminder.");
         } catch (Exception e) {
             logger.warning("People is not added to the reminder");
@@ -624,7 +604,8 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Clicking the add invite button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .accessibilityId("**/XCUIElementTypeButton[`name == \"Add Invitee\"`]"))).click();
             logger.info("Invite button click is working.");
         } catch (Exception e) {
             logger.warning("Clicking invite button is not working.");
@@ -632,8 +613,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //Scrolling to personal note
         try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take care Your self..");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeTextView[`value == \"Personal Notes\"`]")))
+                            .sendKeys("Take care of yourself.");
             logger.info("Scroll to the personal note and added input as well.");
         } catch (Exception e) {
             logger.warning("Scroll to the  personal note is not happen");
@@ -641,7 +623,8 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         //7.Confirm the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
+                    .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]"))).click();
             logger.info("Reminder set successfully.");
         } catch (Exception e) {
             logger.warning("Reminder confirmation is not happen.");
