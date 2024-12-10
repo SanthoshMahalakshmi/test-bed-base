@@ -36,7 +36,7 @@
                     <exclude  name="TC_016"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                     <exclude  name="TC_017"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                     <exclude  name="TC_018"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
-                    <exclude  name="TC_019"/>
+                    <exclude  name="TC_019"/> <!--iOS element changes are done & mac and ubuntu is up to date -->
                     <exclude  name="TC_025"/>
                     <exclude  name="TC_026"/>
                     <exclude  name="TC_027"/>

@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 
 public class DriverManager {
 
-    private static PrintStream originalConsole;
     public static Logger logger = Logger.getLogger("MyLog");
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
     protected static AppiumDriver getDriver() {
