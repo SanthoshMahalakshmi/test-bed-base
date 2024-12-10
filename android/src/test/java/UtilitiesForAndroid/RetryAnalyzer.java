@@ -8,7 +8,8 @@ public class RetryAnalyzer implements IRetryAnalyzer {
     private static final int maxRetryCount = 1;
 
     @Override
-    public boolean retry(ITestResult result) {
+    public boolean retry(ITestResult result)
+    {
         if (retryCount < maxRetryCount) {
             retryCount++;
             System.out.println("Retrying test " + result.getName() + " with status " +
@@ -23,7 +24,8 @@ public class RetryAnalyzer implements IRetryAnalyzer {
         return false;
     }
 
-    private String getResultStatusName(int status) {
+    private String getResultStatusName(int status)
+    {
         switch (status) {
             case 1:
                 return "SUCCESS";
@@ -35,5 +37,6 @@ public class RetryAnalyzer implements IRetryAnalyzer {
                 return "UNKNOWN";
         }
     }
+
 }
 
