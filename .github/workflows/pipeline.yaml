@@ -18,8 +18,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-        
+      
       - name: Run Tests on BrowserStack(android)
         run: |
           export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
@@ -31,6 +30,23 @@ jobs:
           USER_NAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           APP: ${{secrets.APP}}
+
+      - name: Send Test Report via Email
+        if: success()  # Only send email if tests pass
+        run: |
+          # Install mail utilities
+          sudo apt-get update
+          sudo apt-get install -y mailutils
+
+          # Send the email with the report as attachment
+          echo "The test report is attached." | mail -s "Test Report" \
+          -a android/target/surefire-reports/emailable-report.html \
+          ${{ secrets.RECIPIENT_EMAIL }}
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+        
+
       - name: Run Tests on BrowserStack(ios)
         run: |
           export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
