@@ -5,6 +5,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -128,6 +129,16 @@ public class DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Need add skip button handling.
+        WebElement Skip = null;
+        try
+        {
+            Skip = wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
+            logger.info("Skipping the coach mark");
+        }catch (NoSuchElementException e)
+        {
+            logger.warning("There is no Skip button is visible.");
+        }
 
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy

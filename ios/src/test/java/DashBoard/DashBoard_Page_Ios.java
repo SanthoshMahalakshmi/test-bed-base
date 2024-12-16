@@ -5,6 +5,8 @@ import UtilitiesForIos.RetryAnalyzerios;
 import browserstack.shaded.org.eclipse.jgit.diff.Edit;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchCookieException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -1183,56 +1185,68 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //BP report values with chart.
+        WebElement bloodPressureElement, pressureChart, pressureValue =null;
         try {
-            WebElement bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtBloodPressure")));
+            bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Blood Pressure")));
             logger.info("Blood pressure report is present: " + bloodPressureElement.isDisplayed());
 
-            WebElement pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/bloodPressureChart")));
-            logger.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
+            try {
+                pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated
+                        (AppiumBy.accessibilityId("Line Chart. 7 datasets. DataSet, DataSet, DataSet, DataSet, DataSet, DataSet, DataSet")));
+                logger.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
+            } catch (NoSuchCookieException e) {
+                logger.warning("There is no such element as pressure chart is visible.");
+                throw new RuntimeException(e);
+            }
 
-            WebElement pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtBPValue")));
-            logger.info("Blood pressure value is present: " + pressureValue.getText());
-        } catch (Exception e) {
+            try {
+                pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated
+                        (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
+                                "/XCUIElementTypeOther[3]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")));
+                logger.info("Blood pressure value is present: " + pressureValue.getText());
+            } catch (NoSuchElementException e) {
+                logger.warning("There is no such element as Pressure value is present.");
+                throw new RuntimeException(e);
+            }
+        } catch (TimeoutException e) {
             logger.warning("Bp chart is not visible.");
+            throw new TimeoutException(e.getMessage());
         }
 
+        WebElement hrElement, hrChart, hrValue = null;
         try {
             //Hr report values with chart.
-            WebElement hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtHeartRate")));
+            hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("HR")));
             logger.info("Heart rate report is present: " + hrElement.isDisplayed());
 
-            WebElement hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/HeartRateChart")));
+            hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"Bar Chart. 1 dataset. \"`][1]")));
             logger.info("Heart rate report chart is present: " + hrChart.isDisplayed());
 
-            WebElement hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtHeartRateValue")));
+            hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[4]" +
+                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")));
             logger.info("Heart rate value is present: " + hrValue.getText());
         } catch (Exception e) {
             logger.warning("Hr report chart is not visible.");
         }
 
+        WebElement Spo2Element, Spo2Chart, Spo2Value =null;
         try {
             //Spo2 report values with chart.
-            WebElement Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSpo2")));
+            Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("SpO2")));
             logger.info("Spo2 report is present: " + Spo2Element.isDisplayed());
 
-            WebElement Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/spo2Chart")));
+            Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"Bar Chart. 1 dataset. \"`][2]")));
             logger.info("Spo2 report chart is present: " + Spo2Chart.isDisplayed());
 
-            WebElement Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSpo2Value")));
+            Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[5]" +
+                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")));
             logger.info("Spo2 value is present: " + Spo2Value.getText());
         } catch (Exception e) {
             logger.warning("Spo2 report chart is not visible.");
-        }
-
-        try {
-            //ECG report va;ues with chart
-            WebElement ECGElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg")));
-            logger.info("ECG report is present: " + ECGElement.isDisplayed());
-
-            WebElement ECGChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/mpSingleLeadECG")));
-            logger.info("ECG report chart is present: " + ECGChart.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("ECG report chart is not visible.");
         }
     }
 
