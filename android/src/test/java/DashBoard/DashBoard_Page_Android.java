@@ -1235,46 +1235,6 @@ public class DashBoard_Page_Android extends DriverManager {
             logger.warning("Customize the BP range is not happen for the primary user. ");
         }
 
-
-        //Blood sugar range is not customizable
-        try {
-            WebElement CustomizeBlood = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCustomize1")));
-            logger.info("Blood sugar is not customizable :" + CustomizeBlood.isEnabled());
-        } catch (Exception e) {
-            logger.warning("Blood sugar cant be customizable.");
-        }
-
-
-        try {
-            //Customize the Spo2 range
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            logger.warning("Customize the Spo2 is not happen. ");
-        }
-
-
-        try {
-            //Customizing the cholesterol is not possible.
-            WebElement CustomizeCholesterol = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize1\").instance(1)")));
-            logger.info("Cholesterol is not Customizable :" + CustomizeCholesterol.isEnabled());
-        } catch (Exception e) {
-            logger.warning("Customizing is should not be use.");
-        }
-
-        try {
-            //Scroll to the bottom customize.
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtCustomize2\"));"));
-        } catch (Exception e) {
-            logger.warning("Scroll to the element is not happpen.");
-        }
-
         try {
             //Customize the heart rate.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
