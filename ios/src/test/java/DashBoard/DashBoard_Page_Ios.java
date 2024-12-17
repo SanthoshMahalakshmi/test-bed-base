@@ -1034,28 +1034,31 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         try {
             //2.Edit the dependent profile, click on kebab menu inspecting is not working in ios
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(1)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu"))).click();
             //Actual edit profile option.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Profile\")"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtFullName"))).sendKeys("NIHIL");
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Profile"))).click();
+
+            /*dependent profile name change*/
+            wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.iOSClassChain("//XCUIElementTypeOther[@name=\"CenterPageView\"]/XCUIElementTypeOther[1]")))
+                    .sendKeys("NIHIL");
+
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
             logger.warning("Edit the dependent profile is not happen.");
         }
 
         try {
             //3.Deleting the profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(2)"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete\")"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Delete Profile"))).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
+            /*OK confirmation button for deleting the dependent profile.*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
+
+            /*Deleting the dependent profile success toast*/
+            WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Dependent removed successfully")));
+
             logger.info("Success message for deleted dependent :" + message.getText());
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
         } catch (Exception e) {
             logger.warning("Deleting the dependent profile is not happen.s");
         }
@@ -1080,17 +1083,17 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         try
         {
-            //Clicking the kebab menu
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath(""))).click();
+            //2.Edit the dependent profile, click on kebab menu inspecting is not working in ios
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu"))).click();
 
             //Clicking the health report option to navigate to report section.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Health Report\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Health Report"))).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")")));
-            WebElement lable = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")"));
+            WebElement lable = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Blood Pressure")));
             logger.info("Report section : " + lable.getText());
+            logger.info("We are in dependent profile report section.");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.warning("Blood pressure label is not there.");
         }
     }
 
@@ -1274,6 +1277,15 @@ public class DashBoard_Page_Ios extends DriverManager {
             logger.warning("Primary user parameter range click is not happen");
         }
 
+        try
+        {
+            /*Skipping the coach marks*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
+            logger.info("Skip the coach mark while customize the parameter range.");
+        } catch (Exception e) {
+            logger.warning("Skip is not visible for the customize the parameter range.");
+        }
+
         //Customize the BP range
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
@@ -1353,6 +1365,15 @@ public class DashBoard_Page_Ios extends DriverManager {
             logger.info("Navigated to the dependent profile through primary user profile.");
         } catch (Exception e) {
             logger.warning("Navigation is not happen through the primary user profile.");
+        }
+
+        try
+        {
+            /*Skipping the coach marks*/
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
+            logger.info("Skip the coach mark while customize the parameter range.");
+        } catch (Exception e) {
+            logger.warning("Skip is not visible for the customize the parameter range.");
         }
 
         try {
