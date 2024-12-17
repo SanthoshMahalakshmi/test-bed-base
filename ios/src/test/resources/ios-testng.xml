@@ -42,7 +42,7 @@
                     <exclude  name="TC_027"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
                     <exclude  name="TC_028"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
                     <exclude  name="TC_029"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_030"/>
+                    <exclude  name="TC_030"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
                 </methods>
             </class>
 
