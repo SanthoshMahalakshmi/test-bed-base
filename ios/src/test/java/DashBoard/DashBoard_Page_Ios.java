@@ -1259,14 +1259,17 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         try {
             //Clicking on primary user profile
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgProfile"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
+                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther" +
+                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
         } catch (Exception e) {
             logger.warning("Primary user profile click is not happen.");
         }
 
         try {
             //Clicking on parameter range option in the primary user profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtParameterRange"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Parameter Range"))).click();
         } catch (Exception e) {
             logger.warning("Primary user parameter range click is not happen");
         }
@@ -1274,79 +1277,51 @@ public class DashBoard_Page_Ios extends DriverManager {
         //Customize the BP range
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
+                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Customize\"`][1]"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            //Skip
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
+            logger.info("Customize is happened and the reset is available now.");
         } catch (Exception e) {
             logger.warning("Customize the BP range is not happen for the primary user. ");
         }
 
-
-        //Blood sugar range is not customizable
-        try {
-            WebElement CustomizeBlood = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCustomize1")));
-            logger.info("Blood sugar is not customizable :" + CustomizeBlood.isEnabled());
-        } catch (Exception e) {
-            logger.warning("Blood sugar cant be customizable.");
-        }
-
-
-        try {
-            //Customize the Spo2 range
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+        try
+        {
             //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
             //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            logger.warning("Customize the Spo2 is not happen. ");
-        }
-
-
-        try {
-            //Customizing the cholesterol is not possible.
-            WebElement CustomizeCholesterol = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize1\").instance(1)")));
-            logger.info("Cholesterol is not Customizable :" + CustomizeCholesterol.isEnabled());
-        } catch (Exception e) {
-            logger.warning("Customizing is should not be use.");
-        }
-
-        try {
-            //Scroll to the bottom customize.
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtCustomize2\"));"));
-        } catch (Exception e) {
-            logger.warning("Scroll to the element is not happpen.");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("Reset is done by using Reset option.");
+        }catch (TimeoutException e) {
+            logger.warning("Reset is not happen by using reset button.");
         }
 
         try {
             //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Customize\"`][2]"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
+            logger.info("Customize is happening by using customize button.");
         } catch (Exception e) {
             logger.warning("Customizing the HR is not working");
         }
 
-        try {
-            //Navigate to the profile page.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            logger.warning("Navigating back is not happen.");
+        try
+        {
+            //Reset can happen
+            wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
+            //confirmation Ok
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
+            logger.info("Reset is done by using Reset option.");
+        }catch (Exception e)
+        {
+            logger.warning("Reset is not happen by using reset button.");
         }
-
     }
 
 

@@ -41,7 +41,7 @@
                     <exclude  name="TC_026"/> <!--Need to inspect the dependent profile kebab menu for 2 and 3-->
                     <exclude  name="TC_027"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
                     <exclude  name="TC_028"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_029"/>
+                    <exclude  name="TC_029"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
                     <exclude  name="TC_030"/>
                 </methods>
             </class>
