@@ -1,12 +1,9 @@
-userName: connectedhealth_0ZAka9
-accessKey: 795Qi1UYRtf2G6eqDYYQ
 framework: testng
-app: bs://fba090cd83fe9ec81b90c22e9de62de067dd5048
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S22 Ultra
     platformVersion: 12.0
 parallelsPerPlatform: 1
 browserstackLocal: true
-buildName: Test run for ANDROID
-projectName: com.MoAI.healthCare
+buildName: ANDROID_Test_run
+projectName: Connected_Health

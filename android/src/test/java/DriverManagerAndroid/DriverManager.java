@@ -26,29 +26,16 @@ import java.util.logging.Logger;
 
 public class DriverManager {
 
-    private static PrintStream originalConsole;
     public static Logger logger = Logger.getLogger("MyLog");
-
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
-
     protected static AppiumDriver getDriver() {
         return appiumDriverThreadLocal.get();
     }
-
     public static AndroidDriver driver;
 
     public void setDriverForAndroid(AndroidDriver driver) {
         appiumDriverThreadLocal.set(driver); // Set the ThreadLocal variable
         DriverManager.driver = driver; // Assign to the static driver variable
-    }
-
-    @SuppressWarnings("unchecked")
-    private Map<String, String> getPlatformDetails(Map<String, Object> config) {
-        List<Object> platformsList = (List<Object>) config.get("platforms");
-        if (platformsList == null || platformsList.isEmpty()) {
-            throw new IllegalArgumentException("No platforms defined in the configuration.");
-        }
-        return (Map<String, String>) platformsList.get(0);
     }
 
     @BeforeMethod
@@ -65,9 +52,15 @@ public class DriverManager {
             Map<String, Object> config = yaml.load(inputStream);
 
             // Extract details from the YAML
-            String userName = (String) config.get("userName");
+            /*String userName = (String) config.get("userName");
             String accessKey = (String) config.get("accessKey");
-            String app = (String) config.get("app");
+            String app = (String) config.get("app");*/
+
+            // Read secrets from environment variables
+            String userName = System.getenv("USER_NAME");
+            String accessKey = System.getenv("ACCESS_KEY");
+            String app = System.getenv("APP");
+            // Extract details from the YAML
             String buildName = (String) config.get("buildName");
             String projectName = (String) config.get("projectName");
 

@@ -3,6 +3,9 @@ package Login;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.NoSuchContextException;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,26 +26,31 @@ public class Login_Page_Android extends DriverManager
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        /*Clicking the Get started button*/
         try {
-            /*Clicking the Get started button*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
-        } catch (Exception e) {
-            logger.warning("Get started button is not visible.");
+            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtGetStart")));
+            getStarted.click();
+            logger.info("Successfully clicked the 'Get Started' button.");
+        } catch (ElementNotInteractableException e) {
+            logger.warning("The 'Get Started' button is present but not interactable. Details: " + e.getMessage());
+            throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
+        } catch (NoSuchElementException e) {
+            logger.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
         }
 
+        /*1.Verify the logo is present or not in the login page.*/
         try {
-            /*1.Verify the logo is present or not in the login page.*/
             WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgLogo")));
             logger.info("Logo is present :" + logo.isDisplayed());
         } catch (Exception e) {
             logger.warning("Logo is not visible.");
         }
 
+        //3.clicking the mobile number input field and send the keys to it.
         try {
-            //3.clicking the mobile number input field and send the keys to it.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     id("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
-        } catch (Exception e) {
+        } catch (NoSuchContextException e) {
             logger.warning("Mobile number field id not having the input value.");
         }
 

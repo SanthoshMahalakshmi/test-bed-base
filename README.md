@@ -177,6 +177,7 @@ This repository contains the Mobile Testing Process Flow documentation, which pr
 
 ## Process Flow Diagram
 Below is a visual representation of the mobile testing process flow:
+
 ![Mobile_Testing_Process](https://github.com/user-attachments/assets/b4ceca22-50fe-4bfb-9dc0-53b216475684)
 
 
