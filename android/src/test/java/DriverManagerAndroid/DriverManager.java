@@ -6,6 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -16,11 +17,11 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 
@@ -56,45 +57,67 @@ public class DriverManager {
             String accessKey = (String) config.get("accessKey");
             String app = (String) config.get("app");*/
 
-            // Read secrets from environment variables
-            String userName = System.getenv("USER_NAME");
-            String accessKey = System.getenv("ACCESS_KEY");
-            String app = System.getenv("APP");
-            // Extract details from the YAML
-            String buildName = (String) config.get("buildName");
-            String projectName = (String) config.get("projectName");
 
-            // Get platform-specific capabilities
-            List<Map<String, Object>> platforms = (List<Map<String, Object>>) config.get("platforms");
-            Map<String, Object> platform = platforms.get(0);
-            String platformName = (String) platform.get("platformName");
-            String deviceName = (String) platform.get("deviceName");
-            Double platformVersion = (Double) platform.get("platformVersion");
+            // Read secrets from environment variables for local and browser stack.
+            String currentEnv = System.getenv("ENVIRONMENT");
+            if(Objects.equals(currentEnv, "local")) {
+                String AppiumServerUrl = "http://127.0.1.1:4723/";
+                System.out.print("Entering into local case\n");
+                DesiredCapabilities caps = new DesiredCapabilities();
+                caps.setCapability("platformName", "Android");
+                caps.setCapability("deviceName", "Medium Phone API VanillaIceCream"); // Change to your device/emulator name
+                caps.setCapability("udid", "emulator-5554");
+                caps.setCapability("platformVersion", "11"); // Change based on your device
+                caps.setCapability("automationName", "UiAutomator2");
+                caps.setCapability("appPackage", "com.heartmonitor.android"); // Change to your app package
+                caps.setCapability("appActivity", "com.heartmonitor.android.presentation.main.MainActivity"); // Change to main activity
+                caps.setCapability("noReset", true); // Keeps app data after test execution
+                caps.setCapability("appium:app", "/home/santhosh/Downloads/Monitor 1.0.1 (3).apk");
+                URL url = new URL(AppiumServerUrl);
 
-            // Extracting test case name dynamically
-            String testName = testResult.getMethod().getMethodName();
+                setDriverForAndroid(driver = new AndroidDriver(url, caps));
+            }
+            else {
+                System.out.print("Entering into browser stack case\n");
+                String userName = System.getenv("USER_NAME");
+                String accessKey = System.getenv("ACCESS_KEY");
+                String app = System.getenv("APP");
 
-            // Setup BrowserStack capabilities
-            MutableCapabilities capabilities = new MutableCapabilities();
-            capabilities.setCapability("app", app);
+                // Extract details from the YAML
+                String buildName = (String) config.get("buildName");
+                String projectName = (String) config.get("projectName");
 
-            Map<String, Object> browserstackOptions = new java.util.HashMap<>();
-            browserstackOptions.put("userName", userName);
-            browserstackOptions.put("accessKey", accessKey);
-            browserstackOptions.put("osVersion", platformVersion);
-            browserstackOptions.put("deviceName", deviceName);
-            browserstackOptions.put("projectName", projectName);
-            browserstackOptions.put("buildName", buildName);
-            browserstackOptions.put("sessionName", testName);
-            browserstackOptions.put("appiumVersion", "2.0.0");
-            browserstackOptions.put("local", "false");
-            browserstackOptions.put("debug", "true");
+                // Get platform-specific capabilities
+                List<Map<String, Object>> platforms = (List<Map<String, Object>>) config.get("platforms");
+                Map<String, Object> platform = platforms.get(0);
+                String platformName = (String) platform.get("platformName");
+                String deviceName = (String) platform.get("deviceName");
+                Double platformVersion = (Double) platform.get("platformVersion");
 
-            capabilities.setCapability("bstack:options", browserstackOptions);
+                // Extracting test case name dynamically
+                String testName = testResult.getMethod().getMethodName();
 
-            setDriverForAndroid(driver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
-            inputStream.close();
+                // Setup BrowserStack capabilities
+                MutableCapabilities capabilities = new MutableCapabilities();
+                capabilities.setCapability("app", app);
 
+                Map<String, Object> browserstackOptions = new java.util.HashMap<>();
+                browserstackOptions.put("userName", userName);
+                browserstackOptions.put("accessKey", accessKey);
+                browserstackOptions.put("osVersion", platformVersion);
+                browserstackOptions.put("deviceName", deviceName);
+                browserstackOptions.put("projectName", projectName);
+                browserstackOptions.put("buildName", buildName);
+                browserstackOptions.put("sessionName", testName);
+                browserstackOptions.put("appiumVersion", "2.0.0");
+                browserstackOptions.put("local", "false");
+                browserstackOptions.put("debug", "true");
+
+                capabilities.setCapability("bstack:options", browserstackOptions);
+
+                setDriverForAndroid(driver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
+                inputStream.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

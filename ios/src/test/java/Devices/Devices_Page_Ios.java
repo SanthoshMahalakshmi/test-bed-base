@@ -49,7 +49,8 @@ public class Devices_Page_Ios extends DriverManager
 
         //permission
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable
+                    (AppiumBy.id("com.android.packageinstaller:id/permission_allow_button"))).click();
         } catch (Exception e) {
             logger.warning("Giving permission is not happening.");
         }
