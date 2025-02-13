@@ -1,12 +1,18 @@
 userName: connectedhealth_0ZAka9
 accessKey: 795Qi1UYRtf2G6eqDYYQ
 framework: testng
-app: bs://ce20e4010bb6e3cac2fe0c246923822a04f6455e
+app: bs://aec3e981e83264e94264bb29b283e2c911429ac7
 platforms:
   - platformName: iOS
     deviceName: iPhone 14 Pro Max
     platformVersion: 16.0
-parallelsPerPlatform: 1
+  - platformName: iOS
+    deviceName: iPhone 12
+    platformVersion: 15.5
+  - platformName: iOS
+    deviceName: iPhone XR
+    platformVersion: 15
+parallelsPerPlatform: 3
 browserstackLocal: true
 buildName: Test run for ios
 projectName: MoAI_Mobile_Test_Automation

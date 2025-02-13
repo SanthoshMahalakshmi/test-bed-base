@@ -3,6 +3,13 @@
     <test name="Android Tests">
 
         <classes>
+            <!--Driver manager-->
+            <!--<class name="DriverManagerAndroid.DriverManagerForLocal">
+                <methods>
+                    <include name="BaseLogin"/>
+                </methods>
+            </class>-->
+
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
