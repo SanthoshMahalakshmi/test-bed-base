@@ -13,7 +13,7 @@
             <!--Login pages-->
             <class name="Login.Login_Page_Android">
                 <methods>
-                    <exclude  name="TC_002"/> <!--Done-->
+                    <exclude  name="TC_002"/> <!--Done with new element change.-->
                     <exclude  name="TC_003"/> <!--Done-->
                     <exclude  name="TC_004"/> <!--Basic page-->
                     <exclude  name="TC_005"/> <!--Select Gender-->
