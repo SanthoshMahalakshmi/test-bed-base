@@ -4,9 +4,7 @@ import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.NoSuchContextException;
-import org.gradle.internal.concurrent.ExecutorPolicy;
 import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoSuchCookieException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -58,6 +56,7 @@ public class Login_Page_Android extends DriverManager
         try {
             MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     id("com.heartmonitor.android:id/edtMobileNumber")));
+            MobileNumberInput.click();
             MobileNumberInput.sendKeys("9087631080");
         } catch (NoSuchContextException e) {
             logger.warning("Mobile number field is not visible or not available to interact with.");
@@ -109,7 +108,7 @@ public class Login_Page_Android extends DriverManager
         }
 
         try {
-            //Terms and condition link
+            //Privacy policy link
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.heartmonitor.android:id/txtPrivacy"))).click();
             logger.info("Moving to Privacy policy page.");
             //Back to log in page
@@ -124,31 +123,47 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_003()
-    {
+    public void TC_003() throws Exception {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        /*Clicking the Get started button*/
         try {
-            /*Clicking the Get started button*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
-        } catch (Exception e) {
-            logger.warning("Get started button is not visible.");
+            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
+            getStarted.click();
+            logger.info("Successfully clicked the 'Get Started' button.");
+        } catch (ElementNotInteractableException e) {
+            logger.warning("The 'Get Started' button is present but not interactable. Details: " + e.getMessage());
+            throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
+        } catch (NoSuchElementException e) {
+            logger.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
 
+        //3.clicking the mobile number input field and send the keys to it.
+        WebElement MobileNumberInput = null;
         try {
-            //3.clicking the mobile number input field and send the keys to it.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
-        } catch (Exception e) {
-            logger.warning("Mobile number field id not having the input value.");
+            MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    id("com.heartmonitor.android:id/edtMobileNumber")));
+            MobileNumberInput.click();
+            MobileNumberInput.sendKeys("9087631080");
+        } catch (NoSuchContextException e) {
+            logger.warning("Mobile number field is not visible or not available to interact with.");
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e){
+            logger.warning("Issue with mobile number input field :"+e.getMessage());
+            throw new Exception(e.getMessage());
         }
 
         try {
             //4.Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
-        } catch (Exception e) {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+        }catch (NoSuchElementException e){
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e) {
             logger.warning("Continue is not clicked.");
+            throw new Exception(e.getMessage());
         }
 
         WebElement Ok = null;
@@ -164,7 +179,7 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //1.verify mobile number label
-            WebElement label = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtPhoneLabel")));
+            WebElement label = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
             logger.info("Verify mobile number label : " + label.isDisplayed());
         } catch (Exception e) {
             logger.warning("Mobile number label is no visible.");
@@ -172,24 +187,24 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //2.Enter OTP label
-            WebElement OtpLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtPhoneLabel")));
+            WebElement OtpLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
             logger.info("Enter OTP label : "+OtpLabel.isDisplayed());
         } catch (Exception e) {
             logger.warning("OTP lable is not visible.");
         }
 
         //2.Fill the OTP into input field.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP1"))).sendKeys("1");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP2"))).sendKeys("2");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP3"))).sendKeys("3");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP4"))).sendKeys("4");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP5"))).sendKeys("5");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP6"))).sendKeys("6");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP1"))).sendKeys("1");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP2"))).sendKeys("2");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP3"))).sendKeys("3");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP4"))).sendKeys("4");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP5"))).sendKeys("5");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP6"))).sendKeys("6");
 
         try {
             //4.Resend label
             WebElement resend =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtResend\"));")));
+                    androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtResend\"));")));
             logger.info("Resent label is present : " +resend.isDisplayed());
         } catch (Exception e) {
             logger.warning("Resend label is not visible.");
@@ -199,7 +214,7 @@ public class Login_Page_Android extends DriverManager
         WebElement Timer = null;
         try {
             Timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtTimer\"));")));
+                    androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtTimer\"));")));
             logger.info("Timer is present? : " + Timer.isDisplayed());
         } catch (Exception e) {
             logger.warning("*Timer is not found");
@@ -208,7 +223,7 @@ public class Login_Page_Android extends DriverManager
         //3.clicking the verify button.
         WebElement verifyButton = null;
         try {
-            verifyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtVerify")));
+            verifyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtVerify")));
             logger.info("Verify button present? : "+verifyButton.isDisplayed());
         } catch (Exception e) {
             logger.warning("*Verify button is not found");
@@ -225,19 +240,19 @@ public class Login_Page_Android extends DriverManager
         try {
             //2.Full name
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtFullName"))).sendKeys("mam");
+                    ("com.heartmonitor.android:id/edtFullName"))).sendKeys("mam");
 
             //3.Email ID
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtEmail"))).sendKeys("mam@gmail.com");
+                    ("com.heartmonitor.android:id/edtEmail"))).sendKeys("mam@gmail.com");
 
             //4.Mobile number
             System.out.println( wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtMobileNumber"))).getText());
+                    ("com.heartmonitor.android:id/edtMobileNumber"))).getText());
 
             //5.Continue button
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/txtContinue"))).click();
+                    ("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e)
         {
             logger.warning("Verification is not working.");
@@ -254,20 +269,20 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //1.Select the female option.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgWoman"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgWoman"))).click();
 
             //2.Select the male option
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgMan"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMan"))).click();
 
             //3.Others.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgOther"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgOther"))).click();
 
             //4.Respective pagination
-            WebElement Pagination = driver.findElement(AppiumBy.id("com.moai.android:id/txtSelected"));
+            WebElement Pagination = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtSelected"));
             System.out.println("Pagination is visible : "+Pagination.isDisplayed());
 
             //5.continue button clicking
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("All the options are not visible. male female, pagination, continue button");
         }
@@ -284,13 +299,13 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //3.verifying the logo is present or not.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgUserImage"))).isDisplayed();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgUserImage"))).isDisplayed();
 
             //4.pagination is present in the screen
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSelected"))).isDisplayed();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected"))).isDisplayed();
 
             //5.clicking the continue button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("Logo and pagination is not visible.");
         }
@@ -306,13 +321,13 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //Verify the logo
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgUserImage"))).isDisplayed();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgUserImage"))).isDisplayed();
 
             //Pagination verification
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSelected"))).isDisplayed();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected"))).isDisplayed();
 
             //Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("Logo and pagination is not visible.");
         }
@@ -328,11 +343,11 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //pagination.
-            WebElement pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSelected")));
+            WebElement pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected")));
             logger.info("pagination is present : " + pagination.isDisplayed());
 
             //submit
-            WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtContinue")));
+            WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContinue")));
             logger.info("Submit button is present : " + submit.isDisplayed());
             submit.click();
         } catch (Exception e) {
@@ -352,13 +367,13 @@ public class Login_Page_Android extends DriverManager
             wait.until(ExpectedConditions.alertIsPresent());
 
             //Alcohol NO button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtAlcoholNo"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholNo"))).click();
 
             //Smoke NO button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSmokeNo"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSmokeNo"))).click();
 
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("Confirm alert is happen.");
         }
