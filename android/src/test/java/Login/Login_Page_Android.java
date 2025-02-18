@@ -4,7 +4,9 @@ import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.NoSuchContextException;
+import org.gradle.internal.concurrent.ExecutorPolicy;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoSuchCookieException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,14 +23,13 @@ public class Login_Page_Android extends DriverManager
     private static final Logger log = LoggerFactory.getLogger(Login_Page_Android.class);
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_002()
-    {
+    public void TC_002() throws Exception {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         /*Clicking the Get started button*/
         try {
-            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtGetStart")));
+            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
             getStarted.click();
             logger.info("Successfully clicked the 'Get Started' button.");
         } catch (ElementNotInteractableException e) {
@@ -36,28 +37,40 @@ public class Login_Page_Android extends DriverManager
             throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
         } catch (NoSuchElementException e) {
             logger.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
 
         /*1.Verify the logo is present or not in the login page.*/
         try {
-            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgLogo")));
+            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgLogo")));
             logger.info("Logo is present :" + logo.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("Logo is not visible.");
+        } catch (NoSuchElementException e){
+            logger.warning("There is No such element like logo in the login page." + e.getMessage());
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e) {
+            logger.warning("Logo is not visible." + e.getMessage());
+            throw new Exception(e.getMessage());
         }
 
         //3.clicking the mobile number input field and send the keys to it.
+        WebElement MobileNumberInput = null;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
+            MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+                    id("com.heartmonitor.android:id/edtMobileNumber")));
+            MobileNumberInput.sendKeys("9087631080");
         } catch (NoSuchContextException e) {
-            logger.warning("Mobile number field id not having the input value.");
+            logger.warning("Mobile number field is not visible or not available to interact with.");
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e){
+            logger.warning("Issue with mobile number input field :"+e.getMessage());
+            throw new Exception(e.getMessage());
         }
 
         try {
             /* 2.country code is present in the screen or not.  Important - country code is not available in other devices*/
             WebElement countryCode = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/textinput_prefix_text")));
+                    id("com.heartmonitor.android:id/textinput_prefix_text")));
             logger.info("Country code is present :" + countryCode.isDisplayed());
         } catch (Exception e) {
             logger.warning("Country code is not visible.");
@@ -65,26 +78,48 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //4.Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
-        } catch (Exception e) {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+        }catch (NoSuchElementException e){
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e) {
             logger.warning("Continue is not clicked.");
+            throw new Exception(e.getMessage());
         }
 
         try {
             /*Back to log in page*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            logger.warning("Navigating back is not working.");
+        } catch (NoSuchElementException e){
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
 
-        /* *//*5.Terms and condition link*//*
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.moai.android:id/txtTerms"))).click();*/
+        try {
+            //Terms and condition link
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.heartmonitor.android:id/txtTerms"))).click();
+            logger.info("Moving to terms and condition page.");
+            //Back to log in page
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            logger.info("Moving back to log in page.");
+        } catch (NoSuchElementException e){
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
-        /*Back to log in page*//*
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        *//*5.Terms and condition link*//*
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.moai.android:id/txtPrivacy"))).click();*/
+        try {
+            //Terms and condition link
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.heartmonitor.android:id/txtPrivacy"))).click();
+            logger.info("Moving to Privacy policy page.");
+            //Back to log in page
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            logger.info("Moving back to log in page.");
+        } catch (NoSuchElementException e){
+            throw new NoSuchElementException(e.getMessage());
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
     }
 
