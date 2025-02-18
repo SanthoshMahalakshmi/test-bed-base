@@ -3,17 +3,10 @@
     <test name="Android Tests">
 
         <classes>
-            <!--Driver manager-->
-            <!--<class name="DriverManagerAndroid.DriverManagerForLocal">
-                <methods>
-                    <include name="BaseLogin"/>
-                </methods>
-            </class>-->
-
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <include  name="TC_001"/> <!--Done-->
+                    <include  name="TC_001"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
