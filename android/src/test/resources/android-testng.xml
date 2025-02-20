@@ -14,13 +14,13 @@
             <class name="Login.Login_Page_Android">
                 <methods>
                     <exclude  name="TC_002"/> <!--Done with new element change.-->
-                    <exclude  name="TC_003"/> <!--Done-->
-                    <exclude  name="TC_004"/> <!--Basic page-->
-                    <exclude  name="TC_005"/> <!--Select Gender-->
-                    <exclude  name="TC_006"/> <!--Select Height-->
-                    <exclude  name="TC_007"/> <!--Select Weight-->
-                    <exclude  name="TC_008"/> <!--Select DOB-->
-                    <exclude  name="TC_009"/> <!--Submit page with smoke and alcohol -->
+                    <exclude  name="TC_003"/> <!--Done with new element change.-->
+                    <exclude  name="TC_004"/> <!--Done with new element change.-->
+                    <exclude  name="TC_005"/> <!--Done with new element change.-->
+                    <exclude  name="TC_006"/> <!--Done with new element change.-->
+                    <exclude  name="TC_007"/> <!--Done with new element change.-->
+                    <exclude  name="TC_008"/> <!--Done with new element change.-->
+                    <exclude  name="TC_009"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
