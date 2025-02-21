@@ -12,15 +12,15 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <exclude  name="TC_001"/> <!--Done with new element change.-->
+                    <include  name="TC_001"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Android">
                 <methods>
-                    <exclude  name="TC_002"/> <!--Done with new element change.-->
-                    <exclude  name="TC_003"/> <!--Done with new element change.-->
+                    <include  name="TC_002"/> <!--Done with new element change.-->
+                    <include  name="TC_003"/> <!--Done with new element change.-->
                     <exclude  name="TC_004"/> <!--Done with new element change.-->
                     <exclude  name="TC_005"/> <!--Done with new element change.-->
                     <exclude  name="TC_006"/> <!--Done with new element change.-->
