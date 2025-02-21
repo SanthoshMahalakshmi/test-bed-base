@@ -17,7 +17,7 @@ public class Profile_Page_Android extends DriverManager {
     private static final Logger log = LoggerFactory.getLogger(Profile_Page_Android.class);
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_031() {   /*User navigation from profile section */
+    public void TC_031() throws Exception {   /*User navigation from profile section */
 
         BaseLogin(); //Login process.
 
@@ -246,7 +246,7 @@ public class Profile_Page_Android extends DriverManager {
     }
 
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
-    public void TC_032() {
+    public void TC_032() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

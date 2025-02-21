@@ -12,8 +12,7 @@ import java.time.Duration;
 public class Devices_Page_Android extends DriverManager
 {
     @Test
-    public void TC_023()
-    {
+    public void TC_023() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -116,8 +115,7 @@ public class Devices_Page_Android extends DriverManager
     }
 
     @Test
-    public void TC_024()
-    {
+    public void TC_024() throws Exception {
         TC_023(); // to connect with device
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

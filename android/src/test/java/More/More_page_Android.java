@@ -17,7 +17,7 @@ public class More_page_Android extends DriverManager {
     private static final Logger log = LoggerFactory.getLogger(More_page_Android.class);
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_033() {
+    public void TC_033() throws Exception {
         BaseLogin(); // Login process
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -271,7 +271,7 @@ public class More_page_Android extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_034() {
+    public void TC_034() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -390,7 +390,7 @@ public class More_page_Android extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_035() {
+    public void TC_035() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -436,7 +436,7 @@ public class More_page_Android extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_036() {
+    public void TC_036() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));

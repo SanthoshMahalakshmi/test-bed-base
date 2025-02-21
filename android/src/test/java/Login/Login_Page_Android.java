@@ -231,8 +231,7 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_004()
-    {
+    public void TC_004() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         BaseLogin();
@@ -260,8 +259,7 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_005()
-    {
+    public void TC_005() throws Exception {
 
         TC_004(); //  1st page of basic details.
 
@@ -290,8 +288,7 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_006()
-    {
+    public void TC_006() throws Exception {
 
         TC_005(); // To complete the before pages.
 
@@ -313,8 +310,7 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_007()
-    {
+    public void TC_007() throws Exception {
         TC_006(); //To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -334,8 +330,7 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_008()
-    {
+    public void TC_008() throws Exception {
 
         TC_007(); //To complete the previous steps.
 
@@ -356,8 +351,7 @@ public class Login_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_009()
-    {
+    public void TC_009() throws Exception {
         TC_008(); // To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));

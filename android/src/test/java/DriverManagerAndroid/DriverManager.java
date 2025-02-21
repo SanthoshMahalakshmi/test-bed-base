@@ -4,8 +4,7 @@ import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,9 +28,11 @@ public class DriverManager {
 
     public static Logger logger = Logger.getLogger("MyLog");
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
+
     protected static AppiumDriver getDriver() {
         return appiumDriverThreadLocal.get();
     }
+
     public static AndroidDriver driver;
 
     public void setDriverForAndroid(AndroidDriver driver) {
@@ -60,7 +61,7 @@ public class DriverManager {
 
             // Read secrets from environment variables for local and browser stack.
             String currentEnv = System.getenv("ENVIRONMENT");
-            if(Objects.equals(currentEnv, "local")) {
+            if (Objects.equals(currentEnv, "local")) {
                 String AppiumServerUrl = "http://127.0.1.1:4723/";
                 System.out.print("Entering into local case\n");
                 DesiredCapabilities caps = new DesiredCapabilities();
@@ -76,8 +77,7 @@ public class DriverManager {
                 URL url = new URL(AppiumServerUrl);
 
                 setDriverForAndroid(driver = new AndroidDriver(url, caps));
-            }
-            else {
+            } else {
                 System.out.print("Entering into browser stack case\n");
                 String userName = System.getenv("USER_NAME");
                 String accessKey = System.getenv("ACCESS_KEY");
@@ -123,70 +123,87 @@ public class DriverManager {
         }
     }
 
-        @AfterMethod
-        public void quitDriver () {
-            AppiumDriver driver = getDriver();
-            if (driver != null) {
-                driver.quit();
-                appiumDriverThreadLocal.remove();
-                logger.info("Driver quit successfully.");
-            }
+    @AfterMethod
+    public void quitDriver() {
+        AppiumDriver driver = getDriver();
+        if (driver != null) {
+            driver.quit();
+            appiumDriverThreadLocal.remove();
+            logger.info("Driver quit successfully.");
         }
+    }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void BaseLogin() {
+    public void BaseLogin() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking the Get started button
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtGetStart"))).click();
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtGetStart"))).click();
+            logger.info("Get started Button is clicked.");
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
-        //clicking the mobile number input field and send the keys to it.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                ("com.moai.android:id/edtMobileNumber"))).sendKeys("0000000000");
-
-        //Clicking the continue button
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+        try {
+            //clicking the mobile number input field and send the keys to it.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtMobileNumber"))).sendKeys("9087631080");
+            logger.info("Mobile number is added in the field.");
+            //Clicking the continue button
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+            logger.info("Continue button is clicked for login process.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
         WebElement Ok = null;
-        try
-        {
-           Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
-           Ok.click();
-           logger.info("*OK Button is found and its clicked");
-        }
-        catch (Exception e)
-        {
+        try {
+            Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
+            Ok.click();
+            logger.info("*OK Button is found and its clicked");
+        } catch (Exception e) {
             logger.warning("Ok button is not found, we good to go with login");
         }
 
         //Fill the OTP into input field.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP1"))).sendKeys("1");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP2"))).sendKeys("2");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP3"))).sendKeys("3");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP4"))).sendKeys("4");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP5"))).sendKeys("5");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/editTextOTP6"))).sendKeys("6");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP1"))).sendKeys("1");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP2"))).sendKeys("2");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP3"))).sendKeys("3");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP4"))).sendKeys("4");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP5"))).sendKeys("5");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP6"))).sendKeys("6");
         } catch (Exception e) {
-            logger.warning("OTP is not entered.");
+            throw new Exception(e.getMessage());
         }
 
         //Verify the OTP
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtVerify"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtVerify"))).click();
         } catch (Exception e) {
             logger.warning("Verifying the OTP is not working.");
         }
 
         WebElement AllowNotificationButton = null;
         try {
-            AllowNotificationButton =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
+            AllowNotificationButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
             AllowNotificationButton.click();
             logger.info("Allow button is visible and its clicked Allow");
+        } catch (Exception e) {
+            logger.warning("Notification allow Button is not pop-up to accept allow.");
         }
-        catch (Exception e)
-        {
-            logger.info("Notification allow Button is not pop-up to accept allow.");
+
+        WebElement CoachMark = null;
+        try {
+            CoachMark = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+            CoachMark.click();
+            logger.info("Coach mark is visible and its skipped.");
+        } catch (NoSuchElementException e) {
+            logger.warning("The coach mark Skip is not visible." + e.getMessage());
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
         }
     }
 
