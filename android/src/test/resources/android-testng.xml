@@ -3,10 +3,16 @@
     <test name="Android Tests">
 
         <classes>
+            <class name="DriverManagerAndroid.DriverManager">
+                <methods>
+                    <include name="BaseLogin"/>
+                </methods>
+            </class>
+
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <include  name="TC_001"/> <!--Done with new element change.-->
+                    <exclude  name="TC_001"/> <!--Done with new element change.-->
                 </methods>
             </class>
 

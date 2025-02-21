@@ -18,8 +18,7 @@ public class DashBoard_Page_Android extends DriverManager {
     private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Android.class);
     
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_010()
-    {
+    public void TC_010() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -130,7 +129,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_011() {
+    public void TC_011() throws Exception {
 
         BaseLogin(); // To complete the login process.
 
@@ -225,7 +224,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_012() {
+    public void TC_012() throws Exception {
 
         BaseLogin(); // To complete the login process.
 
@@ -281,7 +280,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_013() {
+    public void TC_013() throws Exception {
 
         TC_012();  // To complete the previous steps.
 
@@ -330,7 +329,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_014() {
+    public void TC_014() throws Exception {
 
         BaseLogin();// To complete the login scenario.
 
@@ -435,7 +434,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_015() {
+    public void TC_015() throws Exception {
 
         BaseLogin(); // To complete the login process.
 
@@ -627,7 +626,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_016() {
+    public void TC_016() throws Exception {
 
         BaseLogin();// To complete the login process.
 
@@ -738,7 +737,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_017() {
+    public void TC_017() throws Exception {
 
         BaseLogin(); // To complete the login process.
 
@@ -827,7 +826,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_018() {
+    public void TC_018() throws Exception {
 
         BaseLogin();
 
@@ -906,7 +905,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_019() {
+    public void TC_019() throws Exception {
 
         BaseLogin();
 
@@ -965,7 +964,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_025() {
+    public void TC_025() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1012,7 +1011,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_026() {
+    public void TC_026() throws Exception {
 
         BaseLogin();
 
@@ -1036,7 +1035,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_027() {
+    public void TC_027() throws Exception {
 
         /*Adding the reminder for Blood pressure.*/
         BaseLogin();
@@ -1139,7 +1138,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_028() {
+    public void TC_028() throws Exception {
        BaseLogin(); // Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1199,7 +1198,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_029() {
+    public void TC_029() throws Exception {
 
         BaseLogin(); //Login process from base class.
 
@@ -1259,7 +1258,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_030()
+    public void TC_030() throws Exception
     {
         BaseLogin(); //Login process.
 

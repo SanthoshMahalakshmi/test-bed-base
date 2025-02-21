@@ -13,8 +13,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_020()
-    {
+    public void TC_020() throws Exception {
         BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -90,8 +89,7 @@ public class DownloadingReports_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_021()
-    {
+    public void TC_021() throws Exception {
         BaseLogin();
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -130,8 +128,7 @@ public class DownloadingReports_Page_Android extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_022()
-    {
+    public void TC_022() throws Exception {
        BaseLogin();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
