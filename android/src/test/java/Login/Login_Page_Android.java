@@ -51,12 +51,11 @@ public class Login_Page_Android extends DriverManager
             throw new Exception(e.getMessage());
         }
 
-        //3.clicking the mobile number input field and send the keys to it.
+        //3.Sending input to mobile number field and send the keys to it.
         WebElement MobileNumberInput = null;
         try {
             MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     id("com.heartmonitor.android:id/edtMobileNumber")));
-            MobileNumberInput.click();
             MobileNumberInput.sendKeys("9087631080");
         } catch (NoSuchContextException e) {
             logger.warning("Mobile number field is not visible or not available to interact with.");
@@ -70,9 +69,17 @@ public class Login_Page_Android extends DriverManager
             /* 2.country code is present in the screen or not.  Important - country code is not available in other devices*/
             WebElement countryCode = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     id("com.heartmonitor.android:id/textinput_prefix_text")));
-            logger.info("Country code is present :" + countryCode.isDisplayed());
+            logger.info("Country code is present: " + countryCode.isDisplayed());
         } catch (Exception e) {
             logger.warning("Country code is not visible.");
+        }
+
+        //Logo click for close the keyboard of the mobile
+        try{
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgLogo"))).click();
+            logger.info("Logo click for keyboard close action");
+        } catch (Exception e) {
+            logger.warning("Logo click is not happening for keyboard close.");
         }
 
         try {
@@ -96,7 +103,7 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //Terms and condition link
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.heartmonitor.android:id/txtTerms"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTerms"))).click();
             logger.info("Moving to terms and condition page.");
             //Back to log in page
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
@@ -109,7 +116,7 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //Privacy policy link
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.heartmonitor.android:id/txtPrivacy"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtPrivacy"))).click();
             logger.info("Moving to Privacy policy page.");
             //Back to log in page
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
@@ -146,7 +153,6 @@ public class Login_Page_Android extends DriverManager
         try {
             MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     id("com.heartmonitor.android:id/edtMobileNumber")));
-            MobileNumberInput.click();
             MobileNumberInput.sendKeys("9087631080");
         } catch (NoSuchContextException e) {
             logger.warning("Mobile number field is not visible or not available to interact with.");
@@ -154,6 +160,14 @@ public class Login_Page_Android extends DriverManager
         }catch (Exception e){
             logger.warning("Issue with mobile number input field :"+e.getMessage());
             throw new Exception(e.getMessage());
+        }
+
+        //Logo click for close the keyboard of the mobile
+        try{
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgLogo"))).click();
+            logger.info("Logo click for keyboard close action");
+        } catch (Exception e) {
+            logger.warning("Logo click is not happening for keyboard close.");
         }
 
         try {
