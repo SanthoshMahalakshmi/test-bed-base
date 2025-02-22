@@ -1,4 +1,5 @@
 framework: testng
+app: bs://2b32fee63fb6eb47847ffe8fd896840cea9a38f2
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S22 Ultra

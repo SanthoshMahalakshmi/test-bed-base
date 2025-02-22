@@ -73,7 +73,7 @@ public class DriverManager {
                 caps.setCapability("appPackage", "com.heartmonitor.android"); // Change to your app package
                 caps.setCapability("appActivity", "com.heartmonitor.android.presentation.main.MainActivity"); // Change to main activity
                 caps.setCapability("noReset", true); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/home/santhosh/Downloads/Monitor 1.0.1 (3).apk");
+                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor v1.0.1 (4) - Staging.apk");
                 URL url = new URL(AppiumServerUrl);
 
                 setDriverForAndroid(driver = new AndroidDriver(url, caps));
@@ -81,7 +81,8 @@ public class DriverManager {
                 System.out.print("Entering into BROWSER_STACK case for ANDROID\n");
                 String userName = System.getenv("USER_NAME");
                 String accessKey = System.getenv("ACCESS_KEY");
-                String app = System.getenv("APP");
+                //String app = System.getenv("APP");
+                String app = (String) config.get("app");
 
                 // Extract details from the YAML
                 String buildName = (String) config.get("buildName");

@@ -1,7 +1,7 @@
-userName: connectedhealth_0ZAka9
-accessKey: 795Qi1UYRtf2G6eqDYYQ
+#userName: connectedhealth_0ZAka9
+#accessKey: 795Qi1UYRtf2G6eqDYYQ
 framework: testng
-app: bs://aec3e981e83264e94264bb29b283e2c911429ac7
+app: bs://95c0a6e0a808825636a0ca6a226d7b863a208e29
 platforms:
   - platformName: iOS
     deviceName: iPhone 14 Pro Max
