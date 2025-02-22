@@ -5,5 +5,5 @@ platforms:
     platformVersion: 12.0
 parallelsPerPlatform: 1
 browserstackLocal: true
-buildName: ANDROID_Test_run
-projectName: Connected_Health
+buildName: Test_run_ANDROID
+projectName: Heart-Monitor

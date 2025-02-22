@@ -14,5 +14,5 @@ platforms:
     platformVersion: 15
 parallelsPerPlatform: 3
 browserstackLocal: true
-buildName: Test run for ios
-projectName: MoAI_Mobile_Test_Automation
+buildName: Test_run_for_ios
+projectName: Heart-Monitor
