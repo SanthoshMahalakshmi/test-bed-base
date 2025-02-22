@@ -63,12 +63,12 @@ public class DriverManager {
             String currentEnv = System.getenv("ENVIRONMENT");
             if (Objects.equals(currentEnv, "local")) {
                 String AppiumServerUrl = "http://127.0.1.1:4723/";
-                System.out.print("Entering into local case\n");
+                System.out.print("Entering into local case for ANDROID\n");
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
-                caps.setCapability("deviceName", "Medium Phone API VanillaIceCream"); // Change to your device/emulator name
+                caps.setCapability("deviceName", "sdk_gphone64_x86_64"); // Change to your device/emulator name
                 caps.setCapability("udid", "emulator-5554");
-                caps.setCapability("platformVersion", "11"); // Change based on your device
+                caps.setCapability("platformVersion", "15"); // Change based on your device
                 caps.setCapability("automationName", "UiAutomator2");
                 caps.setCapability("appPackage", "com.heartmonitor.android"); // Change to your app package
                 caps.setCapability("appActivity", "com.heartmonitor.android.presentation.main.MainActivity"); // Change to main activity
@@ -78,7 +78,7 @@ public class DriverManager {
 
                 setDriverForAndroid(driver = new AndroidDriver(url, caps));
             } else {
-                System.out.print("Entering into browser stack case\n");
+                System.out.print("Entering into BROWSER_STACK case for ANDROID\n");
                 String userName = System.getenv("USER_NAME");
                 String accessKey = System.getenv("ACCESS_KEY");
                 String app = System.getenv("APP");
