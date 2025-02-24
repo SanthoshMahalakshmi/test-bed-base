@@ -53,69 +53,6 @@ public class DriverManager {
         return (Map<String, String>) platformsList.get(0);
     }
 
-    /*@BeforeMethod
-    public void initializeDriverForIOS(ITestResult testResult) throws Exception {
-        try {
-            InputStream inputStream = new FileInputStream("config/browserstack-ios.yml");
-
-            if (inputStream == null) {
-                throw new IllegalArgumentException("YAML file not found in resources.");
-            }
-
-            // Parse YAML content
-            Yaml yaml = new Yaml();
-            Map<String, Object> config = yaml.load(inputStream);
-
-            // Extract details from the YAML
-            String userName = (String) config.get("userName");
-            String accessKey = (String) config.get("accessKey");
-            String app = (String) config.get("app");
-            String buildName = (String) config.get("buildName");
-            String projectName = (String) config.get("projectName");
-
-            // Get platform-specific capabilities
-            List<Map<String, Object>> platforms = (List<Map<String, Object>>) config.get("platforms");
-            Map<String, Object> platform = platforms.get(0);
-            String platformName = (String) platform.get("platformName");
-            String deviceName = (String) platform.get("deviceName");
-
-            // Handle platformVersion as String or Double
-            Object platformVersion = platform.get("platformVersion");
-            String platformVersionString = platformVersion instanceof Double
-                    ? String.valueOf(platformVersion)
-                    : (String) platformVersion;
-
-            // Extracting test case name dynamically
-            String testName = testResult.getMethod().getMethodName();
-
-            // Setup BrowserStack capabilities
-            MutableCapabilities capabilities = new MutableCapabilities();
-            capabilities.setCapability("app", app);
-
-            Map<String, Object> browserstackOptions = new java.util.HashMap<>();
-            browserstackOptions.put("userName", userName);
-            browserstackOptions.put("accessKey", accessKey);
-            browserstackOptions.put("osVersion", platformVersionString);
-            browserstackOptions.put("deviceName", deviceName);
-            browserstackOptions.put("projectName", projectName);
-            browserstackOptions.put("buildName", buildName);
-            browserstackOptions.put("sessionName", testName);
-            browserstackOptions.put("appiumVersion", "2.0.0");
-            browserstackOptions.put("local", "false");
-            browserstackOptions.put("debug", "true");
-
-            capabilities.setCapability("bstack:options", browserstackOptions);
-
-            setDriverForIOS(driver = new IOSDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
-            logger.info("iOS Driver initialized successfully.");
-            inputStream.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to initialize iOS driver.", e);
-        }
-    }*/
-
     @BeforeMethod
     public void initializeDriverForIOS(ITestResult testResult) throws Exception {
         try {
