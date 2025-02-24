@@ -132,12 +132,13 @@ public class DriverManager {
             // Read secrets from environment variables for local and browser stack.
             String currentEnv = System.getenv("ENVIRONMENT");
             if (Objects.equals(currentEnv, "local")) {
-                String AppiumServerUrl = "http://127.0.1.1:4723/";
+                String AppiumServerUrl = "http://127.0.0.1:4723";
                 System.out.print("Entering into local case for iOS\n");
 
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
-                caps.setCapability("deviceName", "iPhone 16 Pro Max"); // Change based on your simulator/device
+                caps.setCapability("deviceName", "iPhone 16 Pro"); // Change based on your simulator/device
+                caps.setCapability("udid", "189DE8BE-5520-4ACF-BDA8-CB4029F9AA5D");
                 caps.setCapability("platformVersion", "18.2"); // Change based on your device
                 caps.setCapability("automationName", "XCUITest");
                 caps.setCapability("bundleId", "com.heartmonitor.ios"); // Change to your app's bundle ID

@@ -62,7 +62,7 @@ public class DriverManager {
             // Read secrets from environment variables for local and browser stack.
             String currentEnv = System.getenv("ENVIRONMENT");
             if (Objects.equals(currentEnv, "local")) {
-                String AppiumServerUrl = "http://127.0.1.1:4723/";
+                String AppiumServerUrl = "http://127.0.0.1:4723/";
                 System.out.print("Entering into local case for ANDROID\n");
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
@@ -137,6 +137,8 @@ public class DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void BaseLogin() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        logger.info("Entering into BaseLogin for Android.");
 
         //Clicking the Get started button
         try {
