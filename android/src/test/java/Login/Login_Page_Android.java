@@ -1,5 +1,6 @@
 package Login;
 
+import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
@@ -19,6 +20,7 @@ public class Login_Page_Android extends DriverManager
 {
 
     private static final Logger log = LoggerFactory.getLogger(Login_Page_Android.class);
+    BaseLoginForAndroid bs = new BaseLoginForAndroid();
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_002() throws Exception {
@@ -248,7 +250,7 @@ public class Login_Page_Android extends DriverManager
     public void TC_004() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        BaseLogin();
+        bs.CoreLoginForAndroid(); //For base login scenario
 
         try {
             //2.Full name

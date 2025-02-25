@@ -1,5 +1,6 @@
 package Reports_Page;
 
+import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
@@ -12,9 +13,12 @@ import java.time.Duration;
 public class DownloadingReports_Page_Android extends DriverManager
 {
 
+    BaseLoginForAndroid bs = new BaseLoginForAndroid();
+
+    
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_020() throws Exception {
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -90,7 +94,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_021() throws Exception {
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -129,7 +133,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_022() throws Exception {
-       BaseLogin();
+        bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

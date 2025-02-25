@@ -9,14 +9,15 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.foreign.ValueLayout;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class DriverManager {
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
     protected static AppiumDriver getDriver() {
+        logger.info("getDriver()" + appiumDriverThreadLocal.get());
         return appiumDriverThreadLocal.get();
     }
 
@@ -43,6 +45,7 @@ public class DriverManager {
     @BeforeMethod
     public void initializeDriverForAndroid(ITestResult testResult) throws Exception {
         try {
+
             InputStream inputStream = new FileInputStream("config/browserstack-android.yml");
 
             if (inputStream == null) {
@@ -52,12 +55,6 @@ public class DriverManager {
             // Parse YAML content
             Yaml yaml = new Yaml();
             Map<String, Object> config = yaml.load(inputStream);
-
-            // Extract details from the YAML
-            /*String userName = (String) config.get("userName");
-            String accessKey = (String) config.get("accessKey");
-            String app = (String) config.get("app");*/
-
 
             // Read secrets from environment variables for local and browser stack.
             String currentEnv = System.getenv("ENVIRONMENT");
@@ -71,17 +68,18 @@ public class DriverManager {
                 caps.setCapability("platformVersion", "15"); // Change based on your device
                 caps.setCapability("automationName", "UiAutomator2");
                 caps.setCapability("appPackage", "com.heartmonitor.android"); // Change to your app package
-                caps.setCapability("appActivity", "com.heartmonitor.android.presentation.main.MainActivity"); // Change to main activity
-                caps.setCapability("noReset", true); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor v1.0.1 (4) - Staging.apk");
+                caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity"); // Change to main activity
+                caps.setCapability("fullReset", true);
+                caps.setCapability("noReset", false); // Keeps app data after test execution
+                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor-Staging.apk");
                 URL url = new URL(AppiumServerUrl);
 
-                setDriverForAndroid(driver = new AndroidDriver(url, caps));
+                AndroidDriver newDriver = new AndroidDriver(url, caps);
+                setDriverForAndroid(newDriver);
             } else {
                 System.out.print("Entering into BROWSER_STACK case for ANDROID\n");
                 String userName = System.getenv("USER_NAME");
                 String accessKey = System.getenv("ACCESS_KEY");
-                //String app = System.getenv("APP");
                 String app = (String) config.get("app");
 
                 // Extract details from the YAML
@@ -116,98 +114,53 @@ public class DriverManager {
 
                 capabilities.setCapability("bstack:options", browserstackOptions);
 
-                setDriverForAndroid(driver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
+                AndroidDriver newDriver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities);
+                setDriverForAndroid(newDriver);
                 inputStream.close();
             }
+            logger.info("Driver initialized successfully: " + getDriver());
         } catch (Exception e) {
+            logger.severe("Error initializing driver: " + e.getMessage());
             e.printStackTrace();
+            throw e;
         }
     }
 
-    @AfterMethod
-    public void quitDriver() {
-        AppiumDriver driver = getDriver();
-        if (driver != null) {
-            driver.quit();
-            appiumDriverThreadLocal.remove();
-            logger.info("Driver quit successfully.");
-        }
+    @Test
+    public void BaseLogin()
+    {
+
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void BaseLogin() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    @AfterMethod(alwaysRun = true)
+    public void quitDriver() throws IOException {
+        System.out.println("🛑 Executing @AfterMethod: Quitting Android Driver... " + getDriver());
+        AppiumDriver currentDriver = getDriver();
+        System.out.println("🔚 This has come to an end " + currentDriver);
 
-        logger.info("Entering into BaseLogin for Android.");
-
-        //Clicking the Get started button
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtGetStart"))).click();
-            logger.info("Get started Button is clicked.");
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+        if (currentDriver != null) {
+            try {
+                currentDriver.quit();
+                System.out.println("✅ Driver quit successfully.");
+            } catch (Exception e) {
+                System.out.println("❌ Error while quitting driver: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                appiumDriverThreadLocal.remove();
+                System.out.println("🧹 ThreadLocal driver removed.");
+                // Reset the static driver reference
+                driver = null;
+            }
+        } else {
+            System.out.println("⚠️ No active driver found to quit.");
         }
 
+        // Ensure app is force-stopped after quitting driver
         try {
-            //clicking the mobile number input field and send the keys to it.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtMobileNumber"))).sendKeys("9087631080");
-            logger.info("Mobile number is added in the field.");
-            //Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-            logger.info("Continue button is clicked for login process.");
+            Runtime.getRuntime().exec("adb shell am force-stop com.heartmonitor.android");
+            System.out.println("✅ Force-stopped app successfully.");
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-        WebElement Ok = null;
-        try {
-            Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
-            Ok.click();
-            logger.info("*OK Button is found and its clicked");
-        } catch (Exception e) {
-            logger.warning("Ok button is not found, we good to go with login");
-        }
-
-        //Fill the OTP into input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP1"))).sendKeys("1");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP2"))).sendKeys("2");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP3"))).sendKeys("3");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP4"))).sendKeys("4");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP5"))).sendKeys("5");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP6"))).sendKeys("6");
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-        //Verify the OTP
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtVerify"))).click();
-        } catch (Exception e) {
-            logger.warning("Verifying the OTP is not working.");
-        }
-
-        WebElement AllowNotificationButton = null;
-        try {
-            AllowNotificationButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
-            AllowNotificationButton.click();
-            logger.info("Allow button is visible and its clicked Allow");
-        } catch (Exception e) {
-            logger.warning("Notification allow Button is not pop-up to accept allow.");
-        }
-
-        WebElement CoachMark = null;
-        try {
-            CoachMark = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
-            CoachMark.click();
-            logger.info("Coach mark is visible and its skipped.");
-        } catch (NoSuchElementException e) {
-            logger.warning("The coach mark Skip is not visible." + e.getMessage());
-        } catch (Exception e) {
-            logger.warning(e.getMessage());
+            System.out.println("❌ Error force-stopping app: " + e.getMessage());
         }
     }
-
 }

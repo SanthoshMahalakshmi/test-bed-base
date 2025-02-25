@@ -3,9 +3,9 @@
     <test name="Android Tests">
 
         <classes>
-            <class name="DriverManagerAndroid.DriverManager">
+            <class name="DriverManagerAndroid.BaseLoginForAndroid">
                 <methods>
-                    <include name="BaseLogin"/>
+                    <include name="CoreLogin"/>
                 </methods>
             </class>
 

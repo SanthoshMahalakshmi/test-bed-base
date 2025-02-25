@@ -1,5 +1,6 @@
 package Devices;
 
+import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
@@ -11,9 +12,11 @@ import java.time.Duration;
 
 public class Devices_Page_Android extends DriverManager
 {
+    BaseLoginForAndroid bs = new BaseLoginForAndroid();
+    
     @Test
     public void TC_023() throws Exception {
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
