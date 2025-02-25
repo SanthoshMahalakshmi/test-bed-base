@@ -36,7 +36,7 @@ public class More_page_Android extends DriverManager {
         //1.Notification toggle off and on
         try {
             WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    id("com.moai.android:id/swEnable")));
+                    id("com.heartmonitor.android:id/swEnable")));
             logger.info("Notification toggle is enabled : " + NotificationToggle.isEnabled());
             NotificationToggle.click();
             logger.info("Notification toggle is working.");
@@ -46,7 +46,7 @@ public class More_page_Android extends DriverManager {
 
         //All Notification section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtNotification"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtNotification"))).click();
 
             WebElement NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
                     ("new UiSelector().text(\"Notifications\")")));
@@ -58,7 +58,7 @@ public class More_page_Android extends DriverManager {
         WebElement ActualNotification = null;
         try {
             ActualNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)")));
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/llMain\").instance(0)")));
             logger.info("Notification is present : " + ActualNotification.getText());
         } catch (Exception e) {
             logger.warning("No notification's are present currently.");
@@ -74,7 +74,7 @@ public class More_page_Android extends DriverManager {
         //notification description
         try {
             WebElement Description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/description")));
+                    id("com.heartmonitor.android:id/description")));
             logger.info("Notification description :" + Description.getText());
         } catch (Exception e) {
 
@@ -83,7 +83,7 @@ public class More_page_Android extends DriverManager {
 
         //notification time
         try {
-            WebElement time = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCurrentTime")));
+            WebElement time = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCurrentTime")));
             logger.info("Notification time : " + time.getText());
         } catch (Exception e) {
             logger.warning("No notification Time is visible.");
@@ -91,7 +91,7 @@ public class More_page_Android extends DriverManager {
 
         //Notification personal note
         try {
-            WebElement PersonalNote = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCurrentTime")));
+            WebElement PersonalNote = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCurrentTime")));
             logger.info("Notification personal note : " + PersonalNote.getText());
         } catch (Exception e) {
             logger.warning("NO Notification personal note is visible.");
@@ -99,7 +99,7 @@ public class More_page_Android extends DriverManager {
 
         //Notification Days
         try {
-            WebElement NotificationDays = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/tvWeekDay")));
+            WebElement NotificationDays = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvWeekDay")));
             logger.info("Notification personal note : " + NotificationDays.getText());
         } catch (Exception e) {
             logger.warning("No Notification days is visible.");
@@ -107,14 +107,14 @@ public class More_page_Android extends DriverManager {
 
         //Done.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
         } catch (Exception e) {
             logger.warning("Ok is not clicked after view the notification.");
         }
 
         //clear
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/menu_clear"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/menu_clear"))).click();
         } catch (Exception e) {
             logger.warning("Clear button is not present may be there is no notification.");
         }
@@ -140,7 +140,7 @@ public class More_page_Android extends DriverManager {
 
         //2.Clicking on FAQ section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtFaq"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtFaq"))).click();
             logger.info("MOved to FAQ's section.");
         } catch (Exception e) {
             logger.warning("Not moved to FAQ's section");
@@ -159,7 +159,7 @@ public class More_page_Android extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
                     ("new UiSelector().text(\"How to use this app?\")"))).click();
             WebElement HowToUseThisApp = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtTitle2\").instance(0)")));
+                    (AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtTitle2\").instance(0)")));
             logger.info("How to use this app content is present : " + HowToUseThisApp.isDisplayed());
         } catch (Exception e) {
             logger.warning("How to use this app description is not visible.");
@@ -170,7 +170,7 @@ public class More_page_Android extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
                     ("new UiSelector().text(\"Why do we use it?\")"))).click();
             WebElement WhyDoWeUseIt = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtTitle2\").instance(1)")));
+                    androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtTitle2\").instance(1)")));
             logger.info("Why do we use it content is present : " + WhyDoWeUseIt.isDisplayed());
         } catch (Exception e) {
             logger.warning("No why do use it section is present.");
@@ -185,7 +185,7 @@ public class More_page_Android extends DriverManager {
 
         //3.Clicking on Contact us
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtContactUs"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContactUs"))).click();
         } catch (Exception e) {
             logger.warning("Not clicked the contact us section. ");
         }
@@ -201,7 +201,7 @@ public class More_page_Android extends DriverManager {
 
         //To email address.
         try {
-            WebElement To = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/tvTo")));
+            WebElement To = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvTo")));
             logger.info("User can see the To email address : " + To.isDisplayed());
         } catch (Exception e) {
             logger.warning("To email is not visible.");
@@ -209,7 +209,7 @@ public class More_page_Android extends DriverManager {
 
         //From email address.
         try {
-            WebElement From = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/tvFrom")));
+            WebElement From = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvFrom")));
             logger.info("User can see the To email address : " + From.isDisplayed());
         } catch (Exception e) {
             logger.warning("From email is not visible.");
@@ -218,21 +218,21 @@ public class More_page_Android extends DriverManager {
         //Write your message with minimum character. will get error.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtMessage"))).sendKeys("th");
+                    ("com.heartmonitor.android:id/edtMessage"))).sendKeys("th");
         } catch (Exception e) {
             logger.warning("Write your message is not visible");
         }
 
         //Submit
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("Submit button is not clicked now.");
         }
 
         //Error for less character
         try {
-            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/text_message_toaster")));
+            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/text_message_toaster")));
             logger.info("Error message for less character : " + ErrorText.getText());
         } catch (Exception e) {
             logger.warning("");
@@ -241,7 +241,7 @@ public class More_page_Android extends DriverManager {
         try {
             //Write your message
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                            ("com.moai.android:id/edtMessage"))).
+                            ("com.heartmonitor.android:id/edtMessage"))).
                     sendKeys("Thanks for developing the application and try to resolve all the conflict.");
             logger.info("Write a message is happening.");
         } catch (Exception e) {
@@ -250,14 +250,14 @@ public class More_page_Android extends DriverManager {
 
         //Submit
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("Submit is not happen.");
         }
 
         //Success message
         try {
-            WebElement SuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/text_message_toaster")));
+            WebElement SuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/text_message_toaster")));
             logger.info("Success message for the : " + SuccessMessage.getText());
         } catch (Exception e) {
             logger.warning("Success message is not coming.");
@@ -288,7 +288,7 @@ public class More_page_Android extends DriverManager {
 
         //1.Clicking on About us
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtAboutUs"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAboutUs"))).click();
             logger.info("Moving to about us page.");
         } catch (Exception e) {
             logger.warning("Clicking is not happening for about us.");
@@ -326,7 +326,7 @@ public class More_page_Android extends DriverManager {
 
         //2.clicking on Terms & Conditions
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTerms"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTerms"))).click();
             logger.info("Moving to terms and condition section.");
         } catch (Exception e) {
             logger.warning("Clicking the terms and condition is not working.");
@@ -359,7 +359,7 @@ public class More_page_Android extends DriverManager {
 
         //3.Clicking on Privacy policy
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtPrivacy"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtPrivacy"))).click();
             logger.info("Moving to Privacy policy.");
         } catch (Exception e) {
             logger.warning("Clicking privacy policy is not working.");
@@ -407,7 +407,7 @@ public class More_page_Android extends DriverManager {
 
         //Clicking on logout
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtLogout"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtLogout"))).click();
         } catch (Exception e) {
             logger.warning("logout is not clicked.");
         }
@@ -429,7 +429,7 @@ public class More_page_Android extends DriverManager {
 
         //Verifying the singUp page.
         try {
-            WebElement SignUp = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtPhoneLabel")));
+            WebElement SignUp = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
             logger.info("User currently present :" + SignUp.getText());
         } catch (Exception e) {
             logger.warning("Not moving to the Sign up page again after the logout.");
@@ -454,7 +454,7 @@ public class More_page_Android extends DriverManager {
         //Clicking on delete account
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    id("com.moai.android:id/txtDeleteAcc"))).click();
+                    id("com.heartmonitor.android:id/txtDeleteAcc"))).click();
         } catch (Exception e) {
             logger.warning("Deleting account is not clicked.");
         }
@@ -462,7 +462,7 @@ public class More_page_Android extends DriverManager {
         //Delete account label
         try {
             WebElement DeleteAccountLabel = wait.until(ExpectedConditions.
-                    visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/alertTitle")));
+                    visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/alertTitle")));
             logger.info("Label of delete account : " + DeleteAccountLabel.getText());
         } catch (Exception e) {
             logger.warning("label is not visible.");

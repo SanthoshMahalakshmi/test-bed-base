@@ -60,7 +60,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         WebElement SyncClose = null;
         try {
-            SyncClose = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/image_close_toaster")));
+            SyncClose = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/image_close_toaster")));
             logger.info("Cross button is found its clicked :" + SyncClose.isDisplayed());
             SyncClose.click();
         }
@@ -82,7 +82,7 @@ public class DashBoard_Page_Android extends DriverManager {
         WebElement Notifications = null;
         try{
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/llMain\").instance(0)")));
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/llMain\").instance(0)")));
             logger.info("Notification is present? : " + Notifications.isDisplayed());
         }
         catch (Exception e)
@@ -106,7 +106,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //6.health score section
         WebElement ECGReport = null;
         try {
-            ECGReport =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg")));
+            ECGReport =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtEcg")));
             logger.info("Ecg report is present " + ECGReport.isDisplayed());
         }
         catch (Exception e)
@@ -117,7 +117,7 @@ public class DashBoard_Page_Android extends DriverManager {
         WebElement deviceIndication = null;
         try {
             deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/view5\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/view5\"));"));
             logger.info("Heath scroll is present :" + deviceIndication.isDisplayed());
         } catch (Exception e) {
             logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
@@ -126,7 +126,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scrolling to heath score section.
         WebElement HealthScore = null;
         try {
-            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/view5")));
+            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/view5")));
         } catch (Exception e) {
             logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
         }
@@ -141,8 +141,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //1.Verify My dependent section.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtMyDependent")));
-            WebElement MyDependent = driver.findElement(AppiumBy.id("com.moai.android:id/txtMyDependent"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtMyDependent")));
+            WebElement MyDependent = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtMyDependent"));
             logger.info("My dependent section is present : " + MyDependent.isDisplayed());
         } catch (Exception e) {
             logger.warning("My dependent section is not visible.");
@@ -179,8 +179,8 @@ public class DashBoard_Page_Android extends DriverManager {
         //4.Dependent profile
         try {
             AddedDependent.click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtUserName")));
-            WebElement userName = driver.findElement(AppiumBy.id("com.moai.android:id/txtUserName"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtUserName")));
+            WebElement userName = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtUserName"));
             logger.info("Dependent profile name : " + userName.getText());
         } catch (Exception e) {
             logger.warning("New dependent profile is ");
@@ -197,11 +197,11 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             /*Clicking on share in DB*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgShare"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgShare"))).click();
             /*Selecting the ECG*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbECG"))).click();
             /*Selecting the Submit*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             /*Selecting the message*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     xpath("//android.widget.TextView[@resource-id=\"android:id/text1\" and @text=\"Messages\"]"))).click();
@@ -213,15 +213,15 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //7.downloading the reports and sharing to the people from DB.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgDownload"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgDownload"))).click();
             /*Selecting ECG for download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbECG"))).click();
             /*Selecting the SPO2 download.*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
             /*Selecting the HR download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
             /*Clicking on done*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("Downloading the report not working.");
         }
@@ -236,8 +236,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //verify the care circle section label.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCareCirclesLabel")));
-            WebElement careCircleLabel = driver.findElement(AppiumBy.id("com.moai.android:id/txtCareCirclesLabel"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCareCirclesLabel")));
+            WebElement careCircleLabel = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtCareCirclesLabel"));
             logger.info("Care circle label is present : " + careCircleLabel.isDisplayed());
         } catch (Exception e) {
             logger.warning("Care section label is not visible.");
@@ -245,7 +245,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //2.Clicking the Get stared button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtCareCircle"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtCareCircle"))).click();
         } catch (Exception e) {
             logger.warning("Clicking on get started is not happening.");
         }
@@ -268,7 +268,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Add member
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
         } catch (Exception e) {
             logger.warning("Adding member is not happening");
         }
@@ -276,7 +276,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Enter group name
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).sendKeys("Fam");
+                    ("com.heartmonitor.android:id/edtGroupName"))).sendKeys("Fam");
         } catch (Exception e) {
             logger.warning("Adding new name for the care circle is not happening.");
         }
@@ -292,14 +292,14 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Click the submit to get the error, not enough character.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
         } catch (Exception e) {
             logger.warning("Submit button is not working for getting the error for not enough character.");
         }
 
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error1 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
+            WebElement error1 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
             logger.info("Not enough character error : " + error1.getText());
         } catch (Exception e) {
             logger.warning("error message is not pop-up");
@@ -308,22 +308,22 @@ public class DashBoard_Page_Android extends DriverManager {
         //Clearing the input field.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).clear();
+                    ("com.heartmonitor.android:id/edtGroupName"))).clear();
         } catch (Exception e) {
             logger.warning("Clearing the input field is not working.");
         }
 
         //To get empty input field error.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
             logger.info("Empty input for the care circle name");
         } catch (Exception e) {
             logger.warning("Empty input field error is not pop-up.");
         }
 
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error2 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
+            WebElement error2 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
             logger.info("Empty input field error : " + error2.getText());
         } catch (Exception e) {
             logger.warning("Empty input field error message is not visible.");
@@ -341,7 +341,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Care circle button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
         } catch (Exception e) {
             logger.warning("Care circle button is not visible for a click.");
         }
@@ -357,7 +357,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Add member
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
             logger.info("Add member is happened");
         } catch (Exception e) {
             logger.warning("Add member is not happen.");
@@ -412,7 +412,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Clearing the input field.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).clear();
+                    ("com.heartmonitor.android:id/edtGroupName"))).clear();
             logger.info("Clearing the previous input.");
         } catch (Exception e) {
             logger.warning("Clearing the previous input is not happening");
@@ -421,7 +421,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Editing the care circle name.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtGroupName"))).sendKeys("SANTH");
+                    ("com.heartmonitor.android:id/edtGroupName"))).sendKeys("SANTH");
             logger.info("Editing the care circle name");
         } catch (Exception e) {
             logger.warning("Edit the care circle name is not happen.");
@@ -429,7 +429,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //4.Clicking on the update to complete the change.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
             logger.info("name is changed.");
         } catch (Exception e) {
             logger.warning("Name changed newly.");
@@ -446,7 +446,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //pre - Care circle button.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
             logger.info("clicking the care circle.");
         } catch (Exception e) {
             logger.warning("Care circle is not visible ");
@@ -462,7 +462,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //pre - Add member
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
             logger.info("Adding member is working");
         } catch (Exception e) {
             logger.warning("Add member is not happening.");
@@ -493,8 +493,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //2.Verify the blood pressure radio button is selected by default.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/rbBp")));
-            WebElement BP = driver.findElement(AppiumBy.id("com.moai.android:id/rbBp"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/rbBp")));
+            WebElement BP = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbBp"));
             logger.info("Bp reminder is selected default : " + BP.isDisplayed());
         } catch (Exception e) {
             logger.warning("Bp radio button is not Enabled.");
@@ -502,8 +502,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //3.verify the ECG radio button is selectable
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbECG"))).click();
-            WebElement ECG = driver.findElement(AppiumBy.id("com.moai.android:id/rbECG"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbECG"))).click();
+            WebElement ECG = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbECG"));
             logger.info("Ecg is selected : " + ECG.isDisplayed());
         } catch (Exception e) {
             logger.warning("ECG radio button is not displayed.");
@@ -511,8 +511,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //4. verify the Spo2 reminder radio button is selectable
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
-            WebElement Spo2 = driver.findElement(AppiumBy.id("com.moai.android:id/rbSpo2"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
+            WebElement Spo2 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"));
             logger.info("Spo2 is selected : " + Spo2.isDisplayed());
         } catch (Exception e) {
             logger.warning("Spo2 radio button is not selectable.");
@@ -520,8 +520,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //5.Heart rate reminder radio button is selectable
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
-            WebElement HR = driver.findElement(AppiumBy.id("com.moai.android:id/rbHR"));
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
+            WebElement HR = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbHR"));
             logger.info("HR is selected : " + HR.isDisplayed());
         } catch (Exception e) {
             logger.warning("Hr reminder radio is not visible");
@@ -529,7 +529,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Done button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             logger.info("Done button click is working.");
         } catch (Exception e) {
             logger.warning("Done button click is not working");
@@ -538,7 +538,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Add reminder name
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.moai.android:id/edtReminderName"))).sendKeys("Take Heart rate.");
+                    ("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Take Heart rate.");
             logger.info("Reminder name is added.");
         } catch (Exception e) {
             logger.warning("Add reminder name is not working.");
@@ -546,8 +546,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Selecting the days for the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTHU"))).click();
             logger.info("Selecting the days for reminder is working.");
         } catch (Exception e) {
             logger.warning("Selecting days for the reminder is not working.");
@@ -555,7 +555,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Set the time for the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/chipAdd"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
             logger.info("Set time for reminder is working");
         } catch (Exception e) {
             logger.warning("Set time for reminder is not working.");
@@ -587,7 +587,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Using + to Adding invite to the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
             logger.info("invite the people is working.");
         } catch (Exception e) {
             logger.warning("Invite the people is not working.");
@@ -604,7 +604,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Clicking the add invite button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             logger.info("Invite button click is working.");
         } catch (Exception e) {
             logger.warning("Clicking invite button is not working.");
@@ -613,7 +613,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scrolling to personal note
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take care Your self..");
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));")).sendKeys("Take care Your self..");
             logger.info("Scroll to the personal note and added input as well.");
         } catch (Exception e) {
             logger.warning("Scroll to the  personal note is not happen");
@@ -621,7 +621,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //7.Confirm the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
             logger.info("Reminder set successfully.");
         } catch (Exception e) {
             logger.warning("Reminder confirmation is not happen.");
@@ -639,14 +639,14 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scrolling to the plus button.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgAddReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the add reminder in the DB is not working");
         }
 
         //Clicking the plus button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
             logger.info("Clicking the plus is working");
         } catch (Exception e) {
             logger.warning("plus button is not clicked");
@@ -654,7 +654,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Clicking the SpO2 radio button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
             logger.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
             logger.warning("Spo2 radio button is not visible for a click.");
@@ -662,7 +662,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Clicking the DONE button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             logger.info("Done is clicked");
         } catch (Exception e) {
             logger.warning("Done is nor clicked.");
@@ -671,8 +671,8 @@ public class DashBoard_Page_Android extends DriverManager {
         //CASE - 1
         //1.Selecting the days for the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTHU"))).click();
             logger.info("Days are selected for reminder.");
         } catch (Exception e) {
             logger.warning("Selecting day is not working.");
@@ -680,8 +680,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //2.Unselect the days in the reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTHU"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTHU"))).click();
             logger.info("De-Selecting the days is happen.");
         } catch (Exception e) {
             logger.warning("De-Selecting the days is not working. ");
@@ -690,12 +690,12 @@ public class DashBoard_Page_Android extends DriverManager {
         // CASE - 2 & 3
         //Empty reminder name
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtReminderName")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtReminderName")));
             //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
             //Empty reminder name error will be shown up.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement EmptyReminderName = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
+            WebElement EmptyReminderName = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
             logger.info("Error 1 :" + EmptyReminderName.getText());
         } catch (Exception e) {
             logger.warning("Empty reminder name error is not visible.");
@@ -704,12 +704,12 @@ public class DashBoard_Page_Android extends DriverManager {
         //Less character error on reminder name.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("sa");
+                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("sa");
             //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
             //Error for less charscter.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement LessCharacterError = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
+            WebElement LessCharacterError = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
             logger.info("Error 2 :" + LessCharacterError.getText());
         } catch (Exception e) {
             logger.warning("Less character error is not visible");
@@ -718,7 +718,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //3.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("Sant");
+                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Sant");
         } catch (Exception e) {
             logger.warning("name is added");
         }
@@ -726,10 +726,10 @@ public class DashBoard_Page_Android extends DriverManager {
         //Empty Personal note less character.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take care");
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));")).sendKeys("Take care");
 
             //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
 
             //Popup for not selecting the day
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
@@ -750,28 +750,28 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scrolling to the plus button.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgAddReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the reminder is not happen.");
         }
 
         //Clicking the plus button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
         } catch (Exception e) {
             logger.warning("Clicking plus is not happen.");
         }
 
         //Clicking the SpO2 radio button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
         } catch (Exception e) {
             logger.warning("Selecting SPo2 is not happen.");
         }
 
         //Clicking the DONE button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("Selecting done is not happen.");
         }
@@ -780,7 +780,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtSetReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtSetReminder\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the element is not working.");
         }
@@ -788,7 +788,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Empty Personal note less character.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"))
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"))
                     .sendKeys("Take");
         } catch (Exception e) {
             logger.warning("Empty personal note is not");
@@ -796,15 +796,15 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Confirm the reminder using set reminder button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
         } catch (Exception e) {
             logger.warning("Set reminder is not working. ");
         }
 
         //Error for empty personal note.
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error1 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
+            WebElement error1 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
             logger.info("Error 1 :" + error1.getText());
         } catch (Exception e) {
             logger.warning("Empty personal note error is not visible.");
@@ -812,17 +812,17 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Clearing the personal note to get another error
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtPersonalNotes"))).clear();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtPersonalNotes"))).clear();
         } catch (Exception e) {
             logger.warning("Clearing the personal note.");
         }
 
         //Confirm the reminder using set reminder button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
             //Error for empty personal note.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/textinput_error")));
-            WebElement error2 = driver.findElement(AppiumBy.id("com.moai.android:id/textinput_error"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
+            WebElement error2 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
             logger.info("Error 2 :" + error2.getText());
         } catch (Exception e) {
             logger.warning("Empty personal note error is not visible.");
@@ -839,20 +839,20 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scrolling to the plus button.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgAddReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the element is not happen.");
         }
 
         try {
             //Clicking the plus button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
 
             //Clicking the SpO2 radio button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbSpo2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
 
             //Clicking the DONE button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("New reminder selection for spo2 is not happen.");
         }
@@ -860,17 +860,17 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //reminder name
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("SpO2 reminder ");
+                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("SpO2 reminder ");
             //Selecting the required days
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSUN"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSUN"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
         } catch (Exception e) {
             logger.warning("Reminder name and days are not selected.");
         }
 
         try {
             //Click add Button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/chipAdd"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
 
             //Selecting the Hour.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("9"))).click();
@@ -885,12 +885,12 @@ public class DashBoard_Page_Android extends DriverManager {
         }
 
         //Checking whether the reminder time is added or not.
-        WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
+        WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
         logger.info("Timer is added :"+timer.isDisplayed());
 
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));")).sendKeys("Take");
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));")).sendKeys("Take");
         } catch (Exception e) {
             logger.warning("Scroll is not happen.");
         }
@@ -898,10 +898,10 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //Adding personal notes.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtPersonalNotes"))).sendKeys("Take SpO2");
+                    id("com.heartmonitor.android:id/edtPersonalNotes"))).sendKeys("Take SpO2");
 
             //Set the reminder
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
             logger.info("Personal note is added.");
         } catch (Exception e) {
             logger.warning("Adding personal note is not happen.");
@@ -917,8 +917,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Verify the care circle is present in the screen
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgOtherProfile")));
-            WebElement CareCircle = driver.findElement(AppiumBy.id("com.moai.android:id/imgOtherProfile"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile")));
+            WebElement CareCircle = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"));
             logger.info("Care is present : " + CareCircle.isDisplayed());
             System.out.println();
         } catch (Exception e) {
@@ -927,7 +927,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Care circle button.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgOtherProfile"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
         } catch (Exception e) {
             logger.warning("care circle button is not visible.");
         }
@@ -942,7 +942,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Add member
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
         } catch (Exception e) {
             logger.warning("Add member is not happen.");
         }
@@ -960,7 +960,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Confirmation for deleting the care circle
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/dialog_layout_toaster")));
+            WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/dialog_layout_toaster")));
             logger.info("Success toast : " + SuccessToast.getText());
         } catch (Exception e) {
             logger.warning("Confirmation Ok for delete care circle is not happen.");
@@ -987,11 +987,11 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //2.Edit the dependent profile, click on kebab menu.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(1)"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(1)"))).click();
             //Actual edit profile option.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
                     ("new UiSelector().text(\"Edit Profile\")"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtFullName"))).sendKeys("NIHIL");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtFullName"))).sendKeys("NIHIL");
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
         } catch (Exception e) {
             logger.warning("Edit the dependent profile is not happen.");
@@ -1000,7 +1000,7 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //3.Deleting the profile
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(2)"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(2)"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete\")"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
 
@@ -1025,7 +1025,7 @@ public class DashBoard_Page_Android extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
 
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(0)"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(0)"))).click();
 
             //Clicking the health report option to navigate to report section.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Health Report\")"))).click();
@@ -1046,33 +1046,33 @@ public class DashBoard_Page_Android extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.moai.android:id/txtEcg"))).isDisplayed();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.heartmonitor.android:id/txtEcg"))).isDisplayed();
 
         //Scrolling to the plus button.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgAddReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the element is not happen.");
         }
 
         //1.Clicking the plus button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
         } catch (Exception e) {
             logger.warning("Clicking plus button is not happen.");
         }
 
         //Clicking the HR radio button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/rbHR"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
         } catch (Exception e) {
             logger.warning("Hr radio button click is not happen.");
         }
 
         //Selecting the DONE button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("Done button click is not happen.");
         }
@@ -1080,14 +1080,14 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //2.reminder name
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("Heart rate reminder");
+                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Heart rate reminder");
 
             //Selecting the required days
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMUN"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSUN"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
 
             //Click add Button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/chipAdd"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
 
             //Selecting the Hour as 12.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("9"))).click();
@@ -1103,7 +1103,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Checking whether the reminder time is added or not.
         try {
-            WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/chipText")));
+            WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
             logger.info("just checking whether the reminder time is added or not: " +timer.isDisplayed());
         } catch (Exception e) {
             logger.warning("Timer is not visible.");
@@ -1111,12 +1111,12 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //3.Adding invite
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgAddReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
 
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/mainLayout\").instance(0)"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/mainLayout\").instance(0)"))).click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
         } catch (Exception e) {
             logger.warning("Add people to the reminder is not happen.");
         }
@@ -1124,17 +1124,17 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //Scrolling to the Adding personal notes.
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the element is not happen.");
         }
 
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtPersonalNotes"))).sendKeys("Take HR daily.");
+                    id("com.heartmonitor.android:id/edtPersonalNotes"))).sendKeys("Take HR daily.");
 
             //Set the reminder
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
         } catch (Exception e) {
             logger.warning("Set reminder is not happen.");
         }
@@ -1149,13 +1149,13 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //BP report values with chart.
         try {
-            WebElement bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtBloodPressure")));
+            WebElement bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBloodPressure")));
             logger.info("Blood pressure report is present: " + bloodPressureElement.isDisplayed());
 
-            WebElement pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/bloodPressureChart")));
+            WebElement pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/bloodPressureChart")));
             logger.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
 
-            WebElement pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtBPValue")));
+            WebElement pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBPValue")));
             logger.info("Blood pressure value is present: " + pressureValue.getText());
         } catch (Exception e) {
             logger.warning("Bp chart is not visible.");
@@ -1163,13 +1163,13 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Hr report values with chart.
-            WebElement hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtHeartRate")));
+            WebElement hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtHeartRate")));
             logger.info("Heart rate report is present: " + hrElement.isDisplayed());
 
-            WebElement hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/HeartRateChart")));
+            WebElement hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/HeartRateChart")));
             logger.info("Heart rate report chart is present: " + hrChart.isDisplayed());
 
-            WebElement hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtHeartRateValue")));
+            WebElement hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtHeartRateValue")));
             logger.info("Heart rate value is present: " + hrValue.getText());
         } catch (Exception e) {
             logger.warning("Hr report chart is not visible.");
@@ -1177,13 +1177,13 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Spo2 report values with chart.
-            WebElement Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSpo2")));
+            WebElement Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSpo2")));
             logger.info("Spo2 report is present: " + Spo2Element.isDisplayed());
 
-            WebElement Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/spo2Chart")));
+            WebElement Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/spo2Chart")));
             logger.info("Spo2 report chart is present: " + Spo2Chart.isDisplayed());
 
-            WebElement Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtSpo2Value")));
+            WebElement Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSpo2Value")));
             logger.info("Spo2 value is present: " + Spo2Value.getText());
         } catch (Exception e) {
             logger.warning("Spo2 report chart is not visible.");
@@ -1191,10 +1191,10 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //ECG report va;ues with chart
-            WebElement ECGElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg")));
+            WebElement ECGElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtEcg")));
             logger.info("ECG report is present: " + ECGElement.isDisplayed());
 
-            WebElement ECGChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/mpSingleLeadECG")));
+            WebElement ECGChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/mpSingleLeadECG")));
             logger.info("ECG report chart is present: " + ECGChart.isDisplayed());
         } catch (Exception e) {
             logger.warning("ECG report chart is not visible.");
@@ -1210,14 +1210,14 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Clicking on primary user profile
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgProfile"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgProfile"))).click();
         } catch (Exception e) {
             logger.warning("Primary user profile click is not happen.");
         }
 
         try {
             //Clicking on parameter range option in the primary user profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtParameterRange"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtParameterRange"))).click();
         } catch (Exception e) {
             logger.warning("Primary user parameter range click is not happen");
         }
@@ -1225,26 +1225,26 @@ public class DashBoard_Page_Android extends DriverManager {
         //Customize the BP range
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
+                    androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
             //Skip
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
         } catch (Exception e) {
             logger.warning("Customize the BP range is not happen for the primary user. ");
         }
 
         try {
             //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
         } catch (Exception e) {
@@ -1277,11 +1277,11 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Customize the BP range
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtCustomize2"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtCustomize2"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtBPRest"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtBPRest"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
         } catch (Exception e) {
@@ -1291,14 +1291,14 @@ public class DashBoard_Page_Android extends DriverManager {
         //Scroll to the bottom customize.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtCustomize2\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtCustomize2\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the element is not happen.");
         }
 
         try {
             //Blood sugar range is not customizable
-            WebElement CustomizeBlood = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCustomize1")));
+            WebElement CustomizeBlood = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCustomize1")));
             System.out.println("Blood sugar is not customizable :" + CustomizeBlood.isEnabled());
             logger.info("Customizing for blood sugar is should not be enable.");
         } catch (Exception e) {
@@ -1307,11 +1307,11 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Customize the Spo2 range
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
         } catch (Exception e) {
@@ -1320,7 +1320,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         try {
             //Customizing the cholesterol is not possible.
-            WebElement CustomizeCholesterol = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize1\").instance(1)")));
+            WebElement CustomizeCholesterol = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize1\").instance(1)")));
             logger.info("Cholesterol is not Customizable :" + CustomizeCholesterol.isEnabled());
         } catch (Exception e) {
             logger.warning("Customizing the cholesterol is not possible.");
@@ -1329,18 +1329,18 @@ public class DashBoard_Page_Android extends DriverManager {
         try {
             //Scroll to the bottom customize.
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtCustomize2\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtCustomize2\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the element is not happen.");
         }
 
         try {
             //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize2\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
             //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtBPRest\").instance(0)"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
         } catch (Exception e) {

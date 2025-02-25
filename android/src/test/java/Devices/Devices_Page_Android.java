@@ -29,7 +29,7 @@ public class Devices_Page_Android extends DriverManager
 
         //Verify the burger menu is clickable.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgMenu"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMenu"))).click();
         } catch (Exception e) {
             logger.warning("Burger menu is not clickable.");
         }
@@ -44,7 +44,7 @@ public class Devices_Page_Android extends DriverManager
 
         //Clicking on continue button to find out the device
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("Clicking continue is not happening.");
         }
@@ -58,22 +58,22 @@ public class Devices_Page_Android extends DriverManager
 
         //Clicking again on continue button to find out the device
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("Clicking continue again is not happening.");
         }
 
         //Actual device freq,
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtDeviceName"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtDeviceName"))).click();
         } catch (Exception e) {
             logger.warning("Actual device frequency is not showing.");
         }
 
         //Success message of device connection
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtFailDescription")));
-            WebElement message = driver.findElement(AppiumBy.id("com.moai.android:id/txtFailDescription"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtFailDescription")));
+            WebElement message = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtFailDescription"));
             logger.info("Success message : " + message.getText());
         } catch (Exception e) {
             logger.warning("Success message of connected device is not visible.");
@@ -81,14 +81,14 @@ public class Devices_Page_Android extends DriverManager
 
         //clicking on device info
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtDeviceInfo"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtDeviceInfo"))).click();
         } catch (Exception e) {
             logger.warning("Device info is not visible.");
         }
 
         //Push profile
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtPushProfile"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtPushProfile"))).click();
         } catch (Exception e) {
             logger.warning("Push profile is not happening.");
         }
@@ -102,7 +102,7 @@ public class Devices_Page_Android extends DriverManager
         }
 
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtEcg"))).isDisplayed();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtEcg"))).isDisplayed();
         } catch (Exception e) {
             logger.warning("Clicking Ecg report is not happening. ");
         }
@@ -110,7 +110,7 @@ public class Devices_Page_Android extends DriverManager
         WebElement deviceIndication = null;
         try {
             deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/imgDeviceIndication\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgDeviceIndication\"));"));
             logger.info("Device indication is present : " + deviceIndication.isDisplayed());
         } catch (Exception e) {
             logger.warning("Connected device indication is not visible.");
@@ -132,7 +132,7 @@ public class Devices_Page_Android extends DriverManager
 
         //Verify the burger menu is clickable.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgMenu"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMenu"))).click();
         } catch (Exception e) {
             logger.warning("Clicking Burger menu is not working.");
         }

@@ -26,7 +26,7 @@ public class DownloadingReports_Page_Android extends DriverManager
         try {
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.androidUIAutomator
-                            ("new UiSelector().resourceId(\"com.moai.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
+                            ("new UiSelector().resourceId(\"com.heartmonitor.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
         } catch (Exception e) {
             logger.warning("Clicking the report section is not working.");
         }
@@ -78,7 +78,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
         //Clicking the download button on Spo2 report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgDownload"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgDownload"))).click();
         } catch (Exception e) {
             logger.warning("Downloading the Spo2 report is not happening.");
         }
@@ -102,7 +102,7 @@ public class DownloadingReports_Page_Android extends DriverManager
         try {
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.androidUIAutomator
-                            ("new UiSelector().resourceId(\"com.moai.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
+                            ("new UiSelector().resourceId(\"com.heartmonitor.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
         } catch (Exception e) {
             logger.warning("Clicking on report section is not happening.");
         }
@@ -117,7 +117,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
         //Clicking on the download button in ECG report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/ivDownload1"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/ivDownload1"))).click();
         } catch (Exception e) {
             logger.warning("Downloading ECG report is not happening.");
         }
@@ -141,7 +141,7 @@ public class DownloadingReports_Page_Android extends DriverManager
         try {
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.androidUIAutomator
-                            ("new UiSelector().resourceId(\"com.moai.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
+                            ("new UiSelector().resourceId(\"com.heartmonitor.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
         } catch (Exception e) {
             logger.warning("Clicking report section is not happening.");
         }
@@ -156,7 +156,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
         //Clicking on the download button in ECG report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgDownload"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgDownload"))).click();
         } catch (Exception e) {
             logger.warning("Download the HR report is not happening.");
         }

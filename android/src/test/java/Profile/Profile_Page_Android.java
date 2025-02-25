@@ -27,7 +27,7 @@ public class Profile_Page_Android extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //DB string
-        WebElement DB = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtDashboard")));
+        WebElement DB = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtDashboard")));
         System.out.println("User present in : " + DB.getText());
 
         //1.Clicking on profile section
@@ -40,15 +40,15 @@ public class Profile_Page_Android extends DriverManager {
 
         //1.Clicking the edit for alcohol
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/editConsume"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/editConsume"))).click();
             logger.info("User present in : Alcohol or smoke habit confirmation page");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        WebElement Yes = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtAlcoholYes")));
-        WebElement No = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtAlcoholNo")));
-        WebElement Occasionally = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtAlcoholOther")));
+        WebElement Yes = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholYes")));
+        WebElement No = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholNo")));
+        WebElement Occasionally = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholOther")));
 
         try {
             // Get the current selected text dynamically
@@ -83,10 +83,10 @@ public class Profile_Page_Android extends DriverManager {
             logger.warning("An error occurred while toggling selection: " + e.getMessage());
         }
 
-        WebElement YesForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSmokeYes")));
-        WebElement NoForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSmokeNo")));
+        WebElement YesForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSmokeYes")));
+        WebElement NoForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSmokeNo")));
         ;
-        WebElement occasionallyForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSmokeOther")));
+        WebElement occasionallyForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSmokeOther")));
         ;
         try {
             if (YesForSmoke.getText().equals("Yes")) {
@@ -104,18 +104,18 @@ public class Profile_Page_Android extends DriverManager {
         }
 
         //Confirm with submit
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtContinue"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
 
         //Success toast for the update
-        WebElement SuccessMeg = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/text_message_toaster")));
+        WebElement SuccessMeg = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/text_message_toaster")));
         logger.info("Success toast : " + SuccessMeg.getText());
 
         //2. Editing parameter range
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtParameterRange"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtParameterRange"))).click();
 
         //Skip button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
         } catch (Exception e) {
             logger.warning("Skip is not present");
         }
@@ -123,7 +123,7 @@ public class Profile_Page_Android extends DriverManager {
         /*Checking the visibility of the element.*/
         WebElement Reset = null;
         try {
-            Reset = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtBPRest")));
+            Reset = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBPRest")));
             logger.info("Reset is currently present.");
         } catch (Exception e) {
             logger.warning("Reset is not present.");
@@ -131,13 +131,13 @@ public class Profile_Page_Android extends DriverManager {
 
         /*Checking for customize button visibility*/
         WebElement Customize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize1\").instance(0)")));
+                androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize1\").instance(0)")));
         logger.info("Customize button is present, there is not reset button.");
 
         /*Checking for after customize button visibility*/
         WebElement AfterCustomize = null;
         try {
-            AfterCustomize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtCustomize2")));
+            AfterCustomize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCustomize2")));
         } catch (Exception e) {
             logger.warning("Customize 2 button is not present. bcz the reset button is not present");
         }
@@ -148,10 +148,10 @@ public class Profile_Page_Android extends DriverManager {
             String CurrentSelection = "";
             if (Reset.isEnabled() == true) {
                 CurrentSelection = "Reset";
-            } else if (Customize.isEnabled() && Customize.getAttribute("resource-id").equals("com.moai.android:id/txtCustomize1")) {
+            } else if (Customize.isEnabled() && Customize.getAttribute("resource-id").equals("com.heartmonitor.android:id/txtCustomize1")) {
                 CurrentSelection = "Customize";
-            } else if (AfterCustomize.isEnabled() && AfterCustomize.getAttribute("resource-id").equals("com.moai.android:id/txtCustomize2")) {
-                CurrentSelection = "com.moai.android:id/txtCustomize2";
+            } else if (AfterCustomize.isEnabled() && AfterCustomize.getAttribute("resource-id").equals("com.heartmonitor.android:id/txtCustomize2")) {
+                CurrentSelection = "com.heartmonitor.android:id/txtCustomize2";
             }
 
             switch (CurrentSelection) {
@@ -160,7 +160,7 @@ public class Profile_Page_Android extends DriverManager {
                         logger.info("Reset button block is executing");
                         Reset.click();
                         wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1"))).click();
-                        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();
+                        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
                         logger.info("Reset the previous setting");
                     } catch (Exception e) {
                         logger.warning("Reset is not present.");
@@ -169,7 +169,7 @@ public class Profile_Page_Android extends DriverManager {
                 case "Customize":
                     try {
                         logger.info("Customize button block is executing.");
-                        WebElement skip = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip")));
+                        WebElement skip = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip")));
                         if (skip.isEnabled()) {
                             skip.click();
                         }
@@ -179,7 +179,7 @@ public class Profile_Page_Android extends DriverManager {
                         logger.warning("Normal customize is not present.");
                     }
                     break;
-                case "com.moai.android:id/txtCustomize2":
+                case "com.heartmonitor.android:id/txtCustomize2":
                     try {
                         logger.info("Customize 2 button block is executing.");
                         AfterCustomize.click();
@@ -200,17 +200,17 @@ public class Profile_Page_Android extends DriverManager {
        /* //Customize the Blood pressure
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize1\").instance(0)"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize1\").instance(0)"))).click();
         } catch (Exception e) {
             logger.warning("customize is not clickable");
         }
 
         //Submit the blood pressure
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
 
         //After customized Skip button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
         } catch (Exception e) {
             logger.warning("After customized Skip is not present");
         }*/
@@ -219,7 +219,7 @@ public class Profile_Page_Android extends DriverManager {
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
 
         //3.Editing My dependent
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMyDependent"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMyDependent"))).click();
 
         //My dependent header
         WebElement MyD = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")")));
@@ -227,7 +227,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //Clicking the kebab option
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(0)"))).click();
+                ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(0)"))).click();
 
         //Clicking the Edit profile option.
         wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Edit Profile\")"))).click();
@@ -259,7 +259,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //1. Care circle
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtCareCircle"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtCareCircle"))).click();
             logger.info("Care circle is clicked");
         } catch (Exception e) {
             logger.warning("Care circle is not visible.");
@@ -286,7 +286,7 @@ public class Profile_Page_Android extends DriverManager {
         //Kebab menu click
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/ivOptions\").instance(0)"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/ivOptions\").instance(0)"))).click();
         } catch (Exception e) {
             logger.warning("Kebab menu is not clicked.");
         }
@@ -320,7 +320,7 @@ public class Profile_Page_Android extends DriverManager {
         //Selecting the contact
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/ivProfilePicture\").instance(1)"))).click();
+                    androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/ivProfilePicture\").instance(1)"))).click();
             logger.info("contact is selected for care circle.");
         } catch (Exception e) {
             logger.warning("Contact is not selected.");
@@ -328,7 +328,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //Add member button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvAddMembers"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
             logger.info("Selected member is added to the care circle.");
         } catch (Exception e) {
             logger.warning("Add member is not clicked.");
@@ -337,14 +337,14 @@ public class Profile_Page_Android extends DriverManager {
         //Changing the care circle name input field
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/edtGroupName"))).sendKeys("Family Group");
+                    id("com.heartmonitor.android:id/edtGroupName"))).sendKeys("Family Group");
         } catch (Exception e) {
             logger.warning("Group name is not edited.");
         }
 
         //Update button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvOkay"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
         } catch (Exception e) {
             logger.warning("Update button is not clicked");
         }
@@ -368,14 +368,14 @@ public class Profile_Page_Android extends DriverManager {
         //Scroll to the bottom.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtMyReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtMyReminder\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to device is not working.");
         }
 
         //5.Clicking on My devices section.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMyDevice"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMyDevice"))).click();
             logger.info("User present in : My device page.");
         } catch (Exception e) {
             logger.warning("Not moved to the connected device page.");
@@ -383,7 +383,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //Connected device
         try {
-            WebElement DeviceName = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/txtDeviceName")));
+            WebElement DeviceName = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtDeviceName")));
             logger.info("Listed Device : " + DeviceName.getText());
         } catch (Exception e) {
             logger.warning("No connected device list.");
@@ -391,7 +391,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //Kebab menu on the device section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/imgMenu"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMenu"))).click();
         } catch (Exception e) {
             logger.warning("Kebab menu is not present.");
         }
@@ -420,7 +420,7 @@ public class Profile_Page_Android extends DriverManager {
         //Add Another device option
         try {
             WebElement AddAnother = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.moai.android:id/txtAddAnotherDevice")));
+                    id("com.heartmonitor.android:id/txtAddAnotherDevice")));
             if (AddAnother.isDisplayed() == true) {
                 logger.info("User can able to another device.");
             }
@@ -430,7 +430,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //Device connection video
         try {
-            WebElement Video = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/imgVideoImage")));
+            WebElement Video = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgVideoImage")));
             if (Video.isDisplayed()) {
                 logger.info("User can get to know the how the device work.");
             }
@@ -448,14 +448,14 @@ public class Profile_Page_Android extends DriverManager {
         //Scroll to the bottom.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/txtMyReminder\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtMyReminder\"));"));
         } catch (Exception e) {
             logger.warning("Not scroll to the bottom to the reminder section.");
         }
 
         //6.Clicking on my reminder
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtMyReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMyReminder"))).click();
             logger.info("Reminder section is clicked.");
         } catch (Exception e) {
             logger.warning("Reminder section is not clicked.");
@@ -473,7 +473,7 @@ public class Profile_Page_Android extends DriverManager {
         //Reminder list
         try {
             WebElement Reminder_1 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/rlMainItem\").instance(0)")));
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/rlMainItem\").instance(0)")));
             logger.info("Reminder details : " + Reminder_1.getText());
         } catch (Exception e) {
             logger.warning("Reminder is not present currently.");
@@ -490,7 +490,7 @@ public class Profile_Page_Android extends DriverManager {
         //Edit the reminder name
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    id("com.moai.android:id/edtReminderName"))).sendKeys("BP reminder.");
+                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("BP reminder.");
         } catch (Exception e) {
             logger.warning("Editing the reminder is not worked.");
         }
@@ -498,7 +498,7 @@ public class Profile_Page_Android extends DriverManager {
         //Adding reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/menu_add\")"))).click();
+                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/menu_add\")"))).click();
             logger.info("Trying to add New reminder.");
         } catch (Exception e) {
             logger.warning("Add ned reminder button is not present.");
@@ -506,7 +506,7 @@ public class Profile_Page_Android extends DriverManager {
 
         //Reminder list with default blood pressure radio button selected. clicking on done button.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
             logger.info("Adding reminder for default selected reminder set.");
         } catch (Exception e) {
             logger.warning("Submit button is not clicked.");
@@ -515,7 +515,7 @@ public class Profile_Page_Android extends DriverManager {
         try {
             //Reminder name
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.moai.android:id/edtReminderName"))).sendKeys("Blood pressure reminder.");
+                    ("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Blood pressure reminder.");
         } catch (Exception e) {
 
             logger.warning("Reminder name is not added.");
@@ -523,14 +523,14 @@ public class Profile_Page_Android extends DriverManager {
 
         //Selecting the Day
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtTUE"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTUE"))).click();
         } catch (Exception e) {
             logger.warning("Day selecting is not happen.");
         }
 
         try {
             //Add time
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/chipAdd"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
             //Selecting time
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("3"))).click();
             //Selecting minutes
@@ -544,21 +544,21 @@ public class Profile_Page_Android extends DriverManager {
         //Scroll to the bottom.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/edtPersonalNotes\"));"));
+                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"));
         } catch (Exception e) {
             logger.warning("Scroll to the bottom is not working.");
         }
 
         //Personal note
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/edtPersonalNotes"))).sendKeys("Take care.");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtPersonalNotes"))).sendKeys("Take care.");
         } catch (Exception e) {
             logger.warning("Personal note is not added.");
         }
 
         //Set reminder button
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSetReminder"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
         } catch (Exception e) {
             logger.warning("Set reminder button is not clicked.");
         }
@@ -566,7 +566,7 @@ public class Profile_Page_Android extends DriverManager {
         //Deleting the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/imgDelete\").instance(1)"))).click();
+                    androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgDelete\").instance(1)"))).click();
             //Confirmation
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
             logger.warning("Reminder is deleted.");
