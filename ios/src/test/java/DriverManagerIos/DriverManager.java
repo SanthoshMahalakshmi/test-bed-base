@@ -140,6 +140,7 @@ public class DriverManager {
 
     @AfterMethod
     public void quitDriver() {
+        System.out.println("Quitting iOS Driver...");
         AppiumDriver driver = getDriver();
         if (driver != null) {
             driver.quit();

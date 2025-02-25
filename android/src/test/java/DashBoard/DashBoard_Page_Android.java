@@ -1,5 +1,6 @@
 package DashBoard;
 
+import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
@@ -16,10 +17,13 @@ import java.time.Duration;
 public class DashBoard_Page_Android extends DriverManager {
 
     private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Android.class);
+    BaseLoginForAndroid bs = new BaseLoginForAndroid();
+    
     
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_010() throws Exception {
-        BaseLogin();
+         
+        bs.CoreLoginForAndroid();  //basic login scenario 
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -131,7 +135,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_011() throws Exception {
 
-        BaseLogin(); // To complete the login process.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -226,7 +230,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_012() throws Exception {
 
-        BaseLogin(); // To complete the login process.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -331,7 +335,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_014() throws Exception {
 
-        BaseLogin();// To complete the login scenario.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
@@ -436,7 +440,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
 
-        BaseLogin(); // To complete the login process.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(13));
 
@@ -628,7 +632,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_016() throws Exception {
 
-        BaseLogin();// To complete the login process.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -739,7 +743,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_017() throws Exception {
 
-        BaseLogin(); // To complete the login process.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -828,7 +832,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_018() throws Exception {
 
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -907,7 +911,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_019() throws Exception {
 
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -965,7 +969,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1013,7 +1017,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_026() throws Exception {
 
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1038,7 +1042,7 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_027() throws Exception {
 
         /*Adding the reminder for Blood pressure.*/
-        BaseLogin();
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1139,7 +1143,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_028() throws Exception {
-       BaseLogin(); // Login process.
+        bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1200,7 +1204,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_029() throws Exception {
 
-        BaseLogin(); //Login process from base class.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1260,7 +1264,7 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_030() throws Exception
     {
-        BaseLogin(); //Login process.
+         bs.CoreLoginForAndroid();  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
