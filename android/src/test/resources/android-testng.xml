@@ -3,23 +3,17 @@
     <test name="Android Tests">
 
         <classes>
-            <class name="DriverManagerAndroid.BaseLoginForAndroid">
-                <methods>
-                    <include name="CoreLogin"/>
-                </methods>
-            </class>
-
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <exclude  name="TC_001"/> <!--Done with new element change.-->
+                    <include  name="TC_001"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Android">
                 <methods>
-                    <exclude  name="TC_002"/> <!--Done with new element change.-->
+                    <include  name="TC_002"/> <!--Done with new element change.-->
                     <exclude  name="TC_003"/> <!--Done with new element change.-->
                     <exclude  name="TC_004"/> <!--Done with new element change.-->
                     <exclude  name="TC_005"/> <!--Done with new element change.-->
@@ -33,48 +27,48 @@
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Android">
                 <methods>
-                    <exclude  name="TC_010"/> <!--Done-->
-                    <exclude  name="TC_011"/> <!--Done-27/11-->
-                    <exclude  name="TC_012"/> <!--Done-27/11-->
-                    <exclude  name="TC_013"/> <!--Done-27/11-->
-                    <exclude  name="TC_014"/> <!--Done-27/11-->
-                    <exclude  name="TC_015"/> <!--Done-27/11-->
-                    <exclude  name="TC_016"/> <!--Done-27/11-->
-                    <exclude  name="TC_017"/> <!--Done-27/11-->
-                    <exclude  name="TC_018"/> <!--Done-27/11-->
-                    <exclude  name="TC_019"/> <!--Done-27/11-->
-                    <exclude  name="TC_025"/> <!--Done-27/11-->
-                    <exclude  name="TC_026"/> <!--Done-27/11-->
-                    <exclude  name="TC_027"/> <!--Done-27/11-->
-                    <exclude  name="TC_028"/> <!--Done-27/11-->
-                    <exclude  name="TC_029"/> <!--Done-27/11-->
-                    <exclude  name="TC_030"/> <!--Done-27/11-->
+                    <exclude  name="TC_010"/> <!--Done with new element change.-->
+                    <exclude  name="TC_011"/> <!--Done with new element change.-->
+                    <exclude  name="TC_012"/> <!--Done with new element change.-->
+                    <exclude  name="TC_013"/> <!--Done with new element change.-->
+                    <exclude  name="TC_014"/> <!--Done with new element change.-->
+                    <exclude  name="TC_015"/> <!--Done with new element change.-->
+                    <exclude  name="TC_016"/> <!--Done with new element change.-->
+                    <exclude  name="TC_017"/> <!--Done with new element change.-->
+                    <exclude  name="TC_018"/> <!--Done with new element change.-->
+                    <exclude  name="TC_019"/> <!--Done with new element change.-->
+                    <exclude  name="TC_025"/> <!--Done with new element change.-->
+                    <exclude  name="TC_026"/> <!--Done with new element change.-->
+                    <exclude  name="TC_027"/> <!--Done with new element change.-->
+                    <exclude  name="TC_028"/> <!--Done with new element change.-->
+                    <exclude  name="TC_029"/> <!--Done with new element change.-->
+                    <exclude  name="TC_030"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
             <class name="Profile.Profile_Page_Android">
                 <methods>
-                    <exclude  name="TC_031"/> <!--Done-->
-                    <exclude  name="TC_032"/> <!--Done-->
+                    <exclude  name="TC_031"/> <!--Done with new element change.-->
+                    <exclude  name="TC_032"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
             <!--More section -->
             <class name="More.More_page_Android">
                 <methods>
-                    <exclude  name="TC_033"/> <!--Done-->
-                    <exclude  name="TC_034"/> <!--Done-->
-                    <exclude  name="TC_035"/> <!--Done-->
-                    <exclude  name="TC_036"/> <!--Done-->
+                    <exclude  name="TC_033"/> <!--Done with new element change.-->
+                    <exclude  name="TC_034"/> <!--Done with new element change.-->
+                    <exclude  name="TC_035"/> <!--Done with new element change.-->
+                    <exclude  name="TC_036"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
             <!--Downloading the report.-->
             <class name="Reports_Page.DownloadingReports_Page_Android">
                 <methods>
-                    <exclude  name="TC_020"/> <!--Done-->
-                    <exclude  name="TC_021"/> <!--Done-->
-                    <exclude  name="TC_022"/> <!--Done-->
+                    <exclude  name="TC_020"/> <!--Done with new element change.-->
+                    <exclude  name="TC_021"/> <!--Done with new element change.-->
+                    <exclude  name="TC_022"/> <!--Done with new element change.-->
                 </methods>
             </class>
 
