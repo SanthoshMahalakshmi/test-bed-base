@@ -5,6 +5,7 @@ import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.NoSuchContextException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -16,8 +17,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Login_Page_Android extends DriverManager
-{
+public class Login_Page_Android extends DriverManager {
 
     private static final Logger log = LoggerFactory.getLogger(Login_Page_Android.class);
     BaseLoginForAndroid bs = new BaseLoginForAndroid();
@@ -37,7 +37,7 @@ public class Login_Page_Android extends DriverManager
             throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
         } catch (NoSuchElementException e) {
             logger.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
@@ -45,10 +45,10 @@ public class Login_Page_Android extends DriverManager
         try {
             WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgLogo")));
             logger.info("Logo is present :" + logo.isDisplayed());
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             logger.warning("There is No such element like logo in the login page." + e.getMessage());
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.warning("Logo is not visible." + e.getMessage());
             throw new Exception(e.getMessage());
         }
@@ -62,8 +62,8 @@ public class Login_Page_Android extends DriverManager
         } catch (NoSuchContextException e) {
             logger.warning("Mobile number field is not visible or not available to interact with.");
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e){
-            logger.warning("Issue with mobile number input field :"+e.getMessage());
+        } catch (Exception e) {
+            logger.warning("Issue with mobile number input field :" + e.getMessage());
             throw new Exception(e.getMessage());
         }
 
@@ -77,7 +77,7 @@ public class Login_Page_Android extends DriverManager
         }
 
         //Logo click for close the keyboard of the mobile
-        try{
+        try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgLogo"))).click();
             logger.info("Logo click for keyboard close action");
         } catch (Exception e) {
@@ -87,9 +87,9 @@ public class Login_Page_Android extends DriverManager
         try {
             //4.Clicking the continue button
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.warning("Continue is not clicked.");
             throw new Exception(e.getMessage());
         }
@@ -97,9 +97,9 @@ public class Login_Page_Android extends DriverManager
         try {
             /*Back to log in page*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
@@ -110,9 +110,9 @@ public class Login_Page_Android extends DriverManager
             //Back to log in page
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
             logger.info("Moving back to log in page.");
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
@@ -123,9 +123,9 @@ public class Login_Page_Android extends DriverManager
             //Back to log in page
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
             logger.info("Moving back to log in page.");
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
@@ -146,7 +146,7 @@ public class Login_Page_Android extends DriverManager
             throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
         } catch (NoSuchElementException e) {
             logger.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
@@ -159,13 +159,13 @@ public class Login_Page_Android extends DriverManager
         } catch (NoSuchContextException e) {
             logger.warning("Mobile number field is not visible or not available to interact with.");
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e){
-            logger.warning("Issue with mobile number input field :"+e.getMessage());
+        } catch (Exception e) {
+            logger.warning("Issue with mobile number input field :" + e.getMessage());
             throw new Exception(e.getMessage());
         }
 
         //Logo click for close the keyboard of the mobile
-        try{
+        try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgLogo"))).click();
             logger.info("Logo click for keyboard close action");
         } catch (Exception e) {
@@ -175,21 +175,18 @@ public class Login_Page_Android extends DriverManager
         try {
             //4.Clicking the continue button
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.warning("Continue is not clicked.");
             throw new Exception(e.getMessage());
         }
 
         WebElement Ok = null;
-        try
-        {
+        try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1"))).click();
             logger.info("*OK Button found and its clicked");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.warning("Element is not found, we good to go with login");
         }
 
@@ -204,7 +201,7 @@ public class Login_Page_Android extends DriverManager
         try {
             //2.Enter OTP label
             WebElement OtpLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
-            logger.info("Enter OTP label : "+OtpLabel.isDisplayed());
+            logger.info("Enter OTP label : " + OtpLabel.isDisplayed());
         } catch (Exception e) {
             logger.warning("OTP lable is not visible.");
         }
@@ -219,9 +216,9 @@ public class Login_Page_Android extends DriverManager
 
         try {
             //4.Resend label
-            WebElement resend =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
+            WebElement resend = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtResend\"));")));
-            logger.info("Resent label is present : " +resend.isDisplayed());
+            logger.info("Resent label is present : " + resend.isDisplayed());
         } catch (Exception e) {
             logger.warning("Resend label is not visible.");
         }
@@ -240,9 +237,12 @@ public class Login_Page_Android extends DriverManager
         WebElement verifyButton = null;
         try {
             verifyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtVerify")));
-            logger.info("Verify button present? : "+verifyButton.isDisplayed());
+            logger.info("Verify button present? : " + verifyButton.isDisplayed());
+            verifyButton.click();
+            logger.info("Verify button is clicked.");
         } catch (Exception e) {
             logger.warning("*Verify button is not found");
+            throw new Exception(e.getMessage());
         }
     }
 
@@ -252,25 +252,60 @@ public class Login_Page_Android extends DriverManager
 
         bs.CoreLoginForAndroid(); //For base login scenario
 
+        //Profile button click
+        try{
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Profile"))).click();
+            logger.info("Clicking the profile section.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+
+        WebElement CoachMarkSkip = null;
+        try {
+            CoachMarkSkip = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+            CoachMarkSkip.click();
+            DriverManager.logger.info("Coach mark is visible and its skipped.");
+        } catch (NoSuchElementException e) {
+            DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
+        } catch (Exception e) {
+            DriverManager.logger.warning(e.getMessage());
+        }
+
         try {
             //2.Full name
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
                     ("com.heartmonitor.android:id/edtFullName"))).sendKeys("mam");
+            logger.info("Full Name is added for the new user");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
+        try {
             //3.Email ID
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
                     ("com.heartmonitor.android:id/edtEmail"))).sendKeys("mam@gmail.com");
+            logger.info("Email is added for the new user");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
+        try {
             //4.Mobile number
-            System.out.println( wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
+            System.out.println(wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
                     ("com.heartmonitor.android:id/edtMobileNumber"))).getText());
+            logger.info("Mobile number taken from the field.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
+        try {
             //5.Continue button
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
                     ("com.heartmonitor.android:id/txtContinue"))).click();
-        } catch (Exception e)
-        {
-            logger.warning("Verification is not working.");
+            logger.info("Continue button is clicked now.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
     }
 
@@ -293,7 +328,7 @@ public class Login_Page_Android extends DriverManager
 
             //4.Respective pagination
             WebElement Pagination = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtSelected"));
-            System.out.println("Pagination is visible : "+Pagination.isDisplayed());
+            System.out.println("Pagination is visible : " + Pagination.isDisplayed());
 
             //5.continue button clicking
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();

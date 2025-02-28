@@ -71,7 +71,7 @@ public class DriverManager {
                 caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity"); // Change to main activity
                 caps.setCapability("fullReset", true);
                 caps.setCapability("noReset", false); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor-Staging.apk");
+                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor-Stg-280225.apk");
                 URL url = new URL(AppiumServerUrl);
 
                 AndroidDriver newDriver = new AndroidDriver(url, caps);
@@ -124,12 +124,6 @@ public class DriverManager {
             e.printStackTrace();
             throw e;
         }
-    }
-
-    @Test
-    public void BaseLogin()
-    {
-
     }
 
     @AfterMethod(alwaysRun = true)
