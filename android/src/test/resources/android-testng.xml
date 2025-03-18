@@ -15,8 +15,8 @@
                 <methods>
                     <exclude  name="TC_002"/> <!--Done with new element change.-->
                     <exclude  name="TC_003"/> <!--Done with new element change.-->
-                    <include  name="TC_004"/> <!--Done with new element change.-->
-                    <exclude  name="TC_005"/> <!--Done with new element change.-->
+                    <exclude  name="TC_004"/> <!--Done with new element change.-->
+                    <include  name="TC_005"/> <!--Done with new element change.-->
                     <exclude  name="TC_006"/> <!--Done with new element change.-->
                     <exclude  name="TC_007"/> <!--Done with new element change.-->
                     <exclude  name="TC_008"/> <!--Done with new element change.-->

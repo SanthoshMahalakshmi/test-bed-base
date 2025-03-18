@@ -375,28 +375,78 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_005() throws Exception {
 
-        TC_004(); //  1st page of basic details.
+        //Core login for android.
+        bs.CoreLoginForAndroid();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        //Pre-Request: Profile section click
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Profile"))).click();
+            logger.info("Clicking the profile section.");
+        } catch (Exception e) {
+            logger.warning("There is no profile section.");
+            throw new Exception(e.getMessage());
+        }
+
+        //Pre-Request: Skip button click for profile page section for the first time.
+        WebElement CoachMarkSkip = null;
+        try {
+            CoachMarkSkip = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+            if (CoachMarkSkip.isDisplayed()) {
+                CoachMarkSkip.click();
+                logger.info("Skip button is visible and its clicked.");
+            } else {
+                logger.info("Skip button is not visible for a click.");
+            }
+        } catch (NoSuchElementException e) {
+            DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
+        } catch (Exception e) {
+            DriverManager.logger.warning(e.getMessage());
+        }
+
+        //Pre-Request: Clicking the Edit profile option.
+        WebElement EditProfile = null;
+        try {
+            EditProfile = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtEditProfile")));
+            EditProfile.click();
+            logger.info("Edit profile click is happening on profile section.");
+        } catch (Exception e) {
+            logger.warning("There is no edit profile option available for a click.");
+            throw new NoSuchElementException(e.getMessage());
+        }
+
+        //Pre-Request: Clicking the continue button.
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+            logger.info("Continue button is clicked now.");
+        } catch (Exception e) {
+            logger.warning("There is no continue button is visible.");
+            throw new Exception(e.getMessage());
+        }
 
         try {
             //1.Select the female option.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgWoman"))).click();
+            logger.info("Female option is visible and its selected now.");
 
             //2.Select the male option
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMan"))).click();
+            logger.info("Male option is visible and its selected now.");
 
             //3.Others.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgOther"))).click();
+            logger.info("Others option is visible and its selected now.");
 
             //4.Respective pagination
             WebElement Pagination = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtSelected"));
-            System.out.println("Pagination is visible : " + Pagination.isDisplayed());
+            logger.info("Pagination is visible : " + Pagination.isDisplayed());
 
             //5.continue button clicking
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
         } catch (Exception e) {
             logger.warning("All the options are not visible. male female, pagination, continue button");
+            throw new Exception(e.getMessage());
         }
 
     }
