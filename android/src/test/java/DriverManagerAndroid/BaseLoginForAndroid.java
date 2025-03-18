@@ -12,9 +12,10 @@ public class BaseLoginForAndroid extends DriverManager {
 
     @Test(singleThreaded = true)
     public void CoreLoginForAndroid() throws Exception {
-        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(2));
 
-        DriverManager.logger.info("Entering into BaseLogin for Android." + DriverManager.driver);
+        logger.info("Entering into Core login case fo Android.");
+
+        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(2));
 
         /*Clicking the Get started button*/
         try {
@@ -85,6 +86,6 @@ public class BaseLoginForAndroid extends DriverManager {
         } catch (Exception e) {
             DriverManager.logger.warning(e.getMessage());
         }
-        System.out.println("Test completed successfully");
+       logger.info("Exit from the core login case for Android.");
     }
 }

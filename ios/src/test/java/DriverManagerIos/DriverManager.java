@@ -74,13 +74,13 @@ public class DriverManager {
 
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
-                caps.setCapability("deviceName", "iPhone 16 Pro"); // Change based on your simulator/device
-                caps.setCapability("udid", "189DE8BE-5520-4ACF-BDA8-CB4029F9AA5D");
-                caps.setCapability("platformVersion", "18.2"); // Change based on your device
+                caps.setCapability("deviceName", "iPhone 16 Pro Max"); // Change based on your simulator/device
+                caps.setCapability("udid", "A9242CE4-9A84-44FD-882A-FC68675675AA");
+                caps.setCapability("platformVersion", "18.3"); // Change based on your device
                 caps.setCapability("automationName", "XCUITest");
                 caps.setCapability("bundleId", "com.heartmonitor.ios"); // Change to your app's bundle ID
                 caps.setCapability("noReset", true); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor.app"); // Local app path
+                caps.setCapability("appium:app", "/Users/San/Downloads/Monitor.ipa"); // Local app path
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForIOS(driver = new IOSDriver(url, caps));

@@ -1,13 +1,9 @@
 package DriverManagerAndroid;
 
-import UtilitiesForAndroid.RetryAnalyzer;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.yaml.snakeyaml.Yaml;
@@ -15,10 +11,7 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.foreign.ValueLayout;
 import java.net.URL;
-import java.sql.SQLOutput;
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -63,15 +56,15 @@ public class DriverManager {
                 System.out.print("Entering into local case for ANDROID\n");
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
-                caps.setCapability("deviceName", "sdk_gphone64_x86_64"); // Change to your device/emulator name
+                caps.setCapability("deviceName", "sdk_gphone64_arm64"); // Change to your device/emulator name
                 caps.setCapability("udid", "emulator-5554");
-                caps.setCapability("platformVersion", "15"); // Change based on your device
+                caps.setCapability("platformVersion", "16"); // Change based on your device
                 caps.setCapability("automationName", "UiAutomator2");
                 caps.setCapability("appPackage", "com.heartmonitor.android"); // Change to your app package
                 caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity"); // Change to main activity
                 caps.setCapability("fullReset", true);
                 caps.setCapability("noReset", false); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor-Stg-280225.apk");
+                caps.setCapability("appium:app", "/Users/San/Downloads/apps/Monitor-Staging-170325.apk");
                 URL url = new URL(AppiumServerUrl);
 
                 AndroidDriver newDriver = new AndroidDriver(url, caps);

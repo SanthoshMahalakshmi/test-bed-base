@@ -252,59 +252,122 @@ public class Login_Page_Android extends DriverManager {
 
         bs.CoreLoginForAndroid(); //For base login scenario
 
-        //Profile button click
-        try{
+        //Profile section click
+        try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Profile"))).click();
             logger.info("Clicking the profile section.");
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
-
+        //Skip button click for profile page section for the first time.
         WebElement CoachMarkSkip = null;
         try {
             CoachMarkSkip = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
-            CoachMarkSkip.click();
-            DriverManager.logger.info("Coach mark is visible and its skipped.");
+            if (CoachMarkSkip.isDisplayed()) {
+                CoachMarkSkip.click();
+                logger.info("Skip button is visible and its clicked.");
+            } else {
+                logger.info("Skip button is not visible for a click.");
+            }
         } catch (NoSuchElementException e) {
             DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
         } catch (Exception e) {
             DriverManager.logger.warning(e.getMessage());
         }
 
+        //Clicking the Edit profile option.
+        WebElement EditProfile = null;
         try {
-            //2.Full name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtFullName"))).sendKeys("mam");
-            logger.info("Full Name is added for the new user");
+            EditProfile = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtEditProfile")));
+            EditProfile.click();
+            logger.info("Edit profile click is happening on profile section.");
         } catch (Exception e) {
+            logger.warning("There is no edit profile option available for a click.");
+            throw new NoSuchElementException(e.getMessage());
+        }
+
+        //1.Profile picture click.
+        WebElement ProfilePictureOption = null;
+        try {
+            ProfilePictureOption = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgPickProfile")));
+            ProfilePictureOption.click();
+            logger.info("Profile picture button click is happened.");
+        } catch (Exception e) {
+            logger.warning("There is no profile picture option for the user.");
+            throw new NoSuchElementException(e.getMessage());
+        }
+
+        WebElement Camera, Gallery, Cancel = null;
+        try {
+            Camera = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Camera\")")));
+            Gallery = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Gallery\")")));
+            Cancel = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button2")));
+            if (Camera.isDisplayed() && Gallery.isEnabled()) {
+                Cancel.click();
+                logger.info("user can able to set the profile picture by using camera or gallery.");
+            } else {
+                logger.warning("There is no camera option and gallery option.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        //2.Full name
+        WebElement FullName = null;
+        String ActualFullName = null;
+        try {
+            FullName = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtFullName")));
+            ActualFullName = FullName.getText();
+
+            //Sending some random name for full name field verification.
+            FullName.sendKeys("Santhosh MahaLakshmi");
+
+            if (FullName.isDisplayed()) {
+                FullName.sendKeys(ActualFullName);
+                logger.info("Full Name is edited by the user.");
+            }
+        } catch (Exception e) {
+            logger.warning("There is no Full name input field.");
             throw new Exception(e.getMessage());
         }
 
+        //3.Email ID
+        WebElement EmailID = null;
+        String ActuallEmailId = null;
         try {
-            //3.Email ID
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtEmail"))).sendKeys("mam@gmail.com");
+            EmailID = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtEmail")));
+            ActuallEmailId = EmailID.getText();
+
+            //Sending some random email id for the email input box
+            EmailID.sendKeys("SanthoshMahalakshmi@gmail.com");
+
+            if (EmailID.isDisplayed()) {
+                EmailID.sendKeys(ActuallEmailId);
+                logger.info("Email id is edited by the user.");
+            }
             logger.info("Email is added for the new user");
         } catch (Exception e) {
+            logger.warning("There is no Email input field.");
             throw new Exception(e.getMessage());
         }
 
+        //4.Mobile number
+        WebElement MobileNumber = null;
         try {
-            //4.Mobile number
-            System.out.println(wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtMobileNumber"))).getText());
-            logger.info("Mobile number taken from the field.");
+            MobileNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtMobileNumber")));
+            logger.info("Mobile number is available for this user.");
         } catch (Exception e) {
+            logger.warning("There is no mobile number field");
             throw new Exception(e.getMessage());
         }
 
+        //5.Continue button
         try {
-            //5.Continue button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/txtContinue"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
             logger.info("Continue button is clicked now.");
         } catch (Exception e) {
+            logger.warning("There is no continue button is visible.");
             throw new Exception(e.getMessage());
         }
     }
