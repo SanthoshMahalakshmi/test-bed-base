@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.v85.page.Page;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.Objects;
 
 public class Login_Page_Android extends DriverManager {
 
@@ -454,19 +456,119 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_006() throws Exception {
 
-        TC_005(); // To complete the before pages.
+        //Core login for android.
+        bs.CoreLoginForAndroid();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
+        //Pre-Request: Profile section click
         try {
-            //3.verifying the logo is present or not.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgUserImage"))).isDisplayed();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Profile"))).click();
+            logger.info("Clicking the profile section.");
+        } catch (Exception e) {
+            logger.warning("There is no profile section.");
+            throw new Exception(e.getMessage());
+        }
 
-            //4.pagination is present in the screen
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected"))).isDisplayed();
+        //Pre-Request: Skip button click for profile page section for the first time.
+        WebElement CoachMarkSkip = null;
+        try {
+            CoachMarkSkip = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+            if (CoachMarkSkip.isDisplayed()) {
+                CoachMarkSkip.click();
+                logger.info("Skip button is visible and its clicked.");
+            } else {
+                logger.info("Skip button is not visible for a click.");
+            }
+        } catch (NoSuchElementException e) {
+            DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
+        } catch (Exception e) {
+            DriverManager.logger.warning(e.getMessage());
+        }
 
-            //5.clicking the continue button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+        //Pre-Request: Clicking the Edit profile option.
+        WebElement EditProfile = null;
+        try {
+            EditProfile = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtEditProfile")));
+            EditProfile.click();
+            logger.info("Edit profile click is happening on profile section.");
+        } catch (Exception e) {
+            logger.warning("There is no edit profile option available for a click.");
+            throw new NoSuchElementException(e.getMessage());
+        }
+
+        //Pre-Request: Clicking the continue button in basic details page.
+        WebElement ContinueButton, PageTitle = null;
+        try {
+            ContinueButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContinue")));
+
+            PageTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtTitle")));
+
+            if (Objects.equals(PageTitle.getText(), "Basic Details"))
+            {
+                ContinueButton.click();
+                logger.info("Continue button is clicked in the 'Basic Details' page .");
+            }else
+            {
+                logger.warning("Page title is not available.");
+            }
+        } catch (Exception e) {
+            logger.warning("There is no continue button is visible.");
+            throw new Exception(e.getMessage());
+        }finally {
+            PageTitle = null;
+        }
+
+        //Pre-Request: Clicking the continue button in select gender page.
+        WebElement PageTitle2 = null;
+        try
+        {
+            ContinueButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContinue")));
+            PageTitle2 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtTitle")));
+            logger.warning("Page title" + PageTitle2.getText());_
+            if (true)
+            {
+                ContinueButton.click();
+                logger.info("Now we are in the Select Gender page");
+            }else
+            {
+                logger.warning("Page title is not available in the select gender page.");
+            }
+        }catch (Exception e)
+        {
+            logger.warning("Page title is not available in the select gender page.");
+            throw new Exception(e.getMessage());
+        }
+
+        //1.Height picker
+        WebElement HeightPicker = null;
+        try {
+            HeightPicker = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/scaleNumberPicker")));
+            if (HeightPicker.isDisplayed()) {
+                logger.info("Height Picker is visible = " + HeightPicker.isDisplayed());
+                logger.info("User can edit their height by using the height picker.");
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        WebElement GenderLogo, Pagination = null;
+        try {
+            //2.verifying the logo is present or not.
+            GenderLogo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgUserImage")));
+            if (GenderLogo.isDisplayed()) {
+                logger.info("Selected gender logo is visible? = " + GenderLogo.isDisplayed());
+            }else {
+                logger.warning("There is no gender logo present in the 'Select Height' page.");
+            }
+
+            //3.pagination is present in the screen
+           Pagination =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected")));
+            if (Pagination.isDisplayed()) {
+                logger.info("Pagination is visible? = " + Pagination.isDisplayed());
+            }else {
+                logger.warning("There is no pagination is present in the 'Select height' page.");
+            }
         } catch (Exception e) {
             logger.warning("Logo and pagination is not visible.");
         }
