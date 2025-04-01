@@ -82,7 +82,8 @@
 
             <class name="AllCoachMark.coachMarks">
                 <methods>
-                    <include name="TC_037"/> <!--DashBoard Coach mark.-->
+                    <exclude name="TC_037"/> <!--DashBoard Coach mark.-->
+                    <include name="TC_038"/> <!--Report coach Mark-->
                 </methods>
             </class>
 

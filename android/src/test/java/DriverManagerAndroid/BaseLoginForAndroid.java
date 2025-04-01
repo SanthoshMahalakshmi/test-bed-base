@@ -76,11 +76,11 @@ public class BaseLoginForAndroid extends DriverManager {
             DriverManager.logger.warning("Notification allow Button is not pop-up to accept allow.");
         }
 
-        WebElement CoachMark = null;
+        WebElement SKip = null;
         if (IsSkipped){
             try {
-                CoachMark = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
-                CoachMark.click();
+                SKip = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+                SKip.click();
                 DriverManager.logger.info("Coach mark is visible and its skipped.");
             } catch (NoSuchElementException e) {
                 DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
@@ -88,7 +88,6 @@ public class BaseLoginForAndroid extends DriverManager {
                 DriverManager.logger.warning(e.getMessage());
             }
         }
-
        logger.info("Exit from the core login case for Android.");
     }
 }
