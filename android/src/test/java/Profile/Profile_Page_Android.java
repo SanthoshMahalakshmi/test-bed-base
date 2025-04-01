@@ -22,7 +22,7 @@ public class Profile_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_031() throws Exception {   /*User navigation from profile section */
 
-         bs.CoreLoginForAndroid();  //basic login scenario.
+         bs.CoreLoginForAndroid(true);  //basic login scenario.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -250,7 +250,7 @@ public class Profile_Page_Android extends DriverManager {
 
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
     public void TC_032() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

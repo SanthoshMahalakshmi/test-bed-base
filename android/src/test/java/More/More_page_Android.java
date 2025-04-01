@@ -20,7 +20,7 @@ public class More_page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_033() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -274,7 +274,7 @@ public class More_page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_034() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -393,7 +393,7 @@ public class More_page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_035() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -439,7 +439,7 @@ public class More_page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_036() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 

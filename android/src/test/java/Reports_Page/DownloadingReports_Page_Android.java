@@ -18,7 +18,7 @@ public class DownloadingReports_Page_Android extends DriverManager
     
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_020() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -94,7 +94,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_021() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -133,7 +133,7 @@ public class DownloadingReports_Page_Android extends DriverManager
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_022() throws Exception {
-        bs.CoreLoginForAndroid();  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

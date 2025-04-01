@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v85.page.Page;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -252,7 +251,7 @@ public class Login_Page_Android extends DriverManager {
     public void TC_004() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        bs.CoreLoginForAndroid(); //For base login scenario
+        bs.CoreLoginForAndroid(true); //For base login scenario
 
         //Profile section click
         try {
@@ -378,7 +377,7 @@ public class Login_Page_Android extends DriverManager {
     public void TC_005() throws Exception {
 
         //Core login for android.
-        bs.CoreLoginForAndroid();
+        bs.CoreLoginForAndroid(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -457,7 +456,7 @@ public class Login_Page_Android extends DriverManager {
     public void TC_006() throws Exception {
 
         //Core login for android.
-        bs.CoreLoginForAndroid();
+        bs.CoreLoginForAndroid(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -525,7 +524,7 @@ public class Login_Page_Android extends DriverManager {
         {
             ContinueButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContinue")));
             PageTitle2 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtTitle")));
-            logger.warning("Page title" + PageTitle2.getText());_
+            logger.warning("Page title" + PageTitle2.getText());
             if (true)
             {
                 ContinueButton.click();
