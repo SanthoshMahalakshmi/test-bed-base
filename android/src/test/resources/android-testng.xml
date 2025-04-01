@@ -17,7 +17,7 @@
                     <exclude  name="TC_003"/> <!--Done with new element change.-->
                     <exclude  name="TC_004"/> <!--Done with new element change.-->
                     <exclude  name="TC_005"/> <!--Done with new element change.-->
-                    <include  name="TC_006"/> <!--Done with new element change.-->
+                    <exclude  name="TC_006"/> <!--Done with new element change.-->
                     <exclude  name="TC_007"/> <!--Done with new element change.-->
                     <exclude  name="TC_008"/> <!--Done with new element change.-->
                     <exclude  name="TC_009"/> <!--Done with new element change.-->
@@ -79,6 +79,13 @@
                     <exclude  name="TC_024"/> <!--Done with new element change.-->
                 </methods>
             </class>
+
+            <class name="AllCoachMark.coachMarks">
+                <methods>
+                    <include name="TC_037"/> <!--DashBoard Coach mark.-->
+                </methods>
+            </class>
+
         </classes>
     </test>
 </suite>

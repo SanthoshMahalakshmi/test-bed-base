@@ -16,7 +16,7 @@ public class Devices_Page_Android extends DriverManager
     
     @Test
     public void TC_023() throws Exception {
-         bs.CoreLoginForAndroid();  //basic login scenario
+         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

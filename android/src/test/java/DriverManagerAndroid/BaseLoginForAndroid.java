@@ -11,7 +11,7 @@ import java.time.Duration;
 public class BaseLoginForAndroid extends DriverManager {
 
     @Test(singleThreaded = true)
-    public void CoreLoginForAndroid() throws Exception {
+    public void CoreLoginForAndroid(Boolean IsSkipped) throws Exception {
 
         logger.info("Entering into Core login case fo Android.");
 
@@ -77,15 +77,18 @@ public class BaseLoginForAndroid extends DriverManager {
         }
 
         WebElement CoachMark = null;
-        try {
-            CoachMark = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
-            CoachMark.click();
-            DriverManager.logger.info("Coach mark is visible and its skipped.");
-        } catch (NoSuchElementException e) {
-            DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
-        } catch (Exception e) {
-            DriverManager.logger.warning(e.getMessage());
+        if (IsSkipped){
+            try {
+                CoachMark = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+                CoachMark.click();
+                DriverManager.logger.info("Coach mark is visible and its skipped.");
+            } catch (NoSuchElementException e) {
+                DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
+            } catch (Exception e) {
+                DriverManager.logger.warning(e.getMessage());
+            }
         }
+
        logger.info("Exit from the core login case for Android.");
     }
 }
