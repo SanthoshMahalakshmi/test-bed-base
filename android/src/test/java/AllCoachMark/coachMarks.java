@@ -20,8 +20,7 @@ public class coachMarks extends DriverManager {
 
     /*DashBoard Coach mark case*/
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_037() throws Exception
-    {
+    public void TC_037() throws Exception {
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -30,20 +29,17 @@ public class coachMarks extends DriverManager {
 
         /*1st text element in dashboard.*/
         WebElement firstTextElement;
-        try
-        {
+        try {
             firstTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
             logger.info("DashBoard 1st coach mark Text: \n" + firstTextElement.getText());
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.warning("There is no coach mark text for first element");
             throw new Exception(e.getMessage());
         }
 
         /* Clicking the Next button */
         WebElement Next_1;
-        try
-        {
+        try {
             Next_1 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
             Next_1.click();
             logger.info("Clicking the 'Next' Button for second coach mark text");
@@ -55,8 +51,7 @@ public class coachMarks extends DriverManager {
 
         /*2nd text element in dashboard*/
         WebElement SecondTextElement;
-        try
-        {
+        try {
             SecondTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
             logger.info("DashBoard 2nd coach mark Text: \n " + SecondTextElement.getText());
         } catch (Exception e) {
@@ -66,8 +61,7 @@ public class coachMarks extends DriverManager {
 
         /* Clicking the Next button */
         WebElement Next_2;
-        try
-        {
+        try {
             Next_2 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
             Next_2.click();
             logger.info("Clicking the 'Next' Button for third coach mark text");
@@ -83,16 +77,14 @@ public class coachMarks extends DriverManager {
         try {
             ThirdTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
             logger.info("DashBoard 3rd coach mark Text: \n " + ThirdTextElement.getText());
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.warning("There is no coach mark text for third element");
             throw new Exception(e.getMessage());
         }
 
         /*Clicking 'BACK' button to see the previous coach mark*/
         WebElement BackButton;
-        try
-        {
+        try {
             BackButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnBack")));
             BackButton.click();
             logger.info("Back button click is working, to see the previous coach mark content.");
@@ -104,8 +96,7 @@ public class coachMarks extends DriverManager {
 
         /* Clicking the Next button */
         WebElement Next_3;
-        try
-        {
+        try {
             Next_3 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
             Next_3.click();
             logger.info("Clicking the 'Next' Button for fourth coach mark text");
@@ -120,16 +111,14 @@ public class coachMarks extends DriverManager {
         try {
             FourthTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
             logger.info("DashBoard fourth coach mark Text: \n " + FourthTextElement.getText());
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.warning("There is no coach mark text for fourth element");
             throw new Exception(e.getMessage());
         }
 
         /* Clicking the Next button */
         WebElement Next_4;
-        try
-        {
+        try {
             Next_4 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
             Next_4.click();
             logger.info("Clicking the 'Next' Button for fourth coach mark text");
@@ -144,16 +133,14 @@ public class coachMarks extends DriverManager {
         try {
             FifthTextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
             logger.info("DashBoard 5th coach mark Text: \n " + FifthTextElement.getText());
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             logger.warning("There is no coach mark text for fourth element");
             throw new Exception(e.getMessage());
         }
 
         /* Clicking the Finish button */
         WebElement Finish;
-        try
-        {
+        try {
             Finish = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
             Finish.click();
             logger.info("Clicking the 'Finish' Button for last coach mark.");
@@ -161,6 +148,54 @@ public class coachMarks extends DriverManager {
             logger.warning("In DashBoard there is no 'Finish' Button for coach mark.");
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_038() throws Exception {
+
+        /*Global wait*/
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        /*Core Login for android.*/
+        bs.CoreLoginForAndroid(true);
+
+
+        /*Report page click for the coach mark check.*/
+        WebElement ReportPage=null;
+        try
+        {
+            ReportPage = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Reports\")")));
+            ReportPage.click();
+            logger.info("Report page click is happening for the coach mark check.");
+
+        } catch (Exception e) {
+            logger.warning("There is no report page click is happening.");
+            throw new RuntimeException(e);
+        }
+
+        /*Coach mark text.*/
+        WebElement CoachMarkText = null;
+        try
+        {
+            CoachMarkText =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
+            logger.info("Report coach mark Text: \n " + CoachMarkText.getText());
+        } catch (Exception e) {
+            logger.warning("There is no coach mark text in the report section.");
+            throw new RuntimeException(e);
+        }
+
+        /*Finish button click*/
+        WebElement FinishButton = null;
+        try
+        {
+            FinishButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
+            FinishButton.click();
+            logger.info("Finish button click is happening in the report section.");
+        } catch (Exception e) {
+            logger.warning("There is no finish button in the report section and click is not happening.");
+            throw new RuntimeException(e);
+        }
+
 
     }
 
