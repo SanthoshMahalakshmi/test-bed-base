@@ -195,7 +195,54 @@ public class coachMarks extends DriverManager {
             logger.warning("There is no finish button in the report section and click is not happening.");
             throw new RuntimeException(e);
         }
+    }
 
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_039() throws Exception {
+        /*Global wait*/
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        /*Core Login for android.*/
+        bs.CoreLoginForAndroid(true);
+
+        /*Device button click*/
+        WebElement DeviceButton = null;
+        try
+        {
+            DeviceButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Devices\")")));
+            DeviceButton.click();
+            logger.info("Device section click is happening now.");
+
+        } catch (Exception e) {
+            logger.warning("There is no 'Device' button.");
+            throw new RuntimeException(e);
+        }
+
+        WebElement DeviceCoachMarkText = null;
+        try
+        {
+            DeviceCoachMarkText = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
+            logger.info("Device page Coach mark text: \n" + DeviceCoachMarkText.getText());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        WebElement Finish = null;
+        try
+        {
+            Finish = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
+            Finish.click();
+            logger.info("Clicking the Finish button for the coach mark in the device section");
+
+        } catch (Exception e) {
+            logger.warning("There is no 'Finish' Button in the device section.");
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_040()
+    {
 
     }
 
