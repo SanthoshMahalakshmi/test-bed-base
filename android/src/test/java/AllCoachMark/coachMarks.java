@@ -91,7 +91,7 @@ public class coachMarks extends DriverManager {
 
         } catch (Exception e) {
             logger.warning("There is no back button click is happened.");
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
         /* Clicking the Next button */
@@ -170,7 +170,7 @@ public class coachMarks extends DriverManager {
 
         } catch (Exception e) {
             logger.warning("There is no report page click is happening.");
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
         /*Coach mark text.*/
@@ -181,7 +181,7 @@ public class coachMarks extends DriverManager {
             logger.info("Report coach mark Text: \n " + CoachMarkText.getText());
         } catch (Exception e) {
             logger.warning("There is no coach mark text in the report section.");
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
         /*Finish button click*/
@@ -193,7 +193,7 @@ public class coachMarks extends DriverManager {
             logger.info("Finish button click is happening in the report section.");
         } catch (Exception e) {
             logger.warning("There is no finish button in the report section and click is not happening.");
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -215,7 +215,7 @@ public class coachMarks extends DriverManager {
 
         } catch (Exception e) {
             logger.warning("There is no 'Device' button.");
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
         WebElement DeviceCoachMarkText = null;
@@ -224,7 +224,7 @@ public class coachMarks extends DriverManager {
             DeviceCoachMarkText = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
             logger.info("Device page Coach mark text: \n" + DeviceCoachMarkText.getText());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
         WebElement Finish = null;
@@ -236,13 +236,84 @@ public class coachMarks extends DriverManager {
 
         } catch (Exception e) {
             logger.warning("There is no 'Finish' Button in the device section.");
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_040()
-    {
+    public void TC_040() throws Exception {
+
+        /*Description: Profile page coach mark automation coverage */
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        bs.CoreLoginForAndroid(true);
+
+        WebElement ProfilePageButton;
+        try
+        {
+            ProfilePageButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Profile\")")));
+            ProfilePageButton.click();
+            logger.info("Clicking the 'Profile' page.");
+        } catch (Exception e) {
+            logger.warning("There is no Profile button clicking is not happening now. ");
+            throw new RuntimeException(e.getMessage());
+        }
+
+        WebElement ParameterRangeText_1;
+        try
+        {
+            ParameterRangeText_1 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
+            logger.info("Profile page coach mark text: \n " + ParameterRangeText_1.getText());
+
+        } catch (Exception e) {
+            logger.warning("There is no 1st coach mark text in the profile page");
+            throw new RuntimeException(e.getMessage());
+        }
+
+        WebElement Skip;
+        try
+        {
+            Skip = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvSkip")));
+            logger.info("Skip button is available or not ?" + Skip.isDisplayed());
+        } catch (Exception e) {
+            logger.warning("There is no skip button is available now in the profile section.");
+            throw new RuntimeException(e.getMessage());
+        }
+
+        WebElement NextButton;
+        try
+        {
+            NextButton =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
+            NextButton.click();
+            logger.info("Clicking the 'Next' button in the profile page now.");
+
+        } catch (Exception e) {
+            logger.warning("There is no 'Next' button in the profile page.");
+            throw new RuntimeException(e.getMessage());
+        }
+
+        WebElement ParameterRangeText_2;
+        try
+        {
+            ParameterRangeText_2 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvtest")));
+            logger.info("Profile page coach mark text: \n " + ParameterRangeText_2.getText());
+        } catch (Exception e) {
+            logger.warning("There is no 1st coach mark text in the profile page");
+            throw new RuntimeException(e.getMessage());
+        }
+
+        WebElement FinishButton;
+        try
+        {
+            FinishButton =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
+            FinishButton.click();
+            logger.info("Clicking the 'Finish' button in the profile page now.");
+
+        } catch (Exception e) {
+            logger.warning("There is no 'Finish' button in the profile page.");
+            throw new RuntimeException(e.getMessage());
+        }
 
     }
 
