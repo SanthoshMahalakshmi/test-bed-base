@@ -18,7 +18,7 @@
                     <exclude  name="TC_004"/> <!--Done with new element change.-->
                     <exclude  name="TC_005"/> <!--Done with new element change.-->
                     <exclude  name="TC_006"/> <!--Done with new element change.-->
-                    <exclude  name="TC_007"/> <!--Done with new element change.-->
+                    <include  name="TC_007"/> <!--Done with new element change.-->
                     <exclude  name="TC_008"/> <!--Done with new element change.-->
                     <exclude  name="TC_009"/> <!--Done with new element change.-->
                 </methods>
@@ -85,7 +85,7 @@
                     <exclude name="TC_037"/> <!--DashBoard Coach mark.-->
                     <exclude name="TC_038"/> <!--Report coach Mark-->
                     <exclude name="TC_039"/> <!--Device coach Mark-->
-                    <include name="TC_040"/> <!--Profile coach Mark-->
+                    <exclude name="TC_040"/> <!--Profile coach Mark-->
                 </methods>
             </class>
 
