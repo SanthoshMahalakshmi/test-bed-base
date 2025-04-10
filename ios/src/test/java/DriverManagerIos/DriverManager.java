@@ -80,7 +80,7 @@ public class DriverManager {
                 caps.setCapability("automationName", "XCUITest");
                 caps.setCapability("bundleId", "com.heartmonitor.ios"); // Change to your app's bundle ID
                 caps.setCapability("noReset", true); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/Users/San/Downloads/Monitor.ipa"); // Local app path
+                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor.app"); // Local app path
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForIOS(driver = new IOSDriver(url, caps));
