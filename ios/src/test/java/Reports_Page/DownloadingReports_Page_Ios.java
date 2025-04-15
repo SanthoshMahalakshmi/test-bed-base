@@ -1,5 +1,6 @@
 package Reports_Page;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
@@ -12,10 +13,12 @@ import java.time.Duration;
 public class DownloadingReports_Page_Ios extends DriverManager
 {
 
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
+
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_020()
     {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -60,7 +63,7 @@ public class DownloadingReports_Page_Ios extends DriverManager
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_021()
     {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -94,7 +97,7 @@ public class DownloadingReports_Page_Ios extends DriverManager
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_022()
     {
-       BaseLoginForIos();
+        baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
