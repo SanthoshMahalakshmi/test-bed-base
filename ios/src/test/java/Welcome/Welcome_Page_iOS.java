@@ -2,6 +2,7 @@ package Welcome;
 
 import DriverManagerIos.DriverManager;
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,14 +19,15 @@ public class Welcome_Page_iOS extends DriverManager
         //Global wait.
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
-            logger.info("before login->Allow button is visible and its clicked Allow");
-        }
-        catch (Exception e)
+        /*To accept the notification pop-up*/
+        try
         {
-            logger.info("Before login-> Notification allow Button is not pop-up to accept allow.");
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            alert.accept();
+            logger.info("The allow notification is accepted here.");
+        } catch (Exception e) {
+            logger.warning("There is no Allow button to accept the notification.");
+            throw new RuntimeException(e.getMessage());
         }
 
         try {

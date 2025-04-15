@@ -1,5 +1,6 @@
 package Login;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
@@ -15,6 +16,7 @@ import java.time.Duration;
 public class Login_Page_Ios extends DriverManager {
 
     private static final Logger log = LoggerFactory.getLogger(Login_Page_Ios.class);
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_002() {
@@ -226,7 +228,7 @@ public class Login_Page_Ios extends DriverManager {
     public void TC_004() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        BaseLoginForIos();
+        baseLoginForiOS.BaseLoginForIos();
 
         WebElement profile_picture, Mobile_number, pagination = null;
         try {

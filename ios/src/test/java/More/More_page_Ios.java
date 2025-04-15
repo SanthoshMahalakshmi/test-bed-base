@@ -1,5 +1,6 @@
 package More;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
@@ -15,10 +16,11 @@ import java.time.Duration;
 
 public class More_page_Ios extends DriverManager {
     private static final Logger log = LoggerFactory.getLogger(More_page_Ios.class);
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_033() {
-        BaseLoginForIos(); // Login process
+         baseLoginForiOS.BaseLoginForIos(); // Login process
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -279,7 +281,8 @@ public class More_page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_034() {
-        BaseLoginForIos();
+
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -396,7 +399,8 @@ public class More_page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_035() {
-        BaseLoginForIos();
+
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -441,7 +445,7 @@ public class More_page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_036() {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 

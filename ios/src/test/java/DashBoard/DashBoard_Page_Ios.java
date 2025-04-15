@@ -1,5 +1,6 @@
 package DashBoard;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.RetryAnalyzerios;
 import browserstack.shaded.org.eclipse.jgit.diff.Edit;
@@ -20,10 +21,11 @@ import java.util.NoSuchElementException;
 public class DashBoard_Page_Ios extends DriverManager {
 
     private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Ios.class);
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_010() {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -124,7 +126,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_011() {
 
-        BaseLoginForIos(); // To complete the login process.
+         baseLoginForiOS.BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -226,7 +228,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_012() {
 
-        BaseLoginForIos(); // To complete the login process.
+         baseLoginForiOS.BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -388,7 +390,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_014() {
 
-        BaseLoginForIos();// To complete the login scenario.
+         baseLoginForiOS.BaseLoginForIos();// To complete the login scenario.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
@@ -465,7 +467,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_015() {
 
-        BaseLoginForIos(); // To complete the login process.
+         baseLoginForiOS.BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(13));
 
@@ -633,7 +635,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_016() {
 
-        BaseLoginForIos();// To complete the login process.
+         baseLoginForiOS.BaseLoginForIos();// To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -756,7 +758,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_017() {
 
-        BaseLoginForIos(); // To complete the login process.
+         baseLoginForiOS.BaseLoginForIos(); // To complete the login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -854,7 +856,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_018() {
 
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -960,7 +962,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_019() {
 
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -1005,7 +1007,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_025() {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1068,7 +1070,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_026() {
 
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
             //Clicking the primary user profile to check my dependent
@@ -1101,7 +1103,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     public void TC_027() {
 
         /*Adding the reminder for Blood pressure.*/
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1183,7 +1185,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_028() {
-        BaseLoginForIos(); // Login process.
+         baseLoginForiOS.BaseLoginForIos(); // Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1256,7 +1258,7 @@ public class DashBoard_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_029() {
 
-        BaseLoginForIos(); //Login process from base class.
+         baseLoginForiOS.BaseLoginForIos(); //Login process from base class.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1339,7 +1341,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_030() {
-        BaseLoginForIos(); //Login process.
+         baseLoginForiOS.BaseLoginForIos(); //Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

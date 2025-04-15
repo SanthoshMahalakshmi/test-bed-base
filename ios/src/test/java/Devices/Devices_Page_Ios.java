@@ -1,5 +1,6 @@
 package Devices;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
@@ -11,10 +12,12 @@ import java.time.Duration;
 
 public class Devices_Page_Ios extends DriverManager
 {
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
+
     @Test
     public void TC_023()
     {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

@@ -1,5 +1,6 @@
 package Profile;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
@@ -15,11 +16,12 @@ import java.time.Duration;
 public class Profile_Page_Ios extends DriverManager {
 
     private static final Logger log = LoggerFactory.getLogger(Profile_Page_Ios.class);
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_031() {   /*User navigation from profile section */
 
-        BaseLoginForIos(); //Login process.
+         baseLoginForiOS.BaseLoginForIos(); //Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -292,7 +294,7 @@ public class Profile_Page_Ios extends DriverManager {
 
     @Test(enabled = true, retryAnalyzer = RetryAnalyzerios.class)
     public void TC_032() {
-        BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
