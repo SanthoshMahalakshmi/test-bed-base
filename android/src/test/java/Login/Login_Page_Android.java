@@ -28,6 +28,8 @@ public class Login_Page_Android extends DriverManager {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        logger.info("Enter into TC_002");
+
         /*Clicking the Get started button*/
         try {
             WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
@@ -136,6 +138,8 @@ public class Login_Page_Android extends DriverManager {
     public void TC_003() throws Exception {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        logger.info("Enter into TC_003");
 
         /*Clicking the Get started button*/
         try {
@@ -250,6 +254,8 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_004() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        logger.info("Enter into TC_004");
 
         bs.CoreLoginForAndroid(true); //For base login scenario
 
@@ -377,6 +383,8 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_005() throws Exception {
 
+        logger.info("Enter into TC_005");
+
         //Core login for android.
         bs.CoreLoginForAndroid(true);
 
@@ -455,6 +463,8 @@ public class Login_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_006() throws Exception {
+
+        logger.info("Enter into TC_006");
 
         //Core login for android.
         bs.CoreLoginForAndroid(true);
@@ -573,6 +583,8 @@ public class Login_Page_Android extends DriverManager {
     public void
     TC_007() throws Exception {
 
+        logger.info("Enter into TC_007");
+
         bs.CoreLoginForAndroid(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -679,6 +691,8 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_008() throws Exception {
 
+        logger.info("Enter into TC_008");
+
         TC_007(); //To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -699,6 +713,9 @@ public class Login_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_009() throws Exception {
+
+        logger.info("Enter into TC_009");
+        
         TC_008(); // To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));

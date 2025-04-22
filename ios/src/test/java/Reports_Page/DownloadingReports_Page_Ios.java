@@ -16,9 +16,8 @@ public class DownloadingReports_Page_Ios extends DriverManager
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_020()
-    {
-         baseLoginForiOS.BaseLoginForIos();
+    public void TC_020() throws Exception {
+        baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -61,9 +60,8 @@ public class DownloadingReports_Page_Ios extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_021()
-    {
-         baseLoginForiOS.BaseLoginForIos();
+    public void TC_021() throws Exception {
+        baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -95,9 +93,8 @@ public class DownloadingReports_Page_Ios extends DriverManager
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_022()
-    {
-        baseLoginForiOS.BaseLoginForIos();
+    public void TC_022() throws Exception {
+       baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

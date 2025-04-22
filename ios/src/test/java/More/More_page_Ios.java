@@ -19,8 +19,8 @@ public class More_page_Ios extends DriverManager {
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_033() {
-         baseLoginForiOS.BaseLoginForIos(); // Login process
+    public void TC_033() throws Exception {
+         baseLoginForiOS.BaseLoginForIos(true); // Login process
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -280,9 +280,9 @@ public class More_page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_034() {
+    public void TC_034() throws Exception {
 
-         baseLoginForiOS.BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -398,9 +398,9 @@ public class More_page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_035() {
+    public void TC_035() throws Exception {
 
-         baseLoginForiOS.BaseLoginForIos();
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -444,8 +444,8 @@ public class More_page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_036() {
-         baseLoginForiOS.BaseLoginForIos();
+    public void TC_036() throws Exception {
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 

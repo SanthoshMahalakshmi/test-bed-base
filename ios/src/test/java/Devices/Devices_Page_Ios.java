@@ -15,9 +15,8 @@ public class Devices_Page_Ios extends DriverManager
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test
-    public void TC_023()
-    {
-         baseLoginForiOS.BaseLoginForIos();
+    public void TC_023() throws Exception {
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -120,8 +119,7 @@ public class Devices_Page_Ios extends DriverManager
     }
 
     @Test
-    public void TC_024()
-    {
+    public void TC_024() throws Exception {
         TC_023(); // to connect with device
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

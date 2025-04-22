@@ -97,6 +97,7 @@ public class DriverManager {
                 browserstackOptions.put("userName", userName);
                 browserstackOptions.put("accessKey", accessKey);
                 browserstackOptions.put("osVersion", platformVersion);
+                browserstackOptions.put("platformName", platformName);
                 browserstackOptions.put("deviceName", deviceName);
                 browserstackOptions.put("projectName", projectName);
                 browserstackOptions.put("buildName", buildName);
@@ -107,7 +108,7 @@ public class DriverManager {
 
                 capabilities.setCapability("bstack:options", browserstackOptions);
 
-                AndroidDriver newDriver = new AndroidDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities);
+                AndroidDriver newDriver = new AndroidDriver(new URL("https://USERNAME:ACCESS_KEY@hub-cloud.browserstack.com/wd/hub"), capabilities);
                 setDriverForAndroid(newDriver);
                 inputStream.close();
             }

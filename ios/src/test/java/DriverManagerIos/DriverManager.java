@@ -1,19 +1,12 @@
 package DriverManagerIos;
 
-import UtilitiesForIos.RetryAnalyzerios;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
@@ -21,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URL;
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -125,12 +117,9 @@ public class DriverManager {
                 browserstackOptions.put("appiumVersion", "2.0.0");
                 browserstackOptions.put("local", "false");
                 browserstackOptions.put("debug", "true");
-
                 capabilities.setCapability("bstack:options", browserstackOptions);
-
-                setDriverForIOS(driver = new IOSDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
+                setDriverForIOS(driver = new IOSDriver(new URL("https://USERNAME:ACCESS_KEY@hub-cloud.browserstack.com/wd/hub"), capabilities));
             }
-
             inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,36 +128,63 @@ public class DriverManager {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void quitDriver() throws IOException {
-        System.out.println("🛑 Executing @AfterMethod: Quitting Android Driver... " + getDriver());
+    public void quitDriver() {
         AppiumDriver currentDriver = getDriver();
-        System.out.println("🔚 This has come to an end " + currentDriver);
+        System.out.println("🧪 [AfterMethod] Starting driver cleanup...");
 
         if (currentDriver != null) {
             try {
-                currentDriver.quit();
-                System.out.println("✅ Driver quit successfully.");
+                System.out.println("📌 Driver class: " + currentDriver.getClass().getName());
+
+                if (currentDriver instanceof IOSDriver) {
+                    IOSDriver iosDriver = (IOSDriver) currentDriver;
+                    String bundleId = "com.ios.MoAI";
+
+                    System.out.println("📱 iOSDriver detected. Starting app termination...");
+
+                    try {
+                        // Attempt to terminate the app
+                        boolean terminated = iosDriver.terminateApp(bundleId);
+                        System.out.println("🛑 App terminated: " + terminated);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Failed to terminate app: " + e.getMessage());
+                    }
+
+                    try {
+                        // Wait a second before uninstall
+                        Thread.sleep(1000);
+                        boolean removed = iosDriver.removeApp(bundleId);
+                        System.out.println("🧹 App uninstalled: " + removed);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Failed to uninstall app: " + e.getMessage());
+                    }
+
+                } else {
+                    System.out.println("🤖 Not an iOS driver. No iOS-specific cleanup.");
+                }
+
+                try {
+                    currentDriver.quit();
+                    System.out.println("✅ Driver quit successfully.");
+                } catch (Exception e) {
+                    System.out.println("❌ Error while quitting driver: " + e.getMessage());
+                }
+
             } catch (Exception e) {
-                System.out.println("❌ Error while quitting driver: " + e.getMessage());
+                System.out.println("❌ Unexpected error during cleanup: " + e.getMessage());
                 e.printStackTrace();
             } finally {
-                appiumDriverThreadLocal.remove();
-                System.out.println("🧹 ThreadLocal driver removed.");
-                // Reset the static driver reference
-                driver = null;
+                try {
+                    appiumDriverThreadLocal.remove();
+                    driver = null;
+                    System.out.println("🧼 ThreadLocal cleared.");
+                } catch (Exception e) {
+                    System.out.println("⚠️ Error clearing ThreadLocal: " + e.getMessage());
+                }
             }
         } else {
-            System.out.println("⚠️ No active driver found to quit.");
-        }
-
-        // Ensure app is force-stopped after quitting driver
-        try {
-            Runtime.getRuntime().exec("adb shell am force-stop com.heartmonitor.android");
-            System.out.println("✅ Force-stopped app successfully.");
-        } catch (Exception e) {
-            System.out.println("❌ Error force-stopping app: " + e.getMessage());
+            System.out.println("⚠️ No active driver found.");
         }
     }
-
 
 }

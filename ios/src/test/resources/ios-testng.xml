@@ -3,73 +3,79 @@
     <test name="iOS Tests">
         <classes>
 
+            <class name="DriverManagerIos.BaseLoginForiOS">
+                <methods>
+                    <exclude name="BaseLoginForIos"/>
+                </methods>
+            </class>
+
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_iOS">
                 <methods>
-                    <include  name="TC_001"/>
+                    <exclude  name="TC_001"/>
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Ios">
                 <methods>
-                    <exclude  name="TC_002"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_003"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_004"/> <!--Basic page--> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_005"/> <!--Select Gender--> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_006"/> <!--Select Height--> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_007"/> <!--Select Weight--> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_008"/> <!--Select DOB--> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_009"/> <!--Submit page with smoke and alcohol --> <!--iOS element changes are done & ubuntu is up to date with new branch-->
+                    <exclude  name="TC_002"/> 
+                    <exclude  name="TC_003"/> 
+                    <exclude  name="TC_004"/> <!--Basic page--> 
+                    <exclude  name="TC_005"/> <!--Select Gender--> 
+                    <exclude  name="TC_006"/> <!--Select Height--> 
+                    <exclude  name="TC_007"/> <!--Select Weight--> 
+                    <exclude  name="TC_008"/> <!--Select DOB--> 
+                    <exclude  name="TC_009"/> <!--Submit page with smoke and alcohol --> 
                 </methods>
             </class>
 
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <exclude  name="TC_010"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_011"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_012"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_013"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_014"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_015"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_016"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_017"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_018"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_019"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_025"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_026"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_027"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_028"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_029"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_030"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
+                    <exclude  name="TC_010"/> 
+                    <exclude  name="TC_011"/> 
+                    <exclude  name="TC_012"/> 
+                    <exclude  name="TC_013"/> 
+                    <exclude  name="TC_014"/> 
+                    <exclude  name="TC_015"/> 
+                    <exclude  name="TC_016"/> 
+                    <exclude  name="TC_017"/> 
+                    <exclude  name="TC_018"/> 
+                    <exclude  name="TC_019"/> 
+                    <exclude  name="TC_025"/> 
+                    <exclude  name="TC_026"/> 
+                    <exclude  name="TC_027"/> 
+                    <exclude  name="TC_028"/> 
+                    <exclude  name="TC_029"/> 
+                    <exclude  name="TC_030"/> 
                 </methods>
             </class>
 
             <!--Profile Section-->
             <class name="Profile.Profile_Page_Ios">
                 <methods>
-                    <exclude  name="TC_031"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_032"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
+                    <exclude  name="TC_031"/> 
+                    <exclude  name="TC_032"/> 
                 </methods>
             </class>
 
             <!--More section-->
             <class name="More.More_page_Ios">
                 <methods>
-                    <exclude  name="TC_033"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_034"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_035"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_036"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
+                    <exclude  name="TC_033"/> 
+                    <exclude  name="TC_034"/> 
+                    <exclude  name="TC_035"/> 
+                    <exclude  name="TC_036"/> 
                 </methods>
             </class>
 
             <!--Downloading the report-->
             <class name="Reports_Page.DownloadingReports_Page_Ios">
                 <methods>
-                    <exclude  name="TC_020"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_021"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
-                    <exclude  name="TC_022"/> <!--iOS element changes are done & ubuntu is up to date with new branch-->
+                    <exclude  name="TC_020"/> 
+                    <exclude  name="TC_021"/> 
+                    <exclude  name="TC_022"/> 
                 </methods>
             </class>
 
@@ -78,6 +84,15 @@
                 <methods>
                     <exclude  name="TC_023"/>
                     <exclude  name="TC_024"/>
+                </methods>
+            </class>
+
+            <class name="AllCoachMarkForiOS.CoachMarkiOS">
+                <methods>
+                    <exclude name="TC_037"/> <!--DashBoard Coach mark.-->
+                    <exclude name="TC_038"/> <!--Report coach Mark-->
+                    <exclude name="TC_039"/> <!--Device coach Mark-->
+                    <include name="TC_040"/> <!--Profile coach Mark-->
                 </methods>
             </class>
 

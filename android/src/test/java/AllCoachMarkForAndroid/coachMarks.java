@@ -1,4 +1,4 @@
-package AllCoachMark;
+package AllCoachMarkForAndroid;
 
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
@@ -23,6 +23,8 @@ public class coachMarks extends DriverManager {
     public void TC_037() throws Exception {
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        logger.info("Enter into TC_037");
 
         /*Core Login for android.*/
         bs.CoreLoginForAndroid(false);
@@ -159,7 +161,6 @@ public class coachMarks extends DriverManager {
         /*Core Login for android.*/
         bs.CoreLoginForAndroid(true);
 
-
         /*Report page click for the coach mark check.*/
         WebElement ReportPage=null;
         try
@@ -199,6 +200,7 @@ public class coachMarks extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_039() throws Exception {
+
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -240,11 +242,13 @@ public class coachMarks extends DriverManager {
         }
     }
 
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_040() throws Exception {
 
-        /*Description: Profile page coach mark automation coverage */
+        logger.info("Enter into TC_040");
 
+        /*Description: Profile page coach mark automation coverage */
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         bs.CoreLoginForAndroid(true);

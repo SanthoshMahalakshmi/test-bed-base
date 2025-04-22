@@ -12,7 +12,6 @@ import java.time.Duration;
 
 public class Welcome_Page_iOS extends DriverManager
 {
-
     @Test
     public void TC_001()
     {
