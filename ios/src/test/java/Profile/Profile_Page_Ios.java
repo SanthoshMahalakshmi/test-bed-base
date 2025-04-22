@@ -19,9 +19,9 @@ public class Profile_Page_Ios extends DriverManager {
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_031() {   /*User navigation from profile section */
+    public void TC_031() throws Exception {   /*User navigation from profile section */
 
-         baseLoginForiOS.BaseLoginForIos(); //Login process.
+         baseLoginForiOS.BaseLoginForIos(true);//Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -293,8 +293,8 @@ public class Profile_Page_Ios extends DriverManager {
     }
 
     @Test(enabled = true, retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_032() {
-         baseLoginForiOS.BaseLoginForIos();
+    public void TC_032() throws Exception {
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

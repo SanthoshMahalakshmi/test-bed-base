@@ -16,6 +16,9 @@ public class Devices_Page_Android extends DriverManager
     
     @Test
     public void TC_023() throws Exception {
+
+        logger.info("Enter into TC_023");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -119,6 +122,9 @@ public class Devices_Page_Android extends DriverManager
 
     @Test
     public void TC_024() throws Exception {
+
+        logger.info("Enter into TC_024");
+
         TC_023(); // to connect with device
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

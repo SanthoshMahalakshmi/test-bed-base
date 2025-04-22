@@ -22,8 +22,10 @@ public class DashBoard_Page_Android extends DriverManager {
     
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_010() throws Exception {
+
+         logger.info("Enter into TC_010");
          
-        bs.CoreLoginForAndroid(true);  //basic login scenario 
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -135,6 +137,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_011() throws Exception {
 
+         logger.info("Enter into TC_011");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -230,6 +234,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_012() throws Exception {
 
+         logger.info("Enter into TC_012");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -286,6 +292,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_013() throws Exception {
 
+         logger.info("Enter into TC_013");
+
         TC_012();  // To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -334,6 +342,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_014() throws Exception {
+
+         logger.info("Enter into TC_014");
 
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
@@ -439,6 +449,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
+
+         logger.info("Enter into TC_015");
 
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
@@ -632,6 +644,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_016() throws Exception {
 
+         logger.info("Enter into TC_016");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -743,6 +757,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_017() throws Exception {
 
+         logger.info("Enter into TC_017");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -832,6 +848,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_018() throws Exception {
 
+         logger.info("Enter into TC_018");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -913,62 +931,65 @@ public class DashBoard_Page_Android extends DriverManager {
 
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        //Verify the care circle is present in the screen
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile")));
-            WebElement CareCircle = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"));
-            logger.info("Care is present : " + CareCircle.isDisplayed());
-            System.out.println();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+         //Verify the care circle is present in the screen
+         try {
+             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile")));
+             WebElement CareCircle = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"));
+             logger.info("Care is present : " + CareCircle.isDisplayed());
+             System.out.println();
+         } catch (Exception e) {
+             throw new RuntimeException(e);
+         }
 
-        try {
-            //Care circle button.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
-        } catch (Exception e) {
-            logger.warning("care circle button is not visible.");
-        }
+         try {
+             //Care circle button.
+             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
+         } catch (Exception e) {
+             logger.warning("care circle button is not visible.");
+         }
 
-        //permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            logger.warning("Permission is not allowed.");
-        }
+         //permission
+         try {
+             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
+                     ("com.android.packageinstaller:id/permission_allow_button"))).click();
+         } catch (Exception e) {
+             logger.warning("Permission is not allowed.");
+         }
 
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
-        } catch (Exception e) {
-            logger.warning("Add member is not happen.");
-        }
+         //Add member
+         try {
+             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
+         } catch (Exception e) {
+             logger.warning("Add member is not happen.");
+         }
 
-        //1.clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
+         //1.clicking the kebab menu
+         try {
+             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Delete Care Circle\")"))).click();
-        } catch (Exception e) {
-            logger.warning("Clicking the kebab for delete care circel is not happen.");
-        }
+             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
+                     ("new UiSelector().text(\"Delete Care Circle\")"))).click();
+         } catch (Exception e) {
+             logger.warning("Clicking the kebab for delete care circel is not happen.");
+         }
 
-        //Confirmation for deleting the care circle
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/dialog_layout_toaster")));
-            logger.info("Success toast : " + SuccessToast.getText());
-        } catch (Exception e) {
-            logger.warning("Confirmation Ok for delete care circle is not happen.");
-        }
+         //Confirmation for deleting the care circle
+         try {
+             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+             WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/dialog_layout_toaster")));
+             logger.info("Success toast : " + SuccessToast.getText());
+         } catch (Exception e) {
+             logger.warning("Confirmation Ok for delete care circle is not happen.");
+         }
     }
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
+
+         logger.info("Enter into TC_025");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1017,6 +1038,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_026() throws Exception {
 
+         logger.info("Enter into TC_026");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         try {
@@ -1040,6 +1063,8 @@ public class DashBoard_Page_Android extends DriverManager {
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_027() throws Exception {
+
+         logger.info("Enter into TC_027");
 
         /*Adding the reminder for Blood pressure.*/
          bs.CoreLoginForAndroid(true);  //basic login scenario
@@ -1143,6 +1168,9 @@ public class DashBoard_Page_Android extends DriverManager {
 
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_028() throws Exception {
+
+         logger.info("Enter into TC_028");
+
         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1204,6 +1232,8 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_029() throws Exception {
 
+         logger.info("Enter into TC_029");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1264,6 +1294,9 @@ public class DashBoard_Page_Android extends DriverManager {
      @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_030() throws Exception
     {
+
+        logger.info("Enter into TC_030");
+
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
