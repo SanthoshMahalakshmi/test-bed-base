@@ -1,5 +1,6 @@
 package DriverManagerAndroid;
 
+import UtilitiesForAndroid.LogUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class ConfigLoader {
-    private static final Logger logger = Logger.getLogger(ConfigLoader.class.getName());
+    private static final Logger logger = LogUtil.getLogger(ConfigLoader.class.getName());
 
     /**
      * Loads the configuration from the specified JSON file.
@@ -18,7 +19,7 @@ public class ConfigLoader {
      */
     public static Map<String, Object> loadConfig(String filePath) {
         try {
-            logger.info("Loading configuration from: " + filePath);
+            LogUtil.info("Loading configuration from: " + filePath);
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(new File(filePath), new TypeReference<>() {
             });

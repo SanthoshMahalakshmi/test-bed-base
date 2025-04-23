@@ -2,6 +2,7 @@ package DashBoard;
 
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
+import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.NoSuchCookieException;
@@ -9,8 +10,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -18,7 +17,6 @@ import java.util.NoSuchElementException;
 
 public class DashBoard_Page_Ios extends DriverManager {
 
-    private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Ios.class);
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
@@ -32,48 +30,48 @@ public class DashBoard_Page_Ios extends DriverManager {
         try {
             LogoText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"MoAI\"`]")));
-            logger.info("Logo text : " + LogoText.getText());
-            logger.info("Logo text is present : " + LogoText.isDisplayed());
+            LogUtil.info("Logo text : " + LogoText.getText());
+            LogUtil.info("Logo text is present : " + LogoText.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Logo is not present in dash board");
+            LogUtil.warning("Logo is not present in dash board");
         }
 
         //2.Verify the Sync button.
         WebElement SyncData = null;
         try {
             SyncData = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic sync")));
-            logger.info("Sync data button is present : " + SyncData.isDisplayed());
+            LogUtil.info("Sync data button is present : " + SyncData.isDisplayed());
             SyncData.click();
         } catch (Exception e) {
-            logger.warning("Sync button is not present dash board.");
+            LogUtil.warning("Sync button is not present dash board.");
         }
 
         WebElement SyncInfo_Message = null;
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     accessibilityId("Device disconnected")));
-            logger.info("Sync button info message for device not connected :" + SyncInfo_Message.getText());
+            LogUtil.info("Sync button info message for device not connected :" + SyncInfo_Message.getText());
         } catch (Exception e) {
-            logger.warning("Info message for device not connected is not found.");
+            LogUtil.warning("Info message for device not connected is not found.");
         }
 
         WebElement SyncClose_icon = null;
         try {
             SyncClose_icon = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("error_icon")));
-            logger.info("error_icon button is found its clicked :" + SyncClose_icon.isDisplayed());
+            LogUtil.info("error_icon button is found its clicked :" + SyncClose_icon.isDisplayed());
             SyncClose_icon.click();
         } catch (Exception e) {
-            logger.warning("error_icon button is not found.");
+            LogUtil.warning("error_icon button is not found.");
         }
 
         //3.Notification button.
         WebElement NotificationButton = null;
         try {
             NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic notification")));
-            logger.info("Notification button is present : " + NotificationButton.isDisplayed());
+            LogUtil.info("Notification button is present : " + NotificationButton.isDisplayed());
             NotificationButton.click();
         } catch (Exception e) {
-            logger.warning("Notification button is not present.");
+            LogUtil.warning("Notification button is not present.");
         }
 
         //4.Seeing the notification and clearing them
@@ -81,24 +79,24 @@ public class DashBoard_Page_Ios extends DriverManager {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"Decline\"`][1]")));
-            logger.info("Notification is present? : " + Actual_Notifications.isDisplayed());
+            LogUtil.info("Notification is present? : " + Actual_Notifications.isDisplayed());
         } catch (Exception e) {
-            logger.warning("No notification are present currently.");
+            LogUtil.warning("No notification are present currently.");
         }
 
         //5. clearing them
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic clearAllNotification"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes"))).click();
-            logger.info("Clear button is found and it's cleared all the notifications");
+            LogUtil.info("Clear button is found and it's cleared all the notifications");
         } catch (Exception e) {
-            logger.warning("Clear button is not present currently, there is no notification");
+            LogUtil.warning("Clear button is not present currently, there is no notification");
         }
 
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
-            logger.warning("Navigate back is not happen currently.");
+            LogUtil.warning("Navigate back is not happen currently.");
         }
 
         //6.Device indication¡ /*in process*/
@@ -106,18 +104,18 @@ public class DashBoard_Page_Ios extends DriverManager {
         try {
             deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
                     ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.moai.android:id/view5\"));"));
-            logger.info("Heath scroll is present :" + deviceIndication.isDisplayed());
+            LogUtil.info("Heath scroll is present :" + deviceIndication.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
+            LogUtil.warning("Health scroll is not visible, may be the screen is not scrolled.");
         }
 
         //Scrolling to heath score section.
         WebElement HealthScore = null;
         try {
             HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Health Score")));
-            logger.info("Health Score is present : " + HealthScore.getText());
+            LogUtil.info("Health Score is present : " + HealthScore.getText());
         } catch (Exception e) {
-            logger.warning("Health scroll is not visible, may be the screen is not scrolled.");
+            LogUtil.warning("Health scroll is not visible, may be the screen is not scrolled.");
         }
     }
 
@@ -132,9 +130,9 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebElement MyDependent = null;
         try {
             MyDependent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("My Dependents")));
-            logger.info("My dependent section is present : " + MyDependent.isDisplayed());
+            LogUtil.info("My dependent section is present : " + MyDependent.isDisplayed());
         } catch (Exception e) {
-            logger.warning("My dependent section is not visible.");
+            LogUtil.warning("My dependent section is not visible.");
         }
 
         //2.Add new dependent plus.
@@ -142,17 +140,17 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("+2"))).click();
             //My Dependent details page, new journey for adding dependent. user should cross all the 5 pages.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Basic Details")));
-            logger.info("User can add new Dependent ");
+            LogUtil.info("User can add new Dependent ");
         } catch (Exception e) {
-            logger.warning("Add new dependent is not happening.");
+            LogUtil.warning("Add new dependent is not happening.");
         }
 
         //Home button, moving back to dashboard.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
-            logger.info("Moving back to dashboard.");
+            LogUtil.info("Moving back to dashboard.");
         } catch (Exception e) {
-            logger.warning("Moving back to home is not happening.");
+            LogUtil.warning("Moving back to home is not happening.");
         }
 
         //3.Verify new dependent in the dashboard
@@ -161,9 +159,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             NewDependent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[1]" +
                             "/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]")));
-            logger.warning("Newly added dependent profile is visible : " + NewDependent.isDisplayed());
+            LogUtil.warning("Newly added dependent profile is visible : " + NewDependent.isDisplayed());
         } catch (Exception e) {
-            logger.warning("New dependent is not added.");
+            LogUtil.warning("New dependent is not added.");
         }
 
         //4.Dependent profile
@@ -172,16 +170,16 @@ public class DashBoard_Page_Ios extends DriverManager {
             NewDependent.click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     xpath("//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeOther")));
-            logger.info("Dependent profile is visible : " + dependent_profile.isDisplayed());
+            LogUtil.info("Dependent profile is visible : " + dependent_profile.isDisplayed());
         } catch (Exception e) {
-            logger.warning("New dependent profile is not visible");
+            LogUtil.warning("New dependent profile is not visible");
         }
 
         //Navigate back to the DB
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
-            logger.warning("Navigating back dashboard is not happening.");
+            LogUtil.warning("Navigating back dashboard is not happening.");
         }
 
         //6.Sharing the report detail
@@ -194,9 +192,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Done \"`]"))).click();
             /*Selecting the close button*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("UICloseButtonBackground"))).click();
-            logger.info("Sharing the report is working.");
+            LogUtil.info("Sharing the report is working.");
         } catch (Exception e) {
-            logger.warning("Sharing option click is not happening.");
+            LogUtil.warning("Sharing option click is not happening.");
         }
 
         //7.downloading the reports and sharing to the people from DB.
@@ -217,9 +215,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             /*Clicking on done*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Done \"`]"))).click();
-            logger.info("Sharing the report is working.");
+            LogUtil.info("Sharing the report is working.");
         } catch (Exception e) {
-            logger.warning("Downloading the report not working.");
+            LogUtil.warning("Downloading the report not working.");
         }
     }
 
@@ -234,9 +232,9 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebElement careCircleLabel = null;
         try {
             careCircleLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Care Circles")));
-            logger.info("Care circle label is present : " + careCircleLabel.isDisplayed());
+            LogUtil.info("Care circle label is present : " + careCircleLabel.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Care section label is not visible.");
+            LogUtil.warning("Care section label is not visible.");
         }
 
         //2.Clicking the Get stared button
@@ -244,24 +242,24 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
         } catch (Exception e) {
-            logger.warning("Clicking on get started is not happening.");
+            LogUtil.warning("Clicking on get started is not happening.");
         }
 
         //Allow the permission for accessing the contact list.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("Before clicking the plus to add contact, Permission access is popping-up.");
+            LogUtil.info("Before clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("Before clicking the plus to add contact, Permission access is not popping-up");
+            LogUtil.warning("Before clicking the plus to add contact, Permission access is not popping-up");
         }
 
         //Add group name for care circle.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeTextField[`value == \"Group Name\"`]"))).sendKeys("New group");
-            logger.info("group name is added");
+            LogUtil.info("group name is added");
         } catch (Exception e) {
-            logger.warning("Group name is not added");
+            LogUtil.warning("Group name is not added");
         }
 
         //Clicking the Plus to add contact.
@@ -269,42 +267,42 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     accessibilityId("Plus"))).click();
         } catch (Exception e) {
-            logger.warning("Clicking the plus button is not happening.");
+            LogUtil.warning("Clicking the plus button is not happening.");
         }
 
         //Allow the permission for accessing the contact list.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("After clicking the plus to add contact, Permission access is popping-up.");
+            LogUtil.info("After clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("After clicking the plus to add contact, Permission access is not popping-up");
+            LogUtil.warning("After clicking the plus to add contact, Permission access is not popping-up");
         }
 
         //Selecting the contact
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
-            logger.info("Contact is selected for care circle");
+            LogUtil.info("Contact is selected for care circle");
         } catch (Exception e) {
-            logger.warning("Selecting contact for care circle is not happening.");
+            LogUtil.warning("Selecting contact for care circle is not happening.");
         }
 
         //Add member
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Add Members\"`][3]"))).click();
-            logger.info("Add member button is clicked after selected the contact.");
+            LogUtil.info("Add member button is clicked after selected the contact.");
         } catch (Exception e) {
-            logger.warning("Add member button is not clicked after selected the contact.");
+            LogUtil.warning("Add member button is not clicked after selected the contact.");
         }
 
         //Submit click to create a care circle.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Submit\"`]"))).click();
-            logger.info("Submit button is clicked and care circle is created");
+            LogUtil.info("Submit button is clicked and care circle is created");
         } catch (Exception e) {
-            logger.warning("Submit button is not clicked and care circle is not created.");
+            LogUtil.warning("Submit button is not clicked and care circle is not created.");
         }
     }
 
@@ -316,70 +314,70 @@ public class DashBoard_Page_Ios extends DriverManager {
         //To enter into care circle.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
-            logger.info("Enter into care circle happening..");
+            LogUtil.info("Enter into care circle happening..");
         } catch (Exception e) {
-            logger.warning("Enter into care circle is not happening.");
+            LogUtil.warning("Enter into care circle is not happening.");
         }
 
         //Kebab menu clicking to select the edit care circle option
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
-            logger.info("Kebab menu is clicked to access the edit care circle option");
+            LogUtil.info("Kebab menu is clicked to access the edit care circle option");
 
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
-            logger.info("Clicking the edit care circle option.");
+            LogUtil.info("Clicking the edit care circle option.");
 
         } catch (Exception e) {
-            logger.warning("Kebab menu is not clicked to access the edit care circle option");
-            logger.warning("Clicking the edit care circle is not happening.");
+            LogUtil.warning("Kebab menu is not clicked to access the edit care circle option");
+            LogUtil.warning("Clicking the edit care circle is not happening.");
         }
 
         //Edit the care circle name with less character and Click the submit to get the error for not enough character.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     className("XCUIElementTypeTextField"))).sendKeys("R");
-            logger.info("Care circle name is changed with less character.");
+            LogUtil.info("Care circle name is changed with less character.");
 
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
-            logger.info("clicking the update button with less group name.");
+            LogUtil.info("clicking the update button with less group name.");
         } catch (Exception e) {
-            logger.warning("Submit button is not working for getting the error of not enough character for group name.");
+            LogUtil.warning("Submit button is not working for getting the error of not enough character for group name.");
         }
 
         //Actual error.
         WebElement error1 = null;
         try {
             error1 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Group name at least 5 characters.")));
-            logger.info("Not enough character error : " + error1.getText());
+            LogUtil.info("Not enough character error : " + error1.getText());
         } catch (Exception e) {
-            logger.warning("Error message is not pop-up for less character for care circle group name.");
+            LogUtil.warning("Error message is not pop-up for less character for care circle group name.");
         }
 
         //Clearing the input field.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.className("XCUIElementTypeTextField"))).clear();
-            logger.info("Clearing the group name");
+            LogUtil.info("Clearing the group name");
         } catch (Exception e) {
-            logger.warning("Clearing the group name field is not working.");
+            LogUtil.warning("Clearing the group name field is not working.");
         }
 
         //To get empty input field error, clicking the update.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
-            logger.info("Update click is happen with empty group name");
+            LogUtil.info("Update click is happen with empty group name");
         } catch (Exception e) {
-            logger.warning("Update click is not happen with empty group name");
+            LogUtil.warning("Update click is not happen with empty group name");
         }
 
         //Empty group name error.
         WebElement error2 = null;
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter group name")));
-            logger.info("Empty input field error : " + error2.getText());
+            LogUtil.info("Empty input field error : " + error2.getText());
         } catch (Exception e) {
-            logger.warning("Empty input field error message is not visible.");
+            LogUtil.warning("Empty input field error message is not visible.");
         }
 
     }
@@ -395,69 +393,69 @@ public class DashBoard_Page_Ios extends DriverManager {
         //To enter into care circle.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
-            logger.info("Enter into care circle happening..");
+            LogUtil.info("Enter into care circle happening..");
         } catch (Exception e) {
-            logger.warning("Enter into care circle is not happening.");
+            LogUtil.warning("Enter into care circle is not happening.");
         }
 
         //Allow the permission for accessing the contact list.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("After clicking the plus to add contact, Permission access is popping-up.");
+            LogUtil.info("After clicking the plus to add contact, Permission access is popping-up.");
         } catch (Exception e) {
-            logger.warning("After clicking the plus to add contact, Permission access is not popping-up");
+            LogUtil.warning("After clicking the plus to add contact, Permission access is not popping-up");
         }
 
         //Kebab menu clicking.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
-            logger.info("Kebab menu is clicked to access the edit care circle option");
+            LogUtil.info("Kebab menu is clicked to access the edit care circle option");
         } catch (Exception e) {
-            logger.warning("Kebab menu is not clicked to access the edit care circle option");
+            LogUtil.warning("Kebab menu is not clicked to access the edit care circle option");
         }
 
         //2.(i)Edit care circle option
         WebElement Edit_Care_circle = null;
         try {
             Edit_Care_circle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle")));
-            logger.info("Edit care circle option is present " + Edit_Care_circle.isDisplayed());
+            LogUtil.info("Edit care circle option is present " + Edit_Care_circle.isDisplayed());
         } catch (Exception e) {
-            logger.warning("");
+            LogUtil.warning("");
         }
 
         //2.(ii)Kebab menu list with set reminder
         WebElement SetReminder = null;
         try {
             SetReminder = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Set Reminders")));
-            logger.info("Set reminder option is present in the list : " + SetReminder.isDisplayed());
+            LogUtil.info("Set reminder option is present in the list : " + SetReminder.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Set reminder is not visible.");
+            LogUtil.warning("Set reminder is not visible.");
         }
 
         //2.(iii)Kebab menu list with Delete care circle
         WebElement DeleteCareCircle = null;
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Delete Care Circle")));
-            logger.info("Delete care circle option is present in the list : " + DeleteCareCircle.isDisplayed());
+            LogUtil.info("Delete care circle option is present in the list : " + DeleteCareCircle.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Delete care circle is not visible");
+            LogUtil.warning("Delete care circle is not visible");
         }
 
         //3.Clicking on the edit care circle option in the kebab menu
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
-            logger.info("Clicking the edit care circle");
+            LogUtil.info("Clicking the edit care circle");
         } catch (Exception e) {
-            logger.warning("Edit care circle click is not happening.");
+            LogUtil.warning("Edit care circle click is not happening.");
         }
 
         //4.Clicking on the update to complete the change.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
-            logger.info("Care circle is updated with existing values.");
+            LogUtil.info("Care circle is updated with existing values.");
         } catch (Exception e) {
-            logger.warning("Care circle is not updated with existing values.");
+            LogUtil.warning("Care circle is not updated with existing values.");
         }
 
     }
@@ -472,27 +470,27 @@ public class DashBoard_Page_Ios extends DriverManager {
         //pre - Care circle button.
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
-            logger.info("clicking the care circle.");
+            LogUtil.info("clicking the care circle.");
         } catch (Exception e) {
-            logger.warning("Care circle is not visible ");
+            LogUtil.warning("Care circle is not visible ");
         }
 
 
         //pre - clicking the kebab menu
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
-            logger.info("Kebab menu is clicked in the care circle page.");
+            LogUtil.info("Kebab menu is clicked in the care circle page.");
         } catch (Exception e) {
-            logger.warning("clicking kebab menu is not happening in the care circle page.");
+            LogUtil.warning("clicking kebab menu is not happening in the care circle page.");
         }
 
         //1.clicking the Set reminder button in the kebab menu
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     accessibilityId("Set Reminders"))).click();
-            logger.info("Set reminder is working.");
+            LogUtil.info("Set reminder is working.");
         } catch (Exception e) {
-            logger.warning("Set reminder from care circle is not happening");
+            LogUtil.warning("Set reminder from care circle is not happening");
         }
 
         //2.Verify the blood pressure radio button is selected by default.
@@ -501,9 +499,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             BP = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][1]")));
             BP.click();
-            logger.info("Bp reminder is selected default : " + BP.isDisplayed());
+            LogUtil.info("Bp reminder is selected default : " + BP.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Bp radio button is not Enabled.");
+            LogUtil.warning("Bp radio button is not Enabled.");
         }
 
         //3.verify the ECG radio button is selectable
@@ -512,9 +510,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             ECG = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][2]")));
             ECG.click();
-            logger.info("Ecg is selected : " + ECG.isDisplayed());
+            LogUtil.info("Ecg is selected : " + ECG.isDisplayed());
         } catch (Exception e) {
-            logger.warning("ECG radio button is not displayed.");
+            LogUtil.warning("ECG radio button is not displayed.");
         }
 
         //4. verify the Spo2 reminder radio button is selectable
@@ -523,9 +521,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")));
             Spo2.click();
-            logger.info("Spo2 is selected : " + Spo2.isDisplayed());
+            LogUtil.info("Spo2 is selected : " + Spo2.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Spo2 radio button is not selectable.");
+            LogUtil.warning("Spo2 radio button is not selectable.");
         }
 
         //5.Heart rate reminder radio button is selectable
@@ -534,18 +532,18 @@ public class DashBoard_Page_Ios extends DriverManager {
             HR = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][4]")));
             HR.click();
-            logger.info("HR is selected : " + HR.isDisplayed());
+            LogUtil.info("HR is selected : " + HR.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Hr reminder radio is not visible");
+            LogUtil.warning("Hr reminder radio is not visible");
         }
 
         //Done button
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]"))).click();
-            logger.info("Done button click is working.");
+            LogUtil.info("Done button click is working.");
         } catch (Exception e) {
-            logger.warning("Done button click is not working");
+            LogUtil.warning("Done button click is not working");
         }
 
         //Add reminder name
@@ -553,60 +551,60 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeTextField[`value == \"Reminder Name\"`]")))
                     .sendKeys("Take Heart rate.");
-            logger.info("Reminder name is added.");
+            LogUtil.info("Reminder name is added.");
         } catch (Exception e) {
-            logger.warning("Add reminder name is not working.");
+            LogUtil.warning("Add reminder name is not working.");
         }
 
         //Selecting the days for the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("TUE"))).click();
-            logger.info("Selecting the days for reminder is working.");
+            LogUtil.info("Selecting the days for reminder is working.");
         } catch (Exception e) {
-            logger.warning("Selecting days for the reminder is not working.");
+            LogUtil.warning("Selecting days for the reminder is not working.");
         }
 
         //Set the time for the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Add"))).click();
-            logger.info("Set time for reminder is working");
+            LogUtil.info("Set time for reminder is working");
         } catch (Exception e) {
-            logger.warning("Set time for reminder is not working.");
+            LogUtil.warning("Set time for reminder is not working.");
         }
 
         //clicking the done to Choose the Current time for the reminder.
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done"))).click();
-            logger.info("choose minutes is working");
+            LogUtil.info("choose minutes is working");
         } catch (Exception e) {
-            logger.warning("Choose minute is not working");
+            LogUtil.warning("Choose minute is not working");
         }
 
         //Using + to Adding invite to the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Plus"))).click();
-            logger.info("invite the people is working.");
+            LogUtil.info("invite the people is working.");
         } catch (Exception e) {
-            logger.warning("Invite the people is not working.");
+            LogUtil.warning("Invite the people is not working.");
         }
 
         //6.Add the invite to the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                     .xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
-            logger.info("Care circle people is added to the reminder.");
+            LogUtil.info("Care circle people is added to the reminder.");
         } catch (Exception e) {
-            logger.warning("People is not added to the reminder");
+            LogUtil.warning("People is not added to the reminder");
         }
 
         //Clicking the add invite button
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                     .accessibilityId("**/XCUIElementTypeButton[`name == \"Add Invitee\"`]"))).click();
-            logger.info("Invite button click is working.");
+            LogUtil.info("Invite button click is working.");
         } catch (Exception e) {
-            logger.warning("Clicking invite button is not working.");
+            LogUtil.warning("Clicking invite button is not working.");
         }
 
         //Scrolling to personal note
@@ -614,18 +612,18 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeTextView[`value == \"Personal Notes\"`]")))
                     .sendKeys("Take care of yourself.");
-            logger.info("Scroll to the personal note and added input as well.");
+            LogUtil.info("Scroll to the personal note and added input as well.");
         } catch (Exception e) {
-            logger.warning("Scroll to the  personal note is not happen");
+            LogUtil.warning("Scroll to the  personal note is not happen");
         }
 
         //7.Confirm the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                     .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]"))).click();
-            logger.info("Reminder set successfully.");
+            LogUtil.info("Reminder set successfully.");
         } catch (Exception e) {
-            logger.warning("Reminder confirmation is not happen.");
+            LogUtil.warning("Reminder confirmation is not happen.");
         }
     }
 
@@ -642,9 +640,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
                     .click();
-            logger.info("Clicking the plus is working");
+            LogUtil.info("Clicking the plus is working");
         } catch (Exception e) {
-            logger.warning("plus button is not clicked");
+            LogUtil.warning("plus button is not clicked");
         }
 
         //Clicking the SpO2 radio button.
@@ -652,9 +650,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")))
                     .click();
-            logger.info("Spo2 radio button is visible and it clicked.");
+            LogUtil.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
-            logger.warning("Spo2 radio button is not visible for a click.");
+            LogUtil.warning("Spo2 radio button is not visible for a click.");
         }
 
         //Clicking the DONE button.
@@ -662,9 +660,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]")))
                     .click();
-            logger.info("Done is clicked");
+            LogUtil.info("Done is clicked");
         } catch (Exception e) {
-            logger.warning("Done is not clicked.");
+            LogUtil.warning("Done is not clicked.");
         }
 
         //CASE - 1
@@ -672,18 +670,18 @@ public class DashBoard_Page_Ios extends DriverManager {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("WED"))).click();
-            logger.info("Days are selected for reminder.");
+            LogUtil.info("Days are selected for reminder.");
         } catch (Exception e) {
-            logger.warning("Selecting day is not working.");
+            LogUtil.warning("Selecting day is not working.");
         }
 
         //2.Unselect the days in the reminder
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("MON"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("WED"))).click();
-            logger.info("De-Selecting the days is happen.");
+            LogUtil.info("De-Selecting the days is happen.");
         } catch (Exception e) {
-            logger.warning("De-Selecting the days is not working. ");
+            LogUtil.warning("De-Selecting the days is not working. ");
         }
 
         // CASE - 2 & 3
@@ -696,9 +694,9 @@ public class DashBoard_Page_Ios extends DriverManager {
                     .click();
             //Empty reminder name error will be shown up.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter reminder name")));
-            logger.info("Error 1 :" + EmptyReminderName.getText());
+            LogUtil.info("Error 1 :" + EmptyReminderName.getText());
         } catch (Exception e) {
-            logger.warning("Empty reminder name error is not visible.");
+            LogUtil.warning("Empty reminder name error is not visible.");
         }
 
         //Less character error on reminder name.
@@ -721,9 +719,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Error for less character.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                     .accessibilityId("Reminder name should be at least 3 characters")));
-            logger.info("Error 2 :" + LessCharacterError.getText());
+            LogUtil.info("Error 2 :" + LessCharacterError.getText());
         } catch (Exception e) {
-            logger.warning("Less character error is not visible");
+            LogUtil.warning("Less character error is not visible");
         }
 
         //3. error message for not selected day.
@@ -746,9 +744,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Error for days not selected character.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                     .accessibilityId("Please select day(s)")));
-            logger.info("Error 2 :" + DaysNotSelected.getText());
+            LogUtil.info("Error 2 :" + DaysNotSelected.getText());
         } catch (Exception e) {
-            logger.warning("name is added");
+            LogUtil.warning("name is added");
         }
 
     }
@@ -765,9 +763,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
                     .click();
-            logger.info("Clicking the plus is working");
+            LogUtil.info("Clicking the plus is working");
         } catch (NoSuchElementException e) {
-            logger.warning("Plus button for set reminder is not found.");
+            LogUtil.warning("Plus button for set reminder is not found.");
         }
 
         //Clicking the SpO2 radio button.
@@ -775,9 +773,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")))
                     .click();
-            logger.info("Spo2 radio button is visible and it clicked.");
+            LogUtil.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
-            logger.warning("Spo2 radio button is not visible for a click.");
+            LogUtil.warning("Spo2 radio button is not visible for a click.");
         }
 
         //Clicking the DONE button.
@@ -785,9 +783,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]")))
                     .click();
-            logger.info("Done is clicked");
+            LogUtil.info("Done is clicked");
         } catch (Exception e) {
-            logger.warning("Done is not clicked.");
+            LogUtil.warning("Done is not clicked.");
         }
 
         //1.Empty Personal note less character.
@@ -804,18 +802,18 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Confirm the reminder using set reminder button.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]"))).click();
-            logger.info("Empty personal note to generate the error");
+            LogUtil.info("Empty personal note to generate the error");
         } catch (Exception e) {
-            logger.warning("Empty personal note is not");
+            LogUtil.warning("Empty personal note is not");
         }
 
         //Actual Error creation for empty personal note.
         WebElement ErrorForNoPersonalNote =null;
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter personal note.")));
-            logger.info("Error 1 :" + ErrorForNoPersonalNote.getText());
+            LogUtil.info("Error 1 :" + ErrorForNoPersonalNote.getText());
         } catch (Exception e) {
-            logger.warning("Empty personal note error is not visible.");
+            LogUtil.warning("Empty personal note error is not visible.");
         }
 
         //2.Creating the error for less character in personal note.
@@ -838,16 +836,16 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                     .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]"))).click();
         } catch (Exception e) {
-            logger.warning("Clearing the personal note.");
+            LogUtil.warning("Clearing the personal note.");
         }
 
         //Confirm the reminder using set reminder button.
         WebElement ErrorForLessCharacterForPersonalNote =null;
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Please add reminder time"))).click();
-            logger.info("Less character for personal note error :" + ErrorForLessCharacterForPersonalNote.getText());
+            LogUtil.info("Less character for personal note error :" + ErrorForLessCharacterForPersonalNote.getText());
         } catch (Exception e) {
-            logger.warning("Less character for personal note error is not coming.");
+            LogUtil.warning("Less character for personal note error is not coming.");
         }
     }
 
@@ -863,9 +861,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
                     .click();
-            logger.info("Clicking the plus is working");
+            LogUtil.info("Clicking the plus is working");
         } catch (NoSuchElementException e) {
-            logger.warning("Plus button for set reminder is not found.");
+            LogUtil.warning("Plus button for set reminder is not found.");
         }
 
         //Clicking the SpO2 radio button.
@@ -873,9 +871,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")))
                     .click();
-            logger.info("Spo2 radio button is visible and it clicked.");
+            LogUtil.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
-            logger.warning("Spo2 radio button is not visible for a click.");
+            LogUtil.warning("Spo2 radio button is not visible for a click.");
         }
 
         //Clicking the DONE button.
@@ -883,9 +881,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]")))
                     .click();
-            logger.info("Done is clicked");
+            LogUtil.info("Done is clicked");
         } catch (Exception e) {
-            logger.warning("Done is not clicked.");
+            LogUtil.warning("Done is not clicked.");
         }
 
         try {
@@ -902,9 +900,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .className("XCUIElementTypeTextView")))
                     .sendKeys("Take care.");
-            logger.info("Reminder name date and reminder personal note is added.");
+            LogUtil.info("Reminder name date and reminder personal note is added.");
         } catch (Exception e) {
-            logger.warning("Set time for the reminder is not happen.");
+            LogUtil.warning("Set time for the reminder is not happen.");
         }
 
         //1.Adding reminder time.
@@ -915,11 +913,11 @@ public class DashBoard_Page_Ios extends DriverManager {
             //5.clicking the done set the current time for the reminder.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done"))).click();
 
-            logger.info("Reminder time is added.") ;
+            LogUtil.info("Reminder time is added.") ;
 
         }catch (Exception e)
         {
-            logger.info("Reminder time is not added.");
+            LogUtil.info("Reminder time is not added.");
         }
 
         //2.Editing the reminder time.
@@ -932,11 +930,11 @@ public class DashBoard_Page_Ios extends DriverManager {
             //clicking the done set the current time for the reminder.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done"))).click();
 
-            logger.info("Reminder time is edited.");
+            LogUtil.info("Reminder time is edited.");
 
         }catch (Exception e)
         {
-            logger.info("Reminder time is not edited.");
+            LogUtil.info("Reminder time is not edited.");
         }
 
         //User click the cancel button to avoid setting time for reminder.
@@ -948,10 +946,10 @@ public class DashBoard_Page_Ios extends DriverManager {
 
             //Cancel button click
             Cancel = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Cancel")));
-            logger.info("Canceling the time set for reminder." + Cancel.isDisplayed());
+            LogUtil.info("Canceling the time set for reminder." + Cancel.isDisplayed());
             Cancel.click();
         } catch (Exception e) {
-            logger.warning("Cancel button is not visible.");
+            LogUtil.warning("Cancel button is not visible.");
         }
 
 
@@ -969,9 +967,9 @@ public class DashBoard_Page_Ios extends DriverManager {
         try {
             CareCircle = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon")));
             CareCircle.click();
-            logger.info("Care circle is clicked.");
+            LogUtil.info("Care circle is clicked.");
         } catch (Exception e) {
-            logger.warning("Care circle is is not present to click.");
+            LogUtil.warning("Care circle is is not present to click.");
         }
 
         //clicking the kebab menu
@@ -982,7 +980,7 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                     .accessibilityId("Delete Care Circle"))).click();
         } catch (Exception e) {
-            logger.warning("Clicking the kebab for delete care circel is not happen.");
+            LogUtil.warning("Clicking the kebab for delete care circel is not happen.");
         }
 
         //Confirmation for deleting the care circle
@@ -991,15 +989,15 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Confirm alter message for deleting the care circle
             ConfirmAlterMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                     .accessibilityId("Are you sure you want to delete this Care Circle?")));
-            logger.info("Delete care circle message" + ConfirmAlterMessage.getText());
+            LogUtil.info("Delete care circle message" + ConfirmAlterMessage.getText());
 
             //2.Clicking the Ok to delete the care circle.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK")));
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Care circle removed successfully")));
-            logger.info("Success toast : " + SuccessToast.getText());
+            LogUtil.info("Success toast : " + SuccessToast.getText());
         } catch (Exception e) {
-            logger.warning("Success toast is not coming in the dashboard.");
+            LogUtil.warning("Success toast is not coming in the dashboard.");
         }
     }
 
@@ -1015,9 +1013,9 @@ public class DashBoard_Page_Ios extends DriverManager {
                     .xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]" +
                             "/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
-            logger.info("Clicking the primary user profile to check My dependent section.");
+            LogUtil.info("Clicking the primary user profile to check My dependent section.");
         } catch (Exception e) {
-            logger.warning("Primary user profile is not there to click.");
+            LogUtil.warning("Primary user profile is not there to click.");
         }
 
         try {
@@ -1027,9 +1025,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //1.Verify the dependent list
             WebElement Dependent_1 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                     .xpath("//XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther")));
-            logger.info(Dependent_1.getText() + " is one of the dependent is present : " + Dependent_1.isDisplayed());
+            LogUtil.info(Dependent_1.getText() + " is one of the dependent is present : " + Dependent_1.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Dependent is not available.");
+            LogUtil.warning("Dependent is not available.");
         }
 
         try {
@@ -1045,7 +1043,7 @@ public class DashBoard_Page_Ios extends DriverManager {
 
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
-            logger.warning("Edit the dependent profile is not happen.");
+            LogUtil.warning("Edit the dependent profile is not happen.");
         }
 
         try {
@@ -1058,9 +1056,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             /*Deleting the dependent profile success toast*/
             WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Dependent removed successfully")));
 
-            logger.info("Success message for deleted dependent :" + message.getText());
+            LogUtil.info("Success message for deleted dependent :" + message.getText());
         } catch (Exception e) {
-            logger.warning("Deleting the dependent profile is not happen.s");
+            LogUtil.warning("Deleting the dependent profile is not happen.s");
         }
 
     }
@@ -1076,9 +1074,9 @@ public class DashBoard_Page_Ios extends DriverManager {
                     .xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]" +
                             "/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
-            logger.info("Clicking the primary user profile to check My dependent section.");
+            LogUtil.info("Clicking the primary user profile to check My dependent section.");
         } catch (Exception e) {
-            logger.warning("Not moved to the Report section of the dependent.");
+            LogUtil.warning("Not moved to the Report section of the dependent.");
         }
 
         try
@@ -1090,10 +1088,10 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Health Report"))).click();
 
             WebElement lable = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Blood Pressure")));
-            logger.info("Report section : " + lable.getText());
-            logger.info("We are in dependent profile report section.");
+            LogUtil.info("Report section : " + lable.getText());
+            LogUtil.info("We are in dependent profile report section.");
         } catch (Exception e) {
-            logger.warning("Blood pressure label is not there.");
+            LogUtil.warning("Blood pressure label is not there.");
         }
     }
 
@@ -1110,9 +1108,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Plus\"`][2]")))
                             .click();
-            logger.info("Clicking the plus is working");
+            LogUtil.info("Clicking the plus is working");
         } catch (Exception e) {
-            logger.warning("plus button is not clicked");
+            LogUtil.warning("plus button is not clicked");
         }
 
         //Clicking the SpO2 radio button.
@@ -1120,9 +1118,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"radioUnSelection\"`][3]")))
                     .click();
-            logger.info("Spo2 radio button is visible and it clicked.");
+            LogUtil.info("Spo2 radio button is visible and it clicked.");
         } catch (Exception e) {
-            logger.warning("Spo2 radio button is not visible for a click.");
+            LogUtil.warning("Spo2 radio button is not visible for a click.");
         }
 
         //Clicking the DONE button.
@@ -1130,9 +1128,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                             .iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`]")))
                     .click();
-            logger.info("Done is clicked");
+            LogUtil.info("Done is clicked");
         } catch (Exception e) {
-            logger.warning("Done is not clicked.");
+            LogUtil.warning("Done is not clicked.");
         }
 
         try {
@@ -1158,9 +1156,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //2.(ii)Confirm the reminder using set reminder button.
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
                     .iOSClassChain("**/XCUIElementTypeButton[`name == \"Set Reminder\"`]"))).click();
-            logger.info("Set up  the reminder from the dashboard is happening.");
+            LogUtil.info("Set up  the reminder from the dashboard is happening.");
         } catch (Exception e) {
-            logger.warning("Set up the reminder form the dashboard is not happening.");
+            LogUtil.warning("Set up the reminder form the dashboard is not happening.");
         }
 
         try
@@ -1175,9 +1173,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Clicking on Add invite button for the confirmation.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                     .xpath("**/XCUIElementTypeButton[`name == \"Add Invitee\"`]"))).click();
-            logger.info("Inviting the people to the reminder is happening");
+            LogUtil.info("Inviting the people to the reminder is happening");
         } catch (Exception e) {
-            logger.warning("Invite the people to the reminder is not working. ");
+            LogUtil.warning("Invite the people to the reminder is not working. ");
         }
     }
 
@@ -1191,14 +1189,14 @@ public class DashBoard_Page_Ios extends DriverManager {
         WebElement bloodPressureElement, pressureChart, pressureValue =null;
         try {
             bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Blood Pressure")));
-            logger.info("Blood pressure report is present: " + bloodPressureElement.isDisplayed());
+            LogUtil.info("Blood pressure report is present: " + bloodPressureElement.isDisplayed());
 
             try {
                 pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated
                         (AppiumBy.accessibilityId("Line Chart. 7 datasets. DataSet, DataSet, DataSet, DataSet, DataSet, DataSet, DataSet")));
-                logger.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
+                LogUtil.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
             } catch (NoSuchCookieException e) {
-                logger.warning("There is no such element as pressure chart is visible.");
+                LogUtil.warning("There is no such element as pressure chart is visible.");
                 throw new RuntimeException(e);
             }
 
@@ -1206,13 +1204,13 @@ public class DashBoard_Page_Ios extends DriverManager {
                 pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated
                         (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
                                 "/XCUIElementTypeOther[3]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")));
-                logger.info("Blood pressure value is present: " + pressureValue.getText());
+                LogUtil.info("Blood pressure value is present: " + pressureValue.getText());
             } catch (NoSuchElementException e) {
-                logger.warning("There is no such element as Pressure value is present.");
+                LogUtil.warning("There is no such element as Pressure value is present.");
                 throw new RuntimeException(e);
             }
         } catch (TimeoutException e) {
-            logger.warning("Bp chart is not visible.");
+            LogUtil.warning("Bp chart is not visible.");
             throw new TimeoutException(e.getMessage());
         }
 
@@ -1220,36 +1218,36 @@ public class DashBoard_Page_Ios extends DriverManager {
         try {
             //Hr report values with chart.
             hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("HR")));
-            logger.info("Heart rate report is present: " + hrElement.isDisplayed());
+            LogUtil.info("Heart rate report is present: " + hrElement.isDisplayed());
 
             hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"Bar Chart. 1 dataset. \"`][1]")));
-            logger.info("Heart rate report chart is present: " + hrChart.isDisplayed());
+            LogUtil.info("Heart rate report chart is present: " + hrChart.isDisplayed());
 
             hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated
                     (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[4]" +
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")));
-            logger.info("Heart rate value is present: " + hrValue.getText());
+            LogUtil.info("Heart rate value is present: " + hrValue.getText());
         } catch (Exception e) {
-            logger.warning("Hr report chart is not visible.");
+            LogUtil.warning("Hr report chart is not visible.");
         }
 
         WebElement Spo2Element, Spo2Chart, Spo2Value =null;
         try {
             //Spo2 report values with chart.
             Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("SpO2")));
-            logger.info("Spo2 report is present: " + Spo2Element.isDisplayed());
+            LogUtil.info("Spo2 report is present: " + Spo2Element.isDisplayed());
 
             Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"Bar Chart. 1 dataset. \"`][2]")));
-            logger.info("Spo2 report chart is present: " + Spo2Chart.isDisplayed());
+            LogUtil.info("Spo2 report chart is present: " + Spo2Chart.isDisplayed());
 
             Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated
                     (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[5]" +
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")));
-            logger.info("Spo2 value is present: " + Spo2Value.getText());
+            LogUtil.info("Spo2 value is present: " + Spo2Value.getText());
         } catch (Exception e) {
-            logger.warning("Spo2 report chart is not visible.");
+            LogUtil.warning("Spo2 report chart is not visible.");
         }
     }
 
@@ -1267,23 +1265,23 @@ public class DashBoard_Page_Ios extends DriverManager {
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther" +
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
         } catch (Exception e) {
-            logger.warning("Primary user profile click is not happen.");
+            LogUtil.warning("Primary user profile click is not happen.");
         }
 
         try {
             //Clicking on parameter range option in the primary user profile
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Parameter Range"))).click();
         } catch (Exception e) {
-            logger.warning("Primary user parameter range click is not happen");
+            LogUtil.warning("Primary user parameter range click is not happen");
         }
 
         try
         {
             /*Skipping the coach marks*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
-            logger.info("Skip the coach mark while customize the parameter range.");
+            LogUtil.info("Skip the coach mark while customize the parameter range.");
         } catch (Exception e) {
-            logger.warning("Skip is not visible for the customize the parameter range.");
+            LogUtil.warning("Skip is not visible for the customize the parameter range.");
         }
 
         //Customize the BP range
@@ -1293,9 +1291,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Submit button
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-            logger.info("Customize is happened and the reset is available now.");
+            LogUtil.info("Customize is happened and the reset is available now.");
         } catch (Exception e) {
-            logger.warning("Customize the BP range is not happen for the primary user. ");
+            LogUtil.warning("Customize the BP range is not happen for the primary user. ");
         }
 
         try
@@ -1305,9 +1303,9 @@ public class DashBoard_Page_Ios extends DriverManager {
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("Reset is done by using Reset option.");
+            LogUtil.info("Reset is done by using Reset option.");
         }catch (TimeoutException e) {
-            logger.warning("Reset is not happen by using reset button.");
+            LogUtil.warning("Reset is not happen by using reset button.");
         }
 
         try {
@@ -1317,9 +1315,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Submit button
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-            logger.info("Customize is happening by using customize button.");
+            LogUtil.info("Customize is happening by using customize button.");
         } catch (Exception e) {
-            logger.warning("Customizing the HR is not working");
+            LogUtil.warning("Customizing the HR is not working");
         }
 
         try
@@ -1329,10 +1327,10 @@ public class DashBoard_Page_Ios extends DriverManager {
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("Reset is done by using Reset option.");
+            LogUtil.info("Reset is done by using Reset option.");
         }catch (Exception e)
         {
-            logger.warning("Reset is not happen by using reset button.");
+            LogUtil.warning("Reset is not happen by using reset button.");
         }
     }
 
@@ -1349,9 +1347,9 @@ public class DashBoard_Page_Ios extends DriverManager {
                     (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
                             "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]/" +
                             "XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
-            logger.info("Moving to primary profile to see the dependent.");
+            LogUtil.info("Moving to primary profile to see the dependent.");
         } catch (Exception e) {
-            logger.warning("Primary user profile navigation is not happening.");
+            LogUtil.warning("Primary user profile navigation is not happening.");
         }
 
         try
@@ -1362,18 +1360,18 @@ public class DashBoard_Page_Ios extends DriverManager {
             /*Choosing the 1st profile.*/
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.xpath("//XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
-            logger.info("Navigated to the dependent profile through primary user profile.");
+            LogUtil.info("Navigated to the dependent profile through primary user profile.");
         } catch (Exception e) {
-            logger.warning("Navigation is not happen through the primary user profile.");
+            LogUtil.warning("Navigation is not happen through the primary user profile.");
         }
 
         try
         {
             /*Skipping the coach marks*/
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
-            logger.info("Skip the coach mark while customize the parameter range.");
+            LogUtil.info("Skip the coach mark while customize the parameter range.");
         } catch (Exception e) {
-            logger.warning("Skip is not visible for the customize the parameter range.");
+            LogUtil.warning("Skip is not visible for the customize the parameter range.");
         }
 
         try {
@@ -1383,9 +1381,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Submit button
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-           logger.info("Customize the BP is happened");
+           LogUtil.info("Customize the BP is happened");
         } catch (Exception e) {
-            logger.warning("Customizing BP is not happening.");
+            LogUtil.warning("Customizing BP is not happening.");
         }
 
         try
@@ -1395,9 +1393,9 @@ public class DashBoard_Page_Ios extends DriverManager {
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Reset\"`]"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("Reset is not happen for BP.");
+            LogUtil.info("Reset is not happen for BP.");
         } catch (Exception e) {
-            logger.warning("Reset the BP range is not happen.");
+            LogUtil.warning("Reset the BP range is not happen.");
         }
 
         try {
@@ -1406,9 +1404,9 @@ public class DashBoard_Page_Ios extends DriverManager {
             //Submit button
             wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-           logger.info("Customize the HR is happening.");
+           LogUtil.info("Customize the HR is happening.");
         } catch (Exception e) {
-            logger.warning("Customize the Hr is not happen.");
+            LogUtil.warning("Customize the Hr is not happen.");
         }
 
         try
@@ -1418,10 +1416,10 @@ public class DashBoard_Page_Ios extends DriverManager {
                     (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
             //confirmation Ok
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            logger.info("Reset is done by using Reset option.");
+            LogUtil.info("Reset is done by using Reset option.");
         }catch (Exception e)
         {
-            logger.warning("Reset is not happen by using reset button.");
+            LogUtil.warning("Reset is not happen by using reset button.");
         }
 
     }
