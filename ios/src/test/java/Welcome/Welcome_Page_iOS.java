@@ -1,6 +1,7 @@
 package Welcome;
 
 import DriverManagerIos.DriverManager;
+import UtilitiesForIos.LogUtil;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
@@ -23,27 +24,27 @@ public class Welcome_Page_iOS extends DriverManager
         {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
-            logger.info("The allow notification is accepted here.");
+            LogUtil.info("The allow notification is accepted here.");
         } catch (Exception e) {
-            logger.warning("There is no Allow button to accept the notification.");
+            LogUtil.warning("There is no Allow button to accept the notification.");
             throw new RuntimeException(e.getMessage());
         }
 
         try {
             //confirm the device image is present in the screen welcome screen.
             WebElement img = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeImage")));
-            logger.info("image is displayed in the welcome screen : " + img.isDisplayed() );
+            LogUtil.info("image is displayed in the welcome screen : " + img.isDisplayed() );
         } catch (Exception e) {
-            logger.warning("img is not displayed");
+            LogUtil.warning("img is not displayed");
         }
 
         try {
             //Welcome page Description verification.
             WebElement description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     xpath("//XCUIElementTypeStaticText[@name=\"Keep track of your own and your family’s health and well-being\"]")));
-            logger.info("Welcome page description : " + description.getText());
+            LogUtil.info("Welcome page description : " + description.getText());
         } catch (Exception e) {
-            logger.info("Welcome page description is not displayed");
+            LogUtil.info("Welcome page description is not displayed");
         }
         WebElement getStarted = null;
 
@@ -51,9 +52,9 @@ public class Welcome_Page_iOS extends DriverManager
             //Clicking the Get started button
             getStarted = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     xpath("//XCUIElementTypeStaticText[@name=\"Get Started\"]")));
-            logger.info("Get started button is present in the welcome page : " + getStarted.isDisplayed());
+            LogUtil.info("Get started button is present in the welcome page : " + getStarted.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Get started button is not displayed");
+            LogUtil.warning("Get started button is not displayed");
         }
 
         wait.until(ExpectedConditions.elementToBeClickable(getStarted)).click();
@@ -62,9 +63,9 @@ public class Welcome_Page_iOS extends DriverManager
             //Verifying the login or signup label present or not.
             WebElement loginOrSignup = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     xpath("//XCUIElementTypeStaticText[@name=\"Login or Sign Up\"]")));
-            logger.info("Navigated to login page : "+ loginOrSignup);
+            LogUtil.info("Navigated to login page : "+ loginOrSignup);
         } catch (Exception e) {
-            logger.warning("Navigated to login page is not displayed");
+            LogUtil.warning("Navigated to login page is not displayed");
         }
     }
 }

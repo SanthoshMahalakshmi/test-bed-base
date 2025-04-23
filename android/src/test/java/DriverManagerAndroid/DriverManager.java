@@ -1,5 +1,6 @@
 package DriverManagerAndroid;
 
+import UtilitiesForAndroid.LogUtil;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.*;
@@ -12,19 +13,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 
 public class DriverManager {
 
-    public static Logger logger = Logger.getLogger("MyLog");
+    public static Logger logger = LogUtil.getLogger("MyLog");
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
     protected static AppiumDriver getDriver() {
-        logger.info("getDriver()" + appiumDriverThreadLocal.get());
+        LogUtil.info("getDriver()" + appiumDriverThreadLocal.get());
         return appiumDriverThreadLocal.get();
     }
 
@@ -38,7 +39,6 @@ public class DriverManager {
     @BeforeMethod
     public void initializeDriverForAndroid(ITestResult testResult) throws Exception {
         try {
-
             InputStream inputStream = new FileInputStream("config/browserstack-android.yml");
 
             if (inputStream == null) {
@@ -49,56 +49,64 @@ public class DriverManager {
             Yaml yaml = new Yaml();
             Map<String, Object> config = yaml.load(inputStream);
 
-            // Read secrets from environment variables for local and browser stack.
+            // Read the environment variable
             String currentEnv = System.getenv("ENVIRONMENT");
-            if (Objects.equals(currentEnv, "local")) {
-                String AppiumServerUrl = "http://127.0.0.1:4723/";
-                System.out.print("Entering into local case for ANDROID\n");
+
+            // Set default to 'bs' if not provided
+            if (currentEnv == null || currentEnv.isEmpty()) {
+                currentEnv = "BrowserStack";
+            }
+
+            LogUtil.info("Current ENVIRONMENT: " + currentEnv);
+
+            if (currentEnv.equalsIgnoreCase("local")) {
+                String AppiumServerUrl = "http://127.0.0.1:4723";
+                LogUtil.info("Entering into LOCAL case for Android\n");
+
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
-                caps.setCapability("deviceName", "sdk_gphone64_arm64"); // Change to your device/emulator name
+                caps.setCapability("deviceName", "sdk_gphone64_arm64");
                 caps.setCapability("udid", "emulator-5554");
-                caps.setCapability("platformVersion", "16"); // Change based on your device
+                caps.setCapability("platformVersion", "16");
                 caps.setCapability("automationName", "UiAutomator2");
-                caps.setCapability("appPackage", "com.heartmonitor.android"); // Change to your app package
-                caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity"); // Change to main activity
+                caps.setCapability("appPackage", "com.heartmonitor.android");
+                caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity");
                 caps.setCapability("fullReset", true);
-                caps.setCapability("noReset", false); // Keeps app data after test execution
+                caps.setCapability("noReset", false);
                 caps.setCapability("appium:app", "/Users/San/Downloads/apps/Monitor-Staging-170325.apk");
-                URL url = new URL(AppiumServerUrl);
 
-                AndroidDriver newDriver = new AndroidDriver(url, caps);
-                setDriverForAndroid(newDriver);
+                URL url = new URL(AppiumServerUrl);
+                setDriverForAndroid(new AndroidDriver(url, caps));
             } else {
-                System.out.print("Entering into BROWSER_STACK case for ANDROID\n");
+                LogUtil.info("Entering into BROWSER_STACK case for Android\n");
+
                 String userName = System.getenv("USER_NAME");
                 String accessKey = System.getenv("ACCESS_KEY");
                 String app = (String) config.get("app");
-
-                // Extract details from the YAML
                 String buildName = (String) config.get("buildName");
                 String projectName = (String) config.get("projectName");
 
-                // Get platform-specific capabilities
                 List<Map<String, Object>> platforms = (List<Map<String, Object>>) config.get("platforms");
                 Map<String, Object> platform = platforms.get(0);
                 String platformName = (String) platform.get("platformName");
                 String deviceName = (String) platform.get("deviceName");
-                Double platformVersion = (Double) platform.get("platformVersion");
 
-                // Extracting test case name dynamically
+                Object platformVersion = platform.get("platformVersion");
+                String platformVersionString = platformVersion instanceof Double
+                        ? String.valueOf(platformVersion)
+                        : (String) platformVersion;
+
                 String testName = testResult.getMethod().getMethodName();
 
-                // Setup BrowserStack capabilities
                 MutableCapabilities capabilities = new MutableCapabilities();
                 capabilities.setCapability("app", app);
 
-                Map<String, Object> browserstackOptions = new java.util.HashMap<>();
+                Map<String, Object> browserstackOptions = new HashMap<>();
                 browserstackOptions.put("userName", userName);
                 browserstackOptions.put("accessKey", accessKey);
-                browserstackOptions.put("osVersion", platformVersion);
-                browserstackOptions.put("platformName", platformName);
+                browserstackOptions.put("osVersion", platformVersionString);
                 browserstackOptions.put("deviceName", deviceName);
+                browserstackOptions.put("platformName", platformName);
                 browserstackOptions.put("projectName", projectName);
                 browserstackOptions.put("buildName", buildName);
                 browserstackOptions.put("sessionName", testName);
@@ -108,47 +116,45 @@ public class DriverManager {
 
                 capabilities.setCapability("bstack:options", browserstackOptions);
 
-                AndroidDriver newDriver = new AndroidDriver(new URL("https://USERNAME:ACCESS_KEY@hub-cloud.browserstack.com/wd/hub"), capabilities);
-                setDriverForAndroid(newDriver);
-                inputStream.close();
+                String remoteUrl = "https://" + userName + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub";
+                setDriverForAndroid(new AndroidDriver(new URL(remoteUrl), capabilities));
             }
-            logger.info("Driver initialized successfully: " + getDriver());
+            inputStream.close();
         } catch (Exception e) {
-            logger.severe("Error initializing driver: " + e.getMessage());
             e.printStackTrace();
-            throw e;
+            throw new RuntimeException("Failed to initialize Android driver.", e);
         }
     }
 
     @AfterMethod(alwaysRun = true)
     public void quitDriver() throws IOException {
-        System.out.println("🛑 Executing @AfterMethod: Quitting Android Driver... " + getDriver());
+        LogUtil.info("🛑 Executing @AfterMethod: Quitting Android Driver... " + getDriver());
         AppiumDriver currentDriver = getDriver();
-        System.out.println("🔚 This has come to an end " + currentDriver);
+        LogUtil.info("🔚 This has come to an end " + currentDriver);
 
         if (currentDriver != null) {
             try {
                 currentDriver.quit();
-                System.out.println("✅ Driver quit successfully.");
+                LogUtil.info("✅ Driver quit successfully.");
             } catch (Exception e) {
-                System.out.println("❌ Error while quitting driver: " + e.getMessage());
+                LogUtil.info("❌ Error while quitting driver: " + e.getMessage());
                 e.printStackTrace();
             } finally {
                 appiumDriverThreadLocal.remove();
-                System.out.println("🧹 ThreadLocal driver removed.");
+                LogUtil.info("🧹 ThreadLocal driver removed.");
                 // Reset the static driver reference
                 driver = null;
             }
         } else {
-            System.out.println("⚠️ No active driver found to quit.");
+            LogUtil.info("⚠️ No active driver found to quit.");
         }
 
         // Ensure app is force-stopped after quitting driver
         try {
             Runtime.getRuntime().exec("adb shell am force-stop com.heartmonitor.android");
-            System.out.println("✅ Force-stopped app successfully.");
+            LogUtil.info("✅ Force-stopped app successfully.");
         } catch (Exception e) {
-            System.out.println("❌ Error force-stopping app: " + e.getMessage());
+            LogUtil.info("❌ Error force-stopping app: " + e.getMessage());
         }
     }
 }

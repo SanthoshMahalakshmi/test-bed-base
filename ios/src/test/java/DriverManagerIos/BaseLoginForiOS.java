@@ -1,9 +1,9 @@
 package DriverManagerIos;
 
+import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,9 +21,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
-            logger.info("The allow notification is accepted here.");
+            LogUtil.info("The allow notification is accepted here.");
         } catch (Exception e) {
-            logger.warning("There is no Allow button to accept the notification.");
+            LogUtil.warning("There is no Allow button to accept the notification.");
             throw new RuntimeException(e.getMessage());
         }
 
@@ -31,9 +31,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
-            logger.info("Get started button is clicked.");
+             LogUtil.info("Get started button is clicked.");
         } catch (Exception e) {
-            logger.warning("Get started button is not visible to click");
+             LogUtil.warning("Get started button is not visible to click");
             throw new Exception(e.getMessage());
         }
 
@@ -41,9 +41,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
                     .iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("9087631080");
-            logger.info("input passing for mobile number field is working.");
+             LogUtil.info("input passing for mobile number field is working.");
         } catch (Exception e) {
-            logger.warning("input for the mobile number field not passed.");
+             LogUtil.warning("input for the mobile number field not passed.");
             throw new Exception(e.getMessage());
         }
 
@@ -51,9 +51,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"Continue\"`]"))).click();
-            logger.info("Clicking on continue to move further.");
+             LogUtil.info("Clicking on continue to move further.");
         } catch (Exception e) {
-            logger.warning("Clicking on continue is not working.");
+             LogUtil.warning("Clicking on continue is not working.");
             throw new Exception(e.getMessage());
         }
 
@@ -77,9 +77,9 @@ public class BaseLoginForiOS extends DriverManager {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                             xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[6]")))
                     .sendKeys("6");
-            logger.info("Otp is entered and we moved further.");
+             LogUtil.info("Otp is entered and we moved further.");
         } catch (Exception e) {
-            logger.warning("Entered OTP input is not correct.");
+             LogUtil.warning("Entered OTP input is not correct.");
         }
 
         //Verify the OTP
@@ -87,9 +87,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             VerifyBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Verify OTP\"`]")));
             VerifyBtn.click();
-            logger.info("verifying the otp is working.");
+             LogUtil.info("verifying the otp is working.");
         } catch (Exception e) {
-            logger.warning("Clicking on verify button is not working.");
+             LogUtil.warning("Clicking on verify button is not working.");
             throw new Exception(e.getMessage());
         }
 
@@ -97,9 +97,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             AllowNotificationButton_2 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow")));
             AllowNotificationButton_2.click();
-            logger.info("Allow button is visible and its clicked Allow");
+             LogUtil.info("Allow button is visible and its clicked Allow");
         } catch (Exception e) {
-            logger.info("Notification allow Button is not pop-up to accept allow.");
+             LogUtil.info("Notification allow Button is not pop-up to accept allow.");
         }
 
         WebElement Skip = null;
@@ -108,9 +108,9 @@ public class BaseLoginForiOS extends DriverManager {
                 Skip = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                         iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
                 Skip.click();
-                logger.info("Skip button is clicked to move further.");
+                 LogUtil.info("Skip button is clicked to move further.");
             } catch (Exception e) {
-                logger.warning("Skip button is not present.");
+                 LogUtil.warning("Skip button is not present.");
             }
         }
     }

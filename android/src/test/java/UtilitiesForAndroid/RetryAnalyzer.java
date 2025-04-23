@@ -12,7 +12,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
     {
         if (retryCount < maxRetryCount) {
             retryCount++;
-            System.out.println("Retrying test " + result.getName() + " with status " +
+            LogUtil.info("Retrying test " + result.getName() + " with status " +
                     getResultStatusName(result.getStatus()) + " for the " + retryCount + " time(s).");
             try {
                 Thread.sleep(60000); // Cooldown time if required
