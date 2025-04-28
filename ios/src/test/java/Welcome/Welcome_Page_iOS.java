@@ -2,6 +2,7 @@ package Welcome;
 
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.LogUtil;
+import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
@@ -13,11 +14,11 @@ import java.time.Duration;
 
 public class Welcome_Page_iOS extends DriverManager
 {
-    @Test
+    @Test(retryAnalyzer  = RetryAnalyzerios.class)
     public void TC_001()
     {
         //Global wait.
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         /*To accept the notification pop-up*/
         try

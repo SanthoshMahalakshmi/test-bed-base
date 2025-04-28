@@ -69,7 +69,10 @@ public class DriverManager {
 
             if (currentEnv.equalsIgnoreCase("local")) {
                 String AppiumServerUrl = "http://127.0.0.1:4723";
-                System.out.print("Entering into LOCAL case for iOS\n");
+                LogUtil.info("Entering into LOCAL case for iOS\n");
+
+                String testName = testResult.getMethod().getMethodName();
+                LogUtil.info("🚀 STARTING TEST: " + testName);
 
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
@@ -104,6 +107,7 @@ public class DriverManager {
                         : (String) platformVersion;
 
                 String testName = testResult.getMethod().getMethodName();
+                LogUtil.info("🚀 STARTING TEST: " + testName);
 
                 MutableCapabilities capabilities = new MutableCapabilities();
                 capabilities.setCapability("app", app);
@@ -135,7 +139,9 @@ public class DriverManager {
 
 
     @AfterMethod(alwaysRun = true)
-    public void quitDriver() {
+    public void quitDriver(ITestResult testResult) {
+        String testName = testResult.getMethod().getMethodName();
+        LogUtil.info("✅ FINISHED TEST: " + testName);
         AppiumDriver currentDriver = getDriver();
        LogUtil.info("🧪 [AfterMethod] Starting driver cleanup...");
 

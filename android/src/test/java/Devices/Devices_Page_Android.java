@@ -18,46 +18,58 @@ public class Devices_Page_Android extends DriverManager
     @Test
     public void TC_023() throws Exception {
 
-        LogUtil.info("Enter into TC_023");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement DeviceBtn, BurgerMenuBtn, ConnectDeviceBtn, ContinueBtn,
+        Permission;
 
         //Clicking the device section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Devices"))).click();
+            DeviceBtn =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Devices")));
+            DeviceBtn.click();
+            LogUtil.info("The Device button is clicked to move to that page.");
         } catch (Exception e) {
             LogUtil.warning("Clicking device section is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //Verify the burger menu is clickable.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMenu"))).click();
+            BurgerMenuBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMenu")));
+            BurgerMenuBtn.click();
+            LogUtil.info("Burger Menu button is clicked.");
         } catch (Exception e) {
-            LogUtil.warning("Burger menu is not clickable.");
+            LogUtil.warning("Burger menu button is not clickable.");
         }
 
         //Clicking on the connect device
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"Connect Device\")"))).click();
+            ConnectDeviceBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
+                    androidUIAutomator("new UiSelector().text(\"Connect Device\")")));
+            ConnectDeviceBtn.click();
+            LogUtil.info("Clicking the connect Device Button.");
         } catch (Exception e) {
             LogUtil.warning("Clicking on connect device is not happening.");
         }
 
         //Clicking on continue button to find out the device
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+            ContinueBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue")));
+            ContinueBtn.click();
+            LogUtil.info("Clicking the the continue button.");
         } catch (Exception e) {
             LogUtil.warning("Clicking continue is not happening.");
         }
 
         //permission
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button"))).click();
+            Permission = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.packageinstaller:id/permission_allow_button")));
+            Permission.click();
+            LogUtil.info("Permission for bluetooth search.");
         } catch (Exception e) {
-            LogUtil.warning("Giving permission is not happening.");
+            LogUtil.warning("Permission for bluetooth search is not happening.");
         }
 
         //Clicking again on continue button to find out the device

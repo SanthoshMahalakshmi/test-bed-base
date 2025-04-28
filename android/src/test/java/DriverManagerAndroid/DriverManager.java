@@ -63,6 +63,9 @@ public class DriverManager {
                 String AppiumServerUrl = "http://127.0.0.1:4723";
                 LogUtil.info("Entering into LOCAL case for Android\n");
 
+                String testName = testResult.getMethod().getMethodName();
+                LogUtil.info("🚀 STARTING TEST: " + testName);
+
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
                 caps.setCapability("deviceName", "sdk_gphone64_arm64");
@@ -97,6 +100,7 @@ public class DriverManager {
                         : (String) platformVersion;
 
                 String testName = testResult.getMethod().getMethodName();
+                LogUtil.info("🚀 STARTING TEST: " + testName);
 
                 MutableCapabilities capabilities = new MutableCapabilities();
                 capabilities.setCapability("app", app);
@@ -127,7 +131,9 @@ public class DriverManager {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void quitDriver() throws IOException {
+    public void quitDriver(ITestResult testResult) throws IOException {
+        String testName = testResult.getMethod().getMethodName();
+        LogUtil.info("✅ FINISHED TEST: " + testName);
         LogUtil.info("🛑 Executing @AfterMethod: Quitting Android Driver... " + getDriver());
         AppiumDriver currentDriver = getDriver();
         LogUtil.info("🔚 This has come to an end " + currentDriver);

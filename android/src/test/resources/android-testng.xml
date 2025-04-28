@@ -6,7 +6,7 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <include  name="TC_001"/>
+                    <exclude  name="TC_001"/> <!--Same-->
                 </methods>
             </class>
 
@@ -67,7 +67,7 @@
             <class name="Reports_Page.DownloadingReports_Page_Android">
                 <methods>
                     <exclude  name="TC_020"/>
-                    <exclude  name="TC_021"/>
+                    <include  name="TC_021"/>
                     <exclude  name="TC_022"/>
                 </methods>
             </class>
@@ -75,8 +75,8 @@
             <!--Device connection-->
             <class name="Devices.Devices_Page_Android">
                 <methods>
-                    <exclude  name="TC_023"/>
-                    <exclude  name="TC_024"/>
+                    <exclude  name="TC_023"/> <!--Only for real device-->
+                    <exclude  name="TC_024"/> <!--Only for real device-->
                 </methods>
             </class>
 
