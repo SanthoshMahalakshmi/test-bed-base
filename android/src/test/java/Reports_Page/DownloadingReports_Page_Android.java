@@ -135,42 +135,56 @@ public class DownloadingReports_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_022() throws Exception {
 
-        LogUtil.info("Enter into TC_022");
-
         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        //Variable Declaration.
+        WebElement ReportBtn, ECG, DownloadBtn, FinishBtn, HRReport;
+
         //Clicking on the report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable
+            ReportBtn = wait.until(ExpectedConditions.elementToBeClickable
                     (AppiumBy.androidUIAutomator
-                            ("new UiSelector().resourceId(\"com.heartmonitor.android:id/navigation_bar_item_icon_view\").instance(1)"))).click();
+                            ("new UiSelector().resourceId(\"com.heartmonitor.android:id/navigation_bar_item_icon_view\").instance(1)")));
+            ReportBtn.click();
+            LogUtil.info("Clicking the 'Report' Section.");
         } catch (Exception e) {
-            LogUtil.warning("Clicking report section is not happening.");
+            LogUtil.warning("Clicking the report section is not working.");
+            throw new Exception(e.getMessage());
+        }
+
+        //Report Section coach mark finish.
+        try{
+            FinishBtn =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/btnNext")));
+            FinishBtn.click();
+            LogUtil.info("Report section coach mark finish button is clicked.");
+        } catch (Exception e) {
+            LogUtil.warning("There is no coach mark pop's out in the report section.");
         }
 
         //Clicking on the HR report
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"Heart Rate\")"))).click();
+            HRReport = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Heart Rate\")")));
+            HRReport.click();
+            LogUtil.info("Clicking the HR report section.");
         } catch (Exception e) {
             LogUtil.warning("clicking HR report section is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //Clicking on the download button in ECG report section
+        //Clicking on the download button in Hr report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgDownload"))).click();
+            DownloadBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgDownload")));
+            if (DownloadBtn.isEnabled())
+            {
+                DownloadBtn.click();
+                LogUtil.info("Clicking the download button in the HR report section.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Download the HR report is not happening.");
+            LogUtil.warning("Clicking the download button in the HR report section not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //Allow permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    id("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Allow permission is not happening.");
-        }
     }
 }

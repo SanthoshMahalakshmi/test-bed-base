@@ -131,29 +131,49 @@ public class DownloadingReports_Page_Ios extends DriverManager
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        //Variable Declaration.
+        WebElement ReportBtn, ECG, DownloadBtn, FinishBtn, HRReport;
+
         //Clicking on the report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.accessibilityId("ic_profile"))).click();
-            LogUtil.info("Moving to report section is working.");
+            ReportBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_report")));
+            ReportBtn.click();
+            LogUtil.info("Clicking the 'Report' Section.");
         } catch (Exception e) {
-            LogUtil.warning("Clicking report section is not happening.");
+            LogUtil.warning("Clicking the report section is not working.");
+            throw new Exception(e.getMessage());
+        }
+
+        //Report Section coach mark finish.
+        try{
+            FinishBtn =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]")));
+            FinishBtn.click();
+            LogUtil.info("Report section coach mark finish button is clicked.");
+        } catch (Exception e) {
+            LogUtil.warning("There is no coach mark pop's out in the report section.");
         }
 
         //Clicking on the HR report
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Heart Rate"))).click();
-            LogUtil.info("Moving to the HR report section is happening.");
+            HRReport = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Heart Rate")));
+            HRReport.click();
+            LogUtil.info("Clicking the HR report section.");
         } catch (Exception e) {
             LogUtil.warning("clicking HR report section is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //Clicking on the download button in hr report section
+        //Clicking on the download button in Hr report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
-            LogUtil.info("Downloading the HR report is happening.");
+            DownloadBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload")));
+            if (DownloadBtn.isEnabled())
+            {
+                DownloadBtn.click();
+                LogUtil.info("Clicking the download button in the HR report section.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Download the HR report is not happening.");
+            LogUtil.warning("Clicking the download button in the HR report section not happening.");
+            throw new Exception(e.getMessage());
         }
     }
 }
