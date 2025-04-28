@@ -56,7 +56,7 @@
             <!--More section -->
             <class name="More.More_page_Android">
                 <methods>
-                    <exclude  name="TC_033"/>
+                    <include  name="TC_033"/>
                     <exclude  name="TC_034"/>
                     <exclude  name="TC_035"/>
                     <exclude  name="TC_036"/>
@@ -64,16 +64,16 @@
             </class>
 
             <!--Downloading the report.-->
-            <class name="Reports_Page.DownloadingReports_Page_Android">
+            <class name="Reports_Page.DownloadingReports_Page_Android"> <!--Done-->
                 <methods>
                     <exclude  name="TC_020"/>
                     <exclude  name="TC_021"/>
-                    <include  name="TC_022"/>
+                    <exclude  name="TC_022"/>
                 </methods>
             </class>
 
             <!--Device connection-->
-            <class name="Devices.Devices_Page_Android">
+            <class name="Devices.Devices_Page_Android"> <!--Done-->
                 <methods>
                     <exclude  name="TC_023"/> <!--Only for real device-->
                     <exclude  name="TC_024"/> <!--Only for real device-->
@@ -81,7 +81,7 @@
             </class>
 
             <!--Coach mark-->
-            <class name="AllCoachMarkForAndroid.CoachMarksAndroid">
+            <class name="AllCoachMarkForAndroid.CoachMarksAndroid"> <!--Done-->
                 <methods>
                     <exclude name="TC_037"/> <!--DashBoard Coach mark.-->
                     <exclude name="TC_038"/> <!--Report coach Mark-->

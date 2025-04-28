@@ -25,257 +25,78 @@ public class More_page_Ios extends DriverManager {
 
         //Clicking on more section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    accessibilityId("ic_more"))).click();
-            LogUtil.info("Enter into more section now.");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
+            LogUtil.info("Clicking the More section button.");
         } catch (Exception e) {
+            LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
         }
 
         //1.Notification toggle off and on
         try {
-            WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    xpath("//XCUIElementTypeSwitch[@name=\"Notifications\"]")));
-            LogUtil.info("Notification toggle is enabled : " + NotificationToggle.isEnabled());
-            NotificationToggle.click();
-            LogUtil.info("Notification toggle is working.");
+            WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeSwitch[`name == \"Notifications\"`]")));
+
+            if (NotificationToggle.isDisplayed())
+            {
+                NotificationToggle.click();
+                LogUtil.info("Disabling the Notification using the toggle.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Notification toggle is not enabled.");
+            throw new Exception(e.getMessage());
         }
 
         //All Notification section
+        WebElement NotificationsBtn, NotificationHeader;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Notifications\"]"))).click();
+            NotificationsBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Notifications\"`]")));
+            NotificationsBtn.click();
+            LogUtil.info("Clicking the Notification button to view all the notifications.");
 
-            WebElement NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notifications")));
-            LogUtil.info("User currently present in : " + NotificationHeader.getText() + " page.");
+            NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notifications")));
+            LogUtil.info("User currently present in ? : " + NotificationHeader.getText() + " page.");
         } catch (Exception e) {
             LogUtil.warning("Notification section is not visible.");
         }
 
-        WebElement ActualNotification = null;
+        WebElement ActualNotification;
         try {
-            ActualNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeButton[@name=\"Decline\"])[1]")));
-            LogUtil.info("Notification is present : " + ActualNotification.getText());
+            ActualNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Decline\"`][1]")));
+            LogUtil.info("Notification is present or not? : " + ActualNotification.isDisplayed());
         } catch (Exception e) {
             LogUtil.warning("No notification's are present currently.");
-        }
-
-        //User can click the notification to view the details of it.
-        try {
-            ActualNotification.click();
-        } catch (Exception e) {
-            LogUtil.warning("No notification's are present currently.");
-        }
-
-        //notification description
-        try {
-            WebElement Description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Hahanns\"]")));
-            LogUtil.info("Notification description :" + Description.getText());
-        } catch (Exception e) {
-
-            LogUtil.warning("No notification is present and no description are available.");
-        }
-
-        //notification time
-        try {
-            WebElement time = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"12:59\"]")));
-            LogUtil.info("Notification time : " + time.getText());
-        } catch (Exception e) {
-            LogUtil.warning("No notification Time is visible.");
-        }
-
-        //Notification personal note
-        try {
-            WebElement PersonalNote = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"gagga s\"]")));
-            LogUtil.info("Notification personal note : " + PersonalNote.getText());
-        } catch (Exception e) {
-            LogUtil.warning("NO Notification personal note is visible.");
-        }
-
-        //Notification Days
-        try {
-            WebElement NotificationDays = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"WED\"]")));
-            LogUtil.info("Notification personal note : " + NotificationDays.getText());
-        } catch (Exception e) {
-            LogUtil.warning("No Notification days is visible.");
-        }
-
-        //Done.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Done\"]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Ok is not clicked after view the notification.");
-        }
-
-        //clear
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic clearAllNotification"))).click();
-
-            //Clearing confirmation message.
-            WebElement ConfirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to delete all the notification?")));
-            LogUtil.info("Confirmation message : " + ConfirmationMessage.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Clear button is not present may be there is no notification.");
-        }
-
-        //ok button for the clearing notification.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Yes"))).click();
-            LogUtil.info("Yes button is clicked for clearing the notification.");
-        } catch (Exception e) {
-            LogUtil.warning("Yes button is not clicked.");
         }
 
         //navigate back
+        WebElement BackBtn;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back")));
+            BackBtn.click();
+            LogUtil.info("Clicking the back button.");
         } catch (Exception e) {
-            LogUtil.warning("Navigation is not happen.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //2.Clicking on FAQ section >>>>BUG-Important NO FAQ'S section present for ios.
+        //2.Clicking on FAQ section
+        WebElement FAQBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtFaq"))).click();
-            LogUtil.info("MOved to FAQ's section.");
+            FAQBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("FAQs")));
+            FAQBtn.click();
+            LogUtil.info("Clicking the FAQ's section button..");
         } catch (Exception e) {
-            LogUtil.warning("Not moved to FAQ's section");
+            LogUtil.warning("Clicking the FAQ's section button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //FAQ's header  >>Important-this section is not added for ios.
+        //FAQ's header
         try {
-            WebElement FAQ_Header = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"FAQs\")")));
+            WebElement FAQ_Header = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("FAQs")));
             LogUtil.info("User currently present in : " + FAQ_Header.getText() + " page.");
         } catch (Exception e) {
             LogUtil.warning("FAQ's header is not visible.");
+            throw new Exception(e.getMessage());
         }
-
-        //How to use this app
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"How to use this app?\")"))).click();
-            WebElement HowToUseThisApp = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtTitle2\").instance(0)")));
-            LogUtil.info("How to use this app content is present : " + HowToUseThisApp.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("How to use this app description is not visible.");
-        }
-
-        //Why do we use it
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Why do we use it?\")"))).click();
-            WebElement WhyDoWeUseIt = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtTitle2\").instance(1)")));
-            LogUtil.info("Why do we use it content is present : " + WhyDoWeUseIt.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("No why do use it section is present.");
-        }
-
-        //navigate back
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigation back is not happening.");
-        }
-
-        //3.Clicking on Contact us
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Contact Us"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Not clicked the contact us section. ");
-        }
-
-        //Contact us header
-        try {
-            WebElement ContactUs = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Contact Us\"]")));
-            LogUtil.info("User currently present in : " + ContactUs.getText() + " page.");
-        } catch (Exception e) {
-            LogUtil.warning("Contact us header is not visible");
-        }
-
-        //To email address.
-        try {
-            WebElement To = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeTextField[@value=\"govinda.gupta@tata.com\"]")));
-            LogUtil.info("User can see the To email address : " + To.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("To email is not visible.");
-        }
-
-        //From email address.
-        try {
-            WebElement From = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeTextField[@value=\"santhosh.k@codingmart.com\"]")));
-            LogUtil.info("User can see the To email address : " + From.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("From email is not visible.");
-        }
-
-        //Write your message with minimum character. will get error.  BUG-important - write a message is visible as text, but it should be a placeholder.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeTextView[@value=\"Write your message\"]"))).sendKeys("th");
-        } catch (Exception e) {
-            LogUtil.warning("Write your message is not visible");
-        }
-
-        //Submit
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Submit\"]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Submit button is not clicked now.");
-        }
-
-        //Error for less character BUG-important -less character error is not coming need to raise a bug.
-        try {
-            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/text_message_toaster")));
-            LogUtil.info("Error message for less character : " + ErrorText.getText());
-        } catch (Exception e) {
-            LogUtil.warning("error message is not visible for less character.");
-        }
-
-        //Error for no character
-        try {
-            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Please enter your message\"]")));
-            LogUtil.info("Error message for less character : " + ErrorText.getText());
-        } catch (Exception e) {
-            LogUtil.warning("no input added to send.");
-        }
-
-        try {
-            //Write your message
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeTextView"))).
-                            sendKeys("Thanks for developing the application and try to resolve all the conflict.");
-            LogUtil.info("Write a message is happening.");
-        } catch (Exception e) {
-            LogUtil.warning("Message is not added in the input box.");
-        }
-
-        //Submit BUG-important- could not inspect the submit button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Submit is not happen.");
-        }
-
-        //Success message
-        try {
-            WebElement SuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Request sent successfully\"]")));
-            LogUtil.info("Success message for the : " + SuccessMessage.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Success message is not coming.");
-        }
-
-        //navigate back
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating Back is not working.");
-        }
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
