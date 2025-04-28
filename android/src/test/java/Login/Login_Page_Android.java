@@ -29,8 +29,6 @@ public class Login_Page_Android extends DriverManager {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        LogUtil.info("Enter into TC_002");
-
         /*Clicking the Get started button*/
         try {
             WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
@@ -139,8 +137,6 @@ public class Login_Page_Android extends DriverManager {
     public void TC_003() throws Exception {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        LogUtil.info("Enter into TC_003");
 
         /*Clicking the Get started button*/
         try {
@@ -254,9 +250,7 @@ public class Login_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_004() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        LogUtil.info("Enter into TC_004");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         bs.CoreLoginForAndroid(true); //For base login scenario
 

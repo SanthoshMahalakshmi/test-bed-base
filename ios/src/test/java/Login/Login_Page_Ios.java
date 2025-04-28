@@ -50,7 +50,7 @@ public class Login_Page_Ios extends DriverManager {
         try {
             //3.clicking the mobile number input field and send the keys to it.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("0000000000");
+                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("9087631080");
             LogUtil.info("Mobile number filed is having correct mobile number.");
         } catch (Exception e) {
             LogUtil.warning("Mobile number field is not having the input value.");
