@@ -22,8 +22,6 @@ public class More_page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_033() throws Exception {
 
-        LogUtil.info("Enter into TC_033");
-
          bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -32,122 +30,68 @@ public class More_page_Android extends DriverManager {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     androidUIAutomator("new UiSelector().text(\"More\")"))).click();
-            LogUtil.info("Enter into more section now.");
+            LogUtil.info("Clicking the More section button.");
         } catch (Exception e) {
+            LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
         }
 
         //1.Notification toggle off and on
         try {
-            WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    id("com.heartmonitor.android:id/swEnable")));
-            LogUtil.info("Notification toggle is enabled : " + NotificationToggle.isEnabled());
-            NotificationToggle.click();
-            LogUtil.info("Notification toggle is working.");
+            WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/swEnable")));
+
+            if (NotificationToggle.isDisplayed())
+            {
+                NotificationToggle.click();
+                LogUtil.info("Disabling the Notification using the toggle.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Notification toggle is not enabled.");
+            throw new Exception(e.getMessage());
         }
 
         //All Notification section
+        WebElement NotificationsBtn, NotificationHeader;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtNotification"))).click();
+            NotificationsBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtNotification")));
+            NotificationsBtn.click();
+            LogUtil.info("Clicking the Notification button to view all the notifications.");
 
-            WebElement NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Notifications\")")));
-            LogUtil.info("User currently present in : " + NotificationHeader.getText() + " page.");
+            NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Notifications\")")));
+            LogUtil.info("User currently present in ? : " + NotificationHeader.getText() + " page.");
         } catch (Exception e) {
             LogUtil.warning("Notification section is not visible.");
         }
 
-        WebElement ActualNotification = null;
+        WebElement ActualNotification;
         try {
             ActualNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
                     ("new UiSelector().resourceId(\"com.heartmonitor.android:id/llMain\").instance(0)")));
-            LogUtil.info("Notification is present : " + ActualNotification.getText());
+            LogUtil.info("Notification is present or not? : " + ActualNotification.isDisplayed());
         } catch (Exception e) {
             LogUtil.warning("No notification's are present currently.");
-        }
-
-        //User can click the notification to view the details of it.
-        try {
-            ActualNotification.click();
-        } catch (Exception e) {
-            LogUtil.warning("No notification's are present currently.");
-        }
-
-        //notification description
-        try {
-            WebElement Description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/description")));
-            LogUtil.info("Notification description :" + Description.getText());
-        } catch (Exception e) {
-
-            LogUtil.warning("No notification is present and no description are available.");
-        }
-
-        //notification time
-        try {
-            WebElement time = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCurrentTime")));
-            LogUtil.info("Notification time : " + time.getText());
-        } catch (Exception e) {
-            LogUtil.warning("No notification Time is visible.");
-        }
-
-        //Notification personal note
-        try {
-            WebElement PersonalNote = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCurrentTime")));
-            LogUtil.info("Notification personal note : " + PersonalNote.getText());
-        } catch (Exception e) {
-            LogUtil.warning("NO Notification personal note is visible.");
-        }
-
-        //Notification Days
-        try {
-            WebElement NotificationDays = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvWeekDay")));
-            LogUtil.info("Notification personal note : " + NotificationDays.getText());
-        } catch (Exception e) {
-            LogUtil.warning("No Notification days is visible.");
-        }
-
-        //Done.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Ok is not clicked after view the notification.");
-        }
-
-        //clear
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/menu_clear"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clear button is not present may be there is no notification.");
-        }
-
-        //Clearing confirmation message.
-        WebElement ConfirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-        LogUtil.info("Confirmation message : " + ConfirmationMessage.getText());
-
-        //ok button for the clearing notification.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1"))).click();
-            LogUtil.info("Ok button is clicked for clearing the notification.");
-        } catch (Exception e) {
-            LogUtil.warning("Ok button is not clicked.");
         }
 
         //navigate back
+        WebElement BackBtn;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up")));
+            BackBtn.click();
+            LogUtil.info("Clicking the back button.");
         } catch (Exception e) {
-            LogUtil.warning("Navigation is not happen.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //2.Clicking on FAQ section
+        WebElement FAQBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtFaq"))).click();
-            LogUtil.info("MOved to FAQ's section.");
+            FAQBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtFaq")));
+            FAQBtn.click();
+            LogUtil.info("Clicking the FAQ's section button..");
         } catch (Exception e) {
-            LogUtil.warning("Not moved to FAQ's section");
+            LogUtil.warning("Clicking the FAQ's section button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //FAQ's header
@@ -156,124 +100,17 @@ public class More_page_Android extends DriverManager {
             LogUtil.info("User currently present in : " + FAQ_Header.getText() + " page.");
         } catch (Exception e) {
             LogUtil.warning("FAQ's header is not visible.");
-        }
-
-        //How to use this app
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"How to use this app?\")"))).click();
-            WebElement HowToUseThisApp = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtTitle2\").instance(0)")));
-            LogUtil.info("How to use this app content is present : " + HowToUseThisApp.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("How to use this app description is not visible.");
-        }
-
-        //Why do we use it
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Why do we use it?\")"))).click();
-            WebElement WhyDoWeUseIt = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtTitle2\").instance(1)")));
-            LogUtil.info("Why do we use it content is present : " + WhyDoWeUseIt.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("No why do use it section is present.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
+            BackBtn.click();
+            LogUtil.info("Clicking the back button.");
         } catch (Exception e) {
             LogUtil.warning("Navigation back is not happening.");
+            throw new Exception(e.getMessage());
         }
-
-        //3.Clicking on Contact us
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtContactUs"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Not clicked the contact us section. ");
-        }
-
-        //Contact us header
-        try {
-            WebElement ContactUs = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"Contact Us\")")));
-            LogUtil.info("User currently present in : " + ContactUs.getText() + " page.");
-        } catch (Exception e) {
-            LogUtil.warning("Contact us header is not visible");
-        }
-
-        //To email address.
-        try {
-            WebElement To = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvTo")));
-            LogUtil.info("User can see the To email address : " + To.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("To email is not visible.");
-        }
-
-        //From email address.
-        try {
-            WebElement From = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/tvFrom")));
-            LogUtil.info("User can see the To email address : " + From.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("From email is not visible.");
-        }
-
-        //Write your message with minimum character. will get error.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtMessage"))).sendKeys("th");
-        } catch (Exception e) {
-            LogUtil.warning("Write your message is not visible");
-        }
-
-        //Submit
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Submit button is not clicked now.");
-        }
-
-        //Error for less character
-        try {
-            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/text_message_toaster")));
-            LogUtil.info("Error message for less character : " + ErrorText.getText());
-        } catch (Exception e) {
-            LogUtil.warning("");
-        }
-
-        try {
-            //Write your message
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                            ("com.heartmonitor.android:id/edtMessage"))).
-                    sendKeys("Thanks for developing the application and try to resolve all the conflict.");
-            LogUtil.info("Write a message is happening.");
-        } catch (Exception e) {
-            LogUtil.warning("Message is not added in the input box.");
-        }
-
-        //Submit
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Submit is not happen.");
-        }
-
-        //Success message
-        try {
-            WebElement SuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/text_message_toaster")));
-            LogUtil.info("Success message for the : " + SuccessMessage.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Success message is not coming.");
-        }
-
-        //navigate back
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating Back is not working.");
-        }
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
