@@ -16,6 +16,8 @@ public class BaseLoginForiOS extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void BaseLoginForIos(Boolean isSkipped) throws Exception {
 
+        LogUtil.info("Entering into Core login case for iOS.");
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         try {
@@ -51,7 +53,7 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeButton[`name == \"Continue\"`]"))).click();
-             LogUtil.info("Clicking on continue to move further.");
+             LogUtil.info("Clicking on continue button.");
         } catch (Exception e) {
              LogUtil.warning("Clicking on continue is not working.");
             throw new Exception(e.getMessage());
@@ -77,9 +79,10 @@ public class BaseLoginForiOS extends DriverManager {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                             xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[6]")))
                     .sendKeys("6");
-             LogUtil.info("Otp is entered and we moved further.");
+             LogUtil.info("OTP is entered successfully.");
         } catch (Exception e) {
-             LogUtil.warning("Entered OTP input is not correct.");
+             LogUtil.warning("OTP is entered successfully.");
+             throw new Exception(e.getMessage());
         }
 
         //Verify the OTP
@@ -87,9 +90,9 @@ public class BaseLoginForiOS extends DriverManager {
         try {
             VerifyBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Verify OTP\"`]")));
             VerifyBtn.click();
-             LogUtil.info("verifying the otp is working.");
+             LogUtil.info("Clicking the Verify OTP button.");
         } catch (Exception e) {
-             LogUtil.warning("Clicking on verify button is not working.");
+             LogUtil.warning("Clicking on verify OTP button is not working.");
             throw new Exception(e.getMessage());
         }
 
@@ -113,5 +116,6 @@ public class BaseLoginForiOS extends DriverManager {
                  LogUtil.warning("Skip button is not present.");
             }
         }
+        LogUtil.info("Exit from the core login case for iOS.");
     }
 }
