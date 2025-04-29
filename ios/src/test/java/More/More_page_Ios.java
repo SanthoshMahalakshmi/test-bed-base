@@ -19,6 +19,7 @@ public class More_page_Ios extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_033() throws Exception {
+
          baseLoginForiOS.BaseLoginForIos(true); // Login process
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
