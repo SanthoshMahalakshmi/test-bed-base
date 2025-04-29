@@ -22,14 +22,13 @@ public class More_page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_033() throws Exception {
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"More\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")"))).click();
             LogUtil.info("Clicking the More section button.");
         } catch (Exception e) {
             LogUtil.warning("Clicking the more section button is not happening.");
@@ -39,9 +38,7 @@ public class More_page_Android extends DriverManager {
         //1.Notification toggle off and on
         try {
             WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/swEnable")));
-
-            if (NotificationToggle.isDisplayed())
-            {
+            if (NotificationToggle.isDisplayed()) {
                 NotificationToggle.click();
                 LogUtil.info("Disabling the Notification using the toggle.");
             }
@@ -54,13 +51,18 @@ public class More_page_Android extends DriverManager {
         WebElement NotificationsBtn, NotificationHeader;
         try {
             NotificationsBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtNotification")));
-            NotificationsBtn.click();
-            LogUtil.info("Clicking the Notification button to view all the notifications.");
+            if (NotificationsBtn.isDisplayed()) {
+                NotificationsBtn.click();
+                LogUtil.info("Clicking the Notification button to view all the notifications.");
+            }
 
             NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Notifications\")")));
-            LogUtil.info("User currently present in ? : " + NotificationHeader.getText() + " page.");
+            if (NotificationHeader.isDisplayed()) {
+                LogUtil.info("User currently present in ? : " + NotificationHeader.getText() + " page.");
+            }
+
         } catch (Exception e) {
-            LogUtil.warning("Notification section is not visible.");
+            LogUtil.warning("No Notification is not visible now.");
         }
 
         WebElement ActualNotification;
@@ -118,120 +120,156 @@ public class More_page_Android extends DriverManager {
 
         LogUtil.info("Enter into TC_034");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"More\")"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")"))).click();
+            LogUtil.info("Clicking the More section button.");
         } catch (Exception e) {
-            LogUtil.warning("Clicking more section is not happening.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
-        //1.Clicking on About us
+        //1.Clicking on About
+        WebElement AboutUsBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAboutUs"))).click();
-            LogUtil.info("Moving to about us page.");
+            AboutUsBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAboutUs")));
+            if (AboutUsBtn.isDisplayed()) {
+                AboutUsBtn.click();
+                LogUtil.info("Moving to about us page.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking is not happening for about us.");
+            throw new Exception(e.getMessage());
         }
 
         //About us header
+        WebElement AboutUsHeader;
         try {
-            WebElement AboutUsHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"About Us\")")));
-            LogUtil.info("User currently present in : " + AboutUsHeader.getText());
+            AboutUsHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"About Us\")")));
+            if (AboutUsHeader.isDisplayed()) {
+                LogUtil.info("User currently present in : " + AboutUsHeader.getText() + "Page.");
+            }
         } catch (Exception e) {
             LogUtil.warning("About us header is not present.");
-        }
-
-        //About us content
-        try {
-            WebElement Content = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"What is Lorem Ipsum? Lorem Ipsum is " +
-                            "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                            "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic " +
-                            "typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. " +
-                            "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, " +
-                            "sometimes on purpose (injected humour and the like).\")")));
-            LogUtil.info("About us content is present : " + Content.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("About us content is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
+        WebElement BackBtn;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up")));
+            if (BackBtn.isEnabled()) {
+                BackBtn.click();
+                LogUtil.info("Clicking the back button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Navigating back is not working.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //2.clicking on Terms & Conditions
+        WebElement TermsAndConditions;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTerms"))).click();
-            LogUtil.info("Moving to terms and condition section.");
+            TermsAndConditions = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTerms")));
+            if (TermsAndConditions.isDisplayed()) {
+                TermsAndConditions.click();
+                LogUtil.info("Clicking to Terms & conditions.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking the terms and condition is not working.");
+            throw new Exception(e.getMessage());
         }
 
         //Terms and condition header
+        WebElement TermsAndConditionHeader;
         try {
-            WebElement TermsAndCondition = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Terms & Conditions\")")));
-            LogUtil.info("User currently present in : " + TermsAndCondition.getText());
+            TermsAndConditionHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Terms & Conditions\")")));
+            if (TermsAndConditionHeader.isDisplayed()) {
+                LogUtil.info("User currently present in : " + TermsAndConditionHeader.getText());
+            }
         } catch (Exception e) {
             LogUtil.warning("Terms and condition header is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Terms and condition content.
+        WebElement ContentOfTermsAndCondition;
         try {
-            WebElement ContentOfTermsAndCondition = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().text(\"Terms & Conditions\")")));
-            LogUtil.info("Terms and Condition content is present : " + ContentOfTermsAndCondition.isDisplayed());
+            ContentOfTermsAndCondition = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.androidUIAutomator("new UiSelector().text(\"This  is a legal agreement (“Agreement”) between you (End-user or you) and Connected Health, a Division of Tata Industries, having its registered address at Bombay House, " +
+                            "24 Homi Modi Street, Mumbai 400001(Licensor, us or we) for the use of the MoAI Application Software (App, as defined below) and MoAI Cloud Service (Service, as defined below).\")")));
+            if (ContentOfTermsAndCondition.isDisplayed())
+            {
+                LogUtil.info("Terms and Condition content is present : " + ContentOfTermsAndCondition.isDisplayed());
+            }
         } catch (Exception e) {
             LogUtil.warning("Terms and condition content is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
+            if (BackBtn.isEnabled()) {
+                BackBtn.click();
+                LogUtil.info("Clicking the back button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Navigating back is not working.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //3.Clicking on Privacy policy
+        WebElement PrivacyPolicyBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtPrivacy"))).click();
-            LogUtil.info("Moving to Privacy policy.");
+            PrivacyPolicyBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtPrivacy")));
+            if (PrivacyPolicyBtn.isDisplayed())
+            {
+                PrivacyPolicyBtn.click();
+                LogUtil.info("Moving to Privacy policy.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking privacy policy is not working.");
+            throw new Exception(e.getMessage());
         }
 
         //Privacy policy header
+        WebElement PrivacyPolicyHeader;
         try {
-            WebElement PrivacyPloicy = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Privacy Policy\")")));
-            LogUtil.info("User currently present in : " + PrivacyPloicy.getText());
+             PrivacyPolicyHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Privacy Policy\")")));
+             if (PrivacyPolicyHeader.isDisplayed())
+             {
+                 LogUtil.info("User currently present in : " + PrivacyPolicyHeader.getText() + "page.");
+             }
         } catch (Exception e) {
             LogUtil.warning("Privacy policy header is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Privacy policy content.
+        WebElement PrivacyPolicyContent;
         try {
-            WebElement PrivacyPolicyContent = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.TextView\").instance(2)")));
-            LogUtil.info("Privacy policy content is present : " + PrivacyPolicyContent.isDisplayed());
+             PrivacyPolicyContent = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.TextView\").instance(2)")));
+            if (PrivacyPolicyContent.isDisplayed()) {
+                LogUtil.info("Privacy Policy content is present : " + PrivacyPolicyContent.isDisplayed());
+            }
         } catch (Exception e) {
-            LogUtil.warning("Privacy policy content is not visible.");
+            LogUtil.warning("Privacy Policy content is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
+            if (BackBtn.isEnabled()) {
+                BackBtn.click();
+                LogUtil.info("Clicking the back button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
     }
 
@@ -240,7 +278,7 @@ public class More_page_Android extends DriverManager {
 
         LogUtil.info("Enter into TC_035");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -289,7 +327,7 @@ public class More_page_Android extends DriverManager {
 
         LogUtil.info("Enter into TC_036");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
