@@ -27,9 +27,14 @@ public class More_page_Android extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")"))).click();
-            LogUtil.info("Clicking the More section button.");
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
@@ -123,9 +128,14 @@ public class More_page_Android extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")"))).click();
-            LogUtil.info("Clicking the More section button.");
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
@@ -351,59 +361,84 @@ public class More_page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_036() throws Exception {
 
-        LogUtil.info("Enter into TC_036");
-
         bs.CoreLoginForAndroid(true);  //basic login scenario
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"More\")"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on delete account
+        WebElement DeleteAccountBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    id("com.heartmonitor.android:id/txtDeleteAcc"))).click();
+            DeleteAccountBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtDeleteAcc")));
+            if (DeleteAccountBtn.isDisplayed())
+            {
+                DeleteAccountBtn.click();
+                LogUtil.info("Clicking the delete account button now.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Deleting account is not clicked.");
         }
 
         //Delete account label
+        WebElement DeleteAccountLabel;
         try {
-            WebElement DeleteAccountLabel = wait.until(ExpectedConditions.
-                    visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/alertTitle")));
-            LogUtil.info("Label of delete account : " + DeleteAccountLabel.getText());
+            DeleteAccountLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/alertTitle")));
+            if (DeleteAccountLabel.isDisplayed())
+            {
+                LogUtil.info("Label of delete account is present or not ? : " + DeleteAccountLabel.getText());
+            }
         } catch (Exception e) {
-            LogUtil.warning("label is not visible.");
+            LogUtil.warning("Delete account label is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Confirmation message
+        WebElement DeleteAccountMessage;
         try {
-            WebElement DeleteMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            LogUtil.info("Delete account confirmation message : " + DeleteMessage.getText());
+            DeleteAccountMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
+            if (DeleteAccountMessage.isDisplayed()) {
+                LogUtil.info("Delete account confirmation message : " + DeleteAccountMessage.getText());
+            }
         } catch (Exception e) {
             LogUtil.warning("delete account confirmation is not visible. ");
+            throw new Exception(e.getMessage());
         }
 
         //ok button
+        WebElement DeleteAccountOkBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1")));
-            LogUtil.info("Ok button is visible, but we are not deleting the account now.");
+            DeleteAccountOkBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1")));
+            if (DeleteAccountOkBtn.isDisplayed()) {
+                LogUtil.info("Ok button is visible, but we are not deleting the account now.");
+            }
         } catch (Exception e) {
             LogUtil.warning("OK button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Cancel button.
+        WebElement DeleteAccountCancelBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button2"))).click();
-            LogUtil.info("Clicking cancel for not deleting the account.");
+            DeleteAccountCancelBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button2")));
+            if (DeleteAccountCancelBtn.isDisplayed()) {
+                DeleteAccountCancelBtn.click();
+                LogUtil.info("Clicking cancel button to secure the account.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Cancel button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
     }
