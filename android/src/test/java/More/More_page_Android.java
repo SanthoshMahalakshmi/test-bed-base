@@ -118,8 +118,6 @@ public class More_page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_034() throws Exception {
 
-        LogUtil.info("Enter into TC_034");
-
         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -276,48 +274,76 @@ public class More_page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_035() throws Exception {
 
-        LogUtil.info("Enter into TC_035");
-
         bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"More\")"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on logout
+        WebElement LogoutBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtLogout"))).click();
+            LogoutBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtLogout")));
+            if (LogoutBtn.isDisplayed())
+            {
+                LogoutBtn.click();
+                LogUtil.info("Clicking the logout button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("logout is not clicked.");
+            LogUtil.warning("Clicking the logout is not happened..");
+            throw new Exception(e.getMessage());
         }
 
         //Warning message.
+        WebElement LogoutWarningMessage;
         try {
-            WebElement Message = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            LogUtil.info("Confirmation message for logout : " + Message.getText());
+            LogoutWarningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
+            if (LogoutWarningMessage.isDisplayed())
+            {
+                LogUtil.info("Confirmation message for logout : " + LogoutWarningMessage.getText());
+            }
         } catch (Exception e) {
-            LogUtil.warning("Logout warning message is not coming.");
+            LogUtil.warning("Logout warning message  model is not pop's out.");
+            throw new Exception(e.getMessage());
         }
 
-        //Ok button
+        //Ok button.
+        WebElement LogoutOkBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+            LogoutOkBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1")));
+            if (LogoutOkBtn.isDisplayed())
+            {
+                LogoutOkBtn.click();
+                LogUtil.info("Clicking the Logout 'Ok' Button now.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Logout OK button is not coming.");
+            LogUtil.warning("Logout 'Ok' button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Verifying the singUp page.
+        WebElement SignUpPage;
         try {
-            WebElement SignUp = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
-            LogUtil.info("User currently present :" + SignUp.getText());
+            SignUpPage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
+            if (SignUpPage.isDisplayed()) {
+                LogUtil.info("User currently present : " + SignUpPage.getText());
+                LogUtil.info("User logged out successfully.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Not moving to the Sign up page again after the logout.");
+            throw new Exception(e.getMessage());
         }
 
     }

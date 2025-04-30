@@ -7,6 +7,7 @@ import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.bidi.log.Log;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -266,40 +267,70 @@ public class More_page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on logout
+        WebElement LogoutBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Logout"))).click();
+            LogoutBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Logout")));
+            if (LogoutBtn.isDisplayed())
+            {
+                LogoutBtn.click();
+                LogUtil.info("Clicking the logout button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("logout is not clicked.");
+            LogUtil.warning("Clicking the logout is not happened..");
+            throw new Exception(e.getMessage());
         }
 
         //Warning message.
+        WebElement LogoutWarningMessage;
         try {
-            WebElement Message = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Logout\"])[2]")));
-            LogUtil.info("Confirmation message for logout : " + Message.getText());
+            LogoutWarningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to logout?")));
+            if (LogoutWarningMessage.isDisplayed())
+            {
+                LogUtil.info("Confirmation message for logout : " + LogoutWarningMessage.getText());
+            }
         } catch (Exception e) {
-            LogUtil.warning("Logout warning message is not coming.");
+            LogUtil.warning("Logout warning message  model is not pop's out.");
+            throw new Exception(e.getMessage());
         }
 
         //Yes button
+        WebElement LogoutYesBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes"))).click();
+            LogoutYesBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
+            if (LogoutYesBtn.isDisplayed())
+            {
+                LogoutYesBtn.click();
+                LogUtil.info("Clicking the Logout 'Yes' Button now.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Logout YES button is not coming.");
+            LogUtil.warning("Logout 'YES' button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Verifying the singUp page.
+        WebElement SignUpPage;
         try {
-            WebElement SignUp = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Login or Sign Up")));
-            LogUtil.info("User currently present :" + SignUp.getText());
+            SignUpPage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Login or Sign Up")));
+            if (SignUpPage.isDisplayed()) {
+                LogUtil.info("User currently present : " + SignUpPage.getText());
+            }
         } catch (Exception e) {
             LogUtil.warning("Not moving to the Sign up page again after the logout.");
+            throw new Exception(e.getMessage());
         }
 
     }

@@ -64,8 +64,8 @@
             <class name="More.More_page_Ios">
                 <methods>
                     <exclude  name="TC_033"/>
-                    <include  name="TC_034"/>
-                    <exclude  name="TC_035"/> 
+                    <exclude  name="TC_034"/>
+                    <include  name="TC_035"/>
                     <exclude  name="TC_036"/> 
                 </methods>
             </class>
