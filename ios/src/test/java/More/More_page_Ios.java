@@ -25,9 +25,14 @@ public class More_page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-           wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
-            LogUtil.info("Clicking the More section button.");
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
@@ -108,9 +113,14 @@ public class More_page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
-            LogUtil.info("Clicking the More section button.");
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
@@ -266,40 +276,71 @@ public class More_page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on logout
+        WebElement LogoutBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Logout"))).click();
+            LogoutBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Logout")));
+            if (LogoutBtn.isDisplayed())
+            {
+                LogoutBtn.click();
+                LogUtil.info("Clicking the logout button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("logout is not clicked.");
+            LogUtil.warning("Clicking the logout is not happened..");
+            throw new Exception(e.getMessage());
         }
 
         //Warning message.
+        WebElement LogoutWarningMessage;
         try {
-            WebElement Message = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Logout\"])[2]")));
-            LogUtil.info("Confirmation message for logout : " + Message.getText());
+            LogoutWarningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to logout?")));
+            if (LogoutWarningMessage.isDisplayed())
+            {
+                LogUtil.info("Confirmation message for logout : " + LogoutWarningMessage.getText());
+            }
         } catch (Exception e) {
-            LogUtil.warning("Logout warning message is not coming.");
+            LogUtil.warning("Logout warning message  model is not pop's out.");
+            throw new Exception(e.getMessage());
         }
 
         //Yes button
+        WebElement LogoutYesBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes"))).click();
+            LogoutYesBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
+            if (LogoutYesBtn.isDisplayed())
+            {
+                LogoutYesBtn.click();
+                LogUtil.info("Clicking the Logout 'Yes' Button now.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Logout YES button is not coming.");
+            LogUtil.warning("Logout 'YES' button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Verifying the singUp page.
+        WebElement SignUpPage;
         try {
-            WebElement SignUp = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Login or Sign Up")));
-            LogUtil.info("User currently present :" + SignUp.getText());
+            SignUpPage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Login or Sign Up")));
+            if (SignUpPage.isDisplayed()) {
+                LogUtil.info("User currently present : " + SignUpPage.getText());
+                LogUtil.info("User logged out successfully.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Not moving to the Sign up page again after the logout.");
+            throw new Exception(e.getMessage());
         }
 
     }
@@ -311,51 +352,80 @@ public class More_page_Ios extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on delete account
+        WebElement DeleteAccountBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Delete Account"))).click();
+            DeleteAccountBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Delete Account")));
+            if (DeleteAccountBtn.isDisplayed())
+            {
+                DeleteAccountBtn.click();
+                LogUtil.info("Clicking the delete account button now.");
+            }
         } catch (Exception e) {
             LogUtil.warning("Deleting account is not clicked.");
         }
 
         //Delete account label
+        WebElement DeleteAccountLabel;
         try {
-            WebElement DeleteAccountLabel = wait.until(ExpectedConditions.
-                    visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Delete Account\"])[2]")));
-            LogUtil.info("Label of delete account : " + DeleteAccountLabel.getText());
+            DeleteAccountLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Delete Account\"])[2]")));
+            if (DeleteAccountLabel.isDisplayed())
+            {
+                LogUtil.info("Label of delete account is present or not ? : " + DeleteAccountLabel.isDisplayed());
+            }
         } catch (Exception e) {
-            LogUtil.warning("label is not visible.");
+            LogUtil.warning("Delete account label is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Confirmation message
+        WebElement DeleteAccountMessage;
         try {
-            WebElement DeleteMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeAlert[@name=\"Delete Account\"]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[1]/XCUIElementTypeOther[1]")));
-            LogUtil.info("Delete account confirmation message : " + DeleteMessage.getText());
+            DeleteAccountMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to delete this account?")));
+            if (DeleteAccountMessage.isDisplayed()) {
+                LogUtil.info("Delete account confirmation message : " + DeleteAccountMessage.getText());
+            }
         } catch (Exception e) {
             LogUtil.warning("delete account confirmation is not visible. ");
+            throw new Exception(e.getMessage());
         }
 
-        //yes button
+        //ok button
+        WebElement DeleteAccountYesBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
-            LogUtil.info("yes button is visible, but we are not deleting the account now.");
+            DeleteAccountYesBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
+            if (DeleteAccountYesBtn.isDisplayed()) {
+                LogUtil.info("Ok button is visible, but we are not deleting the account now.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("yes button is not visible.");
+            LogUtil.warning("OK button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
-        //No button.
+        //Cancel button.
+        WebElement DeleteAccountNoBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("No"))).click();
-            LogUtil.info("Clicking No for not deleting the account.");
+            DeleteAccountNoBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("No")));
+            if (DeleteAccountNoBtn.isDisplayed()) {
+                DeleteAccountNoBtn.click();
+                LogUtil.info("Clicking cancel button to secure the account.");
+            }
         } catch (Exception e) {
-            LogUtil.warning("No button is not visible.");
+            LogUtil.warning("Cancel button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
     }
