@@ -1,5 +1,7 @@
 package Login;
 
+import Actions.Activity;
+import Actions.ElementTask;
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.LogUtil;
@@ -12,241 +14,76 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+import static ElementRepositories.CommonElements.*;
 
 import java.time.Duration;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+
+import static ElementRepositories.LoginScreenElements.*;
+import static ElementRepositories.OTPVerifyScreenElements.*;
+import static ElementRepositories.SplashScreenElements.*;
+import static UtilitiesForAndroid.ElementActions.performActions;
 
 public class Login_Page_Android extends DriverManager {
 
-    private static final Logger log = LoggerFactory.getLogger(Login_Page_Android.class);
     BaseLoginForAndroid bs = new BaseLoginForAndroid();
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_002() throws Exception {
-        /*Global wait.*/
+    public void TC_002() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        /*Clicking the Get started button*/
-        try {
-            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
-            getStarted.click();
-            LogUtil.info("Successfully clicked the 'Get Started' button.");
-        } catch (ElementNotInteractableException e) {
-            LogUtil.warning("The 'Get Started' button is present but not interactable. Details: " + e.getMessage());
-            throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
-        } catch (NoSuchElementException e) {
-            LogUtil.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        /*1.Verify the logo is present or not in the login page.*/
-        try {
-            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgLogo")));
-            LogUtil.info("Logo is present :" + logo.isDisplayed());
-        } catch (NoSuchElementException e) {
-            LogUtil.warning("There is No such element like logo in the login page." + e.getMessage());
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            LogUtil.warning("Logo is not visible." + e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(TITLE_LOGO_IMAGE, TITLE_LOGO_IMAGE_TASK);
 
-        //3.Sending input to mobile number field and send the keys to it.
-        WebElement MobileNumberInput = null;
-        try {
-            MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtMobileNumber")));
-            MobileNumberInput.sendKeys("9087631080");
-        } catch (NoSuchContextException e) {
-            LogUtil.warning("Mobile number field is not visible or not available to interact with.");
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            LogUtil.warning("Issue with mobile number input field :" + e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(GET_STARTED_BUTTON, GET_STARTED_TASK);
 
-        try {
-            /* 2.country code is present in the screen or not.  Important - country code is not available in other devices*/
-            WebElement countryCode = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/textinput_prefix_text")));
-            LogUtil.info("Country code is present: " + countryCode.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Country code is not visible.");
-        }
+        elementMap.put(MOBILE_NUMBER_FIELD, MOBILE_NUMBER_FIELD_TASK);
 
-        //Logo click for close the keyboard of the mobile
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgLogo"))).click();
-            LogUtil.info("Logo click for keyboard close action");
-        } catch (Exception e) {
-            LogUtil.warning("Logo click is not happening for keyboard close.");
-        }
+        elementMap.put(COUNTRY_CODE, COUNTRY_CODE_TASK);
 
-        try {
-            //4.Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            LogUtil.warning("Continue is not clicked.");
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(CONTINUE_BUTTON, CONTINUE_BUTTON_TASK);
 
-        try {
-            /*Back to log in page*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
 
-        try {
-            //Terms and condition link
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTerms"))).click();
-            LogUtil.info("Moving to terms and condition page.");
-            //Back to log in page
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-            LogUtil.info("Moving back to log in page.");
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(TERMS_AND_CONDITION_LINK, new ElementTask.Builder(Activity.VERIFY, "Terms and Condition link").build());
 
-        try {
-            //Privacy policy link
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtPrivacy"))).click();
-            LogUtil.info("Moving to Privacy policy page.");
-            //Back to log in page
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-            LogUtil.info("Moving back to log in page.");
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(PRIVACY_POLICY_LINK, new ElementTask.Builder(Activity.VERIFY, "Privacy policy link").build());
 
+        performActions(elementMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_003() throws Exception {
-        /*Global wait.*/
+    public void TC_003() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        /*Clicking the Get started button*/
-        try {
-            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
-            getStarted.click();
-            LogUtil.info("Successfully clicked the 'Get Started' button.");
-        } catch (ElementNotInteractableException e) {
-            LogUtil.warning("The 'Get Started' button is present but not interactable. Details: " + e.getMessage());
-            throw new ElementNotInteractableException("The 'Get Started' button is present but not clickable.", e);
-        } catch (NoSuchElementException e) {
-            LogUtil.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        // Step 1–3: Onboarding screen up to Continue button
+        Map<By, ElementTask> onboardingElements = new LinkedHashMap<>();
+        onboardingElements.put(GET_STARTED_BUTTON, GET_STARTED_TASK);
+        onboardingElements.put(MOBILE_NUMBER_FIELD, MOBILE_NUMBER_FIELD_TASK);
+        onboardingElements.put(CONTINUE_BUTTON, CONTINUE_BUTTON_TASK);
+
+        performActions(onboardingElements, wait); // ⬅️ This finishes mobile number entry
+
+        // Step 4: Enter OTP after Continue is clicked
+        String otp = "123456";
+        for (int i = 0; i < otp.length(); i++) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(OTP_FIELDS[i]))
+                    .sendKeys(String.valueOf(otp.charAt(i)));
         }
 
-        //3.clicking the mobile number input field and send the keys to it.
-        WebElement MobileNumberInput = null;
-        try {
-            MobileNumberInput = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtMobileNumber")));
-            MobileNumberInput.sendKeys("9087631080");
-        } catch (NoSuchContextException e) {
-            LogUtil.warning("Mobile number field is not visible or not available to interact with.");
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            LogUtil.warning("Issue with mobile number input field :" + e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+        // Step 5: Final actions like verify OTP and checking resend label
+        Map<By, ElementTask> otpElements = new LinkedHashMap<>();
+        otpElements.put(VERIFY_MOBILE_NUMBER_LABEL, VERIFY_MOBILE_NUMBER_LABEL_TASK);
+        otpElements.put(RESEND_LABEL, RESEND_LABEL_TASK);
+        otpElements.put(OTP_VERIFY_BUTTON, OTP_VERIFY_BUTTON_TASK);
 
-        //Logo click for close the keyboard of the mobile
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgLogo"))).click();
-            LogUtil.info("Logo click for keyboard close action");
-        } catch (Exception e) {
-            LogUtil.warning("Logo click is not happening for keyboard close.");
-        }
-
-        try {
-            //4.Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            LogUtil.warning("Continue is not clicked.");
-            throw new Exception(e.getMessage());
-        }
-
-        WebElement Ok = null;
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1"))).click();
-            LogUtil.info("*OK Button found and its clicked");
-        } catch (Exception e) {
-            LogUtil.warning("Element is not found, we good to go with login");
-        }
-
-        try {
-            //1.verify mobile number label
-            WebElement label = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
-            LogUtil.info("Verify mobile number label : " + label.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Mobile number label is no visible.");
-        }
-
-        try {
-            //2.Enter OTP label
-            WebElement OtpLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
-            LogUtil.info("Enter OTP label : " + OtpLabel.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("OTP lable is not visible.");
-        }
-
-        //2.Fill the OTP into input field.
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP1"))).sendKeys("1");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP2"))).sendKeys("2");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP3"))).sendKeys("3");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP4"))).sendKeys("4");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP5"))).sendKeys("5");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP6"))).sendKeys("6");
-
-        try {
-            //4.Resend label
-            WebElement resend = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtResend\"));")));
-            LogUtil.info("Resent label is present : " + resend.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Resend label is not visible.");
-        }
-
-        //4.Scroll Timer ----------
-        WebElement Timer = null;
-        try {
-            Timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtTimer\"));")));
-            LogUtil.info("Timer is present? : " + Timer.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("*Timer is not found");
-        }
-
-        //3.clicking the verify button.
-        WebElement verifyButton = null;
-        try {
-            verifyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtVerify")));
-            LogUtil.info("Verify button present? : " + verifyButton.isDisplayed());
-            verifyButton.click();
-            LogUtil.info("Verify button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("*Verify button is not found");
-            throw new Exception(e.getMessage());
-        }
+        performActions(otpElements, wait); // ⬅️ Executes final screen elements
     }
+
 
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_004() throws Exception {
@@ -276,7 +113,7 @@ public class Login_Page_Android extends DriverManager {
         } catch (NoSuchElementException e) {
             LogUtil.warning("The coach mark Skip is not visible." + e.getMessage());
         } catch (Exception e) {
-           LogUtil.warning(e.getMessage());
+            LogUtil.warning(e.getMessage());
         }
 
         //Clicking the Edit profile option.
@@ -664,7 +501,7 @@ public class Login_Page_Android extends DriverManager {
         //3.Pagination verification
         WebElement iSPagination = null;
         try {
-            iSPagination =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected")));
+            iSPagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSelected")));
             LogUtil.info("The pagination is present in the 'Select weight' page." + iSPagination.isDisplayed());
         } catch (Exception e) {
             LogUtil.warning("There is no pagination is present in the 'Select Weight' page." + iSPagination.isDisplayed());
@@ -677,7 +514,8 @@ public class Login_Page_Android extends DriverManager {
             Continue = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue")));
             Continue.click();
             LogUtil.info("The continue button is clicked to move for next page.");
-        } catch (Exception e) {LogUtil.warning("There is no continue button click is happening in the 'Select Weight' page.");
+        } catch (Exception e) {
+            LogUtil.warning("There is no continue button click is happening in the 'Select Weight' page.");
             throw new RuntimeException(e.getMessage());
         }
 
@@ -710,7 +548,7 @@ public class Login_Page_Android extends DriverManager {
     public void TC_009() throws Exception {
 
         LogUtil.info("Enter into TC_009");
-        
+
         TC_008(); // To complete the previous steps.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
