@@ -5,6 +5,7 @@ import DriverManagerIos.DriverManager;
 import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,17 +18,16 @@ public class Login_Page_Ios extends DriverManager {
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_002() {
+    public void TC_002() throws Exception {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
-            LogUtil.info("before login->Allow button is visible and its clicked Allow");
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            alert.accept();
         }
-        catch (Exception e)
-        {
-            LogUtil.info("Before login-> Notification allow Button is not pop-up to accept allow.");
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         try {
@@ -41,10 +41,11 @@ public class Login_Page_Ios extends DriverManager {
 
         try {
             /*1.Verify the logo is present or not in the login page.*/
-            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("AppLogo")));
+            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("svg_monitor_blue")));
             LogUtil.info("Logo is present :" + logo.isDisplayed());
         } catch (Exception e) {
             LogUtil.warning("Logo is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         try {
@@ -52,8 +53,15 @@ public class Login_Page_Ios extends DriverManager {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("9087631080");
             LogUtil.info("Mobile number filed is having correct mobile number.");
+
+            WebElement Done = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done")));
+            if (Done.isDisplayed()|| Done.isEnabled())
+            {
+                Done.click();
+            }
         } catch (Exception e) {
             LogUtil.warning("Mobile number field is not having the input value.");
+            throw new Exception(e.getMessage());
         }
 
         try {
@@ -63,6 +71,7 @@ public class Login_Page_Ios extends DriverManager {
             LogUtil.info("Country code is present :" + countryCode.isDisplayed());
         } catch (Exception e) {
             LogUtil.warning("Country code is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         try {
@@ -71,27 +80,34 @@ public class Login_Page_Ios extends DriverManager {
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
             LogUtil.info("Continue button is clicked.");
 
+            WebElement Done = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done")));
+            if (Done.isDisplayed()|| Done.isEnabled())
+            {
+                Done.click();
+            }
         } catch (Exception e) {
             LogUtil.warning("Continue is not clicked.");
+            throw new Exception(e.getMessage());
         }
 
         try {
             /*Back to log in page*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
         } catch (Exception e) {
             LogUtil.warning("Navigating back is not working.");
         }
 
-        /*Need to check this on ios simulator.*/
-        /* *//*5.Terms and condition link*//*
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.moai.android:id/txtTerms"))).click();*/
+        WebElement PrivacyPolicyAndTermsAndConditionBtn;
+        try
+        {
+            PrivacyPolicyAndTermsAndConditionBtn = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"By continuing, you agree to our  Terms & Conditions and Privacy Policy\"`]")));
+            LogUtil.info("Terms & Condition and Privacy policy links are visible to the user? : " + PrivacyPolicyAndTermsAndConditionBtn.isDisplayed());
 
-        /*Back to log in page*//*
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        *//*5.Terms and condition link*//*
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("com.moai.android:id/txtPrivacy"))).click();*/
-
+        } catch (Exception e) {
+            LogUtil.warning("There is no Terms & Condition and Privacy policy links are visible to the user");
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
@@ -102,9 +118,7 @@ public class Login_Page_Ios extends DriverManager {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
             LogUtil.info("before login->Allow button is visible and its clicked Allow");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             LogUtil.info("Before login-> Notification allow Button is not pop-up to accept allow.");
         }
 
@@ -249,8 +263,8 @@ public class Login_Page_Ios extends DriverManager {
                     iOSClassChain("**/XCUIElementTypeTextField[`value == \"9087631080\"`]")));
             LogUtil.info("Mobile number field is filled already with given number" + Mobile_number.isDisplayed());
 
-           pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("1 of 5")));
-           LogUtil.info("pagination is visible " + pagination.isDisplayed());
+            pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("1 of 5")));
+            LogUtil.info("pagination is visible " + pagination.isDisplayed());
 
         } catch (Exception e) {
             LogUtil.warning("first name, email not added in page-1.");
@@ -481,13 +495,10 @@ public class Login_Page_Ios extends DriverManager {
             LogUtil.warning("None of the option is selected on this page.");
         }
 
-        try
-        {
+        try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
                     iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]"))).click();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             LogUtil.warning("There is not skip button.");
         }
     }

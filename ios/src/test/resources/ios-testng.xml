@@ -10,7 +10,7 @@
             </class>
 
             <!--Welcome page-->
-            <class name="Welcome.Welcome_Page_iOS">
+            <class name="Welcome.Welcome_Page_iOS"> <!--Done-->
                 <methods>
                     <exclude  name="TC_001"/> <!--Same-->
                 </methods>
@@ -66,7 +66,7 @@
                     <exclude  name="TC_033"/>
                     <exclude  name="TC_034"/>
                     <exclude  name="TC_035"/>
-                    <include  name="TC_036"/>
+                    <exclude  name="TC_036"/>
                 </methods>
             </class>
 

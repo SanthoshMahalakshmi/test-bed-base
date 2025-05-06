@@ -6,15 +6,16 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" >
                 <methods>
-                    <exclude  name="TC_001"/> <!--Same-->
+                    <exclude name="TC_001"/> <!--!!-->
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Android">
                 <methods>
-                    <exclude  name="TC_002"/>
+                    <exclude  name="TC_002"/> <!--!!-->
                     <exclude  name="TC_003"/>
+                    <include  name="TC0003"/>
                     <exclude  name="TC_004"/>
                     <exclude  name="TC_005"/>
                     <exclude  name="TC_006"/>
@@ -59,7 +60,7 @@
                     <exclude  name="TC_033"/>
                     <exclude  name="TC_034"/>
                     <exclude  name="TC_035"/>
-                    <include  name="TC_036"/>
+                    <exclude  name="TC_036"/>
                 </methods>
             </class>
 

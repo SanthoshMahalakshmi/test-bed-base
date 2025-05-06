@@ -1,75 +1,39 @@
 package Welcome;
 
+import Actions.ElementTask;
 import DriverManagerAndroid.DriverManager;
-import UtilitiesForAndroid.LogUtil;
 import UtilitiesForAndroid.RetryAnalyzer;
-import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static ElementRepositories.LoginScreenElements.*;
+import static ElementRepositories.SplashScreenElements.*;
+import static UtilitiesForAndroid.ElementActions.performActions;
 
 
 public class Welcome_Page_Android extends DriverManager {
 
+
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_001() throws Exception {
-        /*Global wait*/
+    public void TC_001() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        try {
-            /*confirm the image is present in the screen*/
-            WebElement img = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/images")));
-            LogUtil.info("Welcome screen image is displayed ? :" + img.isDisplayed());
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException(e.getMessage());
-        } catch (Exception e) {
-            LogUtil.warning("Welcome screen image is not displayed");
-            throw new Exception(e.getMessage());
-        }
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        try {
-            /*Description verification*/
-            WebElement description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/txtDescription")));
-            LogUtil.info("Welcome screen description : " + description.getText());
-        } catch (NoSuchElementException e){
-            throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
-            LogUtil.warning("Welcome page description is not visible." + e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(TITLE_LOGO_IMAGE, TITLE_LOGO_IMAGE_TASK);
 
-        /*Clicking the Get started button*/
-        try {
-            WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
-            getStarted.click();
-            LogUtil.info("Successfully clicked the 'Get Started' button.");
-        } catch (ElementClickInterceptedException e) {
-            LogUtil.warning("The 'Get Started' button is present but not interactable. Details: " + e.getMessage());
-            throw new ElementNotInteractableException(e.getMessage());
-        } catch (NoSuchElementException e) {
-            LogUtil.warning("The 'Get Started' button could not be located. Details: " + e.getMessage());
-            throw new NoSuchElementException(e.getMessage());
-        }
+        elementMap.put(DESCRIPTION_TEXT, DESCRIPTION_TEXT_TASK);
 
-        /*Verifying the login or signup label present or not.*/
-        WebElement loginOrSignup = null;
-        try {
-            loginOrSignup = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtPhoneLabel")));
-            LogUtil.info("LoginOrSignUp page label is present? : " + loginOrSignup.isDisplayed());
-        }catch (NoSuchElementException e){
-            LogUtil.warning("There is no such element like LoginOrSignup label");
-            throw new NoSuchElementException(e.getMessage());
-        }catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        elementMap.put(GET_STARTED_BUTTON, GET_STARTED_TASK);
 
+        elementMap.put(LOGIN_OR_SIGNUP_LABEL, LOGIN_OR_SIGNUP_LABEL_TASK);
+
+        performActions(elementMap, wait);
     }
 
 }

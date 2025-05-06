@@ -134,9 +134,8 @@ public class DriverManager {
     public void quitDriver(ITestResult testResult) throws IOException {
         String testName = testResult.getMethod().getMethodName();
         LogUtil.info("✅ FINISHED TEST: " + testName);
-        LogUtil.info("🛑 Executing @AfterMethod: Quitting Android Driver... " + getDriver());
+        LogUtil.info("🛑 Executing @AfterMethod: Quitting Android Driver... ");
         AppiumDriver currentDriver = getDriver();
-        LogUtil.info("🔚 This has come to an end " + currentDriver);
 
         if (currentDriver != null) {
             try {
