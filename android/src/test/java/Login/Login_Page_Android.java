@@ -7,14 +7,13 @@ import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.LogUtil;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.NoSuchContextException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
 import static ElementRepositories.CommonElements.*;
 
 import java.time.Duration;
@@ -24,6 +23,7 @@ import java.util.Objects;
 
 import static ElementRepositories.LoginScreenElements.*;
 import static ElementRepositories.OTPVerifyScreenElements.*;
+import static ElementRepositories.ProfileScreenElements.*;
 import static ElementRepositories.SplashScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.performActions;
 
@@ -60,28 +60,54 @@ public class Login_Page_Android extends DriverManager {
     public void TC_003() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Step 1–3: Onboarding screen up to Continue button
         Map<By, ElementTask> onboardingElements = new LinkedHashMap<>();
         onboardingElements.put(GET_STARTED_BUTTON, GET_STARTED_TASK);
         onboardingElements.put(MOBILE_NUMBER_FIELD, MOBILE_NUMBER_FIELD_TASK);
         onboardingElements.put(CONTINUE_BUTTON, CONTINUE_BUTTON_TASK);
 
-        performActions(onboardingElements, wait); // ⬅️ This finishes mobile number entry
+        performActions(onboardingElements, wait);
 
-        // Step 4: Enter OTP after Continue is clicked
         String otp = "123456";
         for (int i = 0; i < otp.length(); i++) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(OTP_FIELDS[i]))
                     .sendKeys(String.valueOf(otp.charAt(i)));
         }
 
-        // Step 5: Final actions like verify OTP and checking resend label
         Map<By, ElementTask> otpElements = new LinkedHashMap<>();
         otpElements.put(VERIFY_MOBILE_NUMBER_LABEL, VERIFY_MOBILE_NUMBER_LABEL_TASK);
         otpElements.put(RESEND_LABEL, RESEND_LABEL_TASK);
         otpElements.put(OTP_VERIFY_BUTTON, OTP_VERIFY_BUTTON_TASK);
 
-        performActions(otpElements, wait); // ⬅️ Executes final screen elements
+        performActions(otpElements, wait);
+    }
+
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC004() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        bs.CoreLoginForAndroid(true);
+
+        Map<By, ElementTask> elementTask = new LinkedHashMap<>();
+
+        elementTask.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+
+        elementTask.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+
+        elementTask.put(EDIT_PROFILE_BUTTON, EDIT_PROFILE_BUTTON_TASK);
+
+        elementTask.put(PROFILE_PICTURE_OPTION, PROFILE_PICTURE_OPTION_TASK);
+
+        elementTask.put(FULL_NAME_INPUT_FIELD, FULL_NAME_INPUT_FIELD_TASK);
+
+        elementTask.put(EMAIL_ID_INPUT_FIELD, EMAIL_ID_INPUT_FIELD_TASK);
+
+        elementTask.put(MOBILE_NUMBER_INPUT_FIELD, MOBILE_NUMBER_INPUT_FIELD_TASK);
+
+        elementTask.put(CONTINUE_BUTTON, CONTINUE_BUTTON_TASK);
+
+        performActions(elementTask, wait);
+
     }
 
 
@@ -143,7 +169,7 @@ public class Login_Page_Android extends DriverManager {
             Camera = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Camera\")")));
             Gallery = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Gallery\")")));
             Cancel = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button2")));
-            if (Camera.isDisplayed() && Gallery.isEnabled()) {
+            if (Camera.isDisplayed() && Gallery.isDisplayed()) {
                 Cancel.click();
                 LogUtil.info("user can able to set the profile picture by using camera or gallery.");
             } else {

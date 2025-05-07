@@ -12,4 +12,9 @@ public class CommonElements {
     public static final ElementTask BACK_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Back").build();
 
+    /*Continue Button.*/
+    public static final By CONTINUE_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtContinue");
+    public static final ElementTask CONTINUE_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Continue").build();
+
 }

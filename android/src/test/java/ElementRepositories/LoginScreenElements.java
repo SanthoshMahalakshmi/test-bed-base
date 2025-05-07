@@ -21,11 +21,6 @@ public class LoginScreenElements {
     public static final ElementTask COUNTRY_CODE_TASK =
             new ElementTask.Builder(Activity.VERIFY, "Country Code").build();
 
-    /*Continue Button.*/
-    public static final By CONTINUE_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtContinue");
-    public static final ElementTask CONTINUE_BUTTON_TASK =
-            new ElementTask.Builder(Activity.CLICK, "Continue").build();
-
     /*Terms and condition Link*/
     public static final By TERMS_AND_CONDITION_LINK = AppiumBy.id("com.heartmonitor.android:id/txtTerms");
     public static final ElementTask TERMS_AND_CONDITION_LINK_TASK =
