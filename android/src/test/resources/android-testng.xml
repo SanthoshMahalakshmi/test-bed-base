@@ -15,21 +15,20 @@
                 <methods>
                     <exclude  name="TC_002"/> <!--!!-->
                     <exclude  name="TC_003"/> <!--!!-->
-                    <exclude  name="TC_004"/>
-                    <include  name="TC004"/>
-                    <exclude  name="TC_005"/>
-                    <exclude  name="TC_006"/>
-                    <exclude  name="TC_007"/>
-                    <exclude  name="TC_008"/>
-                    <exclude  name="TC_009"/>
+                    <exclude  name="TC_004"/> <!--!!-->
+                    <exclude  name="TC_005"/> <!--!!-->
+                    <exclude  name="TC_006"/> <!--!!-->
+                    <exclude  name="TC_007"/> <!--!!-->
+                    <exclude  name="TC_008"/> <!--!!-->
+                    <exclude  name="TC_009"/> <!--!!-->
                 </methods>
             </class>
 
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Android">
                 <methods>
-                    <exclude  name="TC_010"/>
-                    <exclude  name="TC_011"/>
+                    <exclude  name="TC_010"/> <!--!!-->
+                    <include  name="TC011"/>
                     <exclude  name="TC_012"/>
                     <exclude  name="TC_013"/>
                     <exclude  name="TC_014"/>

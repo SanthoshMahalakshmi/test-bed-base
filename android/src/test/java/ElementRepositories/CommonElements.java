@@ -17,4 +17,15 @@ public class CommonElements {
     public static final ElementTask CONTINUE_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Continue").build();
 
+    /*Continue Button.*/
+    public static final By CONTINUE_BUTTON_2 = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtContinue\")");
+    public static final ElementTask CONTINUE_BUTTON_2_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Continue").build();
+
+    /*Continue Button.*/
+    public static final By CONTINUE_BUTTON_3 = AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.heartmonitor.android:id/txtContinue\"]");
+    public static final ElementTask CONTINUE_BUTTON_3_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Continue").build();
+
+
 }

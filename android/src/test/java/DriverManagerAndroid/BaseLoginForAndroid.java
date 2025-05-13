@@ -1,5 +1,6 @@
 package DriverManagerAndroid;
 
+import UtilitiesForAndroid.ElementActions;
 import UtilitiesForAndroid.LogUtil;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.*;
@@ -8,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.logging.Logger;
 
 public class BaseLoginForAndroid extends DriverManager {
 
@@ -22,6 +22,8 @@ public class BaseLoginForAndroid extends DriverManager {
         //Clicking the Get started button
         try {
             WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
+            getStarted.click();
+            getStarted.click();
             getStarted.click();
             LogUtil.info("Successfully clicked the 'Get Started' button.");
         } catch (ElementClickInterceptedException e) {
@@ -42,6 +44,7 @@ public class BaseLoginForAndroid extends DriverManager {
         //Clicking the continue button
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+            ElementActions.checkForStagingError(wait);
             LogUtil.info("Continue button is clicked for login process.");
         } catch (Exception e) {
             LogUtil.warning("Clicking the continue button is not happening.");
