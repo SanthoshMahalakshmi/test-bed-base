@@ -76,7 +76,7 @@ public class DriverManager {
                 caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity");
                 caps.setCapability("fullReset", true);
                 caps.setCapability("noReset", false);
-                caps.setCapability("appium:app", "/Users/San/Downloads/apps/Monitor-Staging-170325.apk");
+                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor-Stg-130525.apk");
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForAndroid(new AndroidDriver(url, caps));
@@ -137,6 +137,17 @@ public class DriverManager {
         LogUtil.info("🛑 Executing @AfterMethod: Quitting Android Driver... ");
         AppiumDriver currentDriver = getDriver();
 
+        // ✅ Mark test status on BrowserStack if running on BrowserStack
+        String currentEnv = System.getenv("ENVIRONMENT");
+        if (!"local".equalsIgnoreCase(currentEnv) && currentDriver != null) {
+            String status = (testResult.getStatus() == ITestResult.SUCCESS) ? "passed" : "failed";
+            String reason = testResult.getThrowable() != null ? testResult.getThrowable().getMessage() : "Completed";
+            ((JavascriptExecutor) currentDriver).executeScript(
+                    "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""
+                            + status + "\", \"reason\": \"" + reason + "\"}}"
+            );
+        }
+
         if (currentDriver != null) {
             try {
                 currentDriver.quit();
@@ -147,14 +158,12 @@ public class DriverManager {
             } finally {
                 appiumDriverThreadLocal.remove();
                 LogUtil.info("🧹 ThreadLocal driver removed.");
-                // Reset the static driver reference
                 driver = null;
             }
         } else {
             LogUtil.info("⚠️ No active driver found to quit.");
         }
 
-        // Ensure app is force-stopped after quitting driver
         try {
             Runtime.getRuntime().exec("adb shell am force-stop com.heartmonitor.android");
             LogUtil.info("✅ Force-stopped app successfully.");
@@ -162,4 +171,5 @@ public class DriverManager {
             LogUtil.info("❌ Error force-stopping app: " + e.getMessage());
         }
     }
+
 }

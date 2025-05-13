@@ -1,5 +1,7 @@
 package DashBoard;
 
+import Actions.Activity;
+import Actions.ElementTask;
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.LogUtil;
@@ -9,138 +11,68 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static ElementRepositories.CommonElements.*;
+import static ElementRepositories.DashBoardScreenElements.*;
+import static ElementRepositories.NotificationScreenElements.*;
+import static ElementRepositories.ReportScreenElements.*;
+import static UtilitiesForAndroid.ElementActions.*;
 
 public class DashBoard_Page_Android extends DriverManager {
 
-    private static final Logger log = LoggerFactory.getLogger(DashBoard_Page_Android.class);
     BaseLoginForAndroid bs = new BaseLoginForAndroid();
-    
-    
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_010() throws Exception {
 
-         LogUtil.info("Enter into TC_010");
-         
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*Pre-Request*/
+        bs.CoreLoginForAndroid(true);
 
-        //1.Verify the LOGO text present in the top.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")")));
-            WebElement LogoText = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"MoAI\")"));
-            LogUtil.info("Logo text : " + LogoText.getText());
-            LogUtil.info("Logo text is present : " + LogoText.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Logo is not present.");
-        }
-
-        //2.Verify the Sync button.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Sync data")));
-            WebElement SyncData = driver.findElement(AppiumBy.accessibilityId("Sync data"));
-            LogUtil.info("Sync data button is present : " + SyncData.isDisplayed());
-            SyncData.click();
-        } catch (Exception e) {
-            LogUtil.warning("Sync button is not present.");
-        }
-
-        WebElement SyncInfo = null;
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.android.permissioncontroller:id/permission_allow_button")));
-            LogUtil.info("Sync button info :" + SyncInfo.getText());
-        }
-        catch (Exception e)
-        {
-            LogUtil.warning("Info message is not found.");
-        }
-
-        WebElement SyncClose = null;
-        try {
-            SyncClose = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/image_close_toaster")));
-            LogUtil.info("Cross button is found its clicked :" + SyncClose.isDisplayed());
-            SyncClose.click();
-        }
-        catch (Exception e)
-        {
-             LogUtil.warning("Sync cross button is not found.");
-        }
-
-        //3.Notification button.
-        try {
-            WebElement NotificationButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notification")));
-            LogUtil.info("Notification button is present : " + NotificationButton.isDisplayed());
-            NotificationButton.click();
-        } catch (Exception e) {
-            LogUtil.warning("Notification button is not present.");
-        }
-
-        //4.Seeing the notification and clearing them
-        WebElement Notifications = null;
-        try{
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/llMain\").instance(0)")));
-            LogUtil.info("Notification is present? : " + Notifications.isDisplayed());
-        }
-        catch (Exception e)
-        {
-            LogUtil.warning("No notification are present.");
-        }
-
-        //5. clearing them
-        try{
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("clear"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            LogUtil.info("Clear button is found and it's cleared all the notifications");
-        }
-        catch (Exception e)
-        {
-         LogUtil.warning("Clear button is not present currently, there is no notification");
-        }
-
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        //6.health score section
-        WebElement ECGReport = null;
-        try {
-            ECGReport =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtEcg")));
-            LogUtil.info("Ecg report is present " + ECGReport.isDisplayed());
-        }
-        catch (Exception e)
-        {
-            LogUtil.warning("Ecg report data is not present in the dashboard.");
-        }
-
-        WebElement deviceIndication = null;
-        try {
-            deviceIndication = driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/view5\"));"));
-            LogUtil.info("Heath scroll is present :" + deviceIndication.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Health scroll is not visible, may be the screen is not scrolled.");
-        }
-
-        //Scrolling to heath score section.
-        WebElement HealthScore = null;
-        try {
-            HealthScore = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/view5")));
-        } catch (Exception e) {
-            LogUtil.warning("Health scroll is not visible, may be the screen is not scrolled.");
-        }
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        /*Actual test case*/
+        elementMap.put(DASHBOARD_APP_LOGO, DASHBOARD_APP_LOGO_TASK);
+        elementMap.put(DASHBOARD_SYNC_BUTTON, DASHBOARD_SYNC_BUTTON_TASK);
+        elementMap.put(DASHBOARD_SYNC_TOAST, DASHBOARD_SYNC_TOAST_TASK);
+        elementMap.put(DASHBOARD_SYNC_TOAST_CLOSE, DASHBOARD_SYNC_TOAST_CLOSE_TASK);
+        elementMap.put(DASHBOARD_NOTIFICATION_BUTTON, DASHBOARD_NOTIFICATION_BUTTON_TASK);
+        elementMap.put(NOTIFICATION_LABEL, NOTIFICATION_LABEL_TASK);
+        elementMap.put(ACTUAL_NOTIFICATION, ACTUAL_NOTIFICATION_TASK);
+        elementMap.put(NOTIFICATION_CLEAR_BUTTON, new ElementTask.Builder(Activity.VERIFY, "clear button is").build());
+        elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        elementMap.put(DASHBOARD_SEND_FEEDBACK_BUTTON, DASHBOARD_SEND_FEEDBACK_BUTTON_TASK);
+        performActions(elementMap, wait);
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC011() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        /*Pre-Request*/
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_DEPENDENT_LABEL, DASHBOARD_DEPENDENT_LABEL_TASK);
+        elementMap.put(DASHBOARD_DEPENDENT_BUTTON, DASHBOARD_DEPENDENT_BUTTON_TASK);
+        elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
+        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(BLOOD_PRESSURE_TAB, new ElementTask.Builder(Activity.VERIFY, "Blood pressure tab").build());
+        elementMap.put(DOWNLOAD_BUTTON, DOWNLOAD_BUTTON_TASK);
+        performActions(elementMap, wait);
+    }
+
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_011() throws Exception {
 
-         LogUtil.info("Enter into TC_011");
+        LogUtil.info("Enter into TC_011");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -232,12 +164,12 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_012() throws Exception {
 
-         LogUtil.info("Enter into TC_012");
+        LogUtil.info("Enter into TC_012");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -290,10 +222,10 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_013() throws Exception {
 
-         LogUtil.info("Enter into TC_013");
+        LogUtil.info("Enter into TC_013");
 
         TC_012();  // To complete the previous steps.
 
@@ -341,12 +273,12 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_014() throws Exception {
 
-         LogUtil.info("Enter into TC_014");
+        LogUtil.info("Enter into TC_014");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
@@ -448,12 +380,12 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
 
-         LogUtil.info("Enter into TC_015");
+        LogUtil.info("Enter into TC_015");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(13));
 
@@ -481,12 +413,12 @@ public class DashBoard_Page_Android extends DriverManager {
             LogUtil.warning("Add member is not happening.");
         }
 
-         try {
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                     ("com.android.packageinstaller:id/permission_allow_button"))).click();
-         } catch (Exception e) {
-             LogUtil.warning("permission is not accepted for allow.");
-         }
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
+                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
+        } catch (Exception e) {
+            LogUtil.warning("permission is not accepted for allow.");
+        }
 
         //pre - clicking the kebab menu
         try {
@@ -642,12 +574,12 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_016() throws Exception {
 
-         LogUtil.info("Enter into TC_016");
+        LogUtil.info("Enter into TC_016");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -755,12 +687,12 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_017() throws Exception {
 
-         LogUtil.info("Enter into TC_017");
+        LogUtil.info("Enter into TC_017");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -805,7 +737,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Empty Personal note less character.
         try {
             driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"))
+                            ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"))
                     .sendKeys("Take");
         } catch (Exception e) {
             LogUtil.warning("Empty personal note is not");
@@ -846,12 +778,12 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_018() throws Exception {
 
-         LogUtil.info("Enter into TC_018");
+        LogUtil.info("Enter into TC_018");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -905,7 +837,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         //Checking whether the reminder time is added or not.
         WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
-        LogUtil.info("Timer is added :"+timer.isDisplayed());
+        LogUtil.info("Timer is added :" + timer.isDisplayed());
 
         try {
             driver.findElement(AppiumBy.androidUIAutomator
@@ -927,71 +859,71 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_019() throws Exception {
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-         //Verify the care circle is present in the screen
-         try {
-             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile")));
-             WebElement CareCircle = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"));
-             LogUtil.info("Care is present : " + CareCircle.isDisplayed());
-             System.out.println();
-         } catch (Exception e) {
-             throw new RuntimeException(e);
-         }
+        //Verify the care circle is present in the screen
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile")));
+            WebElement CareCircle = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"));
+            LogUtil.info("Care is present : " + CareCircle.isDisplayed());
+            System.out.println();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-         try {
-             //Care circle button.
-             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
-         } catch (Exception e) {
-             LogUtil.warning("care circle button is not visible.");
-         }
+        try {
+            //Care circle button.
+            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
+        } catch (Exception e) {
+            LogUtil.warning("care circle button is not visible.");
+        }
 
-         //permission
-         try {
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                     ("com.android.packageinstaller:id/permission_allow_button"))).click();
-         } catch (Exception e) {
-             LogUtil.warning("Permission is not allowed.");
-         }
+        //permission
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
+                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
+        } catch (Exception e) {
+            LogUtil.warning("Permission is not allowed.");
+        }
 
-         //Add member
-         try {
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
-         } catch (Exception e) {
-             LogUtil.warning("Add member is not happen.");
-         }
+        //Add member
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
+        } catch (Exception e) {
+            LogUtil.warning("Add member is not happen.");
+        }
 
-         //1.clicking the kebab menu
-         try {
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
+        //1.clicking the kebab menu
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
 
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                     ("new UiSelector().text(\"Delete Care Circle\")"))).click();
-         } catch (Exception e) {
-             LogUtil.warning("Clicking the kebab for delete care circel is not happen.");
-         }
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
+                    ("new UiSelector().text(\"Delete Care Circle\")"))).click();
+        } catch (Exception e) {
+            LogUtil.warning("Clicking the kebab for delete care circel is not happen.");
+        }
 
-         //Confirmation for deleting the care circle
-         try {
-             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-             WebElement SuccessToast =  wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/dialog_layout_toaster")));
-             LogUtil.info("Success toast : " + SuccessToast.getText());
-         } catch (Exception e) {
-             LogUtil.warning("Confirmation Ok for delete care circle is not happen.");
-         }
+        //Confirmation for deleting the care circle
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
+            WebElement SuccessToast = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/dialog_layout_toaster")));
+            LogUtil.info("Success toast : " + SuccessToast.getText());
+        } catch (Exception e) {
+            LogUtil.warning("Confirmation Ok for delete care circle is not happen.");
+        }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
 
-         LogUtil.info("Enter into TC_025");
+        LogUtil.info("Enter into TC_025");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1036,12 +968,12 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_026() throws Exception {
 
-         LogUtil.info("Enter into TC_026");
+        LogUtil.info("Enter into TC_026");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -1062,13 +994,13 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_027() throws Exception {
 
-         LogUtil.info("Enter into TC_027");
+        LogUtil.info("Enter into TC_027");
 
         /*Adding the reminder for Blood pressure.*/
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1130,7 +1062,7 @@ public class DashBoard_Page_Android extends DriverManager {
         //Checking whether the reminder time is added or not.
         try {
             WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
-            LogUtil.info("just checking whether the reminder time is added or not: " +timer.isDisplayed());
+            LogUtil.info("just checking whether the reminder time is added or not: " + timer.isDisplayed());
         } catch (Exception e) {
             LogUtil.warning("Timer is not visible.");
         }
@@ -1167,10 +1099,10 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_028() throws Exception {
 
-         LogUtil.info("Enter into TC_028");
+        LogUtil.info("Enter into TC_028");
 
         bs.CoreLoginForAndroid(true);  //basic login scenario
 
@@ -1230,12 +1162,12 @@ public class DashBoard_Page_Android extends DriverManager {
         }
     }
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_029() throws Exception {
 
-         LogUtil.info("Enter into TC_029");
+        LogUtil.info("Enter into TC_029");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -1292,13 +1224,12 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
 
-     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_030() throws Exception
-    {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_030() throws Exception {
 
         LogUtil.info("Enter into TC_030");
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(true);  //basic login scenario
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
