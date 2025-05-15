@@ -7,6 +7,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.Map;
 
 public class ElementActions {
@@ -55,7 +56,6 @@ public class ElementActions {
         }
     }
 
-    // Inside ElementActions.java
     public static void checkForStagingError(WebDriverWait wait) {
         By STAGING_DOWN_POPUP = AppiumBy.id("com.heartmonitor.android:id/txtStagingDown");
 
@@ -113,4 +113,5 @@ public class ElementActions {
             LogUtil.warning("❌ No alert found to accept for [" + description + "] - " + e.getMessage());
         }
     }
+
 }

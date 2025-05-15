@@ -27,5 +27,10 @@ public class CommonElements {
     public static final ElementTask CONTINUE_BUTTON_3_TASK =
             new ElementTask.Builder(Activity.CLICK, "Continue").build();
 
+    /*Toast Close*/
+    public static final By TOAST_CLOSE = AppiumBy.id("com.heartmonitor.android:id/image_close_toaster");
+    public static final ElementTask TOAST_CLOSE_TASK =
+            new ElementTask.Builder(Activity.CLICK, "dashBoard Sync toast message close").build();
+
 
 }
