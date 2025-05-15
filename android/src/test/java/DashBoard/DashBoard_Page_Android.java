@@ -17,8 +17,10 @@ import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static ElementRepositories.CareCircleScreenElements.*;
 import static ElementRepositories.CommonElements.*;
 import static ElementRepositories.DashBoardScreenElements.*;
+import static ElementRepositories.FeedBackScreenElements.*;
 import static ElementRepositories.NotificationScreenElements.*;
 import static ElementRepositories.ReportScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.*;
@@ -51,7 +53,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC011() throws Exception {
+    public void TC_011() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         /*Pre-Request*/
         bs.CoreLoginForAndroid(true);
@@ -66,319 +68,58 @@ public class DashBoard_Page_Android extends DriverManager {
         performActions(elementMap, wait);
     }
 
-
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_011() throws Exception {
-
-        LogUtil.info("Enter into TC_011");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        //1.Verify My dependent section.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtMyDependent")));
-            WebElement MyDependent = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtMyDependent"));
-            LogUtil.info("My dependent section is present : " + MyDependent.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("My dependent section is not visible.");
-        }
-
-        //2.Add new dependent
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
-            //My Dependent details page, new journey for adding dependent. user should cross all the 5 pages.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")")));
-            WebElement MyDependentSection = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")"));
-            LogUtil.info("My Dependent page is present : " + MyDependentSection.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Add new dependent is not happening.");
-        }
-
-        //Home button, moving back to dashboard.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Moving back to home is not happening.");
-        }
-
-        //3.Verify added dependent in the dashboard
-        WebElement AddedDependent = null;
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")")));
-            AddedDependent = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")"));
-            LogUtil.warning("Newly added dependent profile is visible : " + AddedDependent.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("New dependent is not added.");
-        }
-
-        //4.Dependent profile
-        try {
-            AddedDependent.click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtUserName")));
-            WebElement userName = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtUserName"));
-            LogUtil.info("Dependent profile name : " + userName.getText());
-        } catch (Exception e) {
-            LogUtil.warning("New dependent profile is ");
-        }
-
-        //Navigate back to the DB
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating back dashboard is not happening.");
-        }
-
-        //6.Sharing the report detail
-
-        try {
-            /*Clicking on share in DB*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgShare"))).click();
-            /*Selecting the ECG*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbECG"))).click();
-            /*Selecting the Submit*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            /*Selecting the message*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    xpath("//android.widget.TextView[@resource-id=\"android:id/text1\" and @text=\"Messages\"]"))).click();
-            LogUtil.info("Sharing the report is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Sharing option is not happening.");
-        }
-
-
-        //7.downloading the reports and sharing to the people from DB.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgDownload"))).click();
-            /*Selecting ECG for download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbECG"))).click();
-            /*Selecting the SPO2 download.*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
-            /*Selecting the HR download*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
-            /*Clicking on done*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Downloading the report not working.");
-        }
-    }
-
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_012() throws Exception {
 
-        LogUtil.info("Enter into TC_012");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-        //verify the care circle section label.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCareCirclesLabel")));
-            WebElement careCircleLabel = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/txtCareCirclesLabel"));
-            LogUtil.info("Care circle label is present : " + careCircleLabel.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Care section label is not visible.");
-        }
-
-        //2.Clicking the Get stared button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtCareCircle"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking on get started is not happening.");
-        }
-
-        //Permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Permission allow is not happening.");
-        }
-
-        //Selecting the contact
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"A\")"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Selecting contact os not happening.");
-        }
-
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Adding member is not happening");
-        }
-
-        //Enter group name
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtGroupName"))).sendKeys("Fam");
-        } catch (Exception e) {
-            LogUtil.warning("Adding new name for the care circle is not happening.");
-        }
-
+        /*Pre-Request*/
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        /*Actual test case*/
+        elementMap.put(DASHBOARD_CARE_CIRCLE_LABEL, DASHBOARD_CARE_CIRCLE_LABEL_TASK);
+        elementMap.put(DASHBOARD_CARE_CIRCLE_GET_STARTED, DASHBOARD_CARE_CIRCLE_GET_STARTED_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_LABEL, CARE_CIRCLE_LABEL_TASK);
+        elementMap.put(CARE_CIRCLE_GROUP_NAME, CARE_CIRCLE_GROUP_NAME_TASK);
+        elementMap.put(CARE_CIRCLE_CONTACT_ADD_BUTTON, CARE_CIRCLE_CONTACT_ADD_BUTTON_TASK);
+        elementMap.put(SET_REMINDER_CHECK_BOX, SET_REMINDER_CHECK_BOX_TASK);
+        elementMap.put(CARE_CIRCLE_SUBMIT_BUTTON, CARE_CIRCLE_SUBMIT_BUTTON_TASK);
+        performActions(elementMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_013() throws Exception {
 
-        LogUtil.info("Enter into TC_013");
-
-        TC_012();  // To complete the previous steps.
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        //Click the submit to get the error, not enough character.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Submit button is not working for getting the error for not enough character.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
-            WebElement error1 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
-            LogUtil.info("Not enough character error : " + error1.getText());
-        } catch (Exception e) {
-            LogUtil.warning("error message is not pop-up");
-        }
-
-        //Clearing the input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtGroupName"))).clear();
-        } catch (Exception e) {
-            LogUtil.warning("Clearing the input field is not working.");
-        }
-
-        //To get empty input field error.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
-            LogUtil.info("Empty input for the care circle name");
-        } catch (Exception e) {
-            LogUtil.warning("Empty input field error is not pop-up.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
-            WebElement error2 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
-            LogUtil.info("Empty input field error : " + error2.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Empty input field error message is not visible.");
-        }
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_SEND_FEEDBACK_BUTTON, DASHBOARD_SEND_FEEDBACK_BUTTON_TASK);
+        elementMap.put(SEND_FEEDBACK_LABEL, SEND_FEEDBACK_LABEL_TASK);
+        elementMap.put(SUBJECT_INPUT_FIELD, SUBJECT_INPUT_FIELD_TASK);
+        elementMap.put(FEEDBACK_TYPE, FEEDBACK_TYPE_TASK);
+        elementMap.put(FEEDBACK_OPTION_OTHERS, FEEDBACK_OPTION_OTHERS_TASK);
+        elementMap.put(MESSAGE_INPUT_FIELD, MESSAGE_INPUT_FIELD_TASK);
+        elementMap.put(PICK_IMAGE_OPTION, PICK_IMAGE_OPTION_TASK);
+        elementMap.put(SEND_FEEDBACK_BUTTON, SEND_FEEDBACK_BUTTON_TASK);
+        performActions(elementMap, wait);
     }
-
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_014() throws Exception {
-
-        LogUtil.info("Enter into TC_014");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
-        //Care circle button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Care circle button is not visible for a click.");
-        }
-
-        //permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-            LogUtil.info("Permission is given for allow button");
-        } catch (Exception e) {
-            LogUtil.warning("Permission is not happening");
-        }
-
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
-            LogUtil.info("Add member is happened");
-        } catch (Exception e) {
-            LogUtil.warning("Add member is not happen.");
-        }
-
-        //1.clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking the more options is not happen.");
-        }
-
-        //2.(i)Kebab menu list with edit care circle.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Care Circle\")")));
-            WebElement EditCareCircle = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Edit Care Circle\")"));
-            LogUtil.info("Edit care circle option is present in the list : " + EditCareCircle.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Edit care circle is not visible.");
-        }
-
-        //2.(ii)Kebab menu list with set reminder
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Set Reminder\")")));
-            WebElement SetReminder = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Set Reminder\")"));
-            LogUtil.info("Set reminder option is present in the list : " + SetReminder.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Set reminder is not visible.");
-        }
-
-        //2.(iii)Kebab menu list with Delete care circle
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Delete Care Circle\")")));
-            WebElement DeleteCareCircle = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete Care Circle\")"));
-            LogUtil.info("Delete care circle option is present in the list : " + DeleteCareCircle.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Delete care circle is not visible");
-        }
-
-        //3.Clicking on the edit care circle option in the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Care Circle\")"))).click();
-            LogUtil.info("Clicking the edit care circle");
-        } catch (Exception e) {
-            LogUtil.warning("Edit care circle click is not happening.");
-        }
-
-        //Clearing the input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtGroupName"))).clear();
-            LogUtil.info("Clearing the previous input.");
-        } catch (Exception e) {
-            LogUtil.warning("Clearing the previous input is not happening");
-        }
-
-        //Editing the care circle name.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtGroupName"))).sendKeys("SANTH");
-            LogUtil.info("Editing the care circle name");
-        } catch (Exception e) {
-            LogUtil.warning("Edit the care circle name is not happen.");
-        }
-
-        //4.Clicking on the update to complete the change.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvOkay"))).click();
-            LogUtil.info("name is changed.");
-        } catch (Exception e) {
-            LogUtil.warning("Name changed newly.");
-        }
-
+    public void TC014() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_MORE_OPTION, CARE_CIRCLE_MORE_OPTION_TASK);
+        elementMap.put(EDIT_CARE_CIRCLE_OPTION, new ElementTask.Builder(Activity.VERIFY, "Edit care circle option").build());
+        elementMap.put(SET_REMINDER_OPTION, new ElementTask.Builder(Activity.VERIFY, "Set reminder option").build());
+        elementMap.put(DELETE_CARE_CIRCLE_OPTION, new ElementTask.Builder(Activity.VERIFY, "Delete care Circle option").build());
+        performActions(elementMap, wait);
     }
+
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
