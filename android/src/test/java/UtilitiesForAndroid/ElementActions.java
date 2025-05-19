@@ -7,7 +7,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
 import java.util.Map;
 
 public class ElementActions {
@@ -50,7 +49,7 @@ public class ElementActions {
                     attempts++;
                 } catch (Exception e) {
                     LogUtil.warning("Element action failed for [" + description + "]: " + e.getMessage());
-                    break;
+                    throw new RuntimeException("❌ Test failed while performing [" + description + "] - " + e.getMessage(), e);
                 }
             }
         }
@@ -78,11 +77,15 @@ public class ElementActions {
             wait.until(ExpectedConditions.visibilityOf(element));
             if (element.isDisplayed() && element.isEnabled()) {
                 LogUtil.info("Verified [" + description + "] | Displayed: true | Text: \"" + element.getText().trim() + "\"");
+            } else {
+                throw new RuntimeException("❌ [" + description + "] is either not visible or not enabled.");
             }
         } catch (Exception e) {
             LogUtil.warning("❌ Verified [" + description + "] | Displayed: false | Text: \"N/A\"");
+            throw new RuntimeException("❌ Element verification failed for [" + description + "]: " + e.getMessage(), e);
         }
     }
+
 
     private static void clickElement(WebElement element, WebDriverWait wait, String description) {
         try {
@@ -90,8 +93,10 @@ public class ElementActions {
             LogUtil.info("Clicked on [" + description + "] button.");
         } catch (Exception e) {
             LogUtil.warning("❌ Failed to click on [" + description + "] button - " + e.getMessage());
+            throw new RuntimeException("❌ Click action failed for [" + description + "]: " + e.getMessage(), e);
         }
     }
+
 
     private static void sendKeysToElement(WebElement element, WebDriverWait wait, String description, String inputValue) {
         try {
@@ -101,8 +106,10 @@ public class ElementActions {
             LogUtil.info("Input sent to [" + description + "]: \"" + inputValue + "\"");
         } catch (Exception e) {
             LogUtil.warning("❌ Failed to send input to [" + description + "] - " + e.getMessage());
+            throw new RuntimeException("❌ SendKeys action failed for [" + description + "]: " + e.getMessage(), e);
         }
     }
+
 
     private static void acceptAlertIfPresent(WebDriverWait wait, String description) {
         try {
@@ -111,6 +118,7 @@ public class ElementActions {
             LogUtil.info("Alert accepted for [" + description + "].");
         } catch (Exception e) {
             LogUtil.warning("❌ No alert found to accept for [" + description + "] - " + e.getMessage());
+            throw new RuntimeException("❌ Accept alert failed for [" + description + "]: " + e.getMessage(), e);
         }
     }
 
