@@ -82,5 +82,11 @@ public class CareCircleScreenElements {
     public static final ElementTask CARE_CIRCLE_UPDATE_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Care circle Update").build();
 
+    /*No Day selected error.*/
+    public static final By DELETE_CARE_CIRCEL_MODEL_TEXT = AppiumBy.id("android:id/message");
+    public static final ElementTask DELETE_CARE_CIRCEL_MODEL_TEXT_TASK =
+            new ElementTask.Builder(Activity.VERIFY, "delete care circle model message").build();
+
+
 
 }

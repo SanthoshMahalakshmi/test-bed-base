@@ -32,5 +32,20 @@ public class CommonElements {
     public static final ElementTask TOAST_CLOSE_TASK =
             new ElementTask.Builder(Activity.CLICK, "dashBoard Sync toast message close").build();
 
+    /*Done button in set reminder*/
+    public static final By DONE_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtSubmit");
+    public static final ElementTask DONE_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Done").build();
+
+    /*Model close ok button*/
+    public static final By MODEL_CLOSE_OK_BUTTON = AppiumBy.id("android:id/button1");
+    public static final ElementTask MODEL_CLOSE_OK_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Model Confirm: 'ok'").build();
+
+    /*Model close cancel button*/
+    public static final By MODEL_CLOSE_CANCLE_BUTTON = AppiumBy.id("android:id/button2");
+    public static final ElementTask MODEL_CLOSE_CANCLE_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Model close: 'Cancel'").build();
+
 
 }

@@ -23,6 +23,7 @@ import static ElementRepositories.DashBoardScreenElements.*;
 import static ElementRepositories.FeedBackScreenElements.*;
 import static ElementRepositories.NotificationScreenElements.*;
 import static ElementRepositories.ReportScreenElements.*;
+import static ElementRepositories.SetReminderScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.*;
 
 public class DashBoard_Page_Android extends DriverManager {
@@ -120,544 +121,168 @@ public class DashBoard_Page_Android extends DriverManager {
         performActions(elementMap, wait);
     }
 
-
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
+        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(true);
 
-        LogUtil.info("Enter into TC_015");
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_MORE_OPTION, CARE_CIRCLE_MORE_OPTION_TASK);
+        elementMap.put(SET_REMINDER_OPTION, SET_REMINDER_OPTION_TASK);
+        elementMap.put(SET_REMINDER_BP_RADIO_BUTTON, SET_REMINDER_BP_RADIO_BUTTON_TASK);
+        elementMap.put(SET_REMINDER_ECG_RADIO_BUTTON, SET_REMINDER_ECG_RADIO_BUTTON_TASK);
+        elementMap.put(SET_REMINDER_SPO2_RADIO_BUTTON, SET_REMINDER_SPO2_RADIO_BUTTON_TASK);
+        elementMap.put(SET_REMINDER_HR_RADIO_BUTTON, SET_REMINDER_HR_RADIO_BUTTON_TASK);
+        elementMap.put(DONE_BUTTON, DONE_BUTTON_TASK);
+        elementMap.put(REMINDER_NAME, REMINDER_NAME_TASK);
+        elementMap.put(ALL_DAYS_CHECKBOX, ALL_DAYS_CHECKBOX_TASK);
+        elementMap.put(ADD_TIME_BUTTON, ADD_TIME_BUTTON_TASK);
+        elementMap.put(CLOCK_OK_BUTTON, CLOCK_OK_BUTTON_TASK);
+        elementMap.put(ADD_INVITEE_PLUS_BUTTON, ADD_INVITEE_PLUS_BUTTON_TASK);
+        elementMap.put(ALL_MY_FAMILY_CHECKBOX, ALL_MY_FAMILY_CHECKBOX_TASK);
+        elementMap.put(ADD_INVITEE_BUTTON, ADD_INVITEE_BUTTON_TASK);
+        elementMap.put(PERSONAL_NOTE_INPUT_FIELD, PERSONAL_NOTE_INPUT_FIELD_TASK);
+        elementMap.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(13));
-
-        //pre - Care circle button.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
-            LogUtil.info("clicking the care circle.");
-        } catch (Exception e) {
-            LogUtil.warning("Care circle is not visible ");
-        }
-
-        //pre - permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("permission is not accepted for allow.");
-        }
-
-        //pre - Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
-            LogUtil.info("Adding member is working");
-        } catch (Exception e) {
-            LogUtil.warning("Add member is not happening.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("permission is not accepted for allow.");
-        }
-
-        //pre - clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("clicking kebab menu is not happening.");
-        }
-
-        //1.clicking the Set reminder button in the kebab menu
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Set Reminder\")"))).click();
-            LogUtil.info("Set reminder is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Set reminder from care circle is not happening");
-        }
-
-        //2.Verify the blood pressure radio button is selected by default.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/rbBp")));
-            WebElement BP = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbBp"));
-            LogUtil.info("Bp reminder is selected default : " + BP.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Bp radio button is not Enabled.");
-        }
-
-        //3.verify the ECG radio button is selectable
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbECG"))).click();
-            WebElement ECG = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbECG"));
-            LogUtil.info("Ecg is selected : " + ECG.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("ECG radio button is not displayed.");
-        }
-
-        //4. verify the Spo2 reminder radio button is selectable
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
-            WebElement Spo2 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"));
-            LogUtil.info("Spo2 is selected : " + Spo2.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Spo2 radio button is not selectable.");
-        }
-
-        //5.Heart rate reminder radio button is selectable
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
-            WebElement HR = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/rbHR"));
-            LogUtil.info("HR is selected : " + HR.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Hr reminder radio is not visible");
-        }
-
-        //Done button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            LogUtil.info("Done button click is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Done button click is not working");
-        }
-
-        //Add reminder name
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id
-                    ("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Take Heart rate.");
-            LogUtil.info("Reminder name is added.");
-        } catch (Exception e) {
-            LogUtil.warning("Add reminder name is not working.");
-        }
-
-        //Selecting the days for the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTHU"))).click();
-            LogUtil.info("Selecting the days for reminder is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Selecting days for the reminder is not working.");
-        }
-
-        //Set the time for the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
-            LogUtil.info("Set time for reminder is working");
-        } catch (Exception e) {
-            LogUtil.warning("Set time for reminder is not working.");
-        }
-
-        //Choose the hour time for the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("6"))).click();
-            LogUtil.info("Choose hour is happen.");
-        } catch (Exception e) {
-            LogUtil.warning("Choose hour is not happening");
-        }
-
-        //Choose the minute time for the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("0"))).click();
-            LogUtil.info("choose minutes is working");
-        } catch (Exception e) {
-            LogUtil.warning("Choose minute is not working");
-        }
-
-        //Confirm the with OK
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            LogUtil.info("Clicking Ok is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Clicking Ok is not working");
-        }
-
-        //Using + to Adding invite to the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-            LogUtil.info("invite the people is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Invite the people is not working.");
-        }
-
-        //6.Add the invite to the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"Kavya\")"))).click();
-            LogUtil.info("Care circle people is added to the reminder.");
-        } catch (Exception e) {
-            LogUtil.warning("People is not added to the reminder");
-        }
-
-        //Clicking the add invite button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            LogUtil.info("Invite button click is working.");
-        } catch (Exception e) {
-            LogUtil.warning("Clicking invite button is not working.");
-        }
-
-        //Scrolling to personal note
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));")).sendKeys("Take care Your self..");
-            LogUtil.info("Scroll to the personal note and added input as well.");
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the  personal note is not happen");
-        }
-
-        //7.Confirm the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-            LogUtil.info("Reminder set successfully.");
-        } catch (Exception e) {
-            LogUtil.warning("Reminder confirmation is not happen.");
-        }
+        performActions(elementMap, wait);
     }
-
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_016() throws Exception {
+        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        LogUtil.info("Enter into TC_016");
+        /*pre-Request*/
+        elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_MORE_OPTION, CARE_CIRCLE_MORE_OPTION_TASK);
+        elementMap.put(SET_REMINDER_OPTION, SET_REMINDER_OPTION_TASK);
+        elementMap.put(SET_REMINDER_BP_RADIO_BUTTON, SET_REMINDER_BP_RADIO_BUTTON_TASK);
+        elementMap.put(DONE_BUTTON, DONE_BUTTON_TASK);
+        elementMap.put(REMINDER_NAME, REMINDER_NAME_TASK);
+        elementMap.put(PERSONAL_NOTE_INPUT_FIELD, PERSONAL_NOTE_INPUT_FIELD_TASK);
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        /*Actual test case*/
+        elementMap.put(SUN_BUTTON, SUN_BUTTON_TASK);
+        elementMap.put(MON_BUTTON, MON_BUTTON_TASK);
+        elementMap.put(TUE_BUTTON, TUE_BUTTON_TASK);
+        elementMap.put(WED_BUTTON, WED_BUTTON_TASK);
+        elementMap.put(THU_BUTTON, THU_BUTTON_TASK);
+        elementMap.put(FRI_BUTTON, FRI_BUTTON_TASK);
+        elementMap.put(SAT_BUTTON, SAT_BUTTON_TASK);
+        elementMap.put(ALL_DAYS_CHECKBOX, new ElementTask.Builder(Activity.CLICK, "UnSelect the days").build());
+        performActions(elementMap, wait);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        /*Day not selected error.*/
+        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
+        elementTaskMap.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
+        elementTaskMap.put(DAY_NOT_SELECTED_ERROR, DAY_NOT_SELECTED_ERROR_TASK);
+        elementTaskMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        performActions(elementTaskMap, wait);
 
-        //Scrolling to the plus button.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the add reminder in the DB is not working");
-        }
+        /*Time not selected error.*/
+        Map<By, ElementTask> elementTaskMap1 = new LinkedHashMap<>();
+        elementTaskMap1.put(SAT_BUTTON, SAT_BUTTON_TASK);
+        elementTaskMap1.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
+        elementTaskMap1.put(TIME_NOT_SELECTED_ERROR, TIME_NOT_SELECTED_ERROR_TASK);
+        elementTaskMap1.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        performActions(elementTaskMap1, wait);
 
-        //Clicking the plus button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-            LogUtil.info("Clicking the plus is working");
-        } catch (Exception e) {
-            LogUtil.warning("plus button is not clicked");
-        }
-
-        //Clicking the SpO2 radio button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
-            LogUtil.info("Spo2 radio button is visible and it clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("Spo2 radio button is not visible for a click.");
-        }
-
-        //Clicking the DONE button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            LogUtil.info("Done is clicked");
-        } catch (Exception e) {
-            LogUtil.warning("Done is nor clicked.");
-        }
-
-        //CASE - 1
-        //1.Selecting the days for the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTHU"))).click();
-            LogUtil.info("Days are selected for reminder.");
-        } catch (Exception e) {
-            LogUtil.warning("Selecting day is not working.");
-        }
-
-        //2.Unselect the days in the reminder
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtTHU"))).click();
-            LogUtil.info("De-Selecting the days is happen.");
-        } catch (Exception e) {
-            LogUtil.warning("De-Selecting the days is not working. ");
-        }
-
-        // CASE - 2 & 3
-        //Empty reminder name
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtReminderName")));
-            //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-            //Empty reminder name error will be shown up.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
-            WebElement EmptyReminderName = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
-            LogUtil.info("Error 1 :" + EmptyReminderName.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Empty reminder name error is not visible.");
-        }
-
-        //Less character error on reminder name.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("sa");
-            //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-            //Error for less charscter.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
-            WebElement LessCharacterError = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
-            LogUtil.info("Error 2 :" + LessCharacterError.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Less character error is not visible");
-        }
-
-        //3.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Sant");
-        } catch (Exception e) {
-            LogUtil.warning("name is added");
-        }
-
-        //Empty Personal note less character.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));")).sendKeys("Take care");
-
-            //Confirm the reminder using set reminder button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-
-            //Popup for not selecting the day
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
-            LogUtil.info("Pop up message for days not selected : " + message.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Days not selected error is not visible.");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_017() throws Exception {
 
-        LogUtil.info("Enter into TC_017");
+        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        /*Pre-Request*/
+        elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_MORE_OPTION, CARE_CIRCLE_MORE_OPTION_TASK);
+        elementMap.put(SET_REMINDER_OPTION, SET_REMINDER_OPTION_TASK);
+        elementMap.put(SET_REMINDER_BP_RADIO_BUTTON, SET_REMINDER_BP_RADIO_BUTTON_TASK);
+        elementMap.put(DONE_BUTTON, DONE_BUTTON_TASK);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        /*Reminder Empty character error*/
+        elementMap.put(PERSONAL_NOTE_INPUT_FIELD, PERSONAL_NOTE_INPUT_FIELD_TASK);
+        elementMap.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
+        elementMap.put(EMPTY_REMINDER_NAME_ERROR, EMPTY_REMINDER_NAME_ERROR_TASK);
+        performActions(elementMap, wait);
 
-        //Scrolling to the plus button.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the reminder is not happen.");
-        }
-
-        //Clicking the plus button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking plus is not happen.");
-        }
-
-        //Clicking the SpO2 radio button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Selecting SPo2 is not happen.");
-        }
-
-        //Clicking the DONE button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Selecting done is not happen.");
-        }
-
-        //----------------This scroll is not working-----------------------need to work on that-----------------
-
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtSetReminder\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not working.");
-        }
-
-        //Empty Personal note less character.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                            ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"))
-                    .sendKeys("Take");
-        } catch (Exception e) {
-            LogUtil.warning("Empty personal note is not");
-        }
-
-        //Confirm the reminder using set reminder button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Set reminder is not working. ");
-        }
-
-        //Error for empty personal note.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
-            WebElement error1 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
-            LogUtil.info("Error 1 :" + error1.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Empty personal note error is not visible.");
-        }
-
-        //Clearing the personal note to get another error
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtPersonalNotes"))).clear();
-        } catch (Exception e) {
-            LogUtil.warning("Clearing the personal note.");
-        }
-
-        //Confirm the reminder using set reminder button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-            //Error for empty personal note.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/textinput_error")));
-            WebElement error2 = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/textinput_error"));
-            LogUtil.info("Error 2 :" + error2.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Empty personal note error is not visible.");
-        }
+        /*Reminder Less character error*/
+        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
+        elementTaskMap.put(PERSONAL_NOTE_INPUT_FIELD, PERSONAL_NOTE_INPUT_FIELD_TASK);
+        elementTaskMap.put(REMINDER_NAME, new ElementTask.Builder(Activity.SEND_KEYS, "Reminder name").inputValue("Re").build());
+        elementTaskMap.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
+        elementTaskMap.put(REMINDER_NAME_LESS_CHARACTER_ERROR, REMINDER_NAME_LESS_CHARACTER_ERROR_TASK);
+        performActions(elementTaskMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_018() throws Exception {
 
-        LogUtil.info("Enter into TC_018");
+        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        /*Pre-Request*/
+        elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_MORE_OPTION, CARE_CIRCLE_MORE_OPTION_TASK);
+        elementMap.put(SET_REMINDER_OPTION, SET_REMINDER_OPTION_TASK);
+        elementMap.put(SET_REMINDER_BP_RADIO_BUTTON, SET_REMINDER_BP_RADIO_BUTTON_TASK);
+        elementMap.put(DONE_BUTTON, DONE_BUTTON_TASK);
+        performActions(elementMap, wait);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //Scrolling to the plus button.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
+        /*Personal note empty error.*/
+        Map<By, ElementTask> byElementTaskMap = new LinkedHashMap<>();
+        byElementTaskMap.put(REMINDER_NAME, REMINDER_NAME_TASK);
+        byElementTaskMap.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
+        byElementTaskMap.put(EMPTY_PERSONAL_NAME_ERROR, EMPTY_PERSONAL_NAME_ERROR_TASK);
+        performActions(byElementTaskMap, wait);
 
-        try {
-            //Clicking the plus button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
+        /*Less character error for personal note.*/
+        Map<By, ElementTask> elementTaskMap1 = new LinkedHashMap<>();
+        elementTaskMap1.put(PERSONAL_NOTE_INPUT_FIELD, new ElementTask.Builder(Activity.SEND_KEYS, "Personal note").inputValue("per").build());
+        elementTaskMap1.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
+        elementTaskMap1.put(PERSONAL_NOTE_LESS_CHARACTER_ERROR, PERSONAL_NOTE_LESS_CHARACTER_ERROR_TASK);
+        performActions(elementTaskMap1, wait);
 
-            //Clicking the SpO2 radio button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbSpo2"))).click();
-
-            //Clicking the DONE button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("New reminder selection for spo2 is not happen.");
-        }
-
-        try {
-            //reminder name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("SpO2 reminder ");
-            //Selecting the required days
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSUN"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Reminder name and days are not selected.");
-        }
-
-        try {
-            //Click add Button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
-
-            //Selecting the Hour.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("9"))).click();
-
-            //Selecting the Minutes.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("15"))).click();
-
-            //Clicking the ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Set time for the reminder is not happen.");
-        }
-
-        //Checking whether the reminder time is added or not.
-        WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
-        LogUtil.info("Timer is added :" + timer.isDisplayed());
-
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));")).sendKeys("Take");
-        } catch (Exception e) {
-            LogUtil.warning("Scroll is not happen.");
-        }
-
-        try {
-            //Adding personal notes.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtPersonalNotes"))).sendKeys("Take SpO2");
-
-            //Set the reminder
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-            LogUtil.info("Personal note is added.");
-        } catch (Exception e) {
-            LogUtil.warning("Adding personal note is not happen.");
-        }
     }
+
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_019() throws Exception {
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(true);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        /*Pre-Request*/
+        elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
+        elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
+        elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
+        elementMap.put(CARE_CIRCLE_MORE_OPTION, CARE_CIRCLE_MORE_OPTION_TASK);
 
-        //Verify the care circle is present in the screen
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile")));
-            WebElement CareCircle = driver.findElement(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"));
-            LogUtil.info("Care is present : " + CareCircle.isDisplayed());
-            System.out.println();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        /*Actual test case*/
+        elementMap.put(DELETE_CARE_CIRCLE_OPTION, DELETE_CARE_CIRCLE_OPTION_TASK);
+        elementMap.put(DELETE_CARE_CIRCEL_MODEL_TEXT, DELETE_CARE_CIRCEL_MODEL_TEXT_TASK);
+        elementMap.put(MODEL_CLOSE_CANCLE_BUTTON, MODEL_CLOSE_CANCLE_BUTTON_TASK);
+        performActions(elementMap, wait);
 
-        try {
-            //Care circle button.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("care circle button is not visible.");
-        }
-
-        //permission
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id
-                    ("com.android.packageinstaller:id/permission_allow_button"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Permission is not allowed.");
-        }
-
-        //Add member
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvAddMembers"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Add member is not happen.");
-        }
-
-        //1.clicking the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("More options"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Delete Care Circle\")"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking the kebab for delete care circel is not happen.");
-        }
-
-        //Confirmation for deleting the care circle
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            WebElement SuccessToast = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/dialog_layout_toaster")));
-            LogUtil.info("Success toast : " + SuccessToast.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Confirmation Ok for delete care circle is not happen.");
-        }
     }
+
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
