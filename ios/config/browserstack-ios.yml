@@ -14,5 +14,5 @@ platforms:
     platformVersion: 15
 parallelsPerPlatform: 3
 browserstackLocal: true
-buildName: Test_run_for_ios
+buildName: iOS_Test_Run
 projectName: Heart-Monitor

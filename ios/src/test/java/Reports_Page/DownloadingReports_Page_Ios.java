@@ -1,126 +1,179 @@
 package Reports_Page;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
+import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 
 public class DownloadingReports_Page_Ios extends DriverManager
 {
 
-    @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_020()
-    {
-        BaseLoginForIos();
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_020() throws Exception {
+        baseLoginForiOS.BaseLoginForIos(true);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        //Variable Declaration.
+        WebElement
+                ReportBtn, DropDownFilterBtn, FinishBtn, DownloadBtn;
 
         //Clicking on the report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.accessibilityId("ic_profile"))).click();
-            logger.info("clicking the report section is happening.");
+            ReportBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_report")));
+            ReportBtn.click();
+            LogUtil.info("Clicking the 'Report' Section.");
         } catch (Exception e) {
-            logger.warning("Clicking the report section is not working.");
+            LogUtil.warning("Clicking the report section is not working.");
+            throw new Exception(e.getMessage());
         }
 
-        //Drop down filter for BP.
+        //Report Section coach mark finish.
+        try{
+            FinishBtn =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]")));
+            FinishBtn.click();
+            LogUtil.info("Report section coach mark finish button is clicked.");
+        } catch (Exception e) {
+            LogUtil.warning("There is no coach mark pop's out in the report section.");
+        }
+
+        //Drop down filter.
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    accessibilityId("ic_down_arrow"))).click();
-            logger.info("Drop down filter is working.");
+            DropDownFilterBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`value == \"Day\"`]")));
+            LogUtil.info("Drop Down button is displayed? : " + DropDownFilterBtn.isDisplayed());
         } catch (Exception e) {
-            logger.warning("Down filter is not working.");
+            LogUtil.warning("There is Drop Down button is visible for the user in the report section.");
+            throw new Exception(e.getMessage());
         }
 
-        //Selecting the month on this drop down filter.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    accessibilityId("Month"))).click();
-            logger.info("Selecting the month in drop down is happening.");
-        } catch (Exception e) {
-            logger.warning("Selecting month is not working");
+        //Downloading the report.
+        try
+        {
+            DownloadBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload")));
+            if (DownloadBtn.isEnabled())
+            {
+                DownloadBtn.click();
+                LogUtil.info("Downloading the report.");
+            }
+        }catch (Exception e)
+        {
+            LogUtil.warning("There is no download button to download the user report.");
+            throw new NoSuchElementException(e.getMessage());
         }
-
-
-        //Clicking the download button on BP report section
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
-            logger.info("Downloading the BP report is working.");
-        } catch (Exception e) {
-            logger.warning("Downloading the BP report is not happening.");
-        }
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_021()
-    {
-        BaseLoginForIos();
+    public void TC_021() throws Exception {
+        baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        //Variable Declaration.
+        WebElement ReportBtn, ECG, DownloadBtn, FinishBtn;
+
         //Clicking on the report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_report"))).click();
-            logger.info("Moving to report section is working.");
+            ReportBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_report")));
+            ReportBtn.click();
+            LogUtil.info("Clicking the 'Report' Section.");
         } catch (Exception e) {
-            logger.warning("Clicking on report section is not happening.");
+            LogUtil.warning("Clicking the report section is not working.");
+            throw new Exception(e.getMessage());
+        }
+
+        //Report Section coach mark finish.
+        try{
+            FinishBtn =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]")));
+            FinishBtn.click();
+            LogUtil.info("Report section coach mark finish button is clicked.");
+        } catch (Exception e) {
+            LogUtil.warning("There is no coach mark pop's out in the report section.");
         }
 
         //Clicking on the ECG report
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    accessibilityId("ECG"))).click();
-            logger.info("Moving to ECG report section is happening.");
+            ECG =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ECG")));
+            ECG.click();
+            LogUtil.info("Clicking the ECG report section.");
         } catch (Exception e) {
-            logger.warning("Ecg Report selection is not happening.");
+            LogUtil.warning("Clicking the ECG report section is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //Clicking on the download button in ECG report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
-            logger.info("Downloading the BP report is not happening.");
+            DownloadBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload")));
+            if (DownloadBtn.isEnabled())
+            {
+                DownloadBtn.click();
+                LogUtil.info("Clicking the download button in the ECG report section.");
+            }
         } catch (Exception e) {
-            logger.warning("Downloading ECG report is not happening.");
+            LogUtil.warning("Clicking the Downloading ECG report is not happening.");
+            throw new Exception(e.getMessage());
         }
 
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_022()
-    {
-       BaseLoginForIos();
+    public void TC_022() throws Exception {
+       baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        //Variable Declaration.
+        WebElement ReportBtn, ECG, DownloadBtn, FinishBtn, HRReport;
+
         //Clicking on the report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.accessibilityId("ic_profile"))).click();
-            logger.info("Moving to report section is working.");
+            ReportBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_report")));
+            ReportBtn.click();
+            LogUtil.info("Clicking the 'Report' Section.");
         } catch (Exception e) {
-            logger.warning("Clicking report section is not happening.");
+            LogUtil.warning("Clicking the report section is not working.");
+            throw new Exception(e.getMessage());
+        }
+
+        //Report Section coach mark finish.
+        try{
+            FinishBtn =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]")));
+            FinishBtn.click();
+            LogUtil.info("Report section coach mark finish button is clicked.");
+        } catch (Exception e) {
+            LogUtil.warning("There is no coach mark pop's out in the report section.");
         }
 
         //Clicking on the HR report
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Heart Rate"))).click();
-            logger.info("Moving to the HR report section is happening.");
+            HRReport = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Heart Rate")));
+            HRReport.click();
+            LogUtil.info("Clicking the HR report section.");
         } catch (Exception e) {
-            logger.warning("clicking HR report section is not happening.");
+            LogUtil.warning("clicking HR report section is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //Clicking on the download button in hr report section
+        //Clicking on the download button in Hr report section
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload"))).click();
-            logger.info("Downloading the HR report is happening.");
+            DownloadBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload")));
+            if (DownloadBtn.isEnabled())
+            {
+                DownloadBtn.click();
+                LogUtil.info("Clicking the download button in the HR report section.");
+            }
         } catch (Exception e) {
-            logger.warning("Download the HR report is not happening.");
+            LogUtil.warning("Clicking the download button in the HR report section not happening.");
+            throw new Exception(e.getMessage());
         }
     }
 }

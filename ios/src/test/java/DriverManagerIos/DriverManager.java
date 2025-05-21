@@ -1,35 +1,26 @@
 package DriverManagerIos;
 
-import UtilitiesForIos.RetryAnalyzerios;
-import io.appium.java_client.AppiumBy;
+
+import UtilitiesForIos.LogUtil;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URL;
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Logger;
 
 public class DriverManager {
 
     private static PrintStream originalConsole;
-    public static Logger logger = Logger.getLogger("MyLog");
 
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
@@ -66,27 +57,38 @@ public class DriverManager {
             Yaml yaml = new Yaml();
             Map<String, Object> config = yaml.load(inputStream);
 
-            // Read secrets from environment variables for local and browser stack.
+            // Read the environment variable
             String currentEnv = System.getenv("ENVIRONMENT");
-            if (Objects.equals(currentEnv, "local")) {
+
+            // Set default to 'bs' if not provided
+            if (currentEnv == null || currentEnv.isEmpty()) {
+                currentEnv = "BrowserStack";
+            }
+
+            LogUtil.info("Current ENVIRONMENT: " + currentEnv);
+
+            if (currentEnv.equalsIgnoreCase("local")) {
                 String AppiumServerUrl = "http://127.0.0.1:4723";
-                System.out.print("Entering into local case for iOS\n");
+                LogUtil.info("Entering into LOCAL case for iOS\n");
+
+                String testName = testResult.getMethod().getMethodName();
+                LogUtil.info("🚀 STARTING TEST: " + testName);
 
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
-                caps.setCapability("deviceName", "iPhone 16 Pro"); // Change based on your simulator/device
-                caps.setCapability("udid", "189DE8BE-5520-4ACF-BDA8-CB4029F9AA5D");
-                caps.setCapability("platformVersion", "18.2"); // Change based on your device
+                caps.setCapability("deviceName", "iPhone 16 Pro Max");
+                caps.setCapability("udid", "A9242CE4-9A84-44FD-882A-FC68675675AA");
+                caps.setCapability("platformVersion", "18.3");
                 caps.setCapability("automationName", "XCUITest");
-                caps.setCapability("bundleId", "com.heartmonitor.ios"); // Change to your app's bundle ID
-                caps.setCapability("noReset", true); // Keeps app data after test execution
-                caps.setCapability("appium:app", "/Users/codingmart/Downloads/Monitor.app"); // Local app path
+                caps.setCapability("bundleId", "com.ios.MoAI");
+                caps.setCapability("noReset", true);
+                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor.app");
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForIOS(driver = new IOSDriver(url, caps));
-
             } else {
-                System.out.print("Entering into BROWSER_STACK case for iOS\n");
+                
+                LogUtil.info("Entering into BROWSER_STACK case for iOS\n");
 
                 String userName = System.getenv("USER_NAME");
                 String accessKey = System.getenv("ACCESS_KEY");
@@ -94,22 +96,19 @@ public class DriverManager {
                 String buildName = (String) config.get("buildName");
                 String projectName = (String) config.get("projectName");
 
-                // Get platform-specific capabilities
                 List<Map<String, Object>> platforms = (List<Map<String, Object>>) config.get("platforms");
                 Map<String, Object> platform = platforms.get(0);
                 String platformName = (String) platform.get("platformName");
                 String deviceName = (String) platform.get("deviceName");
 
-                // Handle platformVersion as String or Double
                 Object platformVersion = platform.get("platformVersion");
                 String platformVersionString = platformVersion instanceof Double
                         ? String.valueOf(platformVersion)
                         : (String) platformVersion;
 
-                // Extracting test case name dynamically
                 String testName = testResult.getMethod().getMethodName();
+                LogUtil.info("🚀 STARTING TEST: " + testName);
 
-                // Setup BrowserStack capabilities
                 MutableCapabilities capabilities = new MutableCapabilities();
                 capabilities.setCapability("app", app);
 
@@ -127,7 +126,8 @@ public class DriverManager {
 
                 capabilities.setCapability("bstack:options", browserstackOptions);
 
-                setDriverForIOS(driver = new IOSDriver(new URL("https://hub-cloud.browserstack.com/wd/hub"), capabilities));
+                String remoteUrl = "https://" + userName + ":" + accessKey + "@hub-cloud.browserstack.com/wd/hub";
+                setDriverForIOS(driver = new IOSDriver(new URL(remoteUrl), capabilities));
             }
 
             inputStream.close();
@@ -138,136 +138,66 @@ public class DriverManager {
     }
 
 
-    @AfterMethod
-    public void quitDriver() {
-        System.out.println("Quitting iOS Driver...");
-        AppiumDriver driver = getDriver();
-        if (driver != null) {
-            driver.quit();
-            appiumDriverThreadLocal.remove();
-            logger.info("Driver quit successfully.");
+    @AfterMethod(alwaysRun = true)
+    public void quitDriver(ITestResult testResult) {
+        String testName = testResult.getMethod().getMethodName();
+        LogUtil.info("✅ FINISHED TEST: " + testName);
+        AppiumDriver currentDriver = getDriver();
+       LogUtil.info("🧪 [AfterMethod] Starting driver cleanup...");
+
+        if (currentDriver != null) {
+            try {
+               LogUtil.info("📌 Driver class: " + currentDriver.getClass().getName());
+
+                if (currentDriver instanceof IOSDriver) {
+                    IOSDriver iosDriver = (IOSDriver) currentDriver;
+                    String bundleId = "com.ios.MoAI";
+
+                   LogUtil.info("📱 iOSDriver detected. Starting app termination...");
+
+                    try {
+                        // Attempt to terminate the app
+                        boolean terminated = iosDriver.terminateApp(bundleId);
+                       LogUtil.info("🛑 App terminated: " + terminated);
+                    } catch (Exception e) {
+                       LogUtil.info("⚠️ Failed to terminate app: " + e.getMessage());
+                    }
+
+                    try {
+                        // Wait a second before uninstall
+                        Thread.sleep(1000);
+                        boolean removed = iosDriver.removeApp(bundleId);
+                       LogUtil.info("🧹 App uninstalled: " + removed);
+                    } catch (Exception e) {
+                       LogUtil.info("⚠️ Failed to uninstall app: " + e.getMessage());
+                    }
+
+                } else {
+                   LogUtil.info("🤖 Not an iOS driver. No iOS-specific cleanup.");
+                }
+
+                try {
+                    currentDriver.quit();
+                   LogUtil.info("✅ Driver quit successfully.");
+                } catch (Exception e) {
+                   LogUtil.info("❌ Error while quitting driver: " + e.getMessage());
+                }
+
+            } catch (Exception e) {
+               LogUtil.info("❌ Unexpected error during cleanup: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                try {
+                    appiumDriverThreadLocal.remove();
+                    driver = null;
+                   LogUtil.info("🧼 ThreadLocal cleared.");
+                } catch (Exception e) {
+                   LogUtil.info("⚠️ Error clearing ThreadLocal: " + e.getMessage());
+                }
+            }
+        } else {
+           LogUtil.info("⚠️ No active driver found.");
         }
     }
 
-    @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void BaseLoginForIos() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-        //Need add skip button handling.
-        WebElement Skip = null;
-        try
-        {
-            Skip = wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
-            logger.info("Skipping the coach mark");
-        }catch (NoSuchElementException e)
-        {
-            logger.warning("There is no Skip button is visible.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy
-                    .iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
-            logger.info("before login->Allow button is visible and its clicked Allow");
-        }
-        catch (Exception e)
-        {
-            logger.info("Before login-> Notification allow Button is not pop-up to accept allow.");
-        }
-
-        //Clicking the Get started button
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
-            logger.info("Get started button is clicked.");
-        } catch (Exception e) {
-            logger.warning("Get started button is not visible to click");
-        }
-
-        //clicking the mobile number input field and send the keys to it.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy
-                    .iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("0000000000");
-            logger.info("input passing for mobile number field is working.");
-        } catch (Exception e) {
-            logger.warning("input for the mobile number field not passed.");
-        }
-
-        //Clicking the continue button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Continue\"`]"))).click();
-            logger.info("Clicking on continue to move further.");
-        } catch (Exception e) {
-            logger.warning("Clicking on continue is not working.");
-        }
-
-        WebElement Delay_Ok_button = null;
-        try
-        {
-            Delay_Ok_button = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
-            Delay_Ok_button.click();
-            logger.info(" 30 sec 0r 60 sec delay OK Button is found and its clicked");
-        }
-        catch (Exception e)
-        {
-            logger.warning("30 sec 0r 60 sec delay Ok button is not found, we good to go with login");
-        }
-
-        //Fill the OTP into input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[1]")))
-                    .sendKeys("1");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[2]")))
-                    .sendKeys("2");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[3]")))
-                    .sendKeys("3");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[4]")))
-                    .sendKeys("4");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[5]")))
-                    .sendKeys("5");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[6]")))
-                    .sendKeys("6");
-            logger.info("Otp is entered and we moved further.");
-        } catch (Exception e) {
-            logger.warning("Entered OTP input is not correct.");
-        }
-
-        //Verify the OTP
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Verify OTP\"`]"))).click();
-            logger.info("verifying the otp is working.");
-        } catch (Exception e) {
-            logger.warning("Clicking on verify button is not working.");
-        }
-
-        WebElement AllowNotificationButton_2 = null;
-        try {
-            AllowNotificationButton_2 =  wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Allow")));
-            AllowNotificationButton_2.click();
-            logger.info("Allow button is visible and its clicked Allow");
-        }
-        catch (Exception e)
-        {
-            logger.info("Notification allow Button is not pop-up to accept allow.");
-        }
-
-        //When dependent profile ois not add we need to click the skip button.
-        try
-        {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]"))).click();
-            logger.info("Skip button is clicked to move further.");
-        }
-        catch (Exception e)
-        {
-            logger.warning("Skip button is not there might be dependent profile is present.");
-        }
-    }
 }

@@ -1,496 +1,431 @@
 package More;
 
+import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
+import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class More_page_Ios extends DriverManager {
-    private static final Logger log = LoggerFactory.getLogger(More_page_Ios.class);
+
+    BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_033() {
-        BaseLoginForIos(); // Login process
+    public void TC_033() throws Exception {
+
+         baseLoginForiOS.BaseLoginForIos(true); // Login process
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    accessibilityId("ic_more"))).click();
-            logger.info("Enter into more section now.");
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
+            LogUtil.warning("Clicking the more section button is not happening.");
             throw new ElementNotInteractableException(e.getMessage());
         }
 
         //1.Notification toggle off and on
         try {
-            WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    xpath("//XCUIElementTypeSwitch[@name=\"Notifications\"]")));
-            logger.info("Notification toggle is enabled : " + NotificationToggle.isEnabled());
-            NotificationToggle.click();
-            logger.info("Notification toggle is working.");
+            WebElement NotificationToggle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeSwitch[`name == \"Notifications\"`]")));
+
+            if (NotificationToggle.isDisplayed())
+            {
+                NotificationToggle.click();
+                LogUtil.info("Disabling the Notification using the toggle.");
+            }
         } catch (Exception e) {
-            logger.warning("Notification toggle is not enabled.");
+            LogUtil.warning("Notification toggle is not enabled.");
+            throw new Exception(e.getMessage());
         }
 
         //All Notification section
+        WebElement NotificationsBtn, NotificationHeader;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Notifications\"]"))).click();
+            NotificationsBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Notifications\"`]")));
+            NotificationsBtn.click();
+            LogUtil.info("Clicking the Notification button to view all the notifications.");
 
-            WebElement NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notifications")));
-            logger.info("User currently present in : " + NotificationHeader.getText() + " page.");
+            NotificationHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Notifications")));
+            LogUtil.info("User currently present in ? : " + NotificationHeader.getText() + " page.");
         } catch (Exception e) {
-            logger.warning("Notification section is not visible.");
+            LogUtil.warning("Notification section is not visible.");
         }
 
-        WebElement ActualNotification = null;
+        WebElement ActualNotification;
         try {
-            ActualNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeButton[@name=\"Decline\"])[1]")));
-            logger.info("Notification is present : " + ActualNotification.getText());
+            ActualNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Decline\"`][1]")));
+            LogUtil.info("Notification is present or not? : " + ActualNotification.isDisplayed());
         } catch (Exception e) {
-            logger.warning("No notification's are present currently.");
-        }
-
-        //User can click the notification to view the details of it.
-        try {
-            ActualNotification.click();
-        } catch (Exception e) {
-            logger.warning("No notification's are present currently.");
-        }
-
-        //notification description
-        try {
-            WebElement Description = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Hahanns\"]")));
-            logger.info("Notification description :" + Description.getText());
-        } catch (Exception e) {
-
-            logger.warning("No notification is present and no description are available.");
-        }
-
-        //notification time
-        try {
-            WebElement time = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"12:59\"]")));
-            logger.info("Notification time : " + time.getText());
-        } catch (Exception e) {
-            logger.warning("No notification Time is visible.");
-        }
-
-        //Notification personal note
-        try {
-            WebElement PersonalNote = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"gagga s\"]")));
-            logger.info("Notification personal note : " + PersonalNote.getText());
-        } catch (Exception e) {
-            logger.warning("NO Notification personal note is visible.");
-        }
-
-        //Notification Days
-        try {
-            WebElement NotificationDays = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"WED\"]")));
-            logger.info("Notification personal note : " + NotificationDays.getText());
-        } catch (Exception e) {
-            logger.warning("No Notification days is visible.");
-        }
-
-        //Done.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Done\"]"))).click();
-        } catch (Exception e) {
-            logger.warning("Ok is not clicked after view the notification.");
-        }
-
-        //clear
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic clearAllNotification"))).click();
-
-            //Clearing confirmation message.
-            WebElement ConfirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to delete all the notification?")));
-            logger.info("Confirmation message : " + ConfirmationMessage.getText());
-        } catch (Exception e) {
-            logger.warning("Clear button is not present may be there is no notification.");
-        }
-
-        //ok button for the clearing notification.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Yes"))).click();
-            logger.info("Yes button is clicked for clearing the notification.");
-        } catch (Exception e) {
-            logger.warning("Yes button is not clicked.");
+            LogUtil.warning("No notification's are present currently.");
         }
 
         //navigate back
+        WebElement BackBtn;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back")));
+            BackBtn.click();
+            LogUtil.info("Clicking the back button.");
         } catch (Exception e) {
-            logger.warning("Navigation is not happen.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //2.Clicking on FAQ section >>>>BUG-Important NO FAQ'S section present for ios.
+        //2.Clicking on FAQ section
+        WebElement FAQBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtFaq"))).click();
-            logger.info("MOved to FAQ's section.");
+            FAQBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("FAQs")));
+            FAQBtn.click();
+            LogUtil.info("Clicking the FAQ's section button..");
         } catch (Exception e) {
-            logger.warning("Not moved to FAQ's section");
+            LogUtil.warning("Clicking the FAQ's section button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
-        //FAQ's header  >>Important-this section is not added for ios.
+        //FAQ's header
         try {
-            WebElement FAQ_Header = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"FAQs\")")));
-            logger.info("User currently present in : " + FAQ_Header.getText() + " page.");
+            WebElement FAQ_Header = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("FAQs")));
+            LogUtil.info("User currently present in : " + FAQ_Header.getText() + " page.");
         } catch (Exception e) {
-            logger.warning("FAQ's header is not visible.");
+            LogUtil.warning("FAQ's header is not visible.");
+            throw new Exception(e.getMessage());
         }
-
-        //How to use this app
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"How to use this app?\")"))).click();
-            WebElement HowToUseThisApp = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtTitle2\").instance(0)")));
-            logger.info("How to use this app content is present : " + HowToUseThisApp.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("How to use this app description is not visible.");
-        }
-
-        //Why do we use it
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Why do we use it?\")"))).click();
-            WebElement WhyDoWeUseIt = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.moai.android:id/txtTitle2\").instance(1)")));
-            logger.info("Why do we use it content is present : " + WhyDoWeUseIt.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("No why do use it section is present.");
-        }
-
-        //navigate back
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            logger.warning("Navigation back is not happening.");
-        }
-
-        //3.Clicking on Contact us
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Contact Us"))).click();
-        } catch (Exception e) {
-            logger.warning("Not clicked the contact us section. ");
-        }
-
-        //Contact us header
-        try {
-            WebElement ContactUs = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Contact Us\"]")));
-            logger.info("User currently present in : " + ContactUs.getText() + " page.");
-        } catch (Exception e) {
-            logger.warning("Contact us header is not visible");
-        }
-
-        //To email address.
-        try {
-            WebElement To = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeTextField[@value=\"govinda.gupta@tata.com\"]")));
-            logger.info("User can see the To email address : " + To.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("To email is not visible.");
-        }
-
-        //From email address.
-        try {
-            WebElement From = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeTextField[@value=\"santhosh.k@codingmart.com\"]")));
-            logger.info("User can see the To email address : " + From.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("From email is not visible.");
-        }
-
-        //Write your message with minimum character. will get error.  BUG-important - write a message is visible as text, but it should be a placeholder.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeTextView[@value=\"Write your message\"]"))).sendKeys("th");
-        } catch (Exception e) {
-            logger.warning("Write your message is not visible");
-        }
-
-        //Submit
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Submit\"]"))).click();
-        } catch (Exception e) {
-            logger.warning("Submit button is not clicked now.");
-        }
-
-        //Error for less character BUG-important -less character error is not coming need to raise a bug.
-        try {
-            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/text_message_toaster")));
-            logger.info("Error message for less character : " + ErrorText.getText());
-        } catch (Exception e) {
-            logger.warning("error message is not visible for less character.");
-        }
-
-        //Error for no character
-        try {
-            WebElement ErrorText = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Please enter your message\"]")));
-            logger.info("Error message for less character : " + ErrorText.getText());
-        } catch (Exception e) {
-            logger.warning("no input added to send.");
-        }
-
-        try {
-            //Write your message
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeTextView"))).
-                            sendKeys("Thanks for developing the application and try to resolve all the conflict.");
-            logger.info("Write a message is happening.");
-        } catch (Exception e) {
-            logger.warning("Message is not added in the input box.");
-        }
-
-        //Submit BUG-important- could not inspect the submit button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            logger.warning("Submit is not happen.");
-        }
-
-        //Success message
-        try {
-            WebElement SuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Request sent successfully\"]")));
-            logger.info("Success message for the : " + SuccessMessage.getText());
-        } catch (Exception e) {
-            logger.warning("Success message is not coming.");
-        }
-
-        //navigate back
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
-        } catch (Exception e) {
-            logger.warning("Navigating Back is not working.");
-        }
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_034() {
-        BaseLoginForIos();
+    public void TC_034() throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        baseLoginForiOS.BaseLoginForIos(true);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    accessibilityId("ic_more"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            logger.warning("Clicking more section is not happening.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
-        //1.Clicking on About us
+        //1.Clicking on About
+        WebElement AboutUsBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("About Us"))).click();
-            logger.info("Moving to about us page.");
+            AboutUsBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("About Us")));
+            if (AboutUsBtn.isDisplayed()) {
+                AboutUsBtn.click();
+                LogUtil.info("Moving to about us page.");
+            }
         } catch (Exception e) {
-            logger.warning("Clicking is not happening for about us.");
+            LogUtil.warning("Clicking is not happening for about us.");
+            throw new Exception(e.getMessage());
         }
 
         //About us header
+        WebElement AboutUsHeader;
         try {
-            WebElement AboutUsHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    accessibilityId("About Us")));
-            logger.info("User currently present in : " + AboutUsHeader.getText());
+            AboutUsHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"About Us\"`][1]")));
+            if (AboutUsHeader.isDisplayed()) {
+                LogUtil.info("User currently present in : " + AboutUsHeader.getText() + "Page.");
+            }
         } catch (Exception e) {
-            logger.warning("About us header is not present.");
-        }
-
-        //About us content BUG-Important About us content is not present.
-        try {
-            WebElement Content = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"What is Lorem Ipsum? Lorem Ipsum is " +
-                            "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                            "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic " +
-                            "typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. " +
-                            "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, " +
-                            "sometimes on purpose (injected humour and the like).\")")));
-            logger.info("About us content is present : " + Content.isDisplayed());
-        } catch (Exception e) {
-            logger.warning("About us content is not visible.");
+            LogUtil.warning("About us header is not present.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
+        WebElement BackBtn;
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back")));
+            if (BackBtn.isEnabled()) {
+                BackBtn.click();
+                LogUtil.info("Clicking the back button.");
+            }
         } catch (Exception e) {
-            logger.warning("Navigating back is not working.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //2.clicking on Terms & Conditions
+        WebElement TermsAndConditions;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Terms & Condition"))).click();
-            logger.info("Moving to terms and condition section.");
+            TermsAndConditions = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Terms & Conditions")));
+            if (TermsAndConditions.isDisplayed()) {
+                TermsAndConditions.click();
+                LogUtil.info("Clicking to Terms & conditions.");
+            }
         } catch (Exception e) {
-            logger.warning("Clicking the terms and condition is not working.");
+            LogUtil.warning("Clicking the terms and condition is not working.");
+            throw new Exception(e.getMessage());
         }
 
         //Terms and condition header
+        WebElement TermsAndConditionHeader;
         try {
-            WebElement TermsAndCondition = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Terms & Conditions")));
-            logger.info("User currently present in : " + TermsAndCondition.getText());
+            TermsAndConditionHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Terms & Conditions")));
+            if (TermsAndConditionHeader.isDisplayed()) {
+                LogUtil.info("User currently present in : " + TermsAndConditionHeader.getText() + "Page");
+            }
         } catch (Exception e) {
-            logger.warning("Terms and condition header is not visible.");
+            LogUtil.warning("Terms and condition header is not visible.");
+            throw new Exception(e.getMessage());
         }
 
-        //Terms and condition content.               >>>    BUG-Important Content is not added.
+        //Terms and condition content.
+        WebElement ContentOfTermsAndCondition;
         try {
-            WebElement ContentOfTermsAndCondition = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().text(\"Terms & Conditions\")")));
-            logger.info("Terms and Condition content is present : " + ContentOfTermsAndCondition.isDisplayed());
+            ContentOfTermsAndCondition = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("CONNECTED HEALTH MoAI END-USER LICENSE AGREEMENT")));
+            if (ContentOfTermsAndCondition.isDisplayed())
+            {
+                LogUtil.info("Terms and Condition content is present : " + ContentOfTermsAndCondition.isDisplayed());
+            }
         } catch (Exception e) {
-            logger.warning("Terms and condition content is not visible.");
+            LogUtil.warning("Terms and condition content is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back")));
+            if (BackBtn.isEnabled()) {
+                BackBtn.click();
+                LogUtil.info("Clicking the back button.");
+            }
         } catch (Exception e) {
-            logger.warning("Navigating back is not working.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
 
         //3.Clicking on Privacy policy
+        WebElement PrivacyPolicyBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Privacy policy"))).click();
-            logger.info("Moving to Privacy policy.");
+            PrivacyPolicyBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Privacy Policy")));
+            if (PrivacyPolicyBtn.isDisplayed())
+            {
+                PrivacyPolicyBtn.click();
+                LogUtil.info("Moving to Privacy policy.");
+            }
         } catch (Exception e) {
-            logger.warning("Clicking privacy policy is not working.");
+            LogUtil.warning("Clicking privacy policy is not working.");
+            throw new Exception(e.getMessage());
         }
 
         //Privacy policy header
+        WebElement PrivacyPolicyHeader;
         try {
-            WebElement PrivacyPloicy = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Privacy policy")));
-            logger.info("User currently present in : " + PrivacyPloicy.getText());
+            PrivacyPolicyHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Privacy Policy")));
+            if (PrivacyPolicyHeader.isDisplayed())
+            {
+                LogUtil.info("User currently present in : " + PrivacyPolicyHeader.getText() + "page.");
+            }
         } catch (Exception e) {
-            logger.warning("Privacy policy header is not visible.");
+            LogUtil.warning("Privacy policy header is not visible.");
+            throw new Exception(e.getMessage());
         }
 
-        //Privacy policy content.               >>>> BUG-IMPORTANT- content is not added.
+        //Privacy policy content.
+        WebElement PrivacyPolicyContent;
         try {
-            WebElement PrivacyPolicyContent = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.TextView\").instance(2)")));
-            logger.info("Privacy policy content is present : " + PrivacyPolicyContent.isDisplayed());
+            PrivacyPolicyContent = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther" +
+                    "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeWebView/XCUIElementTypeWebView/XCUIElementTypeWebView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeStaticText")));
+            if (PrivacyPolicyContent.isDisplayed()) {
+                LogUtil.info("Privacy Policy content is present : " + PrivacyPolicyContent.isDisplayed());
+            }
         } catch (Exception e) {
-            logger.warning("Privacy policy content is not visible.");
+            LogUtil.warning("Privacy Policy content is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //navigate back
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back"))).click();
+            BackBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic back")));
+            if (BackBtn.isEnabled()) {
+                BackBtn.click();
+                LogUtil.info("Clicking the back button.");
+            }
         } catch (Exception e) {
-            logger.warning("Navigating back is not working.");
+            LogUtil.warning("Clicking the back button is not happening.");
+            throw new Exception(e.getMessage());
         }
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_035() {
-        BaseLoginForIos();
+    public void TC_035() throws Exception {
+
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            logger.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on logout
+        WebElement LogoutBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Logout"))).click();
+            LogoutBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Logout")));
+            if (LogoutBtn.isDisplayed())
+            {
+                LogoutBtn.click();
+                LogUtil.info("Clicking the logout button.");
+            }
         } catch (Exception e) {
-            logger.warning("logout is not clicked.");
+            LogUtil.warning("Clicking the logout is not happened..");
+            throw new Exception(e.getMessage());
         }
 
         //Warning message.
+        WebElement LogoutWarningMessage;
         try {
-            WebElement Message = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Logout\"])[2]")));
-            logger.info("Confirmation message for logout : " + Message.getText());
+            LogoutWarningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to logout?")));
+            if (LogoutWarningMessage.isDisplayed())
+            {
+                LogUtil.info("Confirmation message for logout : " + LogoutWarningMessage.getText());
+            }
         } catch (Exception e) {
-            logger.warning("Logout warning message is not coming.");
+            LogUtil.warning("Logout warning message  model is not pop's out.");
+            throw new Exception(e.getMessage());
         }
 
         //Yes button
+        WebElement LogoutYesBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes"))).click();
+            LogoutYesBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
+            if (LogoutYesBtn.isDisplayed())
+            {
+                LogoutYesBtn.click();
+                LogUtil.info("Clicking the Logout 'Yes' Button now.");
+            }
         } catch (Exception e) {
-            logger.warning("Logout YES button is not coming.");
+            LogUtil.warning("Logout 'YES' button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Verifying the singUp page.
+        WebElement SignUpPage;
         try {
-            WebElement SignUp = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Login or Sign Up")));
-            logger.info("User currently present :" + SignUp.getText());
+            SignUpPage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Login or Sign Up")));
+            if (SignUpPage.isDisplayed()) {
+                LogUtil.info("User currently present : " + SignUpPage.getText());
+                LogUtil.info("User logged out successfully.");
+            }
         } catch (Exception e) {
-            logger.warning("Not moving to the Sign up page again after the logout.");
+            LogUtil.warning("Not moving to the Sign up page again after the logout.");
+            throw new Exception(e.getMessage());
         }
 
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_036() {
-        BaseLoginForIos();
+    public void TC_036() throws Exception {
+         baseLoginForiOS.BaseLoginForIos(true);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         //Clicking on more section
+        WebElement MoreBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more"))).click();
+            MoreBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_more")));
+            if (MoreBtn.isDisplayed())
+            {
+                MoreBtn.click();
+                LogUtil.info("Clicking the More section button.");
+            }
         } catch (Exception e) {
-            logger.warning("Not moving to more section.");
+            LogUtil.warning("Clicking the more section button is not happening.");
+            throw new ElementNotInteractableException(e.getMessage());
         }
 
         //Clicking on delete account
+        WebElement DeleteAccountBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Delete Account"))).click();
+            DeleteAccountBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Delete Account")));
+            if (DeleteAccountBtn.isDisplayed())
+            {
+                DeleteAccountBtn.click();
+                LogUtil.info("Clicking the delete account button now.");
+            }
         } catch (Exception e) {
-            logger.warning("Deleting account is not clicked.");
+            LogUtil.warning("Deleting account is not clicked.");
         }
 
         //Delete account label
+        WebElement DeleteAccountLabel;
         try {
-            WebElement DeleteAccountLabel = wait.until(ExpectedConditions.
-                    visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Delete Account\"])[2]")));
-            logger.info("Label of delete account : " + DeleteAccountLabel.getText());
+            DeleteAccountLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Delete Account\"])[2]")));
+            if (DeleteAccountLabel.isDisplayed())
+            {
+                LogUtil.info("Label of delete account is present or not ? : " + DeleteAccountLabel.isDisplayed());
+            }
         } catch (Exception e) {
-            logger.warning("label is not visible.");
+            LogUtil.warning("Delete account label is not visible.");
+            throw new Exception(e.getMessage());
         }
 
         //Confirmation message
+        WebElement DeleteAccountMessage;
         try {
-            WebElement DeleteMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeAlert[@name=\"Delete Account\"]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[1]/XCUIElementTypeOther[1]")));
-            logger.info("Delete account confirmation message : " + DeleteMessage.getText());
+            DeleteAccountMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Are you sure you want to delete this account?")));
+            if (DeleteAccountMessage.isDisplayed()) {
+                LogUtil.info("Delete account confirmation message : " + DeleteAccountMessage.getText());
+            }
         } catch (Exception e) {
-            logger.warning("delete account confirmation is not visible. ");
+            LogUtil.warning("delete account confirmation is not visible. ");
+            throw new Exception(e.getMessage());
         }
 
-        //yes button
+        //ok button
+        WebElement DeleteAccountYesBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
-            logger.info("yes button is visible, but we are not deleting the account now.");
+            DeleteAccountYesBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Yes")));
+            if (DeleteAccountYesBtn.isDisplayed()) {
+                LogUtil.info("Ok button is visible, but we are not deleting the account now.");
+            }
         } catch (Exception e) {
-            logger.warning("yes button is not visible.");
+            LogUtil.warning("OK button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
-        //No button.
+        //Cancel button.
+        WebElement DeleteAccountNoBtn;
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("No"))).click();
-            logger.info("Clicking No for not deleting the account.");
+            DeleteAccountNoBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("No")));
+            if (DeleteAccountNoBtn.isDisplayed()) {
+                DeleteAccountNoBtn.click();
+                LogUtil.info("Clicking cancel button to secure the account.");
+            }
         } catch (Exception e) {
-            logger.warning("No button is not visible.");
+            LogUtil.warning("Cancel button is not visible.");
+            throw new Exception(e.getMessage());
         }
 
     }

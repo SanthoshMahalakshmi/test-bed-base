@@ -1,5 +1,7 @@
 package DriverManagerAndroid;
 
+import UtilitiesForAndroid.ElementActions;
+import UtilitiesForAndroid.LogUtil;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,40 +13,42 @@ import java.time.Duration;
 public class BaseLoginForAndroid extends DriverManager {
 
     @Test(singleThreaded = true)
-    public void CoreLoginForAndroid() throws Exception {
-        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(2));
+    public void CoreLoginForAndroid(Boolean IsSkipped) throws Exception {
 
-        DriverManager.logger.info("Entering into BaseLogin for Android." + DriverManager.driver);
+        LogUtil.info("Entering into Core login case for Android.");
 
-        /*Clicking the Get started button*/
+        WebDriverWait wait = new WebDriverWait(DriverManager.driver, Duration.ofSeconds(10));
+
+        //Clicking the Get started button
         try {
             WebElement getStarted = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtGetStart")));
             getStarted.click();
-            logger.info("Successfully clicked the 'Get Started' button.");
+            getStarted.click();
+            getStarted.click();
+            LogUtil.info("Successfully clicked the 'Get Started' button.");
         } catch (ElementClickInterceptedException e) {
             throw new ElementNotInteractableException(e.getMessage());
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException(e.getMessage());
         }
 
+        //clicking the mobile number input field and send the keys to it.
         try {
-            //clicking the mobile number input field and send the keys to it.
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtMobileNumber"))).sendKeys("9087631080");
-            DriverManager.logger.info("Mobile number is added in the field.");
-            //Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-            DriverManager.logger.info("Continue button is clicked for login process.");
+            LogUtil.info("Mobile number is added in the field.");
         } catch (Exception e) {
+            LogUtil.warning("Mobile number is not added as input to the input field.");
             throw new Exception(e.getMessage());
         }
 
-        WebElement Ok = null;
+        //Clicking the continue button
         try {
-            Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
-            Ok.click();
-            DriverManager.logger.info("*OK Button is found and its clicked");
+            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
+            ElementActions.checkForStagingError(wait);
+            LogUtil.info("Continue button is clicked for login process.");
         } catch (Exception e) {
-            DriverManager.logger.warning("Ok button is not found, we good to go with login");
+            LogUtil.warning("Clicking the continue button is not happening.");
+            throw new RuntimeException(e);
         }
 
         //Fill the OTP into input field.
@@ -55,36 +59,42 @@ public class BaseLoginForAndroid extends DriverManager {
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP4"))).sendKeys("4");
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP5"))).sendKeys("5");
             wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/editTextOTP6"))).sendKeys("6");
+            LogUtil.info("OTP is entered successfully.");
         } catch (Exception e) {
+            LogUtil.warning("OTP is not entered successfully.");
             throw new Exception(e.getMessage());
         }
 
         //Verify the OTP
         try {
             wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtVerify"))).click();
+            LogUtil.info("OTP verify button is clicked successfully.");
         } catch (Exception e) {
-            DriverManager.logger.warning("Verifying the OTP is not working.");
+            LogUtil.warning("Verifying the OTP is not working.");
+            throw new Exception(e.getMessage());
         }
 
         WebElement AllowNotificationButton = null;
         try {
             AllowNotificationButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.android.permissioncontroller:id/permission_allow_button")));
             AllowNotificationButton.click();
-            DriverManager.logger.info("Allow button is visible and its clicked Allow");
+            LogUtil.info("Allow button is visible and its clicked Allow");
         } catch (Exception e) {
-            DriverManager.logger.warning("Notification allow Button is not pop-up to accept allow.");
+            LogUtil.warning("Notification allow Button is not pop-up to accept allow.");
         }
 
-        WebElement CoachMark = null;
-        try {
-            CoachMark = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
-            CoachMark.click();
-            DriverManager.logger.info("Coach mark is visible and its skipped.");
-        } catch (NoSuchElementException e) {
-            DriverManager.logger.warning("The coach mark Skip is not visible." + e.getMessage());
-        } catch (Exception e) {
-            DriverManager.logger.warning(e.getMessage());
+        WebElement SKip = null;
+        if (IsSkipped) {
+            try {
+                SKip = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.heartmonitor.android:id/tvSkip")));
+                SKip.click();
+                LogUtil.info("Coach mark is visible and its skipped.");
+            } catch (NoSuchElementException e) {
+                LogUtil.warning("The coach mark Skip is not visible." + e.getMessage());
+            } catch (Exception e) {
+                LogUtil.warning(e.getMessage());
+            }
         }
-        System.out.println("Test completed successfully");
+        LogUtil.info("Exit from the core login case for Android.");
     }
 }

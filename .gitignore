@@ -13,6 +13,8 @@ target/
 *.ipr
 .idea/*
 logs/*
+ios/logs/*
+android/logs/*
 
 ### Eclipse ###
 .apt_generated
