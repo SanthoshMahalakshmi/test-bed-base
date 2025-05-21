@@ -47,5 +47,10 @@ public class CommonElements {
     public static final ElementTask MODEL_CLOSE_CANCLE_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Model close: 'Cancel'").build();
 
+    /*Model close cancel button*/
+    public static final By REPORT_BUTTON = AppiumBy.accessibilityId("Reports");
+    public static final ElementTask REPORT_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Report section in dashboard").build();
+
 
 }

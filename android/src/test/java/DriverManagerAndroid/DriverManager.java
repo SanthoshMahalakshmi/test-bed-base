@@ -76,7 +76,7 @@ public class DriverManager {
                 caps.setCapability("appActivity", "com.heartmonitor.android.presentation.splash.SplashActivity");
                 caps.setCapability("fullReset", true);
                 caps.setCapability("noReset", false);
-                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor-Stg-130525.apk");
+                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitah - Stg New.apk");
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForAndroid(new AndroidDriver(url, caps));

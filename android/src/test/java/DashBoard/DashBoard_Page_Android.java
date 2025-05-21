@@ -107,7 +107,7 @@ public class DashBoard_Page_Android extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC014() throws Exception {
+    public void TC_014() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         bs.CoreLoginForAndroid(true);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
