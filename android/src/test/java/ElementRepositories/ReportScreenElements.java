@@ -60,7 +60,7 @@ public class ReportScreenElements {
     /*Download button*/
     public static final By DOWNLOAD_BUTTON = AppiumBy.id("com.heartmonitor.android:id/imgDownload");
     public static final ElementTask DOWNLOAD_BUTTON_TASK =
-            new ElementTask.Builder(Activity.VERIFY, "Download button in report section").build();
+            new ElementTask.Builder(Activity.CLICK, "Download button in report section").build();
 
     /*Share Option*/
     public static final By SHARE_OPTION = AppiumBy.id("com.heartmonitor.android:id/imgShare");
