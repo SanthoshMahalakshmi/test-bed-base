@@ -66,9 +66,9 @@
             <!--Downloading the report.-->
             <class name="Reports_Page.DownloadingReports_Page_Android"> <!--Done-->
                 <methods>
-                    <exclude  name="TC_020"/>
-                    <include  name="TC_021"/>
-                    <exclude  name="TC_022"/>
+                    <exclude  name="TC_020"/> <!--!!-->
+                    <exclude  name="TC_021"/> <!--!!-->
+                    <include  name="TC_022"/>
                 </methods>
             </class>
 
