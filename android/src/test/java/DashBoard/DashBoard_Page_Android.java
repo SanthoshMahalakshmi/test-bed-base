@@ -65,7 +65,7 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
         elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
         elementMap.put(BLOOD_PRESSURE_TAB, new ElementTask.Builder(Activity.VERIFY, "Blood pressure tab").build());
-        elementMap.put(DOWNLOAD_BUTTON, DOWNLOAD_BUTTON_TASK);
+        elementMap.put(DOWNLOAD_BUTTON, new ElementTask.Builder(Activity.VERIFY, "Download button").build());
         performActions(elementMap, wait);
     }
 
