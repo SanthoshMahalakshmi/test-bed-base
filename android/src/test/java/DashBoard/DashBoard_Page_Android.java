@@ -21,7 +21,9 @@ import static ElementRepositories.CareCircleScreenElements.*;
 import static ElementRepositories.CommonElements.*;
 import static ElementRepositories.DashBoardScreenElements.*;
 import static ElementRepositories.FeedBackScreenElements.*;
+import static ElementRepositories.MyDependentScreenElements.*;
 import static ElementRepositories.NotificationScreenElements.*;
+import static ElementRepositories.ProfileScreenElements.*;
 import static ElementRepositories.ReportScreenElements.*;
 import static ElementRepositories.SetReminderScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.*;
@@ -63,7 +65,7 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_DEPENDENT_BUTTON, DASHBOARD_DEPENDENT_BUTTON_TASK);
         elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
         elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
-        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
         elementMap.put(BLOOD_PRESSURE_TAB, new ElementTask.Builder(Activity.VERIFY, "Blood pressure tab").build());
         elementMap.put(DOWNLOAD_BUTTON, new ElementTask.Builder(Activity.VERIFY, "Download button").build());
         performActions(elementMap, wait);
@@ -286,78 +288,43 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
-
-        LogUtil.info("Enter into TC_025");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(false);  //basic login scenario
 
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
+        elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.VERIFY, "Dependent User").build());
+        performActions(elementMap, wait);
 
-        try {
-            //1.Verify the dependent list
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Kavya\")")));
-            WebElement Dependent_1 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Kavya\")"));
-            LogUtil.info(Dependent_1.getText() + " is one of the dependent is present : " + Dependent_1.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Dependent is not available.");
-        }
-
-        try {
-            //2.Edit the dependent profile, click on kebab menu.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(1)"))).click();
-            //Actual edit profile option.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Profile\")"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtFullName"))).sendKeys("NIHIL");
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Edit the dependent profile is not happen.");
-        }
-
-        try {
-            //3.Deleting the profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(2)"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete\")"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
-            LogUtil.info("Success message for deleted dependent :" + message.getText());
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Deleting the dependent profile is not happen.s");
-        }
-
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+        elementMap2.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK,"Dependent user").build());
+        elementMap2.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap2.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+        elementMap2.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
+        elementMap2.put(DEPENDENT_BURGER_MENU, DEPENDENT_BURGER_MENU_TASK);
+        elementMap2.put(DEPENDENT_DELETE_OPTION, DEPENDENT_DELETE_OPTION_TASK);
+        elementMap2.put(DEPENDENT_EDIT_PROFILE_OPTION, DEPENDENT_EDIT_PROFILE_OPTION_TASK);
+        performActions(elementMap2, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_026() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(false);  //basic login scenario
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        LogUtil.info("Enter into TC_026");
+        /*Pre-Request*/
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+        elementMap.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        /*Actual test Case*/
+        elementMap.put(DEPENDENT_BURGER_MENU, DEPENDENT_BURGER_MENU_TASK);
+        elementMap.put(DEPENDENT_HEALTH_REPORT_OPTION, DEPENDENT_HEALTH_REPORT_OPTION_TASK);
+        elementMap.put(REPORT_BUTTON, new ElementTask.Builder(Activity.VERIFY, "User is in report section now").build());
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
+        performActions(elementMap, wait);
 
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(0)"))).click();
-
-            //Clicking the health report option to navigate to report section.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Health Report\")"))).click();
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")")));
-            WebElement lable = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")"));
-            LogUtil.info("Report section : " + lable.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Not moved to the Report section of the dependent.");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)

@@ -30,7 +30,7 @@ public class DownloadingReports_Page_Android extends DriverManager {
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         /*Pre-request*/
         elementMap.put(REPORT_BUTTON, REPORT_BUTTON_TASK);
-        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
 
         /*Actual test case*/
         elementMap.put(DATE_FILTER_OPTION, DATE_FILTER_OPTION_TASK);
@@ -55,7 +55,7 @@ public class DownloadingReports_Page_Android extends DriverManager {
 
         /*pre-Request*/
         elementMap.put(REPORT_BUTTON, REPORT_BUTTON_TASK);
-        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
 
         /*Actual test case*/
         elementMap.put(ECG_TAB, ECG_TAB_TASK);
@@ -74,7 +74,7 @@ public class DownloadingReports_Page_Android extends DriverManager {
 
         /*pre-Request*/
         elementMap.put(REPORT_BUTTON, REPORT_BUTTON_TASK);
-        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
 
         /*Actual testcase*/
         elementMap.put(HR_TAB, HR_TAB_TASK);

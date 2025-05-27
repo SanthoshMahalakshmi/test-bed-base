@@ -12,6 +12,11 @@ public class DashBoardScreenElements {
     public static final ElementTask DASHBOARD_APP_LOGO_TASK =
             new ElementTask.Builder(Activity.VERIFY, "dashBoard App Logo").build();
 
+    /*DashBoard option*/
+    public static final By DASHBOARD_BUTTON = AppiumBy.id("com.heartmonitor.android:id/nav_graph_dashboard");
+    public static final ElementTask DASHBOARD_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "DashBoard option").build();
+
     /*DashBoard Sync button Element*/
     public static final By DASHBOARD_SYNC_BUTTON = AppiumBy.accessibilityId("Sync data");
     public static final ElementTask DASHBOARD_SYNC_BUTTON_TASK =
@@ -47,8 +52,13 @@ public class DashBoardScreenElements {
     public static final ElementTask DASHBOARD_DEPENDENT_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "dashBoard dependent + option").build();
 
+    /*Dependent drop down button*/
+    public static final By DASHBOARD_DEPENDENT_DROPDOWN = AppiumBy.id("com.heartmonitor.android:id/myDepsDropDown");
+    public static final ElementTask DASHBOARD_DEPENDENT_DROPDOWN_TASK =
+            new ElementTask.Builder(Activity.CLICK, "dashBoard dependent drop down").build();
+
     /*Dependent user*/
-    public static final By DASHBOARD_DEPENDENT_USER = AppiumBy.androidUIAutomator("new UiSelector().text(\"S\")");
+    public static final By DASHBOARD_DEPENDENT_USER = AppiumBy.id("com.heartmonitor.android:id/depName");
     public static final ElementTask DASHBOARD_DEPENDENT_USER_TASK =
             new ElementTask.Builder(Activity.VERIFY, "dependent user").build();
 
