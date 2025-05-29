@@ -365,61 +365,32 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_029() throws Exception {
 
-        LogUtil.info("Enter into TC_029");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
+        bs.CoreLoginForAndroid(false);  //basic login scenario
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        try {
-            //Clicking on primary user profile
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/imgProfile"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Primary user profile click is not happen.");
-        }
+        /*Pre-Condition*/
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
 
-        try {
-            //Clicking on parameter range option in the primary user profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtParameterRange"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Primary user parameter range click is not happen");
-        }
+        /*Actual Test Case*/
+        elementMap.put(PARAMETER_RANGE_BUTTON, PARAMETER_RANGE_BUTTON_TASK);
+        elementMap.put(ADJUST_BUTTON_1, ADJUST_BUTTON_1_TASK);
+        elementMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
+        elementMap.put(KEEP_DEFAULT_BUTTON_1, KEEP_DEFAULT_BUTTON_1_TASK);
+        elementMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
+        elementMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        performActions(elementMap, wait);
 
-        //Customize the BP range
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-            //Skip
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Customize the BP range is not happen for the primary user. ");
-        }
 
-        try {
-            //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Customizing the HR is not working");
-        }
+        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
+        elementTaskMap.put(ADJUST_BUTTON_2, ADJUST_BUTTON_2_TASK);
+        elementTaskMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
+        elementTaskMap.put(KEEP_DEFAULT_BUTTON_2, KEEP_DEFAULT_BUTTON_2_TASK);
+        elementTaskMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
+        elementTaskMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        performActions(elementTaskMap, wait);
 
-        try {
-            //Navigate to the profile page.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating back is not happen.");
-        }
 
     }
 
