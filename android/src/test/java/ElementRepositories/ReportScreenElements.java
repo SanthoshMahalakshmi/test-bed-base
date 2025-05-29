@@ -68,8 +68,8 @@ public class ReportScreenElements {
             new ElementTask.Builder(Activity.CLICK, "Share option").build();
 
     /*Report section Coach mark finish button*/
-    public static final By COACH_MARK_FINISH_BUTTON = AppiumBy.id("com.heartmonitor.android:id/btnNext");
-    public static final ElementTask COACH_MARK_FINISH_BUTTON_TASK =
+    public static final By REPORT_COACH_MARK_FINISH_BUTTON = AppiumBy.id("com.heartmonitor.android:id/btnNext");
+    public static final ElementTask REPORT_COACH_MARK_FINISH_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Coach mark finish").build();
 
     /*Ecg Download button*/
@@ -81,6 +81,7 @@ public class ReportScreenElements {
     public static final By ECG_REPORT_ID = AppiumBy.className("android.widget.TextView");
     public static final ElementTask ECG_REPORT_ID_TASK =
             new ElementTask.Builder(Activity.VERIFY, "ECG report id").build();
+
 
 
 }

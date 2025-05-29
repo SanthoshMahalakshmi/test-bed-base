@@ -6,6 +6,7 @@ import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.LogUtil;
 import UtilitiesForAndroid.RetryAnalyzer;
+import com.sun.jna.platform.win32.OaIdl;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,9 @@ import static ElementRepositories.CareCircleScreenElements.*;
 import static ElementRepositories.CommonElements.*;
 import static ElementRepositories.DashBoardScreenElements.*;
 import static ElementRepositories.FeedBackScreenElements.*;
+import static ElementRepositories.MyDependentScreenElements.*;
 import static ElementRepositories.NotificationScreenElements.*;
+import static ElementRepositories.ProfileScreenElements.*;
 import static ElementRepositories.ReportScreenElements.*;
 import static ElementRepositories.SetReminderScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.*;
@@ -63,7 +66,7 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_DEPENDENT_BUTTON, DASHBOARD_DEPENDENT_BUTTON_TASK);
         elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
         elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
-        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
         elementMap.put(BLOOD_PRESSURE_TAB, new ElementTask.Builder(Activity.VERIFY, "Blood pressure tab").build());
         elementMap.put(DOWNLOAD_BUTTON, new ElementTask.Builder(Activity.VERIFY, "Download button").build());
         performActions(elementMap, wait);
@@ -286,246 +289,77 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
-
-        LogUtil.info("Enter into TC_025");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(false);  //basic login scenario
 
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
+        elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.VERIFY, "Dependent User").build());
+        performActions(elementMap, wait);
 
-        try {
-            //1.Verify the dependent list
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Kavya\")")));
-            WebElement Dependent_1 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Kavya\")"));
-            LogUtil.info(Dependent_1.getText() + " is one of the dependent is present : " + Dependent_1.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Dependent is not available.");
-        }
-
-        try {
-            //2.Edit the dependent profile, click on kebab menu.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(1)"))).click();
-            //Actual edit profile option.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().text(\"Edit Profile\")"))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/edtFullName"))).sendKeys("NIHIL");
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Edit the dependent profile is not happen.");
-        }
-
-        try {
-            //3.Deleting the profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(2)"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Delete\")"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/message")));
-            WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
-            LogUtil.info("Success message for deleted dependent :" + message.getText());
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Deleting the dependent profile is not happen.s");
-        }
-
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+        elementMap2.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK,"Dependent user").build());
+        elementMap2.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap2.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+        elementMap2.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
+        elementMap2.put(DEPENDENT_BURGER_MENU, DEPENDENT_BURGER_MENU_TASK);
+        elementMap2.put(DEPENDENT_DELETE_OPTION, DEPENDENT_DELETE_OPTION_TASK);
+        elementMap2.put(DEPENDENT_EDIT_PROFILE_OPTION, DEPENDENT_EDIT_PROFILE_OPTION_TASK);
+        performActions(elementMap2, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_026() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(false);  //basic login scenario
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
-        LogUtil.info("Enter into TC_026");
+        /*Pre-Request*/
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+        elementMap.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        /*Actual test Case*/
+        elementMap.put(DEPENDENT_BURGER_MENU, DEPENDENT_BURGER_MENU_TASK);
+        elementMap.put(DEPENDENT_HEALTH_REPORT_OPTION, DEPENDENT_HEALTH_REPORT_OPTION_TASK);
+        elementMap.put(REPORT_BUTTON, new ElementTask.Builder(Activity.VERIFY, "User is in report section now").build());
+        elementMap.put(REPORT_COACH_MARK_FINISH_BUTTON, REPORT_COACH_MARK_FINISH_BUTTON_TASK);
+        performActions(elementMap, wait);
 
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"+2\")"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(0)"))).click();
-
-            //Clicking the health report option to navigate to report section.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Health Report\")"))).click();
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")")));
-            WebElement lable = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Blood Pressure\")"));
-            LogUtil.info("Report section : " + lable.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Not moved to the Report section of the dependent.");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_027() throws Exception {
-
-        LogUtil.info("Enter into TC_027");
-
-        /*Adding the reminder for Blood pressure.*/
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.heartmonitor.android:id/txtEcg"))).isDisplayed();
-
-        //Scrolling to the plus button.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
-
-        //1.Clicking the plus button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking plus button is not happen.");
-        }
-
-        //Clicking the HR radio button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Hr radio button click is not happen.");
-        }
-
-        //Selecting the DONE button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Done button click is not happen.");
-        }
-
-        try {
-            //2.reminder name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Heart rate reminder");
-
-            //Selecting the required days
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
-
-            //Click add Button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
-
-            //Selecting the Hour as 12.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("9"))).click();
-
-            //Selecting the Minutes as 00.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("15"))).click();
-
-            //Clicking the ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Setting up the reminder time and day selection is not happen.");
-        }
-
-        //Checking whether the reminder time is added or not.
-        try {
-            WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
-            LogUtil.info("just checking whether the reminder time is added or not: " + timer.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Timer is not visible.");
-        }
-
-        try {
-            //3.Adding invite
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/mainLayout\").instance(0)"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Add people to the reminder is not happen.");
-        }
-
-        try {
-            //Scrolling to the Adding personal notes.
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtPersonalNotes"))).sendKeys("Take HR daily.");
-
-            //Set the reminder
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Set reminder is not happen.");
-        }
+        bs.CoreLoginForAndroid(false);  //basic login scenario
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(REMINDER_PLUS_BUTTON, REMINDER_PLUS_BUTTON_TASK);
+        performActions(elementMap, wait);
 
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_028() throws Exception {
 
-        LogUtil.info("Enter into TC_028");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
+        bs.CoreLoginForAndroid(false);  //basic login scenario
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_BP_REPORT_LABEL, DASHBOARD_BP_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_BP_REPORT_CHART, DASHBOARD_BP_REPORT_CHART_TASK);
+        elementMap.put(DASHBOARD_BP_REPORT_VALUE, DASHBOARD_BP_REPORT_VALUE_TASK);
 
-        //BP report values with chart.
-        try {
-            WebElement bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBloodPressure")));
-            LogUtil.info("Blood pressure report is present: " + bloodPressureElement.isDisplayed());
+        elementMap.put(DASHBOARD_HR_REPORT_LABEL, DASHBOARD_HR_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_HR_REPORT_CHART, DASHBOARD_HR_REPORT_CHART_TASK);
+        elementMap.put(DASHBOARD_HR_REPORT_VALUE, DASHBOARD_HR_REPORT_VALUE_TASK);
 
-            WebElement pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/bloodPressureChart")));
-            LogUtil.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
+        elementMap.put(DASHBOARD_SPO2_REPORT_LABEL, DASHBOARD_SPO2_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_SPO2_REPORT_CHART, DASHBOARD_SPO2_REPORT_CHART_TASK);
+        elementMap.put(DASHBOARD_SPO2_REPORT_VALUE, DASHBOARD_SPO2_REPORT_VALUE_TASK);
 
-            WebElement pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBPValue")));
-            LogUtil.info("Blood pressure value is present: " + pressureValue.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Bp chart is not visible.");
-        }
+        elementMap.put(DASHBOARD_ECG_REPORT_LABEL, DASHBOARD_ECG_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_ECG_REPORT_CHART, DASHBOARD_ECG_REPORT_CHART_TASK);
+        performActions(elementMap, wait);
 
-        try {
-            //Hr report values with chart.
-            WebElement hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtHeartRate")));
-            LogUtil.info("Heart rate report is present: " + hrElement.isDisplayed());
-
-            WebElement hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/HeartRateChart")));
-            LogUtil.info("Heart rate report chart is present: " + hrChart.isDisplayed());
-
-            WebElement hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtHeartRateValue")));
-            LogUtil.info("Heart rate value is present: " + hrValue.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Hr report chart is not visible.");
-        }
-
-        try {
-            //Spo2 report values with chart.
-            WebElement Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSpo2")));
-            LogUtil.info("Spo2 report is present: " + Spo2Element.isDisplayed());
-
-            WebElement Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/spo2Chart")));
-            LogUtil.info("Spo2 report chart is present: " + Spo2Chart.isDisplayed());
-
-            WebElement Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSpo2Value")));
-            LogUtil.info("Spo2 value is present: " + Spo2Value.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Spo2 report chart is not visible.");
-        }
-
-        try {
-            //ECG report va;ues with chart
-            WebElement ECGElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtEcg")));
-            LogUtil.info("ECG report is present: " + ECGElement.isDisplayed());
-
-            WebElement ECGChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/mpSingleLeadECG")));
-            LogUtil.info("ECG report chart is present: " + ECGChart.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("ECG report chart is not visible.");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)

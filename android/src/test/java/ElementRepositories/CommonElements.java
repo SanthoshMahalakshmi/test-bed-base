@@ -47,10 +47,16 @@ public class CommonElements {
     public static final ElementTask MODEL_CLOSE_CANCLE_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Model close: 'Cancel'").build();
 
-    /*Model close cancel button*/
+    /*Report button*/
     public static final By REPORT_BUTTON = AppiumBy.accessibilityId("Reports");
     public static final ElementTask REPORT_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Report section in dashboard").build();
+
+
+    /*Reminder Plus button*/
+    public static final By REMINDER_PLUS_BUTTON = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgAddReminder\")");
+    public static final ElementTask REMINDER_PLUS_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Reminder add").build();
 
 
 }
