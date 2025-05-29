@@ -16,12 +16,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 
 public class DriverManager {
 
-    public static Logger logger = LogUtil.getLogger("MyLog");
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
     protected static AppiumDriver getDriver() {
@@ -68,8 +66,8 @@ public class DriverManager {
 
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
-                caps.setCapability("deviceName", "sdk_gphone64_arm64");
-                caps.setCapability("udid", "emulator-5554");
+                caps.setCapability("deviceName", "Pixel 9 Pro");
+                caps.setCapability("udid", "emulator-5556");
                 caps.setCapability("platformVersion", "16");
                 caps.setCapability("automationName", "UiAutomator2");
                 caps.setCapability("appPackage", "com.heartmonitor.android");

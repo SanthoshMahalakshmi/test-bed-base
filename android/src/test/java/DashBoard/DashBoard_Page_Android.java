@@ -6,6 +6,7 @@ import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.LogUtil;
 import UtilitiesForAndroid.RetryAnalyzer;
+import com.sun.jna.platform.win32.OaIdl;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -329,170 +330,36 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_027() throws Exception {
-
-        LogUtil.info("Enter into TC_027");
-
-        /*Adding the reminder for Blood pressure.*/
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.heartmonitor.android:id/txtEcg"))).isDisplayed();
-
-        //Scrolling to the plus button.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/imgAddReminder\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
-
-        //1.Clicking the plus button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking plus button is not happen.");
-        }
-
-        //Clicking the HR radio button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/rbHR"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Hr radio button click is not happen.");
-        }
-
-        //Selecting the DONE button.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Done button click is not happen.");
-        }
-
-        try {
-            //2.reminder name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtReminderName"))).sendKeys("Heart rate reminder");
-
-            //Selecting the required days
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSUN"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMUN"))).click();
-
-            //Click add Button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/chipAdd"))).click();
-
-            //Selecting the Hour as 12.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("9"))).click();
-
-            //Selecting the Minutes as 00.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("15"))).click();
-
-            //Clicking the ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Setting up the reminder time and day selection is not happen.");
-        }
-
-        //Checking whether the reminder time is added or not.
-        try {
-            WebElement timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/chipText")));
-            LogUtil.info("just checking whether the reminder time is added or not: " + timer.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Timer is not visible.");
-        }
-
-        try {
-            //3.Adding invite
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgAddReminder"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/mainLayout\").instance(0)"))).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Add people to the reminder is not happen.");
-        }
-
-        try {
-            //Scrolling to the Adding personal notes.
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/edtPersonalNotes\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    id("com.heartmonitor.android:id/edtPersonalNotes"))).sendKeys("Take HR daily.");
-
-            //Set the reminder
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSetReminder"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Set reminder is not happen.");
-        }
+        bs.CoreLoginForAndroid(false);  //basic login scenario
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(REMINDER_PLUS_BUTTON, REMINDER_PLUS_BUTTON_TASK);
+        performActions(elementMap, wait);
 
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_028() throws Exception {
 
-        LogUtil.info("Enter into TC_028");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
+        bs.CoreLoginForAndroid(false);  //basic login scenario
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DASHBOARD_BP_REPORT_LABEL, DASHBOARD_BP_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_BP_REPORT_CHART, DASHBOARD_BP_REPORT_CHART_TASK);
+        elementMap.put(DASHBOARD_BP_REPORT_VALUE, DASHBOARD_BP_REPORT_VALUE_TASK);
 
-        //BP report values with chart.
-        try {
-            WebElement bloodPressureElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBloodPressure")));
-            LogUtil.info("Blood pressure report is present: " + bloodPressureElement.isDisplayed());
+        elementMap.put(DASHBOARD_HR_REPORT_LABEL, DASHBOARD_HR_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_HR_REPORT_CHART, DASHBOARD_HR_REPORT_CHART_TASK);
+        elementMap.put(DASHBOARD_HR_REPORT_VALUE, DASHBOARD_HR_REPORT_VALUE_TASK);
 
-            WebElement pressureChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/bloodPressureChart")));
-            LogUtil.info("Blood pressure report chart is present: " + pressureChart.isDisplayed());
+        elementMap.put(DASHBOARD_SPO2_REPORT_LABEL, DASHBOARD_SPO2_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_SPO2_REPORT_CHART, DASHBOARD_SPO2_REPORT_CHART_TASK);
+        elementMap.put(DASHBOARD_SPO2_REPORT_VALUE, DASHBOARD_SPO2_REPORT_VALUE_TASK);
 
-            WebElement pressureValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBPValue")));
-            LogUtil.info("Blood pressure value is present: " + pressureValue.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Bp chart is not visible.");
-        }
+        elementMap.put(DASHBOARD_ECG_REPORT_LABEL, DASHBOARD_ECG_REPORT_LABEL_TASK);
+        elementMap.put(DASHBOARD_ECG_REPORT_CHART, DASHBOARD_ECG_REPORT_CHART_TASK);
+        performActions(elementMap, wait);
 
-        try {
-            //Hr report values with chart.
-            WebElement hrElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtHeartRate")));
-            LogUtil.info("Heart rate report is present: " + hrElement.isDisplayed());
-
-            WebElement hrChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/HeartRateChart")));
-            LogUtil.info("Heart rate report chart is present: " + hrChart.isDisplayed());
-
-            WebElement hrValue = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtHeartRateValue")));
-            LogUtil.info("Heart rate value is present: " + hrValue.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Hr report chart is not visible.");
-        }
-
-        try {
-            //Spo2 report values with chart.
-            WebElement Spo2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSpo2")));
-            LogUtil.info("Spo2 report is present: " + Spo2Element.isDisplayed());
-
-            WebElement Spo2Chart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/spo2Chart")));
-            LogUtil.info("Spo2 report chart is present: " + Spo2Chart.isDisplayed());
-
-            WebElement Spo2Value = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtSpo2Value")));
-            LogUtil.info("Spo2 value is present: " + Spo2Value.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Spo2 report chart is not visible.");
-        }
-
-        try {
-            //ECG report va;ues with chart
-            WebElement ECGElement = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtEcg")));
-            LogUtil.info("ECG report is present: " + ECGElement.isDisplayed());
-
-            WebElement ECGChart = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/mpSingleLeadECG")));
-            LogUtil.info("ECG report chart is present: " + ECGChart.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("ECG report chart is not visible.");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)

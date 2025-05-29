@@ -110,7 +110,6 @@ public class ElementActions {
         }
     }
 
-
     private static void acceptAlertIfPresent(WebDriverWait wait, String description) {
         try {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
