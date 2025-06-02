@@ -17,6 +17,11 @@ public class MoreScreenElements {
     public static final ElementTask NOTIFICATION_LABEL_TASK =
             new ElementTask.Builder(Activity.VERIFY, "Notification label").build();
 
+    /*Notification Toggle*/
+    public static final By NOTIFICATION_TOGGLE = AppiumBy.id("com.heartmonitor.android:id/swEnable");
+    public static final ElementTask NOTIFICATION_TOGGLE_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Notification Toggle").build();
+
     /*FAQ's OPTION*/
     public static final By FAQ_OPTION = AppiumBy.id("com.heartmonitor.android:id/txtFaq");
     public static final ElementTask FAQ_OPTION_TASK =

@@ -23,13 +23,28 @@ public class More_page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_032() throws Exception {
 
-        bs.CoreLoginForAndroid(true);  //basic login scenario
+        bs.CoreLoginForAndroid(false);  //basic login scenario
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
-
         elementMap.put(MORE_OPTION, MORE_OPTION_TASK);
+        elementMap.put(NOTIFICATION_LABEL, NOTIFICATION_LABEL_TASK);
+        elementMap.put(NOTIFICATION_TOGGLE, NOTIFICATION_TOGGLE_TASK);
         performActions(elementMap, wait);
+
+
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+        elementMap2.put(NOTIFICATION_TOGGLE, NOTIFICATION_TOGGLE_TASK);
+        elementMap2.put(FAQ_OPTION, FAQ_OPTION_TASK);
+        elementMap2.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementMap2, wait);
+
+
+        Map<By, ElementTask> elementMap3 = new LinkedHashMap<>();
+        elementMap3.put(SEND_FEEDBACK_OPTION, SEND_FEEDBACK_OPTION_TASK);
+        elementMap3.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementMap3, wait);
+
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -37,9 +52,24 @@ public class More_page_Android extends DriverManager {
 
         bs.CoreLoginForAndroid(false);  //basic login scenario
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(MORE_OPTION, MORE_OPTION_TASK);
+        elementMap.put(ABOUT_US_OPTION, ABOUT_US_OPTION_TASK);
+        elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
         performActions(elementMap, wait);
 
+
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+        elementMap2.put(TERMS_AND_CONDITION_OPTION, TERMS_AND_CONDITION_OPTION_TASK);
+        elementMap2.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementMap2, wait);
+
+
+        Map<By, ElementTask> elementMap3 = new LinkedHashMap<>();
+        elementMap3.put(PRIVACY_POLICY_OPTION, PRIVACY_POLICY_OPTION_TASK);
+        elementMap3.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementMap3, wait);
 
     }
 

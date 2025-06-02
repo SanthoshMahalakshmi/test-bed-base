@@ -55,10 +55,10 @@
             <!--More section -->
             <class name="More.More_page_Android"> <!--Done-->
                 <methods>
-                    <exclude  name="TC_032"/>
-                    <exclude  name="TC_033"/>
-                    <include  name="TC_034"/>
-                    <include  name="TC_035"/>
+                    <exclude  name="TC_032"/> <!--!!-->
+                    <exclude  name="TC_033"/> <!--!!-->
+                    <exclude  name="TC_034"/> <!--!!-->
+                    <exclude  name="TC_035"/> <!--!!-->
                 </methods>
             </class>
 
