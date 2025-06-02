@@ -50,7 +50,7 @@ public class CommonElements {
     /*Report button*/
     public static final By REPORT_BUTTON = AppiumBy.accessibilityId("Reports");
     public static final ElementTask REPORT_BUTTON_TASK =
-            new ElementTask.Builder(Activity.CLICK, "Report section in dashboard").build();
+            new ElementTask.Builder(Activity.CLICK, "Report Option").build();
 
     /*Reminder Plus button*/
     public static final By REMINDER_PLUS_BUTTON = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgAddReminder\")");
@@ -61,6 +61,11 @@ public class CommonElements {
     public static final By MODEL_TEXT = AppiumBy.id("android:id/message");
     public static final ElementTask MODEL_TEXT_TASK =
             new ElementTask.Builder(Activity.VERIFY, "Model text").build();
+
+    /*Device button*/
+    public static final By DEVICE_BUTTON = AppiumBy.accessibilityId("Devices");
+    public static final ElementTask DEVICE_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Devices option").build();
 
 
 }
