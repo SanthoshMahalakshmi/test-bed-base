@@ -276,7 +276,7 @@ public class DashBoard_Page_Android extends DriverManager {
         /*Actual test case*/
         elementMap.put(DELETE_CARE_CIRCLE_OPTION, DELETE_CARE_CIRCLE_OPTION_TASK);
         elementMap.put(DELETE_CARE_CIRCEL_MODEL_TEXT, DELETE_CARE_CIRCEL_MODEL_TEXT_TASK);
-        elementMap.put(MODEL_CLOSE_CANCLE_BUTTON, MODEL_CLOSE_CANCLE_BUTTON_TASK);
+        elementMap.put(MODEL_CLOSE_CANCEL_BUTTON, MODEL_CLOSE_CANCEL_BUTTON_TASK);
         performActions(elementMap, wait);
 
     }

@@ -43,8 +43,8 @@ public class CommonElements {
             new ElementTask.Builder(Activity.CLICK, "Model Confirm: 'ok'").build();
 
     /*Model close cancel button*/
-    public static final By MODEL_CLOSE_CANCLE_BUTTON = AppiumBy.id("android:id/button2");
-    public static final ElementTask MODEL_CLOSE_CANCLE_BUTTON_TASK =
+    public static final By MODEL_CLOSE_CANCEL_BUTTON = AppiumBy.id("android:id/button2");
+    public static final ElementTask MODEL_CLOSE_CANCEL_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Model close: 'Cancel'").build();
 
     /*Report button*/
@@ -56,6 +56,11 @@ public class CommonElements {
     public static final By REMINDER_PLUS_BUTTON = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgAddReminder\")");
     public static final ElementTask REMINDER_PLUS_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Reminder add").build();
+
+    /*Common model text*/
+    public static final By MODEL_TEXT = AppiumBy.id("android:id/message");
+    public static final ElementTask MODEL_TEXT_TASK =
+            new ElementTask.Builder(Activity.VERIFY, "Model text").build();
 
 
 }
