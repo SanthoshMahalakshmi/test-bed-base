@@ -67,7 +67,7 @@ public class DriverManager {
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "Android");
                 caps.setCapability("deviceName", "Pixel 9 Pro");
-                caps.setCapability("udid", "emulator-5556");
+                caps.setCapability("udid", "emulator-5554");
                 caps.setCapability("platformVersion", "16");
                 caps.setCapability("automationName", "UiAutomator2");
                 caps.setCapability("appPackage", "com.heartmonitor.android");

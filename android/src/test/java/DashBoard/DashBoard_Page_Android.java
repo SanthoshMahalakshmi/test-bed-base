@@ -4,13 +4,8 @@ import Actions.Activity;
 import Actions.ElementTask;
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
-import UtilitiesForAndroid.LogUtil;
 import UtilitiesForAndroid.RetryAnalyzer;
-import com.sun.jna.platform.win32.OaIdl;
-import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
@@ -359,129 +354,6 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_ECG_REPORT_LABEL, DASHBOARD_ECG_REPORT_LABEL_TASK);
         elementMap.put(DASHBOARD_ECG_REPORT_CHART, DASHBOARD_ECG_REPORT_CHART_TASK);
         performActions(elementMap, wait);
-
-    }
-
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_029() throws Exception {
-
-        bs.CoreLoginForAndroid(false);  //basic login scenario
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        /*Pre-Condition*/
-        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
-        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
-        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
-
-        /*Actual Test Case*/
-        elementMap.put(PARAMETER_RANGE_BUTTON, PARAMETER_RANGE_BUTTON_TASK);
-        elementMap.put(ADJUST_BUTTON_1, ADJUST_BUTTON_1_TASK);
-        elementMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
-        elementMap.put(KEEP_DEFAULT_BUTTON_1, KEEP_DEFAULT_BUTTON_1_TASK);
-        elementMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
-        elementMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
-        performActions(elementMap, wait);
-
-
-        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
-        elementTaskMap.put(ADJUST_BUTTON_2, ADJUST_BUTTON_2_TASK);
-        elementTaskMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
-        elementTaskMap.put(KEEP_DEFAULT_BUTTON_2, KEEP_DEFAULT_BUTTON_2_TASK);
-        elementTaskMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
-        elementTaskMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
-        performActions(elementTaskMap, wait);
-
-
-    }
-
-
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void TC_030() throws Exception {
-
-        LogUtil.info("Enter into TC_030");
-
-        bs.CoreLoginForAndroid(true);  //basic login scenario
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        try {
-            //clicking the dependent profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"K\")"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Dependent user profile navigation is not happening.");
-        }
-
-        try {
-            //Customize the BP range
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtCustomize2"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtBPRest"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Customizing BP is not happening.");
-        }
-
-        //Scroll to the bottom customize.
-        try {
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtCustomize2\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
-
-        try {
-            //Blood sugar range is not customizable
-            WebElement CustomizeBlood = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCustomize1")));
-            System.out.println("Blood sugar is not customizable :" + CustomizeBlood.isEnabled());
-            LogUtil.info("Customizing for blood sugar is should not be enable.");
-        } catch (Exception e) {
-            LogUtil.warning("Blood sugar customize is not cheking.");
-        }
-
-        try {
-            //Customize the Spo2 range
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Customizing the Spo2 is not happen.");
-        }
-
-        try {
-            //Customizing the cholesterol is not possible.
-            WebElement CustomizeCholesterol = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize1\").instance(1)")));
-            LogUtil.info("Cholesterol is not Customizable :" + CustomizeCholesterol.isEnabled());
-        } catch (Exception e) {
-            LogUtil.warning("Customizing the cholesterol is not possible.");
-        }
-
-        try {
-            //Scroll to the bottom customize.
-            driver.findElement(AppiumBy.androidUIAutomator
-                    ("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(resourceId(\"com.heartmonitor.android:id/txtCustomize2\"));"));
-        } catch (Exception e) {
-            LogUtil.warning("Scroll to the element is not happen.");
-        }
-
-        try {
-            //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize2\").instance(0)"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtBPRest\").instance(0)"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Customize the Hr is not happen.");
-        }
 
     }
 

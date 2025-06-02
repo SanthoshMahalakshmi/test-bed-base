@@ -67,18 +67,20 @@ public class ProfileScreenElements {
     public static final ElementTask RESET_PARAMETER_TEXT_TASK =
             new ElementTask.Builder(Activity.CLICK, "Reset Parameter Model text").build();
 
+    /*Care circle*/
+    public static final By CARE_CIRCLE_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtCareCircle");
+    public static final ElementTask CARE_CIRCLE_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Care Circle").build();
 
+    /*My Device*/
+    public static final By MY_DEVICE_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtMyDevice");
+    public static final ElementTask MY_DEVICE_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "My device").build();
 
-
-
-
-
-
-
-
-
-
-
+    /*My reminder*/
+    public static final By MY_REMINDER_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtMyReminder");
+    public static final ElementTask MY_REMINDER_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "My Reminder").build();
 
 
 
