@@ -62,7 +62,7 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_DEPENDENT_BUTTON, DASHBOARD_DEPENDENT_BUTTON_TASK);
         elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
         elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
-        elementMap.put(REPORT_FINISH_BUTTON, REPORT_FINISH_BUTTON_TASK);
+        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
         elementMap.put(BLOOD_PRESSURE_TAB, new ElementTask.Builder(Activity.VERIFY, "Blood pressure tab").build());
         elementMap.put(DOWNLOAD_BUTTON, new ElementTask.Builder(Activity.VERIFY, "Download button").build());
         performActions(elementMap, wait);
@@ -319,7 +319,7 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DEPENDENT_BURGER_MENU, DEPENDENT_BURGER_MENU_TASK);
         elementMap.put(DEPENDENT_HEALTH_REPORT_OPTION, DEPENDENT_HEALTH_REPORT_OPTION_TASK);
         elementMap.put(REPORT_BUTTON, new ElementTask.Builder(Activity.VERIFY, "User is in report section now").build());
-        elementMap.put(REPORT_FINISH_BUTTON, REPORT_FINISH_BUTTON_TASK);
+        elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
         performActions(elementMap, wait);
 
     }
