@@ -1,257 +1,114 @@
 package Profile;
 
+import Actions.ElementTask;
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.LogUtil;
 import UtilitiesForAndroid.RetryAnalyzer;
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static ElementRepositories.CommonElements.*;
+import static ElementRepositories.DeviceScreenElements.*;
+import static ElementRepositories.ProfileScreenElements.*;
+import static UtilitiesForAndroid.ElementActions.performActions;
 
 public class Profile_Page_Android extends DriverManager {
 
-    private static final Logger log = LoggerFactory.getLogger(Profile_Page_Android.class);
     BaseLoginForAndroid bs = new BaseLoginForAndroid();
-    
+
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_029() throws Exception {
+
+        bs.CoreLoginForAndroid(false);  //basic login scenario
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        /*Pre-Condition*/
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+
+        /*Actual Test Case*/
+        elementMap.put(PARAMETER_RANGE_BUTTON, PARAMETER_RANGE_BUTTON_TASK);
+        elementMap.put(ADJUST_BUTTON_1, ADJUST_BUTTON_1_TASK);
+        elementMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
+        elementMap.put(KEEP_DEFAULT_BUTTON_1, KEEP_DEFAULT_BUTTON_1_TASK);
+        elementMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
+        elementMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        performActions(elementMap, wait);
+
+
+        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
+        elementTaskMap.put(ADJUST_BUTTON_2, ADJUST_BUTTON_2_TASK);
+        elementTaskMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
+        elementTaskMap.put(KEEP_DEFAULT_BUTTON_2, KEEP_DEFAULT_BUTTON_2_TASK);
+        elementTaskMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
+        elementTaskMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        performActions(elementTaskMap, wait);
+    }
+
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_030() throws Exception {
+
+        bs.CoreLoginForAndroid(false);  //basic login scenario
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        /*Actual Test Case*/
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+        elementMap.put(CONSUME_EDIT_BUTTON, CONSUME_EDIT_BUTTON_TASK);
+        elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementMap, wait);
+
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+        elementMap2.put(PARAMETER_RANGE_BUTTON, PARAMETER_RANGE_BUTTON_TASK);
+        elementMap2.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementMap2, wait);
+
+        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
+        elementTaskMap.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
+        elementTaskMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementTaskMap, wait);
+    }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_031() throws Exception {
 
-        LogUtil.info("Enter into TC_031");
-
-         bs.CoreLoginForAndroid(true);  //basic login scenario.
-
+        bs.CoreLoginForAndroid(false);  //basic login scenario.
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //DB string
-        WebElement DB = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtDashboard")));
-        System.out.println("User present in : " + DB.getText());
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+        elementMap.put(CARE_CIRCLE_BUTTON, CARE_CIRCLE_BUTTON_TASK);
+        elementMap.put(BACK_BUTTON,BACK_BUTTON_TASK);
+        performActions(elementMap, wait);
 
-        //1.Clicking on profile section
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Profile\")"))).click();
-            LogUtil.info("User on profile currently");
-        } catch (Exception e) {
-            LogUtil.warning("Profile section is not present");
-        }
+        Map<By, ElementTask> elementTaskMap = new LinkedHashMap<>();
+        elementTaskMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementTaskMap.put(MY_DEVICE_BUTTON, MY_DEVICE_BUTTON_TASK);
+        elementTaskMap.put(DEVICE_COACH_MARK_FINISH_BUTTON, DEVICE_COACH_MARK_FINISH_BUTTON_TASK);
+        performActions(elementTaskMap, wait);
 
-        //1.Clicking the edit for alcohol
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/editConsume"))).click();
-            LogUtil.info("User present in : Alcohol or smoke habit confirmation page");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        WebElement Yes = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholYes")));
-        WebElement No = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholNo")));
-        WebElement Occasionally = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtAlcoholOther")));
-
-        try {
-            // Get the current selected text dynamically
-            String currentSelection = "";
-            if (Yes.getText().equals("Yes")) {
-                currentSelection = "Yes";
-            } else if (No.getText().equals("No")) {
-                currentSelection = "No";
-            } else if (Occasionally.getText().equals("Occasionally")) {
-                currentSelection = "Occasionally";
-            }
-
-            // Use a switch to handle different cases
-            switch (currentSelection) {
-                case "Yes":
-                    No.click();
-                    LogUtil.info("Previously 'Yes' was selected for alcohol. Now changed to 'No'.");
-                    break;
-                case "No":
-                    Yes.click();
-                    LogUtil.info("Previously 'No' was selected for alcohol. Now changed to 'Yes'.");
-                    break;
-                case "Occasionally":
-                    Yes.click();
-                    LogUtil.info("Previously 'Occasionally' was selected for alcohol. Now changed to 'Yes'.");
-                    break;
-                default:
-                    LogUtil.warning("No valid option is currently selected.");
-                    break;
-            }
-        } catch (Exception e) {
-            LogUtil.warning("An error occurred while toggling selection: " + e.getMessage());
-        }
-
-        WebElement YesForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSmokeYes")));
-        WebElement NoForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSmokeNo")));
-        ;
-        WebElement occasionallyForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSmokeOther")));
-        ;
-        try {
-            if (YesForSmoke.getText().equals("Yes")) {
-                NoForSmoke.click();
-                LogUtil.info("Previously Yes is selected for smoke, Now changed to No.");
-            } else if (NoForSmoke.getText().equals("No")) {
-                YesForSmoke.click();
-                LogUtil.info("Previously NO is selected for smoke, Now changed to Yes.");
-            } else if (occasionallyForSmoke.getText().equals("Occasionally")) {
-                YesForSmoke.click();
-                LogUtil.info("Previously occasionally is selected for smoke, Now changed to Yes.");
-            }
-        } catch (Exception e) {
-            LogUtil.warning("Nothing is selected for smoke it remains as it's.");
-        }
-
-        //Confirm with submit
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtContinue"))).click();
-
-        //Success toast for the update
-        WebElement SuccessMeg = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/text_message_toaster")));
-        LogUtil.info("Success toast : " + SuccessMeg.getText());
-
-        //2. Editing parameter range
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtParameterRange"))).click();
-
-        //Skip button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Skip is not present");
-        }
-
-        /*Checking the visibility of the element.*/
-        WebElement Reset = null;
-        try {
-            Reset = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtBPRest")));
-            LogUtil.info("Reset is currently present.");
-        } catch (Exception e) {
-            LogUtil.warning("Reset is not present.");
-        }
-
-        /*Checking for customize button visibility*/
-        WebElement Customize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize1\").instance(0)")));
-        LogUtil.info("Customize button is present, there is not reset button.");
-
-        /*Checking for after customize button visibility*/
-        WebElement AfterCustomize = null;
-        try {
-            AfterCustomize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.heartmonitor.android:id/txtCustomize2")));
-        } catch (Exception e) {
-            LogUtil.warning("Customize 2 button is not present. bcz the reset button is not present");
-        }
-
-        /*Selecting the desired element based on the visibility*/
-        try {
-            LogUtil.info("Enter into if and elseif block");
-            String CurrentSelection = "";
-            if (Reset.isEnabled() == true) {
-                CurrentSelection = "Reset";
-            } else if (Customize.isEnabled() && Customize.getAttribute("resource-id").equals("com.heartmonitor.android:id/txtCustomize1")) {
-                CurrentSelection = "Customize";
-            } else if (AfterCustomize.isEnabled() && AfterCustomize.getAttribute("resource-id").equals("com.heartmonitor.android:id/txtCustomize2")) {
-                CurrentSelection = "com.heartmonitor.android:id/txtCustomize2";
-            }
-
-            switch (CurrentSelection) {
-                case "Reset":
-                    try {
-                        LogUtil.info("Reset button block is executing");
-                        Reset.click();
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1"))).click();
-                        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
-                        LogUtil.info("Reset the previous setting");
-                    } catch (Exception e) {
-                        LogUtil.warning("Reset is not present.");
-                    }
-                    break;
-                case "Customize":
-                    try {
-                        LogUtil.info("Customize button block is executing.");
-                        WebElement skip = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip")));
-                        if (skip.isEnabled()) {
-                            skip.click();
-                        }
-                        Customize.click();
-                        LogUtil.info("Normal customize is clicked ");
-                    } catch (Exception e) {
-                        LogUtil.warning("Normal customize is not present.");
-                    }
-                    break;
-                case "com.heartmonitor.android:id/txtCustomize2":
-                    try {
-                        LogUtil.info("Customize 2 button block is executing.");
-                        AfterCustomize.click();
-                        LogUtil.info("After customize is present.");
-                    } catch (Exception e) {
-                        LogUtil.warning("After customize is not present.");
-                    }
-                    break;
-                default:
-                    LogUtil.warning("No valid option is currently selected.");
-                    break;
-            }
-        } catch (Exception e) {
-            LogUtil.warning("None of the above is selected and its not customized anything");
-        }
-
-
-       /* //Customize the Blood pressure
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.heartmonitor.android:id/txtCustomize1\").instance(0)"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("customize is not clickable");
-        }
-
-        //Submit the blood pressure
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtSubmit"))).click();
-
-        //After customized Skip button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/tvSkip"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("After customized Skip is not present");
-        }*/
-
-        //Back to the profile section
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        //3.Editing My dependent
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/txtMyDependent"))).click();
-
-        //My dependent header
-        WebElement MyD = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"My Dependent\")")));
-        LogUtil.info("User present in : " + MyD.getText() + " page");
-
-        //Clicking the kebab option
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                ("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgMenu\").instance(0)"))).click();
-
-        //Clicking the Edit profile option.
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Edit Profile\")"))).click();
-
-        //Edit profile header
-        WebElement EP = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                androidUIAutomator("new UiSelector().text(\"Edit Profile\")")));
-        LogUtil.info("User present in : " + EP.getText() + " page");
-
-        //Back to the profile section
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        // Clicking the home option
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Navigate up"))).click();
-
-        //Clicking on profile section
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator("new UiSelector().text(\"Profile\")"))).click();
-
+        Map<By, ElementTask> elementTaskMap1 = new LinkedHashMap<>();
+        elementTaskMap1.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+        elementTaskMap1.put(MY_REMINDER_BUTTON, MY_REMINDER_BUTTON_TASK);
+        elementTaskMap1.put(BACK_BUTTON, BACK_BUTTON_TASK);
+        performActions(elementTaskMap1, wait);
     }
 
-    @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_032() throws Exception {
 
         LogUtil.info("Enter into TC_032");
