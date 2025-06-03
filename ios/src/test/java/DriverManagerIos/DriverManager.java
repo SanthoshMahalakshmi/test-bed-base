@@ -76,8 +76,8 @@ public class DriverManager {
 
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
-                caps.setCapability("deviceName", "iPhone 16 Pro Max");
-                caps.setCapability("udid", "A9242CE4-9A84-44FD-882A-FC68675675AA");
+                caps.setCapability("deviceName", "iPhone 16 Pro");
+                caps.setCapability("udid", "F5743292-C7A4-4B67-B68F-B4E88268D2EA");
                 caps.setCapability("platformVersion", "18.3");
                 caps.setCapability("automationName", "XCUITest");
                 caps.setCapability("bundleId", "com.ios.MoAI");
