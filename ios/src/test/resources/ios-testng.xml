@@ -12,7 +12,7 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_iOS"> <!--Done-->
                 <methods>
-                    <exclude  name="TC_001"/> <!--Same-->
+                    <include  name="TC_001"/> <!--Same-->
                 </methods>
             </class>
 
