@@ -19,8 +19,10 @@ import java.util.Map;
 
 import static UtilitiesForIos.iOSElementActions.*;
 import static iOSElemenRepositories.iOSCommonElements.*;
+import static iOSElemenRepositories.iOSEditProfilePage1Elements.*;
 import static iOSElemenRepositories.iOSLoginScreenElements.*;
 import static iOSElemenRepositories.iOSOTPVerifyScreenElements.*;
+import static iOSElemenRepositories.iOSProfileScreenElements.*;
 import static iOSElemenRepositories.iOSSplashScreenElements.*;
 
 public class Login_Page_Ios extends DriverManager {
@@ -97,49 +99,22 @@ public class Login_Page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_004() throws Exception {
+    public void TC_004() {
+
+        baseLoginForiOS.BaseLoginForIos(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        baseLoginForiOS.BaseLoginForIos(true);
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        WebElement profile_picture, Mobile_number, pagination = null;
-        try {
-            profile_picture = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic addimage")));
-            LogUtil.info("profile picture option is available for selecting picture" + profile_picture.isDisplayed());
-
-            //2.Full name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"Full Name\"`]"))).sendKeys("mam");
-            LogUtil.info("First name filed is filled with user name.");
-
-            //3.Email ID
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            iOSClassChain("**/XCUIElementTypeTextField[`value == \"Email Address\"`]"))).
-                    sendKeys("mam@gmail.com");
-            LogUtil.info("Email id field is filled with user email.");
-
-            //4.Mobile number
-            Mobile_number = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"9087631080\"`]")));
-            LogUtil.info("Mobile number field is filled already with given number" + Mobile_number.isDisplayed());
-
-            pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("1 of 5")));
-            LogUtil.info("pagination is visible " + pagination.isDisplayed());
-
-        } catch (Exception e) {
-            LogUtil.warning("first name, email not added in page-1.");
-        }
-
-        /*Accessibility for error message ->> "Please enter Valid name"*/ /*Need to add conditional check here.*/
-
-        try /*Moving to next page.*/ {
-            //5.Continue button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
-            LogUtil.info("Continue button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("1st time user Verification is not working in basic detail page-1.");
-        }
+        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_iOS_PROFILE_BUTTON_TASK);
+        iOSElementMap.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
+        iOSElementMap.put(iOS_EDIT_PROFILE_BUTTON, iOS_EDIT_PROFILE_BUTTON_TASK);
+        iOSElementMap.put(iOS_PROFILE_PICTURE_OPTION,iOS_PROFILE_PICTURE_OPTION_TASK);
+        iOSElementMap.put(iOS_FULL_NAME_INPUT_FIELD, iOS_FULL_NAME_INPUT_FIELD_TASK);
+        iOSElementMap.put(iOS_EMAIL_ID_INPUT_FIELD, iOS_EMAIL_ID_INPUT_FIELD_TASK);
+        iOSElementMap.put(iOS_MOBILE_NUMBER_INPUT_FIELD, iOS_MOBILE_NUMBER_INPUT_FIELD_TASK);
+        iOSElementMap.put(iOS_CONTINUE_BUTTON, iOS_CONTINUE_BUTTON_TASK);
+        performIOSActions(iOSElementMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})

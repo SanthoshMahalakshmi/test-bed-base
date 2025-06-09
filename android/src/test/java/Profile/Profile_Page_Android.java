@@ -14,7 +14,6 @@ import java.util.Map;
 
 import static ElementRepositories.CommonElements.*;
 import static ElementRepositories.DeviceScreenElements.*;
-import static ElementRepositories.MoreScreenElements.*;
 import static ElementRepositories.ProfileScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.performActions;
 
@@ -39,7 +38,7 @@ public class Profile_Page_Android extends DriverManager {
         elementMap.put(ADJUST_BUTTON_1, ADJUST_BUTTON_1_TASK);
         elementMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
         elementMap.put(KEEP_DEFAULT_BUTTON_1, KEEP_DEFAULT_BUTTON_1_TASK);
-        elementMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
+        elementMap.put(RESET_PARAMETER_MODEL_TEXT, RESET_PARAMETER_MODEL_TEXT_TASK);
         elementMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
         performActions(elementMap, wait);
 
@@ -48,7 +47,7 @@ public class Profile_Page_Android extends DriverManager {
         elementTaskMap.put(ADJUST_BUTTON_2, ADJUST_BUTTON_2_TASK);
         elementTaskMap.put(SUBMIT_BUTTON, SUBMIT_BUTTON_TASK);
         elementTaskMap.put(KEEP_DEFAULT_BUTTON_2, KEEP_DEFAULT_BUTTON_2_TASK);
-        elementTaskMap.put(RESET_PARAMETER_TEXT, RESET_PARAMETER_TEXT_TASK);
+        elementTaskMap.put(RESET_PARAMETER_MODEL_TEXT, RESET_PARAMETER_MODEL_TEXT_TASK);
         elementTaskMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
         performActions(elementTaskMap, wait);
     }

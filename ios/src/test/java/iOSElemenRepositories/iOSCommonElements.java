@@ -11,4 +11,19 @@ public class iOSCommonElements {
     public static final By iOS_KEYBOARD_DONE_BUTTON = AppiumBy.accessibilityId("Done");
     public static final iOSElementTask iOS_KEYBOARD_DONE_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Key Board Done").build();
+
+    /*Model Close Ok Button*/
+    public static final By iOS_MODEL_CLOSE_OK_BUTTON = AppiumBy.accessibilityId("OK");
+    public static final iOSElementTask iOS_MODEL_CLOSE_OK_BUTTON_TASK =
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Model Confirm: OK").build();
+
+    /*Model Close Cancel Button*/
+    public static final By iOS_MODEL_CLOSE_CANCEL_BUTTON = AppiumBy.accessibilityId("Cancel");
+    public static final iOSElementTask iOS_MODEL_CLOSE_CANCEL_BUTTON_TASK =
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Model Confirm: Cancel").build();
+
+    /*Continue Button*/
+    public static final By iOS_CONTINUE_BUTTON = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]");
+    public static final iOSElementTask iOS_CONTINUE_BUTTON_TASK =
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Continue").build();
 }
