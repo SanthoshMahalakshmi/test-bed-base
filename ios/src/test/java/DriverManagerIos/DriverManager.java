@@ -60,7 +60,7 @@ public class DriverManager {
             // Read the environment variable
             String currentEnv = System.getenv("ENVIRONMENT");
 
-            // Set default to 'bs' if not provided
+            // Set default to 'BrowserStack' if not provided
             if (currentEnv == null || currentEnv.isEmpty()) {
                 currentEnv = "BrowserStack";
             }
@@ -74,20 +74,41 @@ public class DriverManager {
                 String testName = testResult.getMethod().getMethodName();
                 LogUtil.info("🚀 STARTING TEST: " + testName);
 
+                String bundleId = "com.ios.MoAI";
+
+                // Step 1: Use a temporary driver to uninstall app if already installed
+                DesiredCapabilities tempCaps = new DesiredCapabilities();
+                tempCaps.setCapability("platformName", "iOS");
+                tempCaps.setCapability("deviceName", "iPhone 16 Pro");
+                tempCaps.setCapability("udid", "F5743292-C7A4-4B67-B68F-B4E88268D2EA");
+                tempCaps.setCapability("platformVersion", "18.3");
+                tempCaps.setCapability("automationName", "XCUITest");
+
+                IOSDriver tempDriver = new IOSDriver(new URL(AppiumServerUrl), tempCaps);
+
+                if (tempDriver.isAppInstalled(bundleId)) {
+                    LogUtil.info("🔁 App already installed. Uninstalling...");
+                    tempDriver.removeApp(bundleId);
+                    Thread.sleep(1000);
+                }
+
+                tempDriver.quit();
+
+                // Step 2: Set up real capabilities
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
                 caps.setCapability("deviceName", "iPhone 16 Pro");
                 caps.setCapability("udid", "F5743292-C7A4-4B67-B68F-B4E88268D2EA");
                 caps.setCapability("platformVersion", "18.3");
                 caps.setCapability("automationName", "XCUITest");
-                caps.setCapability("bundleId", "com.ios.MoAI");
-                caps.setCapability("noReset", true);
+                caps.setCapability("bundleId", bundleId);
+                caps.setCapability("noReset", false); // Force clean install
+                caps.setCapability("autoAcceptAlerts", true); // Accept permission popups
                 caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor.app");
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForIOS(driver = new IOSDriver(url, caps));
             } else {
-                
                 LogUtil.info("Entering into BROWSER_STACK case for iOS\n");
 
                 String userName = System.getenv("USER_NAME");
@@ -136,7 +157,6 @@ public class DriverManager {
             throw new RuntimeException("Failed to initialize iOS driver.", e);
         }
     }
-
 
     @AfterMethod(alwaysRun = true)
     public void quitDriver(ITestResult testResult) {
