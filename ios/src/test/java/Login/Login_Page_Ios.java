@@ -1,113 +1,56 @@
 package Login;
 
+import Actions.iOSActionType;
+import Actions.iOSElementTask;
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static UtilitiesForIos.iOSElementActions.*;
+import static iOSElemenRepositories.iOSCommonElements.*;
+import static iOSElemenRepositories.iOSEditProfilePage1Elements.*;
+import static iOSElemenRepositories.iOSLoginScreenElements.*;
+import static iOSElemenRepositories.iOSOTPVerifyScreenElements.*;
+import static iOSElemenRepositories.iOSProfileScreenElements.*;
+import static iOSElemenRepositories.iOSSplashScreenElements.*;
 
 public class Login_Page_Ios extends DriverManager {
 
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_002() throws Exception {
+    public void TC_002() {
+
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        try {
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            alert.accept();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
+        iOSElementMap.put(iOS_TITLE_LOGO_IMAGE, iOS_TITLE_LOGO_IMAGE_TASK);
+        iOSElementMap.put(iOS_NEXT_BTN, iOS_NEXT_BTN_TASK);
+        performIOSActions(iOSElementMap, wait);
 
-        try {
-            /*Clicking the Get started button*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
-            LogUtil.info("Get started button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("Get started button is not visible.");
-        }
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
+        iOSElementMap2.put(iOS_NEXT_BTN, iOS_NEXT_BTN_TASK);
+        iOSElementMap2.put(iOS_GET_STARTED_BTN, iOS_GET_STARTED_BTN_TASK);
+        performIOSActions(iOSElementMap2, wait);
 
-        try {
-            /*1.Verify the logo is present or not in the login page.*/
-            WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("svg_monitor_blue")));
-            LogUtil.info("Logo is present :" + logo.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Logo is not visible.");
-            throw new Exception(e.getMessage());
-        }
-
-        try {
-            //3.clicking the mobile number input field and send the keys to it.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("9087631080");
-            LogUtil.info("Mobile number filed is having correct mobile number.");
-
-            WebElement Done = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done")));
-            if (Done.isDisplayed()|| Done.isEnabled())
-            {
-                Done.click();
-            }
-        } catch (Exception e) {
-            LogUtil.warning("Mobile number field is not having the input value.");
-            throw new Exception(e.getMessage());
-        }
-
-        try {
-            /* 2.country code is present in the screen or not.  Important - country code is not available in other devices*/
-            WebElement countryCode = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"+91\"`]")));
-            LogUtil.info("Country code is present :" + countryCode.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Country code is not visible.");
-            throw new Exception(e.getMessage());
-        }
-
-        try {
-            //4.Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
-            LogUtil.info("Continue button is clicked.");
-
-            WebElement Done = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Done")));
-            if (Done.isDisplayed()|| Done.isEnabled())
-            {
-                Done.click();
-            }
-        } catch (Exception e) {
-            LogUtil.warning("Continue is not clicked.");
-            throw new Exception(e.getMessage());
-        }
-
-        try {
-            /*Back to log in page*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating back is not working.");
-        }
-
-        WebElement PrivacyPolicyAndTermsAndConditionBtn;
-        try
-        {
-            PrivacyPolicyAndTermsAndConditionBtn = wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"By continuing, you agree to our  Terms & Conditions and Privacy Policy\"`]")));
-            LogUtil.info("Terms & Condition and Privacy policy links are visible to the user? : " + PrivacyPolicyAndTermsAndConditionBtn.isDisplayed());
-
-        } catch (Exception e) {
-            LogUtil.warning("There is no Terms & Condition and Privacy policy links are visible to the user");
-            throw new RuntimeException(e.getMessage());
-        }
+        Map<By, iOSElementTask> iOSElementMap3 = new LinkedHashMap<>();
+        iOSElementMap3.put(iOS_MOBILE_NUMBER_FIELD, new iOSElementTask.Builder(iOSActionType.VERIFY, "Mobile Number").build());
+        iOSElementMap3.put(iOS_COUNTRY_CODE, iOS_COUNTRY_CODE_TASK);
+        iOSElementMap3.put(iOS_CONTINUE_BTN, new iOSElementTask.Builder(iOSActionType.VERIFY, "Continue").build());
+        iOSElementMap3.put(iOS_PRIVACY_POLICY_LINK, iOS_PRIVACY_POLICY_LINK_TASK);
+        performIOSActions(iOSElementMap3, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
@@ -115,171 +58,63 @@ public class Login_Page_Ios extends DriverManager {
         /*Global wait.*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Allow\"`]"))).click();
-            LogUtil.info("before login->Allow button is visible and its clicked Allow");
-        } catch (Exception e) {
-            LogUtil.info("Before login-> Notification allow Button is not pop-up to accept allow.");
-        }
+        /*Pre-Condition*/
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
+        iOSElementMap.put(iOS_NEXT_BTN, iOS_NEXT_BTN_TASK);
+        performIOSActions(iOSElementMap, wait);
+
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
+        iOSElementMap2.put(iOS_NEXT_BTN, iOS_NEXT_BTN_TASK);
+        iOSElementMap2.put(iOS_GET_STARTED_BTN, iOS_GET_STARTED_BTN_TASK);
+        performIOSActions(iOSElementMap2, wait);
 
         try {
-            /*Clicking the Get started button*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Get Started\"`]"))).click();
-            LogUtil.info("Get started button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("Get started button is not visible.");
+            driver.findElement(AppiumBy.xpath("//XCUIElementTypeTextField[@value=\"9999999999\"]")).sendKeys("9087631080");
+
+        }catch (Exception e)
+        {
+            throw new RuntimeException(e.getMessage());
         }
 
-        try {
-            //3.clicking the mobile number input field and send the keys to it.
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]"))).sendKeys("0000000000");
-            LogUtil.info("Mobile number filed is having correct mobile number.");
-        } catch (Exception e) {
-            LogUtil.warning("Mobile number field id not having the input value.");
+        Map<By, iOSElementTask> iOSElementMap3 = new LinkedHashMap<>();
+        iOSElementMap3.put(iOS_KEYBOARD_DONE_BUTTON, iOS_KEYBOARD_DONE_BUTTON_TASK);
+        iOSElementMap3.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+        performIOSActions(iOSElementMap3, wait);
+
+
+        String otp = "123456";
+        for (int i = 0; i < otp.length(); i++) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(iOS_OTP_FIELDS[i]))
+                    .sendKeys(String.valueOf(otp.charAt(i)));
         }
 
-        try {
-            //4.Clicking the continue button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
-            LogUtil.info("Continue button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("Continue is not clicked.");
-        }
 
-        WebElement Delay_Ok = null;  /* Important->Need to check this ok button element in simulator.*/
-        try {
-            Delay_Ok = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("android:id/button1")));
-            Delay_Ok.click();
-            LogUtil.info("*OK Button found and its clicked");
-        } catch (Exception e) {
-            LogUtil.warning("Element is not found, we good to go with login");
-        }
 
-        try {
-            //1.verify mobile number label
-            WebElement label = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Mobile Number")));
-            LogUtil.info("Verify mobile number label : " + label.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Mobile number label is no visible.");
-        }
+        Map<By, iOSElementTask> iOSElementMap4 = new LinkedHashMap<>();
+        iOSElementMap4.put(iOS_VERIFY_MOBILE_NUMBER_LABEL, iOS_VERIFY_MOBILE_NUMBER_LABEL_TASK);
+        iOSElementMap4.put(iOS_RESEND_LABEL, iOS_RESEND_LABEL_TASK);
+        iOSElementMap4.put(iOS_OTP_VERIFY_BUTTON, iOS_OTP_VERIFY_BUTTON_TASK);
+        performIOSActions(iOSElementMap4, wait);
 
-        try {
-            //2.Enter OTP label
-            WebElement OtpLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Enter OTP")));
-            LogUtil.info("Enter OTP label : " + OtpLabel.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("OTP lable is not visible.");
-        }
-
-        //Fill the OTP into input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[1]")))
-                    .sendKeys("1");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[2]")))
-                    .sendKeys("2");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[3]")))
-                    .sendKeys("3");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[4]")))
-                    .sendKeys("4");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[5]")))
-                    .sendKeys("5");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField[6]")))
-                    .sendKeys("6");
-            LogUtil.info("Otp is entered and we moved further.");
-        } catch (Exception e) {
-            LogUtil.warning("Entered OTP input is not correct.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Done"))).click();
-            LogUtil.info("keyboard done button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("Keyboard Done button is not clicked.");
-        }
-
-        try {
-            //4.Resend label
-            WebElement resend = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Resend OTP\"`]")));
-            LogUtil.info("Resent label is present : " + resend.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Resend label is not visible.");
-        }
-
-        //4.Timer element.
-        WebElement Timer = null;
-        try {
-            Timer = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    accessibilityId("02:55")));
-            LogUtil.info("Timer is present? : " + Timer.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("*Timer is not found");
-        }
-
-        //3.clicking the verify button.
-        WebElement verifyButton = null;
-        try {
-            verifyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Verify OTP\"`]")));
-            LogUtil.info("Verify button present? : " + verifyButton.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("*Verify button is not found");
-        }
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_004() throws Exception {
+    public void TC_004() {
+
+        baseLoginForiOS.BaseLoginForIos(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        baseLoginForiOS.BaseLoginForIos(true);
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        WebElement profile_picture, Mobile_number, pagination = null;
-        try {
-            profile_picture = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("ic addimage")));
-            LogUtil.info("profile picture option is available for selecting picture" + profile_picture.isDisplayed());
-
-            //2.Full name
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"Full Name\"`]"))).sendKeys("mam");
-            LogUtil.info("First name filed is filled with user name.");
-
-            //3.Email ID
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                            iOSClassChain("**/XCUIElementTypeTextField[`value == \"Email Address\"`]"))).
-                    sendKeys("mam@gmail.com");
-            LogUtil.info("Email id field is filled with user email.");
-
-            //4.Mobile number
-            Mobile_number = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeTextField[`value == \"9087631080\"`]")));
-            LogUtil.info("Mobile number field is filled already with given number" + Mobile_number.isDisplayed());
-
-            pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("1 of 5")));
-            LogUtil.info("pagination is visible " + pagination.isDisplayed());
-
-        } catch (Exception e) {
-            LogUtil.warning("first name, email not added in page-1.");
-        }
-
-        /*Accessibility for error message ->> "Please enter Valid name"*/ /*Need to add conditional check here.*/
-
-        try /*Moving to next page.*/ {
-            //5.Continue button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
-            LogUtil.info("Continue button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("1st time user Verification is not working in basic detail page-1.");
-        }
+        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_iOS_PROFILE_BUTTON_TASK);
+        iOSElementMap.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
+        iOSElementMap.put(iOS_EDIT_PROFILE_BUTTON, iOS_EDIT_PROFILE_BUTTON_TASK);
+        iOSElementMap.put(iOS_PROFILE_PICTURE_OPTION,iOS_PROFILE_PICTURE_OPTION_TASK);
+        iOSElementMap.put(iOS_FULL_NAME_INPUT_FIELD, iOS_FULL_NAME_INPUT_FIELD_TASK);
+        iOSElementMap.put(iOS_EMAIL_ID_INPUT_FIELD, iOS_EMAIL_ID_INPUT_FIELD_TASK);
+        iOSElementMap.put(iOS_MOBILE_NUMBER_INPUT_FIELD, iOS_MOBILE_NUMBER_INPUT_FIELD_TASK);
+        iOSElementMap.put(iOS_CONTINUE_BUTTON, iOS_CONTINUE_BUTTON_TASK);
+        performIOSActions(iOSElementMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})

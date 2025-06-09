@@ -63,8 +63,8 @@ public class ProfileScreenElements {
             new ElementTask.Builder(Activity.CLICK, "Submit").build();
 
     /*Are Sure You want to reset the parameter? model text.*/
-    public static final By RESET_PARAMETER_TEXT = AppiumBy.id("android:id/message");
-    public static final ElementTask RESET_PARAMETER_TEXT_TASK =
+    public static final By RESET_PARAMETER_MODEL_TEXT = AppiumBy.id("android:id/message");
+    public static final ElementTask RESET_PARAMETER_MODEL_TEXT_TASK =
             new ElementTask.Builder(Activity.CLICK, "Reset Parameter Model text").build();
 
     /*Care circle*/

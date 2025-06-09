@@ -64,12 +64,12 @@ public class Login_Page_Android extends DriverManager {
     public void TC_003() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+        /*Pre-Condition*/
         Map<By, ElementTask> onboardingElements = new LinkedHashMap<>();
         onboardingElements.put(GET_STARTED_BUTTON, GET_STARTED_TASK);
         onboardingElements.put(MOBILE_NUMBER_FIELD, MOBILE_NUMBER_FIELD_TASK);
         onboardingElements.put(CONTINUE_BUTTON, CONTINUE_BUTTON_TASK);
         checkForStagingError(wait);
-
         performActions(onboardingElements, wait);
 
         String otp = "123456";

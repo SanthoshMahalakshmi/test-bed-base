@@ -12,11 +12,6 @@ public class iOSSplashScreenElements {
     public static final iOSElementTask iOS_TITLE_LOGO_IMAGE_TASK =
             new iOSElementTask.Builder(iOSActionType.VERIFY, "Logo").build();
 
-    /*User name */
-    public static final By iOS_USERNAME = AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`value == \"9999999999\"`]");
-    public static final iOSElementTask iOS_USERNAME_TASK =
-            new iOSElementTask.Builder(iOSActionType.SEND_KEYS, "9087631080").build();
-
     /*Get Started*/
     public static final By iOS_GET_STARTED_BTN = AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Get Started\"`]");
     public static final iOSElementTask iOS_GET_STARTED_BTN_TASK =
