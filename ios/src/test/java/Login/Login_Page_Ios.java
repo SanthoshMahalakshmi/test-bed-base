@@ -22,6 +22,7 @@ import static UtilitiesForIos.iOSElementActions.*;
 import static iOSElemenRepositories.iOSCommonElements.*;
 import static iOSElemenRepositories.iOSEditProfilePage1Elements.*;
 import static iOSElemenRepositories.iOSEditProfilePage2Elements.*;
+import static iOSElemenRepositories.iOSEditProfilePage3Elements.*;
 import static iOSElemenRepositories.iOSLoginScreenElements.*;
 import static iOSElemenRepositories.iOSOTPVerifyScreenElements.*;
 import static iOSElemenRepositories.iOSProfileScreenElements.*;
@@ -124,9 +125,10 @@ public class Login_Page_Ios extends DriverManager {
 
         baseLoginForiOS.BaseLoginForIos(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
         /*Pre-Request*/
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
+
         iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
         iOSElementMap.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
@@ -153,43 +155,43 @@ public class Login_Page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_006() throws Exception {
+    public void TC_006() {
 
-        TC_005(); // To complete the before pages.
+        baseLoginForiOS.BaseLoginForIos(false);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        WebElement Height_label, Default_height, logo, pagination = null;
-        try {
-            Height_label = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Select Height")));
-            LogUtil.info("User currently in " + Height_label.getText() + "page.");
+        /*Pre-Request*/
+        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
 
-            Default_height = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("5 ft. 2 in.")));
-            LogUtil.info("Default height " + Default_height.getText() + " is Selected.");
+        iOSElementMap1.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-            //3.verifying the logo is present or not.
-            logo = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeImage")));
-            LogUtil.info("Logo is visible " + logo.isDisplayed());
+        iOSElementMap1.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
 
-            //4.pagination is present in the screen
-            pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    accessibilityId("3 of 5")));
-            LogUtil.info("Pagination is present " + pagination.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Label and default is not visible in page-3.");
-        }
+        iOSElementMap1.put(iOS_EDIT_PROFILE_BUTTON, iOS_EDIT_PROFILE_BUTTON_TASK);
 
-        try {
-            //5.clicking the continue button.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("1st time user Verification is not working in basic detail page-3.");
-        }
+        iOSElementMap1.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+
+        performIOSActions(iOSElementMap1, wait);
+
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
+
+        iOSElementMap2.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+
+        performIOSActions(iOSElementMap2, wait);
+
+        /*Actual Test case*/
+        Map<By, iOSElementTask> iOSElementMap3 = new LinkedHashMap<>();
+
+        iOSElementMap3.put(iOS_SELECT_HEIGHT_LABEL, iOS_SELECT_HEIGHT_LABEL_TASK);
+
+        iOSElementMap3.put(iOS_HEIGHT_VALUE, iOS_HEIGHT_VALUE_TASK);
+
+        iOSElementMap3.put(iOS_HEIGHT_SCROLLBAR, iOS_HEIGHT_SCROLLBAR_TASK);
+
+        iOSElementMap3.put(iOS_SELECTED_GENDER_LOGO, iOS_SELECTED_GENDER_LOGO_TASK);
+
+        performIOSActions(iOSElementMap3, wait);
 
     }
 
