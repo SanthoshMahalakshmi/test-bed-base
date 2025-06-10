@@ -6,11 +6,8 @@ import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
-import com.sun.jna.platform.unix.solaris.LibKstat;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.Activity;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -25,6 +22,7 @@ import static iOSElemenRepositories.iOSEditProfilePage1Elements.*;
 import static iOSElemenRepositories.iOSEditProfilePage2Elements.*;
 import static iOSElemenRepositories.iOSEditProfilePage3Elements.*;
 import static iOSElemenRepositories.iOSEditProfilePage4Elements.*;
+import static iOSElemenRepositories.iOSEditProfilePage5Elements.*;
 import static iOSElemenRepositories.iOSLoginScreenElements.*;
 import static iOSElemenRepositories.iOSOTPVerifyScreenElements.*;
 import static iOSElemenRepositories.iOSProfileScreenElements.*;
@@ -248,31 +246,58 @@ public class Login_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_008() throws Exception {
 
-        TC_007(); //To complete the previous steps.
-
+        baseLoginForiOS.BaseLoginForIos(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        WebElement BirthYear_label, pagination = null;
-        try {
-            BirthYear_label = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Select Birth Year")));
-            LogUtil.info("User currently in " + BirthYear_label.getText() + "page.");
+        /*Pre-Request-1*/
+        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
 
-            //pagination.
-            pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("5 of 5")));
-            LogUtil.info("pagination is present : " + pagination.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Birth year and pagination is not visible in page-5.");
-        }
+        iOSElementMap1.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-        try {
-            //submit
-            WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Submit\"`]")));
-            LogUtil.info("Submit button is present : " + submit.isDisplayed());
-            submit.click();
-        } catch (Exception e) {
-            LogUtil.warning("1st time user Verification is not working in basic detail page-4.");
-        }
+        iOSElementMap1.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
+
+        iOSElementMap1.put(iOS_EDIT_PROFILE_BUTTON, iOS_EDIT_PROFILE_BUTTON_TASK);
+
+        iOSElementMap1.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+
+        performIOSActions(iOSElementMap1, wait);
+
+        /*Pre-Request-2*/
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
+
+        iOSElementMap2.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+
+        performIOSActions(iOSElementMap2, wait);
+
+        /*Pre-Request-3*/
+        Map<By, iOSElementTask> iOSElementMap3 = new LinkedHashMap<>();
+
+        iOSElementMap3.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+
+        performIOSActions(iOSElementMap3, wait);
+
+        /*Pre-Request-4*/
+        Map<By, iOSElementTask> iOSElementMap4 = new LinkedHashMap<>();
+
+        iOSElementMap4.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
+
+        performIOSActions(iOSElementMap4, wait);
+
+
+        /*Actual Test Case*/
+        Map<By, iOSElementTask> iOSElementMap5 = new LinkedHashMap<>();
+
+        iOSElementMap5.put(iOS_SELECT_BIRTH_DATE_LABEL, iOS_SELECT_BIRTH_DATE_LABEL_TASK);
+
+        iOSElementMap5.put(iOS_BIRTH_DATE_SCROLL_BAR, iOS_BIRTH_DATE_SCROLL_BAR_TASK);
+
+        iOSElementMap5.put(iOS_BIRTH_MONTH_SCROLL_BAR, iOS_BIRTH_MONTH_SCROLL_BAR_TASK);
+
+        iOSElementMap5.put(iOS_BIRTH_YEAR_SCROLL_BAR, iOS_BIRTH_YEAR_SCROLL_BAR_TASK);
+
+        performIOSActions(iOSElementMap5,wait);
+
+
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
