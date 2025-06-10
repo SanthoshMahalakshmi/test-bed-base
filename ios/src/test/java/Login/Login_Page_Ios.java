@@ -7,6 +7,7 @@ import DriverManagerIos.DriverManager;
 import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.Activity;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,6 +21,7 @@ import java.util.Map;
 import static UtilitiesForIos.iOSElementActions.*;
 import static iOSElemenRepositories.iOSCommonElements.*;
 import static iOSElemenRepositories.iOSEditProfilePage1Elements.*;
+import static iOSElemenRepositories.iOSEditProfilePage2Elements.*;
 import static iOSElemenRepositories.iOSLoginScreenElements.*;
 import static iOSElemenRepositories.iOSOTPVerifyScreenElements.*;
 import static iOSElemenRepositories.iOSProfileScreenElements.*;
@@ -106,7 +108,7 @@ public class Login_Page_Ios extends DriverManager {
 
         Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_iOS_PROFILE_BUTTON_TASK);
+        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
         iOSElementMap.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
         iOSElementMap.put(iOS_EDIT_PROFILE_BUTTON, iOS_EDIT_PROFILE_BUTTON_TASK);
         iOSElementMap.put(iOS_PROFILE_PICTURE_OPTION,iOS_PROFILE_PICTURE_OPTION_TASK);
@@ -117,60 +119,36 @@ public class Login_Page_Ios extends DriverManager {
         performIOSActions(iOSElementMap, wait);
     }
 
-    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_005() throws Exception {
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_005()  {
 
-        TC_004(); //  1st page of basic details.
-
+        baseLoginForiOS.BaseLoginForIos(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        WebElement Pagination = null;
-        try {
-            //1.Select the female option.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeImage"))).click();
-            LogUtil.info("Female option is selected");
+        /*Pre-Request*/
+        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-            //2.Select the male option
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]" +
-                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeImage"))).click();
+        iOSElementMap.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
 
-            //3.Others.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[3]/XCUIElementTypeImage"))).click();
+        iOSElementMap.put(iOS_EDIT_PROFILE_BUTTON, iOS_EDIT_PROFILE_BUTTON_TASK);
 
-            //Selecting the man logo again for reference.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]" +
-                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]" +
-                            "/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeImage"))).click();
+        iOSElementMap.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BTN_TASK);
 
-            //4.Respective pagination
-            Pagination = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("2 of 5")));
-            LogUtil.info("Pagination is visible : " + Pagination.isDisplayed());
+        performIOSActions(iOSElementMap, wait);
 
-        } catch (Exception e) {
-            LogUtil.warning("male or female or others not selected in page-2.");
-        }
+        /*Actual Test Execution*/
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
 
-        try {
-            //5.continue button clicking
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]"))).click();
-            LogUtil.info("Continue button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("1st time user Verification is not working in basic detail page-2.");
-        }
+        iOSElementMap2.put(iOS_MALE_LOGO_ELEMENT, new iOSElementTask.Builder(iOSActionType.VERIFY, "Male Logo Option").build());
+
+        iOSElementMap2.put(iOS_FEMALE_LOGO_ELEMENT, iOS_FEMALE_LOGO_ELEMENT_TASK);
+
+        iOSElementMap2.put(iOS_OTHER_LOGO_ELEMENT, iOS_OTHER_LOGO_ELEMENT_TASK);
+
+        iOSElementMap2.put(iOS_CONTINUE_BTN, iOS_CONTINUE_BUTTON_TASK);
+
+        performIOSActions(iOSElementMap2, wait);
 
     }
 
