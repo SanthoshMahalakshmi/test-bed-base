@@ -9,7 +9,7 @@ public class iOSProfileScreenElements {
 
     /*Profile button*/
     public static final By iOS_PROFILE_BUTTON = AppiumBy.accessibilityId("ic_profile");
-    public static final iOSElementTask iOS_iOS_PROFILE_BUTTON_TASK =
+    public static final iOSElementTask iOS_PROFILE_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Profile Option").build();
 
     /*Profile Page Coach mark Skip.*/
