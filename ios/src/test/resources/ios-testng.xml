@@ -23,8 +23,8 @@
                     <exclude  name="TC_003"/> <!--!!-->
                     <exclude  name="TC_004"/> <!--Basic page--> <!--!!-->
                     <exclude  name="TC_005"/> <!--Select Gender--> <!--!!-->
-                    <include  name="TC_006"/> <!--Select Height-->
-                    <exclude  name="TC_007"/> <!--Select Weight--> 
+                    <exclude  name="TC_006"/> <!--Select Height--> <!--!!-->
+                    <include  name="TC_007"/> <!--Select Weight-->
                     <exclude  name="TC_008"/> <!--Select DOB--> 
                     <exclude  name="TC_009"/> <!--Submit page with smoke and alcohol --> 
                 </methods>
