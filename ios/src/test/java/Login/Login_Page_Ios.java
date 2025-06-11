@@ -18,6 +18,7 @@ import java.util.Map;
 
 import static UtilitiesForIos.iOSElementActions.*;
 import static iOSElemenRepositories.iOSCommonElements.*;
+import static iOSElemenRepositories.iOSConsumeEditPage.*;
 import static iOSElemenRepositories.iOSEditProfilePage1Elements.*;
 import static iOSElemenRepositories.iOSEditProfilePage2Elements.*;
 import static iOSElemenRepositories.iOSEditProfilePage3Elements.*;
@@ -300,62 +301,38 @@ public class Login_Page_Ios extends DriverManager {
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzerios.class, enabled = true, groups = {"FirstTime login page"})
-    public void TC_009() throws Exception {
-        TC_008(); // To complete the previous steps.
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_009() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        baseLoginForiOS.BaseLoginForIos(false);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        try {
+        /*Pre-Request.*/
+        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
 
-            /*After profile created the successfully toast is not coming.*/
+        iOSElementMap1.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-            //confirm alert
-            wait.until(ExpectedConditions.alertIsPresent());
+        iOSElementMap1.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
 
-            //Alcohol yes button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Yes\"`][1]")));
-            LogUtil.info("Yes button for alcohol is visible.");
+        iOSElementMap1.put(iOS_CONSUME_EDIT_BUTTON, iOS_CONSUME_EDIT_BUTTON_TASK);
 
-            //Alcohol No button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"No\"`][1]")));
-            LogUtil.info("No button for alcohol is visible.");
+        iOSElementMap1.put(iOS_DO_YOU_CONSUME_ALCOHOL_LABEL, iOS_DO_YOU_CONSUME_ALCOHOL_LABEL_TASK);
 
-            //Alcohol Occasionally button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Occasionally\"`][1]"))).click();
-            LogUtil.info("Occasionally button for alcohol is visible.");
+        iOSElementMap1.put(iOS_ALCOHOL_YES_BUTTON, iOS_ALCOHOL_YES_BUTTON_TASK);
 
-            //Smoke Yes button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeButton[`name == \"Yes\"`][2]")));
-            LogUtil.info("Yes button for smoke is visible.");
+        iOSElementMap1.put(iOS_ALCOHOL_NO_BUTTON, iOS_ALCOHOL_NO_BUTTON_TASK);
 
-            //Smoke NO button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"No\"`][2]")));
-            LogUtil.info("NO button for smoke is visible.");
+        iOSElementMap1.put(iOS_ALCOHOL_OCCASIONALLY_BUTTON, iOS_ALCOHOL_OCCASIONALLY_BUTTON_TASK);
 
-            //Smoke Occasionally button
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Occasionally\"`][2]"))).click();
-            LogUtil.info("Occasionally button for smoke is visible.");
+        iOSElementMap1.put(iOS_DO_YOU_SMOKE_LABEL, iOS_DO_YOU_SMOKE_LABEL_TASK);
 
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Submit\"`]"))).click();
+        iOSElementMap1.put(iOS_SMOKE_YES_BUTTON, iOS_SMOKE_YES_BUTTON_TASK);
 
-        } catch (Exception e) {
-            LogUtil.warning("None of the option is selected on this page.");
-        }
+        iOSElementMap1.put(iOS_SMOKE_NO_BUTTON, iOS_SMOKE_NO_BUTTON_TASK);
 
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("There is not skip button.");
-        }
+        iOSElementMap1.put(iOS_SMOKE_OCCASIONALLY_BUTTON, iOS_SMOKE_OCCASIONALLY_BUTTON_TASK);
+
+        performIOSActions(iOSElementMap1, wait);
+
     }
 }
