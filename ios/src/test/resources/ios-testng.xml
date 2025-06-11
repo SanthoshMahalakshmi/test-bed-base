@@ -25,8 +25,8 @@
                     <exclude  name="TC_005"/> <!--Select Gender--> <!--!!-->
                     <exclude  name="TC_006"/> <!--Select Height--> <!--!!-->
                     <exclude  name="TC_007"/> <!--Select Weight--> <!--!!-->
-                    <include  name="TC_008"/> <!--Select DOB-->
-                    <exclude  name="TC_009"/> <!--Submit page with smoke and alcohol --> 
+                    <exclude  name="TC_008"/> <!--Select DOB--> <!--!!-->
+                    <include  name="TC_009"/> <!--Submit page with smoke and alcohol -->
                 </methods>
             </class>
 
