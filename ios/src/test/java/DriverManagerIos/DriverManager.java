@@ -13,14 +13,11 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
 public class DriverManager {
-
-    private static PrintStream originalConsole;
 
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 

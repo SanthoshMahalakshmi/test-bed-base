@@ -40,7 +40,7 @@ public class DownloadingReports_Page_Android extends DriverManager {
         elementMap.put(WEEK_FILTER_OPTION, WEEK_FILTER_OPTION_TASK);
         elementMap.put(MONTH_FILTER_OPTION, MONTH_FILTER_OPTION_TASK);
         elementMap.put(YEAR_FILTER_OPTION, YEAR_FILTER_OPTION_TASK);
-        elementMap.put(CUSTOME_FILTER_OPTION, CUSTOME_FILTER_OPTION_TASK);
+        elementMap.put(CUSTOM_FILTER_OPTION, CUSTOM_FILTER_OPTION_TASK);
         elementMap.put(DOWNLOAD_BUTTON, DOWNLOAD_BUTTON_TASK);
         performActions(elementMap, wait);
 

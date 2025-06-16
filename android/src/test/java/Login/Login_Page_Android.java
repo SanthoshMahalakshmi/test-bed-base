@@ -264,7 +264,7 @@ public class Login_Page_Android extends DriverManager {
         performActions(elementMap2, wait);
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_009() throws Exception {
 
         bs.CoreLoginForAndroid(true);
