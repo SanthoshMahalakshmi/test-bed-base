@@ -60,7 +60,11 @@ public class iOSReportScreenElements {
     public static final iOSElementTask iOS_ECG_DOWNLOAD_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "ECG Download option").build();
 
-    public static final By iOS_ECG_REPORT_ID = AppiumBy.accessibilityId("ecg_report_1085_20250616_093030");
+    public static final By iOS_ECG_REPORT_ID = AppiumBy.accessibilityId("ecg_report_1085_20250616_131239, Actions Menu");
     public static final iOSElementTask iOS_ECG_REPORT_ID_TASK =
-            new iOSElementTask.Builder(iOSActionType.CLICK, "ECG report id").build();
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "ECG report id").build();
+
+    public static final By iOS_ECG_REPORT_DONE_BUTTON = AppiumBy.accessibilityId("QLOverlayDoneButtonAccessibilityIdentifier");
+    public static final iOSElementTask iOS_ECG_REPORT_DONE_BUTTON_TASK =
+            new iOSElementTask.Builder(iOSActionType.CLICK, "ECG report Done ").build();
 }

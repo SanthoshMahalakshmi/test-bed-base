@@ -57,59 +57,39 @@ public class DownloadingReports_Page_Ios extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_dummy() {
 
+        baseLoginForiOS.BaseLoginForIos(false);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
+
+        iOSElementMap.put(iOS_REPORT_SECTION, iOS_REPORT_SECTION_TASK);
+
+        iOSElementMap.put(iOS_COACH_MARK_FINISH_BUTTON, iOS_COACH_MARK_FINISH_BUTTON_TASK);
+
+        /*Test case 22 is needs be updated next */
+
+        performIOSActions(iOSElementMap, wait);
+
 
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_021() throws Exception {
-        baseLoginForiOS.BaseLoginForIos(true);
+        baseLoginForiOS.BaseLoginForIos(false);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        //Variable Declaration.
-        WebElement ReportBtn, ECG, DownloadBtn, FinishBtn;
+        iOSElementMap.put(iOS_REPORT_SECTION, iOS_REPORT_SECTION_TASK);
 
-        //Clicking on the report section
-        try {
-            ReportBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_report")));
-            ReportBtn.click();
-            LogUtil.info("Clicking the 'Report' Section.");
-        } catch (Exception e) {
-            LogUtil.warning("Clicking the report section is not working.");
-            throw new Exception(e.getMessage());
-        }
+        iOSElementMap.put(iOS_COACH_MARK_FINISH_BUTTON, iOS_COACH_MARK_FINISH_BUTTON_TASK);
 
-        //Report Section coach mark finish.
-        try {
-            FinishBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]")));
-            FinishBtn.click();
-            LogUtil.info("Report section coach mark finish button is clicked.");
-        } catch (Exception e) {
-            LogUtil.warning("There is no coach mark pop's out in the report section.");
-        }
+        /*Actual test case*/
+        iOSElementMap.put(iOS_ECG_TAB, iOS_ECG_TAB_TASK);
+        iOSElementMap.put(iOS_ECG_DOWNLOAD_BUTTON, iOS_ECG_DOWNLOAD_BUTTON_TASK);
+        iOSElementMap.put(iOS_ECG_REPORT_DONE_BUTTON, iOS_ECG_REPORT_DONE_BUTTON_TASK);
 
-        //Clicking on the ECG report
-        try {
-            ECG = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ECG")));
-            ECG.click();
-            LogUtil.info("Clicking the ECG report section.");
-        } catch (Exception e) {
-            LogUtil.warning("Clicking the ECG report section is not happening.");
-            throw new Exception(e.getMessage());
-        }
-
-        //Clicking on the download button in ECG report section
-        try {
-            DownloadBtn = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic donwload")));
-            if (DownloadBtn.isEnabled()) {
-                DownloadBtn.click();
-                LogUtil.info("Clicking the download button in the ECG report section.");
-            }
-        } catch (Exception e) {
-            LogUtil.warning("Clicking the Downloading ECG report is not happening.");
-            throw new Exception(e.getMessage());
-        }
-
+        performIOSActions(iOSElementMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
