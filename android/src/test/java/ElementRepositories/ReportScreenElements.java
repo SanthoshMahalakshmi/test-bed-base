@@ -53,8 +53,8 @@ public class ReportScreenElements {
             new ElementTask.Builder(Activity.CLICK, "Year filter").build();
 
     /*Day filter option*/
-    public static final By CUSTOME_FILTER_OPTION = AppiumBy.id("com.heartmonitor.android:id/llDate");
-    public static final ElementTask CUSTOME_FILTER_OPTION_TASK =
+    public static final By CUSTOM_FILTER_OPTION = AppiumBy.id("com.heartmonitor.android:id/llDate");
+    public static final ElementTask CUSTOM_FILTER_OPTION_TASK =
             new ElementTask.Builder(Activity.CLICK, "Custom filter").build();
 
     /*Download button*/

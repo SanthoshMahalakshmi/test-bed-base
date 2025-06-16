@@ -26,24 +26,24 @@
                     <exclude  name="TC_006"/> <!--Select Height--> <!--!!-->
                     <exclude  name="TC_007"/> <!--Select Weight--> <!--!!-->
                     <exclude  name="TC_008"/> <!--Select DOB--> <!--!!-->
-                    <include  name="TC_009"/> <!--Submit page with smoke and alcohol -->
+                    <exclude  name="TC_009"/> <!--Submit page with smoke and alcohol --> <!--!!-->
                 </methods>
             </class>
 
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <exclude  name="TC_010"/> 
-                    <exclude  name="TC_011"/> 
-                    <exclude  name="TC_012"/> 
-                    <exclude  name="TC_013"/> 
-                    <exclude  name="TC_014"/> 
-                    <exclude  name="TC_015"/> 
-                    <exclude  name="TC_016"/> 
-                    <exclude  name="TC_017"/> 
-                    <exclude  name="TC_018"/> 
-                    <exclude  name="TC_019"/> 
-                    <exclude  name="TC_025"/> 
+                    <exclude  name="TC_010"/> <!--Not yet Done-->
+                    <exclude  name="TC_011"/> <!--Not Yet Done-->
+                    <exclude  name="TC_012"/> <!--Not Yet Done-->
+                    <exclude  name="TC_013"/> <!--Not Yet Done-->
+                    <exclude  name="TC_014"/> <!--Not Yet Done-->
+                    <exclude  name="TC_015"/> <!--Not Yet Done-->
+                    <exclude  name="TC_016"/> <!--Not Yet Done-->
+                    <exclude  name="TC_017"/> <!--Not Yet Done-->
+                    <exclude  name="TC_018"/> <!--Not Yet Done-->
+                    <exclude  name="TC_019"/> <!--Not Yet Done-->
+                    <exclude  name="TC_025"/>
                     <exclude  name="TC_026"/> 
                     <exclude  name="TC_027"/> 
                     <exclude  name="TC_028"/> 
@@ -73,7 +73,8 @@
             <!--Downloading the report-->
             <class name="Reports_Page.DownloadingReports_Page_Ios"> <!--Done-->
                 <methods>
-                    <exclude  name="TC_020"/>
+                    <exclude  name="TC_020"/> <!--!!-->
+                    <include  name="TC_dummy"/> <!--In Progress-->
                     <exclude  name="TC_021"/>
                     <exclude  name="TC_022"/>
                 </methods>
