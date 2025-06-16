@@ -66,15 +66,15 @@ public class DownloadingReports_Page_Ios extends DriverManager {
 
         iOSElementMap.put(iOS_COACH_MARK_FINISH_BUTTON, iOS_COACH_MARK_FINISH_BUTTON_TASK);
 
-        /*Test case 22 is needs be updated next */
+        /*Actual Test case*/
+        iOSElementMap.put(iOS_HR_TAB, iOS_HR_TAB_TASK);
+        iOSElementMap.put(iOS_DOWNLOAD_BUTTON, iOS_DOWNLOAD_BUTTON_TASK);
 
         performIOSActions(iOSElementMap, wait);
-
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_021() throws Exception {
+    public void TC_021() {
         baseLoginForiOS.BaseLoginForIos(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 

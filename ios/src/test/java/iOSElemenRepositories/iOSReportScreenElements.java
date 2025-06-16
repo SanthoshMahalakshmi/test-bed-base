@@ -50,7 +50,7 @@ public class iOSReportScreenElements {
 
     public static final By iOS_DOWNLOAD_BUTTON = AppiumBy.accessibilityId("ic donwload");
     public static final iOSElementTask iOS_DOWNLOAD_BUTTON_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "Download option").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Download option").build();
 
     public static final By iOS_SHARE_OPTION = AppiumBy.accessibilityId("ic share");
     public static final iOSElementTask iOS_SHARE_OPTION_TASK =
