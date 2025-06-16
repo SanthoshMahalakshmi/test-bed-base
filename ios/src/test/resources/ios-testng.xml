@@ -74,9 +74,8 @@
             <class name="Reports_Page.DownloadingReports_Page_Ios"> <!--Done-->
                 <methods>
                     <exclude  name="TC_020"/> <!--!!-->
-                    <include  name="TC_dummy"/> <!--In Progress-->
                     <exclude  name="TC_021"/> <!--!!-->
-                    <exclude  name="TC_022"/>
+                    <exclude  name="TC_022"/> <!--!!-->
                 </methods>
             </class>
 
