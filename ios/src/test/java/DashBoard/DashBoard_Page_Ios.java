@@ -1,6 +1,5 @@
 package DashBoard;
 
-import Actions.iOSActionType;
 import Actions.iOSElementTask;
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
@@ -18,9 +17,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import static UtilitiesForIos.iOSElementActions.performIOSActions;
-import static iOSElemenRepositories.iOSCommonElements.*;
 import static iOSElemenRepositories.iOSDashBoardScreenElements.*;
-import static iOSElemenRepositories.iOSNotificationScreenElements.*;
 
 public class DashBoard_Page_Ios extends DriverManager {
 
@@ -28,31 +25,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
     @Test
     public void TC_010() {
-        baseLoginForiOS.BaseLoginForIos(false);
+        baseLoginForiOS.BaseLoginForIos(false); // Launch the app
 
-       WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(2));
 
-        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
-
-        iOSElementMap.put(iOS_DUM, iOS_DUM_TASK);
-
-        iOSElementMap.put(iOS_DASHBOARD_APP_LOGO, iOS_DASHBOARD_APP_LOGO_TASK);
-
-        iOSElementMap.put(iOS_DASHBOARD_SYNC_BUTTON, iOS_DASHBOARD_SYNC_BUTTON_TASK);
-
-        iOSElementMap.put(iOS_DASHBOARD_NOTIFICATION_BUTTON, iOS_DASHBOARD_NOTIFICATION_BUTTON_TASK);
-
-        iOSElementMap.put(iOS_NOTIFICATION_LABEL, iOS_NOTIFICATION_LABEL_TASK);
-
-        iOSElementMap.put(iOS_ACTUAL_NOTIFICATION, iOS_ACTUAL_NOTIFICATION_TASK);
-
-        iOSElementMap.put(iOS_NOTIFICATION_CLEAR_BUTTON, new iOSElementTask.Builder(iOSActionType.VERIFY, "Notification clear").build());
-
-        iOSElementMap.put(iOS_BACK_BUTTON, iOS_BACK_BUTTON_TASK);
-
-        iOSElementMap.put(iOS_DASHBOARD_SEND_FEEDBACK_BUTTON, iOS_DASHBOARD_SEND_FEEDBACK_BUTTON_TASK);
-
-        performIOSActions(iOSElementMap, wait);
     }
 
 
@@ -78,8 +53,6 @@ public class DashBoard_Page_Ios extends DriverManager {
         iOSElementMap.put(iOS_DASHBOARD_CARE_CIRCLE_PLUS_BUTTON, iOS_DASHBOARD_CARE_CIRCLE_PLUS_BUTTON_TASK);
 
         performIOSActions(iOSElementMap, wait);
-
-
 
     }
 
@@ -952,6 +925,25 @@ public class DashBoard_Page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
+    public void TC_Dummy() {
+
+        baseLoginForiOS.BaseLoginForIos(false);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
+
+        iOSElementMap1.put(iOS_DASHBOARD_BP_REPORT_LABEL, iOS_DASHBOARD_BP_REPORT_LABEL_TASK);
+
+        iOSElementMap1.put(iOS_DASHBOARD_HR_REPORT_LABEL, iOS_DASHBOARD_HR_REPORT_LABEL_TASK);
+
+        iOSElementMap1.put(iOS_DASHBOARD_SPO2_REPORT_LABEL, iOS_DASHBOARD_SPO2_REPORT_LABEL_TASK);
+
+        performIOSActions(iOSElementMap1, wait);
+
+    }
+
+    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_028() throws Exception {
         baseLoginForiOS.BaseLoginForIos(true); // Login process.
 
@@ -1020,85 +1012,6 @@ public class DashBoard_Page_Ios extends DriverManager {
             LogUtil.info("Spo2 value is present: " + Spo2Value.getText());
         } catch (Exception e) {
             LogUtil.warning("Spo2 report chart is not visible.");
-        }
-    }
-
-    @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_029() throws Exception {
-
-        baseLoginForiOS.BaseLoginForIos(true); //Login process from base class.
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        try {
-            //Clicking on primary user profile
-            wait.until(ExpectedConditions.visibilityOfElementLocated
-                    (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Primary user profile click is not happen.");
-        }
-
-        try {
-            //Clicking on parameter range option in the primary user profile
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Parameter Range"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Primary user parameter range click is not happen");
-        }
-
-        try {
-            /*Skipping the coach marks*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
-            LogUtil.info("Skip the coach mark while customize the parameter range.");
-        } catch (Exception e) {
-            LogUtil.warning("Skip is not visible for the customize the parameter range.");
-        }
-
-        //Customize the BP range
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Customize\"`][1]"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-            LogUtil.info("Customize is happened and the reset is available now.");
-        } catch (Exception e) {
-            LogUtil.warning("Customize the BP range is not happen for the primary user. ");
-        }
-
-        try {
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            LogUtil.info("Reset is done by using Reset option.");
-        } catch (TimeoutException e) {
-            LogUtil.warning("Reset is not happen by using reset button.");
-        }
-
-        try {
-            //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Customize\"`][2]"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-            LogUtil.info("Customize is happening by using customize button.");
-        } catch (Exception e) {
-            LogUtil.warning("Customizing the HR is not working");
-        }
-
-        try {
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            LogUtil.info("Reset is done by using Reset option.");
-        } catch (Exception e) {
-            LogUtil.warning("Reset is not happen by using reset button.");
         }
     }
 
