@@ -32,6 +32,11 @@ public class iOSCommonElements {
     public static final iOSElementTask iOS_BACK_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Back").build();
 
+    /*Home Button*/
+    public static final By iOS_HOME_BUTTON = AppiumBy.accessibilityId("ic home header");
+    public static final iOSElementTask iOS_HOME_BUTTON_TASK =
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Home").build();
+
     /*Actual Report Section*/
     public static final By iOS_REPORT_SECTION = AppiumBy.accessibilityId("ic_report");
     public static final iOSElementTask iOS_REPORT_SECTION_TASK =

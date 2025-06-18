@@ -65,7 +65,7 @@ public class iOSProfileScreenElements {
     /*My dependent*/
     public static final By iOS_MY_DEPENDENT_BUTTON = AppiumBy.accessibilityId("My Dependents");
     public static final iOSElementTask iOS_MY_DEPENDENT_BUTTON_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "My dependent option").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "My dependent option").build();
 
     /*Care circle*/
     public static final By iOS_CARE_CIRCLE_BUTTON = AppiumBy.accessibilityId("Care Circle");

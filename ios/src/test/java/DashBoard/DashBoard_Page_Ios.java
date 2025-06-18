@@ -925,25 +925,6 @@ public class DashBoard_Page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_Dummy() {
-
-        baseLoginForiOS.BaseLoginForIos(false);
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-
-        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
-
-        iOSElementMap1.put(iOS_DASHBOARD_BP_REPORT_LABEL, iOS_DASHBOARD_BP_REPORT_LABEL_TASK);
-
-        iOSElementMap1.put(iOS_DASHBOARD_HR_REPORT_LABEL, iOS_DASHBOARD_HR_REPORT_LABEL_TASK);
-
-        iOSElementMap1.put(iOS_DASHBOARD_SPO2_REPORT_LABEL, iOS_DASHBOARD_SPO2_REPORT_LABEL_TASK);
-
-        performIOSActions(iOSElementMap1, wait);
-
-    }
-
-    @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_028() throws Exception {
         baseLoginForiOS.BaseLoginForIos(true); // Login process.
 
@@ -1014,90 +995,4 @@ public class DashBoard_Page_Ios extends DriverManager {
             LogUtil.warning("Spo2 report chart is not visible.");
         }
     }
-
-
-    @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_030() throws Exception {
-        baseLoginForiOS.BaseLoginForIos(true); //Login process.
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        try {
-            //clicking the dependent profile
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther" +
-                            "/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]/" +
-                            "XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther"))).click();
-            LogUtil.info("Moving to primary profile to see the dependent.");
-        } catch (Exception e) {
-            LogUtil.warning("Primary user profile navigation is not happening.");
-        }
-
-        try {
-            /*Clicking the My Dependent option.*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("My Dependents"))).click();
-
-            /*Choosing the 1st profile.*/
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.xpath("//XCUIElementTypeCell/XCUIElementTypeOther[1]/XCUIElementTypeOther"))).click();
-            LogUtil.info("Navigated to the dependent profile through primary user profile.");
-        } catch (Exception e) {
-            LogUtil.warning("Navigation is not happen through the primary user profile.");
-        }
-
-        try {
-            /*Skipping the coach marks*/
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
-            LogUtil.info("Skip the coach mark while customize the parameter range.");
-        } catch (Exception e) {
-            LogUtil.warning("Skip is not visible for the customize the parameter range.");
-        }
-
-        try {
-            //Customize the BP range
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Customize\"`][1]"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-            LogUtil.info("Customize the BP is happened");
-        } catch (Exception e) {
-            LogUtil.warning("Customizing BP is not happening.");
-        }
-
-        try {
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Reset\"`]"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            LogUtil.info("Reset is not happen for BP.");
-        } catch (Exception e) {
-            LogUtil.warning("Reset the BP range is not happen.");
-        }
-
-        try {
-            //Customize the heart rate.
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Customize\"`][2]"))).click();
-            //Submit button
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Submit\"`]"))).click();
-            LogUtil.info("Customize the HR is happening.");
-        } catch (Exception e) {
-            LogUtil.warning("Customize the Hr is not happen.");
-        }
-
-        try {
-            //Reset can happen
-            wait.until(ExpectedConditions.elementToBeClickable
-                    (AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset\"`]"))).click();
-            //confirmation Ok
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("OK"))).click();
-            LogUtil.info("Reset is done by using Reset option.");
-        } catch (Exception e) {
-            LogUtil.warning("Reset is not happen by using reset button.");
-        }
-
-    }
-
 }
