@@ -35,32 +35,32 @@ public class iOSProfileScreenElements {
     /*1st Adjust Button*/
     public static final By iOS_ADJUST_BUTTON_1 = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Adjust\"`][1]");
     public static final iOSElementTask iOS_ADJUST_BUTTON_1_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "Blood Pressure Adjust").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Blood Pressure Adjust").build();
 
     /*2nd Adjust Button*/
-    public static final By iOS_ADJUST_BUTTON_2 = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Adjust\"`][2]");
+    public static final By iOS_ADJUST_BUTTON_2 = AppiumBy.xpath("(//XCUIElementTypeButton[@name=\"Adjust\"])[2]");
     public static final iOSElementTask iOS_ADJUST_BUTTON_2_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "HR Adjust").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "HR Adjust").build();
 
     /*1st keep Default Button*/
-    public static final By iOS_KEEP_DEFAULT_BUTTON_1 = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Keep Default\"`][1]");
+    public static final By iOS_KEEP_DEFAULT_BUTTON_1 = AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Keep Default\"])[1]");
     public static final iOSElementTask iOS_KEEP_DEFAULT_BUTTON_1_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "Blood Pressure Keep Default").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Blood Pressure Keep Default").build();
 
     /*2nd keep Default Button*/
-    public static final By iOS_KEEP_DEFAULT_BUTTON_2 = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Keep Default\"`][2]");
+    public static final By iOS_KEEP_DEFAULT_BUTTON_2 = AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Keep Default\"])[2]");
     public static final iOSElementTask iOS_KEEP_DEFAULT_BUTTON_2_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "HR Keep Default").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "HR Keep Default").build();
 
     /*Submit button for closing the range model*/
-    public static final By iOS_SUBMIT_BUTTON = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Submit\"`]");
+    public static final By iOS_SUBMIT_BUTTON = AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Submit\"]");
     public static final iOSElementTask iOS_SUBMIT_BUTTON_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "Submit").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Submit").build();
 
     /*Are Sure You want to reset the parameter? model text.*/
-    public static final By iOS_RESET_PARAMETER_MODEL_TEXT = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Reset Parameters\"`]");
+    public static final By iOS_RESET_PARAMETER_MODEL_TEXT = AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Reset Parameters\"]");
     public static final iOSElementTask iOS_RESET_PARAMETER_MODEL_TEXT_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "Reset Model text Header.").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Reset Model text Header.").build();
 
     /*My dependent*/
     public static final By iOS_MY_DEPENDENT_BUTTON = AppiumBy.accessibilityId("My Dependents");

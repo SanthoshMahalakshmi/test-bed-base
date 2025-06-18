@@ -77,9 +77,9 @@ public class iOSDashBoardScreenElements {
             new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
 
     /*DashBoard BP Report label*/
-    public static final By iOS_DASHBOARD_BP_REPORT_LABEL = AppiumBy.iOSClassChain("");
+    public static final By iOS_DASHBOARD_BP_REPORT_LABEL = AppiumBy.accessibilityId("Blood Pressure");
     public static final iOSElementTask iOS_DASHBOARD_BP_REPORT_LABEL_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "DashBoard Bp report label").build();
 
     /*DashBoard BP Report chart*/
     public static final By iOS_DASHBOARD_BP_REPORT_CHART = AppiumBy.iOSClassChain("");
@@ -92,9 +92,9 @@ public class iOSDashBoardScreenElements {
             new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
 
     /*DashBoard HR Report label*/
-    public static final By iOS_DASHBOARD_HR_REPORT_LABEL = AppiumBy.iOSClassChain("");
+    public static final By iOS_DASHBOARD_HR_REPORT_LABEL = AppiumBy.accessibilityId("HR");
     public static final iOSElementTask iOS_DASHBOARD_HR_REPORT_LABEL_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "DashBoard HR report label").build();
 
     /*DashBoard HR Report chart*/
     public static final By iOS_DASHBOARD_HR_REPORT_CHART = AppiumBy.iOSClassChain("");
@@ -107,9 +107,9 @@ public class iOSDashBoardScreenElements {
             new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
 
     /*DashBoard SPO2 Report label*/
-    public static final By iOS_DASHBOARD_SPO2_REPORT_LABEL = AppiumBy.iOSClassChain("");
+    public static final By iOS_DASHBOARD_SPO2_REPORT_LABEL = AppiumBy.accessibilityId("SpO2");
     public static final iOSElementTask iOS_DASHBOARD_SPO2_REPORT_LABEL_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "DashBoard SPO2 report label").build();
 
     /*DashBoard SPO2 Report chart*/
     public static final By iOS_DASHBOARD_SPO2_REPORT_CHART = AppiumBy.iOSClassChain("");
@@ -122,17 +122,17 @@ public class iOSDashBoardScreenElements {
             new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
 
     /*DashBoard ECG Report label*/
-    public static final By iOS_DASHBOARD_ECG_REPORT_LABEL = AppiumBy.iOSClassChain("");
+    public static final By iOS_DASHBOARD_ECG_REPORT_LABEL = AppiumBy.accessibilityId("ECG");
     public static final iOSElementTask iOS_DASHBOARD_ECG_REPORT_LABEL_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "DashBoard ECG report label").build();
 
     /*DashBoard ECG Report chart*/
     public static final By iOS_DASHBOARD_ECG_REPORT_CHART = AppiumBy.iOSClassChain("");
     public static final iOSElementTask iOS_DASHBOARD_ECG_REPORT_CHART_TASK =
             new iOSElementTask.Builder(iOSActionType.VERIFY, "").build();
 
-    public static final By iOS_DUM = AppiumBy.accessibilityId("ic_device");
+    public static final By iOS_DUM = AppiumBy.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOthers");
     public static final iOSElementTask iOS_DUM_TASK =
-            new iOSElementTask.Builder(iOSActionType.CLICK, "").build();
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "Send FeedBack option").build();
 
 }
