@@ -91,7 +91,7 @@ public class Login_Page_Android extends DriverManager {
     public void TC_004() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         Map<By, ElementTask> elementTask = new LinkedHashMap<>();
 
@@ -121,7 +121,7 @@ public class Login_Page_Android extends DriverManager {
     public void TC_005() throws Exception {
 
         //Core login for android.
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -153,7 +153,7 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_006() throws Exception {
         //Core login for android.
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -179,7 +179,7 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_007() throws Exception {
 
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -209,7 +209,7 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
     public void TC_008() throws Exception {
 
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -267,7 +267,7 @@ public class Login_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_009() throws Exception {
 
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();

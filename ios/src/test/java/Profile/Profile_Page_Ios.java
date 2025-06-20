@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static UtilitiesForIos.iOSElementActions.performIOSActions;
 import static iOSElemenRepositories.iOSCommonElements.*;
+import static iOSElemenRepositories.iOSDeviceScreenElements.*;
 import static iOSElemenRepositories.iOSProfileScreenElements.*;
 
 public class Profile_Page_Ios extends DriverManager {
@@ -89,276 +90,42 @@ public class Profile_Page_Ios extends DriverManager {
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_031() throws Exception {   /*User navigation from profile section */
+    public void TC_031() {
 
-         baseLoginForiOS.BaseLoginForIos(true);//Login process.
+         baseLoginForiOS.BaseLoginForIos(false);//Login process.
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //DB string
-        try {
-            WebElement DB = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Dashboard\"]")));
-            LogUtil.info("User present in : " + DB.getText());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        //1.Clicking on profile section
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    xpath("//XCUIElementTypeButton[@name=\"Profile\"]"))).click();
-            LogUtil.info("User on profile currently");
-        } catch (Exception e) {
-            LogUtil.warning("Profile section is not present");
-        }
+        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-        //1.Clicking the edit for alcohol
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic edit"))).click();
-            LogUtil.info("User present in : Alcohol or smoke habit confirmation page");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        iOSElementMap.put(iOS_PROFILE_COACH_MARK_SKIP, iOS_PROFILE_COACH_MARK_SKIP_TASK);
 
-        WebElement Yes = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//XCUIElementTypeButton[@name=\"Yes\"])[1]")));
-        WebElement No = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"No\"])[1]")));
-        WebElement Occasionally = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Occasionally\"])[1]")));
+        iOSElementMap.put(iOS_CARE_CIRCLE_BUTTON, iOS_CARE_CIRCLE_BUTTON_TASK);
 
-        try {
-            // Get the current selected text dynamically
-            String currentSelection = "";
-            if (Yes.getText().equals("Yes")) {
-                currentSelection = "Yes";
-            } else if (No.getText().equals("No")) {
-                currentSelection = "No";
-            } else if (Occasionally.getText().equals("Occasionally")) {
-                currentSelection = "Occasionally";
-            }
+        iOSElementMap.put(iOS_HOME_BUTTON, iOS_HOME_BUTTON_TASK);
 
-            // Use a switch to handle different cases
-            switch (currentSelection) {
-                case "Yes":
-                    No.click();
-                    LogUtil.info("Previously 'Yes' was selected for alcohol. Now changed to 'No'.");
-                    break;
-                case "No":
-                    Yes.click();
-                    LogUtil.info("Previously 'No' was selected for alcohol. Now changed to 'Yes'.");
-                    break;
-                case "Occasionally":
-                    Yes.click();
-                    LogUtil.info("Previously 'Occasionally' was selected for alcohol. Now changed to 'Yes'.");
-                    break;
-                default:
-                    LogUtil.warning("No valid option is currently selected.");
-                    break;
-            }
-        } catch (Exception e) {
-            LogUtil.warning("An error occurred while toggling selection: " + e.getMessage());
-        }
-
-        WebElement YesForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Yes\"])[2]")));
-        WebElement NoForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"No\"])[2]")));
-        WebElement occasionallyForSmoke = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Occasionally\"])[2]")));
-
-        try {
-            if (YesForSmoke.getText().equals("Yes")) {
-                NoForSmoke.click();
-                LogUtil.info("Previously Yes is selected for smoke, Now changed to No.");
-            } else if (NoForSmoke.getText().equals("No")) {
-                YesForSmoke.click();
-                LogUtil.info("Previously NO is selected for smoke, Now changed to Yes.");
-            } else if (occasionallyForSmoke.getText().equals("Occasionally")) {
-                YesForSmoke.click();
-                LogUtil.info("Previously occasionally is selected for smoke, Now changed to Yes.");
-            }
-        } catch (Exception e) {
-            LogUtil.warning("Nothing is selected for smoke it remains as it's.");
-        }
-
-        //Confirm with submit
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Submit\"]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("submit is not present");
-        }
-
-        //Success toast for the update  BUG-Important success message is not coming.
-        try {
-            WebElement SuccessMeg = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.moai.android:id/text_message_toaster")));
-            LogUtil.info("Success toast : " + SuccessMeg.getText());
-        } catch (Exception e) {
-            LogUtil.warning("submit is not present");
-        }
-
-        //2. Editing parameter range
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Parameter Range\"]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Parameter range is not present");
-        }
-
-        //Skip button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"Skip\"]"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Skip is not present");
-        }
-
-        /*Checking the visibility of the element.*/
-        WebElement Reset = null;
-        try {
-            Reset = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Reset\"])[1]")));
-            LogUtil.info("Reset is currently present.");
-        } catch (Exception e) {
-            LogUtil.warning("Reset is not present.");
-        }
-
-        /*Checking for customize button visibility*/
-        WebElement Customize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                xpath("(//XCUIElementTypeStaticText[@name=\"Customize\"])[1]")));
-        LogUtil.info("Customize button is present, there is not reset button.");
-
-        /*Checking for after customize button visibility*/
-        WebElement AfterCustomize = null;
-        try {
-            AfterCustomize = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("(//XCUIElementTypeStaticText[@name=\"Customize\"])[1]")));
-        } catch (Exception e) {
-            LogUtil.warning("Customize 2 button is not present. bcz the reset button is not present");
-        }
-
-        /*Selecting the desired element based on the visibility*/
-        try {
-            LogUtil.info("Enter into if and else-if block");
-            String CurrentSelection = "";
-            if (Reset.isEnabled() == true) {
-                CurrentSelection = "Reset";
-            } else if (Customize.isEnabled()) {
-                CurrentSelection = "Customize";
-            } else if (AfterCustomize.isEnabled()) {
-                CurrentSelection = "Customize";
-            }
-
-            switch (CurrentSelection) {
-                case "Reset":
-                    try {
-                        LogUtil.info("Reset button block is executing");
-                        Reset.click();
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
-                        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"Skip\"]"))).click();
-                        LogUtil.info("Reset the previous setting");
-                    } catch (Exception e) {
-                        LogUtil.warning("Reset is not present.");
-                    }
-                    break;
-                case "Customize":
-                    try {
-                        LogUtil.info("Customize button block is executing.");
-                        WebElement skip = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"Skip\"]")));
-                        if (skip.isEnabled()) {
-                            skip.click();
-                        }
-                        Customize.click();
-                        LogUtil.info("Normal customize is clicked ");
-                    } catch (Exception e) {
-                        LogUtil.warning("Normal customize is not present.");
-                    }
-                    break;
-                case "com.moai.android:id/txtCustomize2":
-                    try {
-                        LogUtil.info("Customize 2 button block is executing.");
-                        AfterCustomize.click();
-                        LogUtil.info("After customize is present.");
-                    } catch (Exception e) {
-                        LogUtil.warning("After customize is not present.");
-                    }
-                    break;
-                default:
-                    LogUtil.warning("No valid option is currently selected.");
-                    break;
-            }
-        } catch (Exception e) {
-            LogUtil.warning("None of the above is selected and its not customized anything");
-        }
+        performIOSActions(iOSElementMap, wait);
 
 
-       /* //Customize the Blood pressure
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/txtCustomize1\").instance(0)"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("customize is not clickable");
-        }
+        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
 
-        //Submit the blood pressure
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/txtSubmit"))).click();
+        iOSElementMap1.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-        //After customized Skip button
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.moai.android:id/tvSkip"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("After customized Skip is not present");
-        }*/
+        iOSElementMap1.put(iOS_MY_DEVICE_BUTTON, iOS_MY_DEVICE_BUTTON_TASK);
 
-        //Back to the profile section
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating back is nor working");
-        }
+        iOSElementMap1.put(iOS_DEVICE_COACH_MARK_FINISH_BUTTON, iOS_DEVICE_COACH_MARK_FINISH_BUTTON_TASK);
 
-        //3.Editing My dependent
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("My Dependents"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("My Dependents is not present");
-        }
+        performIOSActions(iOSElementMap1, wait);
 
-        //My dependent header
-        try {
-            WebElement MyD = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"My Dependents\"]")));
-            LogUtil.info("User present in : " + MyD.getText() + " page");
-        } catch (Exception e) {
-            LogUtil.warning("My Dependents is not present");
-        }
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
 
-        try {   /* BUG_IMPORTANT Kebab menu is able to inspect bcz scroll is overlapped.*/
-            //Clicking the kebab option
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.androidUIAutomator
-                    ("new UiSelector().resourceId(\"com.moai.android:id/imgMenu\").instance(0)"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("BUG_IMPORTANT Kebab menu is able to inspect bcz scroll is overlapped.");
-        }
+        iOSElementMap2.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-        //Clicking the Edit profile option.
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"Edit Profile\"]"))).click();
+        iOSElementMap2.put(iOS_MY_REMINDER_BUTTON, iOS_MY_REMINDER_BUTTON_TASK);
 
-        //Edit profile header
-        try {
-            WebElement EP = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.
-                    xpath("//XCUIElementTypeStaticText[@name=\"Basic Details\"]")));
-            LogUtil.info("User present in : " + EP.getText() + " page");
-        } catch (Exception e) {
-            LogUtil.warning("edit profile header is not present");
-        }
-
-        //Back to the profile section
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic back"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating back is nor working");
-        }
-
-        // Clicking the home option
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic home header"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Navigating back is nor working");
-        }
-
-        //Clicking on profile section
-        wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"Profile\"]"))).click();
+        performIOSActions(iOSElementMap2, wait);
 
     }
 

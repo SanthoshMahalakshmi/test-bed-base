@@ -35,7 +35,7 @@ public class DashBoard_Page_Android extends DriverManager {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         /*Pre-Request*/
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         /*Actual test case*/
@@ -56,7 +56,7 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_011() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         /*Pre-Request*/
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         elementMap.put(DASHBOARD_DEPENDENT_LABEL, DASHBOARD_DEPENDENT_LABEL_TASK);
         elementMap.put(DASHBOARD_DEPENDENT_BUTTON, DASHBOARD_DEPENDENT_BUTTON_TASK);
@@ -73,7 +73,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         /*Pre-Request*/
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         /*Actual test case*/
         elementMap.put(DASHBOARD_CARE_CIRCLE_LABEL, DASHBOARD_CARE_CIRCLE_LABEL_TASK);
@@ -92,7 +92,7 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_013() throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         elementMap.put(DASHBOARD_SEND_FEEDBACK_BUTTON, DASHBOARD_SEND_FEEDBACK_BUTTON_TASK);
         elementMap.put(SEND_FEEDBACK_LABEL, SEND_FEEDBACK_LABEL_TASK);
@@ -108,7 +108,7 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_014() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         elementMap.put(DASHBOARD_CARE_CIRCLE, DASHBOARD_CARE_CIRCLE_TASK);
         elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
@@ -123,7 +123,7 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
 
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
@@ -153,7 +153,7 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_016() throws Exception {
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
         /*pre-Request*/
@@ -199,7 +199,7 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_017() throws Exception {
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
         /*Pre-Request*/
@@ -230,7 +230,7 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_018() throws Exception {
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
         /*Pre-Request*/
@@ -265,7 +265,7 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_019() throws Exception {
 
         WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
-        bs.CoreLoginForAndroid(true);
+        bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
         /*Pre-Request*/

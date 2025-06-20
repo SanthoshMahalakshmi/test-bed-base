@@ -20,7 +20,7 @@ public class Devices_Page_Android extends DriverManager
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-         bs.CoreLoginForAndroid(true);  //basic login scenario
+         bs.CoreLoginForAndroid(false);  //basic login scenario
 
         WebElement DeviceBtn, BurgerMenuBtn, ConnectDeviceBtn, ContinueBtn,
         Permission;

@@ -4,7 +4,6 @@ import Actions.iOSActionType;
 import Actions.iOSElementTask;
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
-import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;

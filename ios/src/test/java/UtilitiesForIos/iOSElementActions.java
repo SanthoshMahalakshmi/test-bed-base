@@ -4,9 +4,11 @@ import Actions.iOSActionType;
 import Actions.iOSElementTask;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class iOSElementActions {
@@ -37,6 +39,9 @@ public class iOSElementActions {
                             break;
                         case SEND_KEYS:
                             sendKeysToIOSElement(element, wait, description, task.getInputValue());
+                            break;
+                        case SCROLL_AND_CLICK:
+                            iOSClickAndScrollToElement(element, locator, wait, description);
                             break;
                         default:
                             throw new UnsupportedOperationException("Unsupported action: " + action);
@@ -119,7 +124,7 @@ public class iOSElementActions {
         }
     }
 
-    public static void alert(WebDriverWait wait, String description) {
+    public static void alertIOS(WebDriverWait wait, String description) {
         try {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
@@ -127,6 +132,22 @@ public class iOSElementActions {
         } catch (Exception e) {
             LogUtil.warning("❌ No alert found to accept for [" + description + "] - " + e.getMessage());
             throw new RuntimeException("❌ Accept alert failed for [" + description + "]: " + e.getMessage(), e);
+        }
+    }
+
+    public static void iOSClickAndScrollToElement(WebElement element, By locator, WebDriverWait wait, String description) {
+        try {
+            WebDriver driver = ((RemoteWebElement) element).getWrappedDriver();
+            HashMap<String, Object> scrollObject = new HashMap<>();
+            scrollObject.put("element", ((RemoteWebElement) element).getId());
+            scrollObject.put("toVisible", true);
+            ((JavascriptExecutor) driver).executeScript("mobile: scroll", scrollObject);
+
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+            LogUtil.info("Scrolled and clicked on [" + description + "] button.");
+        } catch (Exception e) {
+            LogUtil.warning("❌ Failed to scroll and click on [" + description + "] - " + e.getMessage());
+            throw new RuntimeException("❌ Scroll+Click failed for [" + description + "]", e);
         }
     }
 }

@@ -70,16 +70,16 @@ public class iOSProfileScreenElements {
     /*Care circle*/
     public static final By iOS_CARE_CIRCLE_BUTTON = AppiumBy.accessibilityId("Care Circle");
     public static final iOSElementTask iOS_CARE_CIRCLE_BUTTON_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "Care Circle Option").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Care Circle Option").build();
 
     /*My Device*/
     public static final By iOS_MY_DEVICE_BUTTON = AppiumBy.accessibilityId("My Devices");
     public static final iOSElementTask iOS_MY_DEVICE_BUTTON_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "My device").build();
+            new iOSElementTask.Builder(iOSActionType.CLICK, "My device").build();
 
     /*My reminder*/
-    public static final By iOS_MY_REMINDER_BUTTON = AppiumBy.accessibilityId("My Reminders");
+    public static final By iOS_MY_REMINDER_BUTTON = AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"My Reminders\"]");
     public static final iOSElementTask iOS_MY_REMINDER_BUTTON_TASK =
-            new iOSElementTask.Builder(iOSActionType.VERIFY, "My reminder Option").build();
+            new iOSElementTask.Builder(iOSActionType.SCROLL_AND_CLICK, "My reminder Option").build();
 
 }

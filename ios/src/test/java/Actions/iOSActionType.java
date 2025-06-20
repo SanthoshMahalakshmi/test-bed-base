@@ -4,5 +4,6 @@ public enum iOSActionType {
     VERIFY,
     CLICK,
     ACCEPT,
-    SEND_KEYS;
+    SEND_KEYS,
+    SCROLL_AND_CLICK;
 }
