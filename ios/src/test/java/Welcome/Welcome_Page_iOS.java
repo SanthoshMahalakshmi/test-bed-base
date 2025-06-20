@@ -21,7 +21,7 @@ public class Welcome_Page_iOS extends DriverManager {
     public void TC_001()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        alert(wait, "Allow notification from alert function.");
+        alertIOS(wait, "Allow notification from alert function.");
 
         Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
         iOSElementMap1.put(iOS_TITLE_LOGO_IMAGE, iOS_TITLE_LOGO_IMAGE_TASK);

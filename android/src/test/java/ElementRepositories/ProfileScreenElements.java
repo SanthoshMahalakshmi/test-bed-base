@@ -82,9 +82,5 @@ public class ProfileScreenElements {
     public static final ElementTask MY_REMINDER_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "My Reminder").build();
 
-
-
-
-
 }
 
