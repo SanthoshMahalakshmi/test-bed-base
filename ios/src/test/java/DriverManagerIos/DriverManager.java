@@ -77,7 +77,7 @@ public class DriverManager {
                 DesiredCapabilities tempCaps = new DesiredCapabilities();
                 tempCaps.setCapability("platformName", "iOS");
                 tempCaps.setCapability("deviceName", "iPhone 16 Pro");
-                tempCaps.setCapability("udid", "F5743292-C7A4-4B67-B68F-B4E88268D2EA");
+                tempCaps.setCapability("udid", "54CCE476-1545-4764-980E-7A64215EB071");
                 tempCaps.setCapability("platformVersion", "18.3");
                 tempCaps.setCapability("automationName", "XCUITest");
 
@@ -95,7 +95,7 @@ public class DriverManager {
                 DesiredCapabilities caps = new DesiredCapabilities();
                 caps.setCapability("platformName", "iOS");
                 caps.setCapability("deviceName", "iPhone 16 Pro");
-                caps.setCapability("udid", "F5743292-C7A4-4B67-B68F-B4E88268D2EA");
+                caps.setCapability("udid", "54CCE476-1545-4764-980E-7A64215EB071");
                 caps.setCapability("platformVersion", "18.3");
                 caps.setCapability("automationName", "XCUITest");
                 caps.setCapability("bundleId", bundleId);
