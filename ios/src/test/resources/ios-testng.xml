@@ -87,11 +87,11 @@
             </class>
 
             <!--Coach mark-->
-            <class name="AllCoachMarkForiOS.CoachMarkiOS"> <!--Done-->
+            <class name="AllCoachMark.CoachMark_iOS"> <!--Done-->
                 <methods>
                     <exclude name="TC_036"/> <!--DashBoard Coach mark.-->
-                    <include name="TC_037"/> <!--Report coach Mark-->
-                    <exclude name="TC_038"/> <!--Device coach Mark-->
+                    <exclude name="TC_037"/> <!--Report coach Mark-->
+                    <include name="TC_038"/> <!--Device coach Mark-->
                     <exclude name="TC_039"/> <!--Profile coach Mark-->
                 </methods>
             </class>

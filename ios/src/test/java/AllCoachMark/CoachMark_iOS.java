@@ -1,4 +1,4 @@
-package AllCoachMarkForiOS;
+package AllCoachMark;
 
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
@@ -17,18 +17,20 @@ import Actions.iOSElementTask;
 
 import static UtilitiesForIos.iOSElementActions.performIOSActions;
 import static iOSElemenRepositories.iOSCommonElements.*;
+import static iOSElemenRepositories.iOSProfileScreenElements.iOS_MY_DEVICE_BUTTON;
+import static iOSElemenRepositories.iOSProfileScreenElements.iOS_MY_DEVICE_BUTTON_TASK;
 import static iOSElemenRepositories.iOSCoachMarkScreenElements.*;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CoachMarkiOS extends DriverManager {
+public class CoachMark_iOS extends DriverManager {
 
     BaseLoginForiOS bs = new BaseLoginForiOS();
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC036() throws Exception {
+    public void TC036() {
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -43,7 +45,7 @@ public class CoachMarkiOS extends DriverManager {
 
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_037() throws Exception {
+    public void TC_037() {
 
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -64,7 +66,7 @@ public class CoachMarkiOS extends DriverManager {
 
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_038() throws Exception {
+    public void TC_038() {
 
         /*Global wait*/
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -73,6 +75,12 @@ public class CoachMarkiOS extends DriverManager {
         bs.BaseLoginForIos(false);
 
         Map<By, iOSElementTask> iOSElemenetMap = new LinkedHashMap<>();
+
+        iOSElemenetMap.put(iOS_MY_DEVICE_BUTTON, iOS_MY_DEVICE_BUTTON_TASK);
+
+        iOSElemenetMap.put(iOS_DEVICE_COACH_MARK_TEXT, iOS_DEVICE_COACH_MARK_TEXT_TASK);
+
+        iOSElemenetMap.put(iOS_COACH_MARK_FINISH_BUTTON, iOS_COACH_MARK_FINISH_BUTTON_TASK);
 
         performIOSActions(iOSElemenetMap, wait);
     }

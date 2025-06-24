@@ -73,7 +73,7 @@ public class iOSProfileScreenElements {
             new iOSElementTask.Builder(iOSActionType.CLICK, "Care Circle Option").build();
 
     /*My Device*/
-    public static final By iOS_MY_DEVICE_BUTTON = AppiumBy.accessibilityId("My Devices");
+    public static final By iOS_MY_DEVICE_BUTTON = AppiumBy.accessibilityId("ic_device");
     public static final iOSElementTask iOS_MY_DEVICE_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "My device").build();
 
