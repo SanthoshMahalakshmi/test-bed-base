@@ -3,13 +3,9 @@ package AllCoachMark;
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 
-import UtilitiesForIos.LogUtil;
 import UtilitiesForIos.RetryAnalyzerios;
-import io.appium.java_client.AppiumBy;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
@@ -17,9 +13,8 @@ import Actions.iOSElementTask;
 
 import static UtilitiesForIos.iOSElementActions.performIOSActions;
 import static iOSElemenRepositories.iOSCommonElements.*;
-import static iOSElemenRepositories.iOSProfileScreenElements.iOS_MY_DEVICE_BUTTON;
-import static iOSElemenRepositories.iOSProfileScreenElements.iOS_MY_DEVICE_BUTTON_TASK;
 import static iOSElemenRepositories.iOSCoachMarkScreenElements.*;
+import static iOSElemenRepositories.iOSProfileScreenElements.*;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
@@ -57,7 +52,7 @@ public class CoachMark_iOS extends DriverManager {
 
         iOSElementMap.put(iOS_REPORT_SECTION, iOS_REPORT_SECTION_TASK);
 
-       iOSElementMap.put(iOS_PROFILE_COACH_MARK_TEXT, iOS_PROFILE_COACH_MARK_TEXT_TASK);
+       iOSElementMap.put(iOS_REPORT_COACH_MARK_TEXT, iOS_REPORT_COACH_MARK_TEXT_TASK);
 
         iOSElementMap.put(iOS_COACH_MARK_FINISH_BUTTON, iOS_COACH_MARK_FINISH_BUTTON_TASK);
 
@@ -87,71 +82,25 @@ public class CoachMark_iOS extends DriverManager {
 
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
-    public void TC_039() throws Exception {
+    public void TC_039() {
 
-        /*Description: Profile page coach mark automation coverage */
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        bs.BaseLoginForIos(true);
+        bs.BaseLoginForIos(false);
 
-        WebElement ProfilePageButton;
-        try {
-            ProfilePageButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic_profile")));
-            ProfilePageButton.click();
-            LogUtil.info("Clicking the 'Profile' page.");
-        } catch (Exception e) {
-            LogUtil.warning("There is no Profile button clicking is not happening now. ");
-            throw new RuntimeException(e.getMessage());
-        }
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        WebElement ParameterRangeText_1;
-        try {
-            ParameterRangeText_1 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("We’ve provided commonly accepted range.")));
-            LogUtil.info("Profile page coach mark text: \n " + ParameterRangeText_1.getText());
-        } catch (Exception e) {
-            LogUtil.warning("There is no 1st coach mark text in the profile page");
-            throw new RuntimeException(e.getMessage());
-        }
+        iOSElementMap.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
 
-        WebElement Skip;
-        try {
-            Skip = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Skip\"`]")));
-            LogUtil.info("Skip button is available or not? : " + Skip.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("There is no skip button is available now in the profile section.");
-            throw new RuntimeException(e.getMessage());
-        }
+        iOSElementMap.put(iOS_PROFILE_COACH_MARK_TEXT1, iOS_PROFILE_COACH_MARK_TEXT_TASK1);
 
-        WebElement NextButton;
-        try {
-            NextButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Next\"`]")));
-            NextButton.click();
-            LogUtil.info("Clicking the 'Next' button in the profile page now.");
+        iOSElementMap.put(iOS_COACH_MARK_NEXT_BUTTON, iOS_COACH_MARK_NEXT_BUTTON_TASK);
 
-        } catch (Exception e) {
-            LogUtil.warning("There is no 'Next' button in the profile page.");
-            throw new RuntimeException(e.getMessage());
-        }
+        iOSElementMap.put(iOS_PROFILE_COACH_MARK_TEXT2, iOS_PROFILE_COACH_MARK_TEXT_TASK2);
 
-        WebElement ParameterRangeText_2;
-        try {
-            ParameterRangeText_2 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Customize if informed by physician.")));
-            LogUtil.info("Profile page coach mark text: \n " + ParameterRangeText_2.getText());
-        } catch (Exception e) {
-            LogUtil.warning("There is no 1st coach mark text in the profile page");
-            throw new RuntimeException(e.getMessage());
-        }
+        iOSElementMap.put(iOS_COACH_MARK_FINISH_BUTTON, iOS_COACH_MARK_FINISH_BUTTON_TASK);
 
-        WebElement FinishButton;
-        try {
-            FinishButton = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]")));
-            FinishButton.click();
-            LogUtil.info("Clicking the 'Finish' button in the profile page now.");
-
-        } catch (Exception e) {
-            LogUtil.warning("There is no 'Finish' button in the profile page.");
-            throw new RuntimeException(e.getMessage());
-        }
-
+        performIOSActions(iOSElementMap, wait);
+        
     }
 }
