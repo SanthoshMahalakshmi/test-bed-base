@@ -12,16 +12,24 @@ public class iOSCoachMarkScreenElements {
     public static final iOSElementTask iOS_COACH_MARK_FINISH_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Coach Mark Finish").build();
 
-    public static final By iOS_COACH_MARK_NEXT_BUTTON = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Finish\"`]");
+    public static final By iOS_COACH_MARK_NEXT_BUTTON = AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Next\"`]");
     public static final iOSElementTask iOS_COACH_MARK_NEXT_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Coach Mark Next").build();
 
-    public static final By iOS_PROFILE_COACH_MARK_TEXT = AppiumBy.accessibilityId("Click here to download the report for the selected parameter.");
-    public static final iOSElementTask iOS_PROFILE_COACH_MARK_TEXT_TASK =
+    public static final By iOS_REPORT_COACH_MARK_TEXT = AppiumBy.accessibilityId("Click here to download the report for the selected parameter.");
+    public static final iOSElementTask iOS_REPORT_COACH_MARK_TEXT_TASK =
             new iOSElementTask.Builder(iOSActionType.VERIFY, "Profile Coach Mark text").build();
 
-            public static final By iOS_DEVICE_COACH_MARK_TEXT = AppiumBy.accessibilityId("Select to Proceed.");
+    public static final By iOS_DEVICE_COACH_MARK_TEXT = AppiumBy.accessibilityId("Select to Proceed.");
     public static final iOSElementTask iOS_DEVICE_COACH_MARK_TEXT_TASK =
             new iOSElementTask.Builder(iOSActionType.VERIFY, "Device Coach Mark text").build();
+
+    public static final By iOS_PROFILE_COACH_MARK_TEXT1 = AppiumBy.accessibilityId("We’ve provided commonly accepted range.");
+    public static final iOSElementTask iOS_PROFILE_COACH_MARK_TEXT_TASK1 =
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "Profile Coach Mark text").build();
+
+    public static final By iOS_PROFILE_COACH_MARK_TEXT2 = AppiumBy.accessibilityId("Customize if informed by physician.");
+    public static final iOSElementTask iOS_PROFILE_COACH_MARK_TEXT_TASK2 =
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "Profile Coach Mark text").build();
 
 }
