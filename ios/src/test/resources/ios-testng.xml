@@ -55,18 +55,17 @@
                 <methods>
                     <exclude  name="TC_029"/> <!--!!-->
                     <exclude  name="TC_030"/> <!--!!-->
-                    <include  name="TC_031"/>
-                    <exclude  name="TC_032"/> 
+                    <exclude  name="TC_031"/> <!--!!-->
                 </methods>
             </class>
 
             <!--More section-->
             <class name="More.More_page_Ios">
                 <methods>
+                    <exclude  name="TC_032"/>
                     <exclude  name="TC_033"/>
                     <exclude  name="TC_034"/>
                     <exclude  name="TC_035"/>
-                    <exclude  name="TC_036"/>
                 </methods>
             </class>
 
@@ -90,10 +89,10 @@
             <!--Coach mark-->
             <class name="AllCoachMarkForiOS.CoachMarkiOS"> <!--Done-->
                 <methods>
-                    <exclude name="TC_037"/> <!--DashBoard Coach mark.-->
-                    <exclude name="TC_038"/> <!--Report coach Mark-->
-                    <exclude name="TC_039"/> <!--Device coach Mark-->
-                    <exclude name="TC_040"/> <!--Profile coach Mark-->
+                    <exclude name="TC_036"/> <!--DashBoard Coach mark.-->
+                    <include name="TC_037"/> <!--Report coach Mark-->
+                    <exclude name="TC_038"/> <!--Device coach Mark-->
+                    <exclude name="TC_039"/> <!--Profile coach Mark-->
                 </methods>
             </class>
 

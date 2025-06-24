@@ -4,11 +4,8 @@ import Actions.ElementTask;
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
 import UtilitiesForAndroid.RetryAnalyzer;
-import com.sun.jna.platform.win32.OaIdl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -22,7 +19,6 @@ import static UtilitiesForAndroid.ElementActions.*;
 
 public class CoachMarksAndroid extends DriverManager {
 
-    private static final Logger log = LoggerFactory.getLogger(CoachMarksAndroid.class);
     BaseLoginForAndroid bs = new BaseLoginForAndroid();
 
     /*DashBoard Coach mark case*/
@@ -35,8 +31,6 @@ public class CoachMarksAndroid extends DriverManager {
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         /*Need to add dashboard coach mark case once after the coach mark is available*/
         performActions(elementMap, wait);
-
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
