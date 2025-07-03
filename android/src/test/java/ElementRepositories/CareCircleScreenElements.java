@@ -87,6 +87,4 @@ public class CareCircleScreenElements {
     public static final ElementTask DELETE_CARE_CIRCEL_MODEL_TEXT_TASK =
             new ElementTask.Builder(Activity.VERIFY, "delete care circle model message").build();
 
-
-
 }

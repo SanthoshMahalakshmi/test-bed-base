@@ -1,10 +1,9 @@
-package AllCoachMark;
+package AllCoachMarkForiOS;
 
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
 
 import UtilitiesForIos.RetryAnalyzerios;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -13,14 +12,17 @@ import Actions.iOSElementTask;
 
 import static UtilitiesForIos.iOSElementActions.performIOSActions;
 import static iOSElemenRepositories.iOSCommonElements.*;
+import static iOSElemenRepositories.iOSProfileScreenElements.iOS_MY_DEVICE_BUTTON;
+import static iOSElemenRepositories.iOSProfileScreenElements.iOS_MY_DEVICE_BUTTON_TASK;
+import static iOSElemenRepositories.iOSProfileScreenElements.iOS_PROFILE_BUTTON;
+import static iOSElemenRepositories.iOSProfileScreenElements.iOS_PROFILE_BUTTON_TASK;
 import static iOSElemenRepositories.iOSCoachMarkScreenElements.*;
-import static iOSElemenRepositories.iOSProfileScreenElements.*;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CoachMark_iOS extends DriverManager {
+public class CoachMarkiOS extends DriverManager {
 
     BaseLoginForiOS bs = new BaseLoginForiOS();
 

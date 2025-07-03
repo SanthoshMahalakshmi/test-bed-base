@@ -101,7 +101,7 @@ public class DriverManager {
                 caps.setCapability("bundleId", bundleId);
                 caps.setCapability("noReset", false); // Force clean install
                 caps.setCapability("autoAcceptAlerts", true); // Accept permission popups
-                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor.app");
+                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor 5.app");
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForIOS(driver = new IOSDriver(url, caps));

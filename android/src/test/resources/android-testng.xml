@@ -17,7 +17,7 @@
                     <exclude  name="TC_003"/> <!--!!-->
                     <exclude  name="TC_004"/> <!--!!-->
                     <exclude  name="TC_005"/> <!--!!-->
-                    <include name="TC_006"/> <!--!!-->
+                    <exclude name="TC_006"/> <!--!!-->
                     <exclude  name="TC_007"/> <!--!!-->
                     <exclude  name="TC_008"/> <!--!!-->
                     <exclude  name="TC_009"/> <!--!!-->
@@ -29,7 +29,7 @@
                 <methods>
                     <exclude  name="TC_010"/> <!--!!-->
                     <exclude  name="TC_011"/> <!--!!-->
-                    <exclude  name="TC_012"/> <!--!!-->
+                    <include  name="TC_012"/> <!--!!-->
                     <exclude  name="TC_013"/> <!--!!-->
                     <exclude  name="TC_014"/> <!--!!-->
                     <exclude  name="TC_015"/> <!--!!-->
@@ -41,6 +41,7 @@
                     <exclude  name="TC_026"/> <!--!!-->
                     <exclude  name="TC_027"/> <!--Not yet Done-->
                     <exclude  name="TC_028"/> <!--!!-->
+                    <include  name="TC_040"/>
                 </methods>
             </class>
 
