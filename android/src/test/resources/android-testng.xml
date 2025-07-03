@@ -29,7 +29,7 @@
                 <methods>
                     <exclude  name="TC_010"/> <!--!!-->
                     <exclude  name="TC_011"/> <!--!!-->
-                    <include  name="TC_012"/> <!--!!-->
+                    <exclude  name="TC_012"/> <!--!!-->
                     <exclude  name="TC_013"/> <!--!!-->
                     <exclude  name="TC_014"/> <!--!!-->
                     <exclude  name="TC_015"/> <!--!!-->

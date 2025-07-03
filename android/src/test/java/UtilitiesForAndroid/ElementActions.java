@@ -121,4 +121,16 @@ public class ElementActions {
         }
     }
 
+    // Refactored method for comparing two elements' text for equality
+    public static void assertElementsTextEqual(WebDriver driver, By locator1, By locator2, String description1, String description2) {
+        String text1 = driver.findElement(locator1).getText().trim();
+        String text2 = driver.findElement(locator2).getText().trim();
+        LogUtil.info("Comparing text: [" + description1 + "] = \"" + text1 + "\" with [" + description2 + "] = \"" + text2 + "\"");
+        org.testng.Assert.assertEquals(
+            text1,
+            text2,
+            "Text mismatch between " + description1 + " and " + description2
+        );
+    }
+
 }

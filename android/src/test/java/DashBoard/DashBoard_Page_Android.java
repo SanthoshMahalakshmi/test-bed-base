@@ -356,4 +356,28 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_040() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        bs.CoreLoginForAndroid(false);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+
+        elementMap.put(PRIMARY_USER_PROFILE_NAME, PRIMARY_USER_PROFILE_NAME_TASK);
+
+        performActions(elementMap, wait);
+
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+       
+        elementMap2.put(DASHBOARD_BUTTON, DASHBOARD_BUTTON_TASK);
+        
+        elementMap2.put(DASHBOARD_PRIMARY_USER_PROFILE_NAME, DASHBOARD_PRIMARY_USER_PROFILE_NAME_TASK);
+        performActions(elementMap2, wait);
+
+        assertElementsTextEqual(driver, PRIMARY_USER_PROFILE_NAME,DASHBOARD_PRIMARY_USER_PROFILE_NAME, "primary user profile name on profile", "primary user profile name on dashboard");
+    }
+
 }

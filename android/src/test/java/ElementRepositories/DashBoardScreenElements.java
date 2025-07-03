@@ -132,5 +132,9 @@ public class DashBoardScreenElements {
     public static final ElementTask DASHBOARD_ECG_REPORT_CHART_TASK =
             new ElementTask.Builder(Activity.VERIFY, "DashBoard ECG report chart").build();
 
+    /*Primary user profile name in dashboard*/
+    public static final By DASHBOARD_PRIMARY_USER_PROFILE_NAME = AppiumBy.id("com.heartmonitor.android:id/txtUserName");
+    public static final ElementTask DASHBOARD_PRIMARY_USER_PROFILE_NAME_TASK =
+            new ElementTask.Builder(Activity.VERIFY, "primary user profile name on dashboard").build();
 
 }

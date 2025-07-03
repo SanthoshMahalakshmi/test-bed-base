@@ -82,5 +82,10 @@ public class ProfileScreenElements {
     public static final ElementTask MY_REMINDER_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "My Reminder").build();
 
+    
+    public static final By PRIMARY_USER_PROFILE_NAME = AppiumBy.id("com.heartmonitor.android:id/txtUserName");
+    public static final ElementTask PRIMARY_USER_PROFILE_NAME_TASK =
+            new ElementTask.Builder(Activity.VERIFY, "primary user profile name").build();
+
 }
 
