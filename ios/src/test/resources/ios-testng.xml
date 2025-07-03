@@ -33,7 +33,7 @@
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <exclude  name="TC_010"/> <!--Not yet Done-->
+                    <include  name="TC_010"/> <!--Not yet Done-->
                     <exclude  name="TC_011"/> <!--Not Yet Done-->
                     <exclude  name="TC_012"/> <!--Not Yet Done-->
                     <exclude  name="TC_013"/> <!--Not Yet Done-->
@@ -90,9 +90,9 @@
             <class name="AllCoachMark.CoachMark_iOS"> <!--Done-->
                 <methods>
                     <exclude name="TC_036"/> <!--DashBoard Coach mark.-->
-                    <exclude name="TC_037"/> <!--Report coach Mark-->
-                    <exclude name="TC_038"/> <!--Device coach Mark-->
-                    <include name="TC_039"/> <!--Profile coach Mark-->
+                    <exclude name="TC_037"/> <!--Report coach Mark--> <!--!!-->
+                    <exclude name="TC_038"/> <!--Device coach Mark--> <!--!!-->
+                    <exclude name="TC_039"/> <!--Profile coach Mark--> <!--!!-->
                 </methods>
             </class>
 

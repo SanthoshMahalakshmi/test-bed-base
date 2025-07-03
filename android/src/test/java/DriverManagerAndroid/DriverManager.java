@@ -34,6 +34,7 @@ public class DriverManager {
         DriverManager.driver = driver; // Assign to the static driver variable
     }
 
+    @SuppressWarnings("unused")
     @BeforeMethod
     public void initializeDriverForAndroid(ITestResult testResult) throws Exception {
         try {

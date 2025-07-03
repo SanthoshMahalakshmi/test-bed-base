@@ -1,5 +1,6 @@
 package DashBoard;
 
+import Actions.iOSActionType;
 import Actions.iOSElementTask;
 import DriverManagerIos.BaseLoginForiOS;
 import DriverManagerIos.DriverManager;
@@ -18,27 +19,50 @@ import java.util.NoSuchElementException;
 
 import static UtilitiesForIos.iOSElementActions.performIOSActions;
 import static iOSElemenRepositories.iOSDashBoardScreenElements.*;
+import static iOSElemenRepositories.iOSProfileScreenElements.*;
 
 public class DashBoard_Page_Ios extends DriverManager {
 
     BaseLoginForiOS baseLoginForiOS = new BaseLoginForiOS();
 
     @Test
-    public void TC_010() {
-        baseLoginForiOS.BaseLoginForIos(false); // Launch the app
+    public void TC_010()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
+        baseLoginForiOS.BaseLoginForIos(false);
 
+        Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
+
+        iOSElementMap1.put(iOS_MY_DEVICE_BUTTON, iOS_MY_DEVICE_BUTTON_TASK);
+        performIOSActions(iOSElementMap1, wait);
     }
-
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
     public void TC_011() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
+        baseLoginForiOS.BaseLoginForIos(false);
+
         Map<By, iOSElementTask> iOSElementMap1 = new LinkedHashMap<>();
 
+        iOSElementMap1.put(iOS_PlUS, iOS_PlUS_TASK);
+
+        iOSElementMap1.put(iOS_PROFILE_BUTTON, iOS_PROFILE_BUTTON_TASK);
+
+        iOSElementMap1.put(iOS_PROFILE_COACH_MARK_SKIP , iOS_PROFILE_COACH_MARK_SKIP_TASK);
+
+        iOSElementMap1.put(iOS_MY_DEPENDENT_BUTTON, iOS_MY_DEPENDENT_BUTTON_TASK);
+
         performIOSActions(iOSElementMap1, wait);
+
+
+        Map<By, iOSElementTask> iOSElementMap2 = new LinkedHashMap<>();
+
+        iOSElementMap2.put(iOS_DASHBOARD_DEPENDENT_USER, iOS_DASHBOARD_DEPENDENT_USER_TASK);
+
+        performIOSActions(iOSElementMap2, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)
@@ -61,75 +85,10 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //To enter into care circle.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
-            LogUtil.info("Enter into care circle happening..");
-        } catch (Exception e) {
-            LogUtil.warning("Enter into care circle is not happening.");
-        }
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        //Kebab menu clicking to select the edit care circle option
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
-            LogUtil.info("Kebab menu is clicked to access the edit care circle option");
 
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
-            LogUtil.info("Clicking the edit care circle option.");
-
-        } catch (Exception e) {
-            LogUtil.warning("Kebab menu is not clicked to access the edit care circle option");
-            LogUtil.warning("Clicking the edit care circle is not happening.");
-        }
-
-        //Edit the care circle name with less character and Click the submit to get the error for not enough character.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    className("XCUIElementTypeTextField"))).sendKeys("R");
-            LogUtil.info("Care circle name is changed with less character.");
-
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
-            LogUtil.info("clicking the update button with less group name.");
-        } catch (Exception e) {
-            LogUtil.warning("Submit button is not working for getting the error of not enough character for group name.");
-        }
-
-        //Actual error.
-        WebElement error1 = null;
-        try {
-            error1 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Group name at least 5 characters.")));
-            LogUtil.info("Not enough character error : " + error1.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Error message is not pop-up for less character for care circle group name.");
-        }
-
-        //Clearing the input field.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.className("XCUIElementTypeTextField"))).clear();
-            LogUtil.info("Clearing the group name");
-        } catch (Exception e) {
-            LogUtil.warning("Clearing the group name field is not working.");
-        }
-
-        //To get empty input field error, clicking the update.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
-            LogUtil.info("Update click is happen with empty group name");
-        } catch (Exception e) {
-            LogUtil.warning("Update click is not happen with empty group name");
-        }
-
-        //Empty group name error.
-        WebElement error2 = null;
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Please enter group name")));
-            LogUtil.info("Empty input field error : " + error2.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Empty input field error message is not visible.");
-        }
-
+        performIOSActions(iOSElementMap, wait);
     }
 
 
@@ -140,74 +99,9 @@ public class DashBoard_Page_Ios extends DriverManager {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        //To enter into care circle.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic heartHandBlueHomeIcon"))).click();
-            LogUtil.info("Enter into care circle happening..");
-        } catch (Exception e) {
-            LogUtil.warning("Enter into care circle is not happening.");
-        }
+        Map<By, iOSElementTask> iOSElementMap = new LinkedHashMap<>();
 
-        //Allow the permission for accessing the contact list.
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("OK"))).click();
-            LogUtil.info("After clicking the plus to add contact, Permission access is popping-up.");
-        } catch (Exception e) {
-            LogUtil.warning("After clicking the plus to add contact, Permission access is not popping-up");
-        }
-
-        //Kebab menu clicking.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("ic dot menu white"))).click();
-            LogUtil.info("Kebab menu is clicked to access the edit care circle option");
-        } catch (Exception e) {
-            LogUtil.warning("Kebab menu is not clicked to access the edit care circle option");
-        }
-
-        //2.(i)Edit care circle option
-        WebElement Edit_Care_circle = null;
-        try {
-            Edit_Care_circle = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle")));
-            LogUtil.info("Edit care circle option is present " + Edit_Care_circle.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("");
-        }
-
-        //2.(ii)Kebab menu list with set reminder
-        WebElement SetReminder = null;
-        try {
-            SetReminder = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Set Reminders")));
-            LogUtil.info("Set reminder option is present in the list : " + SetReminder.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Set reminder is not visible.");
-        }
-
-        //2.(iii)Kebab menu list with Delete care circle
-        WebElement DeleteCareCircle = null;
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("Delete Care Circle")));
-            LogUtil.info("Delete care circle option is present in the list : " + DeleteCareCircle.isDisplayed());
-        } catch (Exception e) {
-            LogUtil.warning("Delete care circle is not visible");
-        }
-
-        //3.Clicking on the edit care circle option in the kebab menu
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Edit Care Circle"))).click();
-            LogUtil.info("Clicking the edit care circle");
-        } catch (Exception e) {
-            LogUtil.warning("Edit care circle click is not happening.");
-        }
-
-        //4.Clicking on the update to complete the change.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Update\"`]"))).click();
-            LogUtil.info("Care circle is updated with existing values.");
-        } catch (Exception e) {
-            LogUtil.warning("Care circle is not updated with existing values.");
-        }
-
+        performIOSActions(iOSElementMap, wait);
     }
 
     @Test(retryAnalyzer = RetryAnalyzerios.class)

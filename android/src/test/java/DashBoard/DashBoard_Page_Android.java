@@ -1,29 +1,29 @@
 package DashBoard;
 
-import Actions.Activity;
-import Actions.ElementTask;
-import DriverManagerAndroid.BaseLoginForAndroid;
-import DriverManagerAndroid.DriverManager;
-import UtilitiesForAndroid.RetryAnalyzer;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
-
 import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static ElementRepositories.CareCircleScreenElements.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import Actions.Activity;
+import Actions.ElementTask;
+import DriverManagerAndroid.BaseLoginForAndroid;
+import DriverManagerAndroid.DriverManager;
 import static ElementRepositories.CoachMarkScreenElements.*;
 import static ElementRepositories.CommonElements.*;
 import static ElementRepositories.DashBoardScreenElements.*;
 import static ElementRepositories.FeedBackScreenElements.*;
 import static ElementRepositories.MyDependentScreenElements.*;
 import static ElementRepositories.NotificationScreenElements.*;
-import static ElementRepositories.ProfileScreenElements.*;
 import static ElementRepositories.ReportScreenElements.*;
 import static ElementRepositories.SetReminderScreenElements.*;
+import static ElementRepositories.CareCircleScreenElements.*;
 import static UtilitiesForAndroid.ElementActions.*;
+import static ElementRepositories.ProfileScreenElements.*;
+import UtilitiesForAndroid.RetryAnalyzer;
 
 public class DashBoard_Page_Android extends DriverManager {
 
@@ -122,7 +122,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_015() throws Exception {
-        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         bs.CoreLoginForAndroid(false);
 
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
@@ -152,7 +152,7 @@ public class DashBoard_Page_Android extends DriverManager {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_016() throws Exception {
-        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
@@ -198,7 +198,7 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_017() throws Exception {
 
-        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
@@ -229,7 +229,7 @@ public class DashBoard_Page_Android extends DriverManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_018() throws Exception {
 
-        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
@@ -260,11 +260,10 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_019() throws Exception {
 
-        WebDriverWait wait =  new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         bs.CoreLoginForAndroid(false);
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
 
@@ -282,7 +281,6 @@ public class DashBoard_Page_Android extends DriverManager {
 
     }
 
-
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_025() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -294,7 +292,7 @@ public class DashBoard_Page_Android extends DriverManager {
         performActions(elementMap, wait);
 
         Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
-        elementMap2.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK,"Dependent user").build());
+        elementMap2.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent user").build());
         elementMap2.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
         elementMap2.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
         elementMap2.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
@@ -356,6 +354,30 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_ECG_REPORT_CHART, DASHBOARD_ECG_REPORT_CHART_TASK);
         performActions(elementMap, wait);
 
+    }
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void TC_040() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        bs.CoreLoginForAndroid(false);
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+
+        elementMap.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
+
+        elementMap.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
+
+        elementMap.put(PRIMARY_USER_PROFILE_NAME, PRIMARY_USER_PROFILE_NAME_TASK);
+
+        performActions(elementMap, wait);
+
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+       
+        elementMap2.put(DASHBOARD_BUTTON, DASHBOARD_BUTTON_TASK);
+        
+        elementMap2.put(DASHBOARD_PRIMARY_USER_PROFILE_NAME, DASHBOARD_PRIMARY_USER_PROFILE_NAME_TASK);
+        performActions(elementMap2, wait);
+
+        assertElementsTextEqual(driver, PRIMARY_USER_PROFILE_NAME,DASHBOARD_PRIMARY_USER_PROFILE_NAME, "primary user profile name on profile", "primary user profile name on dashboard");
     }
 
 }
