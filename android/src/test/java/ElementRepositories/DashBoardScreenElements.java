@@ -57,10 +57,25 @@ public class DashBoardScreenElements {
     public static final ElementTask DASHBOARD_DEPENDENT_DROPDOWN_TASK =
             new ElementTask.Builder(Activity.CLICK, "dashBoard dependent drop down").build();
 
-    /*Dependent user*/
-    public static final By DASHBOARD_DEPENDENT_USER = AppiumBy.id("com.heartmonitor.android:id/depName");
-    public static final ElementTask DASHBOARD_DEPENDENT_USER_TASK =
-            new ElementTask.Builder(Activity.VERIFY, "dependent user").build();
+    /*Dependent user-1*/
+    public static final By DASHBOARD_DEPENDENT_USER_1 = AppiumBy.androidUIAutomator("new UiSelector().text(\"Paolo Maldini\")");
+    public static final ElementTask DASHBOARD_DEPENDENT_USER_1_TASK =
+            new ElementTask.Builder(Activity.CLICK, "dependent user-1: Paolo Maldini").build();
+
+    /*Dependent user-2*/
+    public static final By DASHBOARD_DEPENDENT_USER_2 = AppiumBy.androidUIAutomator("new UiSelector().text(\"Franco Baresi\")");
+    public static final ElementTask DASHBOARD_DEPENDENT_USER_2_TASK =
+            new ElementTask.Builder(Activity.CLICK, "dependent user-2: Franco Baresi").build();
+
+    /*Dependent user-3*/
+    public static final By DASHBOARD_DEPENDENT_USER_3 = AppiumBy.androidUIAutomator("new UiSelector().text(\"Franz Beckenbauer\")");
+    public static final ElementTask DASHBOARD_DEPENDENT_USER_3_TASK =
+            new ElementTask.Builder(Activity.CLICK, "dependent user-3: Franz Beckenbauer").build();
+
+    /*Dependent user-4*/
+    public static final By DASHBOARD_DEPENDENT_USER_4 = AppiumBy.androidUIAutomator("new UiSelector().text(\"Ramos Sergio\")");
+    public static final ElementTask DASHBOARD_DEPENDENT_USER_4_TASK =
+            new ElementTask.Builder(Activity.CLICK, "dependent user-4: Ramos Sergio").build();
 
     /*Care Circle label*/
     public static final By DASHBOARD_CARE_CIRCLE_LABEL = AppiumBy.id("com.heartmonitor.android:id/txtCareCirclesLabel");
@@ -137,4 +152,8 @@ public class DashBoardScreenElements {
     public static final ElementTask DASHBOARD_PRIMARY_USER_PROFILE_NAME_TASK =
             new ElementTask.Builder(Activity.VERIFY, "primary user profile name on dashboard").build();
 
+    /*Dependent user profile name.*/
+    public static final By DASHBOARD_DEPENDENT_USER_PROFILE_NAME = AppiumBy.id("com.heartmonitor.android:id/txtUserName");
+    public static final ElementTask DASHBOARD_DEPENDENT_USER_PROFILE_NAME_TASK =
+            new ElementTask.Builder(Activity.VERIFY, "Dependent user profile name").build();
 }
