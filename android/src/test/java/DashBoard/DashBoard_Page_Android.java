@@ -61,7 +61,7 @@ public class DashBoard_Page_Android extends DriverManager {
         elementMap.put(DASHBOARD_DEPENDENT_LABEL, DASHBOARD_DEPENDENT_LABEL_TASK);
         elementMap.put(DASHBOARD_DEPENDENT_BUTTON, DASHBOARD_DEPENDENT_BUTTON_TASK);
         elementMap.put(BACK_BUTTON, BACK_BUTTON_TASK);
-        elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
+        elementMap.put(DASHBOARD_DEPENDENT_USER_1, new ElementTask.Builder(Activity.CLICK, "Dependent profile click").build());
         elementMap.put(COACH_MARK_FINISH_BUTTON, COACH_MARK_FINISH_BUTTON_TASK);
         elementMap.put(BLOOD_PRESSURE_TAB, new ElementTask.Builder(Activity.VERIFY, "Blood pressure tab").build());
         elementMap.put(DOWNLOAD_BUTTON, new ElementTask.Builder(Activity.VERIFY, "Download button").build());
@@ -288,11 +288,11 @@ public class DashBoard_Page_Android extends DriverManager {
 
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         elementMap.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
-        elementMap.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.VERIFY, "Dependent User").build());
+        elementMap.put(DASHBOARD_DEPENDENT_USER_1, new ElementTask.Builder(Activity.VERIFY, "Dependent User").build());
         performActions(elementMap, wait);
 
         Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
-        elementMap2.put(DASHBOARD_DEPENDENT_USER, new ElementTask.Builder(Activity.CLICK, "Dependent user").build());
+        elementMap2.put(DASHBOARD_DEPENDENT_USER_1, new ElementTask.Builder(Activity.CLICK, "Dependent user").build());
         elementMap2.put(PROFILE_BUTTON, PROFILE_BUTTON_TASK);
         elementMap2.put(PROFILE_COACH_MARK_SKIP, PROFILE_COACH_MARK_SKIP_TASK);
         elementMap2.put(MY_DEPENDENT_BUTTON, MY_DEPENDENT_BUTTON_TASK);
@@ -378,6 +378,41 @@ public class DashBoard_Page_Android extends DriverManager {
         performActions(elementMap2, wait);
 
         assertElementsTextEqual(driver, PRIMARY_USER_PROFILE_NAME,DASHBOARD_PRIMARY_USER_PROFILE_NAME, "primary user profile name on profile", "primary user profile name on dashboard");
+    }
+
+    @Test
+    public void TC_041() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(false);
+
+        Map<By, ElementTask> elementMap1 = new LinkedHashMap<>();
+        elementMap1.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
+        elementMap1.put(DASHBOARD_DEPENDENT_USER_1, DASHBOARD_DEPENDENT_USER_1_TASK);
+        elementMap1.put(DASHBOARD_DEPENDENT_USER_PROFILE_NAME, DASHBOARD_DEPENDENT_USER_PROFILE_NAME_TASK);
+        performActions(elementMap1, wait);
+        assertElementsTextEqual(driver, DASHBOARD_DEPENDENT_USER_1, DASHBOARD_DEPENDENT_USER_PROFILE_NAME, "Dependent user name in dashboard", "Dependent user name in dropDown");
+
+        Map<By, ElementTask> elementMap2 = new LinkedHashMap<>();
+        elementMap2.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
+        elementMap2.put(DASHBOARD_DEPENDENT_USER_2, DASHBOARD_DEPENDENT_USER_2_TASK);
+        elementMap2.put(DASHBOARD_DEPENDENT_USER_PROFILE_NAME, DASHBOARD_DEPENDENT_USER_PROFILE_NAME_TASK);
+        performActions(elementMap2, wait);
+        assertElementsTextEqual(driver, DASHBOARD_DEPENDENT_USER_2, DASHBOARD_DEPENDENT_USER_PROFILE_NAME, "Dependent user name in dashboard", "Dependent user name in dropDown");
+
+        Map<By, ElementTask> elementMap3 = new LinkedHashMap<>();
+        elementMap3.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
+        elementMap3.put(DASHBOARD_DEPENDENT_USER_3, DASHBOARD_DEPENDENT_USER_3_TASK);
+        elementMap3.put(DASHBOARD_DEPENDENT_USER_PROFILE_NAME, DASHBOARD_DEPENDENT_USER_PROFILE_NAME_TASK);
+        performActions(elementMap3, wait);
+        assertElementsTextEqual(driver, DASHBOARD_DEPENDENT_USER_3, DASHBOARD_DEPENDENT_USER_PROFILE_NAME, "Dependent user name in dashboard", "Dependent user name in dropDown");
+
+        Map<By, ElementTask> elementMap4 = new LinkedHashMap<>();
+        elementMap4.put(DASHBOARD_DEPENDENT_DROPDOWN, DASHBOARD_DEPENDENT_DROPDOWN_TASK);
+        elementMap4.put(DASHBOARD_DEPENDENT_USER_4, DASHBOARD_DEPENDENT_USER_4_TASK);
+        elementMap4.put(DASHBOARD_DEPENDENT_USER_PROFILE_NAME, DASHBOARD_DEPENDENT_USER_PROFILE_NAME_TASK);
+        performActions(elementMap4, wait);
+        assertElementsTextEqual(driver, DASHBOARD_DEPENDENT_USER_4, DASHBOARD_DEPENDENT_USER_PROFILE_NAME, "Dependent user name in dashboard", "Dependent user name in dropDown");
+
     }
 
 }
