@@ -39,10 +39,10 @@
                     <exclude  name="TC_019"/> <!--!!-->
                     <exclude  name="TC_025"/> <!--!!-->
                     <exclude  name="TC_026"/> <!--!!-->
-                    <exclude  name="TC_027"/> <!--Not yet Done-->
+                    <include  name="TC_027"/>
                     <exclude  name="TC_028"/> <!--!!-->
                     <exclude  name="TC_040"/> <!--!!-->
-                    <include  name="TC_041"/>
+                    <exclude  name="TC_041"/> <!--!!-->
                 </methods>
             </class>
 

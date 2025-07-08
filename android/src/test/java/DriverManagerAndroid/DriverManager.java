@@ -22,7 +22,7 @@ public class DriverManager {
 
     private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
-    protected static AppiumDriver getDriver() {
+    public static AppiumDriver getDriver() {
         LogUtil.info("getDriver()" + appiumDriverThreadLocal.get());
         return appiumDriverThreadLocal.get();
     }

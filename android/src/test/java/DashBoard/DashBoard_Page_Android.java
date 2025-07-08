@@ -326,10 +326,18 @@ public class DashBoard_Page_Android extends DriverManager {
     public void TC_027() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         bs.CoreLoginForAndroid(false);  //basic login scenario
+
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         elementMap.put(REMINDER_PLUS_BUTTON, REMINDER_PLUS_BUTTON_TASK);
+        elementMap.put(DONE_BUTTON, DONE_BUTTON_TASK);
+        elementMap.put(REMINDER_NAME, REMINDER_NAME_TASK);
+        elementMap.put(MON_BUTTON, MON_BUTTON_TASK);
+        elementMap.put(SAT_BUTTON, SAT_BUTTON_TASK);
+        elementMap.put(ADD_TIME_BUTTON, ADD_TIME_BUTTON_TASK);
+        elementMap.put(MODEL_CLOSE_OK_BUTTON, MODEL_CLOSE_OK_BUTTON_TASK);
+        elementMap.put(PERSONAL_NOTE_INPUT_FIELD, PERSONAL_NOTE_INPUT_FIELD_TASK);
+        elementMap.put(SET_REMINDER_BUTTON, SET_REMINDER_BUTTON_TASK);
         performActions(elementMap, wait);
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -414,5 +422,4 @@ public class DashBoard_Page_Android extends DriverManager {
         assertElementsTextEqual(driver, DASHBOARD_DEPENDENT_USER_4, DASHBOARD_DEPENDENT_USER_PROFILE_NAME, "Dependent user name in dashboard", "Dependent user name in dropDown");
 
     }
-
 }

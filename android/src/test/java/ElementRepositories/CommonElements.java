@@ -53,7 +53,9 @@ public class CommonElements {
             new ElementTask.Builder(Activity.CLICK, "Report Option").build();
 
     /*Reminder Plus button*/
-    public static final By REMINDER_PLUS_BUTTON = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.heartmonitor.android:id/imgAddReminder\")");
+    static String resourceId = "com.heartmonitor.android:id/imgAddReminder";
+    static String uiScrollScript = "new UiScrollable(new UiSelector().scrollable(true))" + ".scrollIntoView(new UiSelector().resourceId(\"" + resourceId + "\"))";
+    public static final By REMINDER_PLUS_BUTTON = AppiumBy.androidUIAutomator(uiScrollScript);
     public static final ElementTask REMINDER_PLUS_BUTTON_TASK =
             new ElementTask.Builder(Activity.CLICK, "Reminder add").build();
 
