@@ -2,7 +2,9 @@ package UtilitiesForAndroid;
 
 import Actions.Activity;
 import Actions.ElementTask;
+import DriverManagerAndroid.DriverManager;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,6 +40,8 @@ public class ElementActions {
                         case SEND_KEYS:
                             sendKeysToElement(element, wait, description, task.getInputValue());
                             break;
+                        case SCROLL_TO_ELEMENT:
+                            scrollToMobileElement(locator,wait, description);
                         default:
                             throw new UnsupportedOperationException("Unsupported action: " + action);
                     }
@@ -121,7 +125,6 @@ public class ElementActions {
         }
     }
 
-    // Refactored method for comparing two elements' text for equality
     public static void assertElementsTextEqual(WebDriver driver, By locator1, By locator2, String description1, String description2) {
         String text1 = driver.findElement(locator1).getText().trim();
         String text2 = driver.findElement(locator2).getText().trim();
@@ -131,6 +134,36 @@ public class ElementActions {
             text2,
             "Text mismatch between " + description1 + " and " + description2
         );
+    }
+
+    private static void scrollToMobileElement(By locator, WebDriverWait wait, String description) {
+        try {
+            AndroidDriver driver = (AndroidDriver) DriverManager.getDriver();
+
+            // First attempt direct scroll via UiScrollable if possible
+            String scrollableCommand = "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(" +
+                    "new UiSelector()." + getLocatorStrategy(locator) + "(\"" + getLocatorValue(locator) + "\"))";
+
+            driver.findElement(AppiumBy.androidUIAutomator(scrollableCommand));
+
+            LogUtil.info("✅ Scrolled to element [" + description + "]");
+        } catch (Exception e) {
+            LogUtil.warning("❌ Failed to scroll to [" + description + "] - " + e.getMessage());
+            throw new RuntimeException("❌ Scroll action failed for [" + description + "]", e);
+        }
+    }
+
+    private static String getLocatorStrategy(By locator) {
+        String locatorStr = locator.toString();
+        if (locatorStr.contains("resourceId")) return "resourceId";
+        if (locatorStr.contains("text")) return "text";
+        if (locatorStr.contains("description") || locatorStr.contains("accessibilityId")) return "description";
+        throw new IllegalArgumentException("Unsupported locator strategy: " + locatorStr);
+    }
+
+    private static String getLocatorValue(By locator) {
+        String locatorStr = locator.toString();
+        return locatorStr.substring(locatorStr.indexOf(": ") + 2).replace("\"", "").trim();
     }
 
 }

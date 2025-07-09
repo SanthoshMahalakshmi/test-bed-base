@@ -35,7 +35,7 @@ public class SetReminderScreenElements {
     /*Reminder name input field*/
     public static final By REMINDER_NAME = AppiumBy.id("com.heartmonitor.android:id/edtReminderName");
     public static final ElementTask REMINDER_NAME_TASK =
-            new ElementTask.Builder(Activity.SEND_KEYS, "Reminder name input").inputValue("Reminder for HR").build();
+            new ElementTask.Builder(Activity.SEND_KEYS, "Reminder name input").inputValue("Reminder: BP(or)HR(or)ECG(or)Spo2").build();
 
     /*All days check box*/
     public static final By ALL_DAYS_CHECKBOX = AppiumBy.id("com.heartmonitor.android:id/checkRepeat");
@@ -65,7 +65,7 @@ public class SetReminderScreenElements {
     /*Personal note input field.*/
     public static final By PERSONAL_NOTE_INPUT_FIELD = AppiumBy.id("com.heartmonitor.android:id/edtPersonalNotes");
     public static final ElementTask PERSONAL_NOTE_INPUT_FIELD_TASK =
-            new ElementTask.Builder(Activity.SEND_KEYS, "Personal note input field").inputValue("Reminder for care circle user").build();
+            new ElementTask.Builder(Activity.SEND_KEYS, "Personal note input field").inputValue("Reminder for care circle user.").build();
 
     /*Set reminder Button*/
     public static final By SET_REMINDER_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtSetReminder");
