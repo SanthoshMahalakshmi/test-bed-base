@@ -1,5 +1,6 @@
 package Devices;
 
+import Actions.Activity;
 import Actions.ElementTask;
 import DriverManagerAndroid.BaseLoginForAndroid;
 import DriverManagerAndroid.DriverManager;
@@ -41,54 +42,16 @@ public class Devices_Page_Android extends DriverManager {
     @Test
     public void TC_024() throws Exception {
 
-        LogUtil.info("Enter into TC_024");
-
-        TC_023(); // to connect with device
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        bs.CoreLoginForAndroid(false);
 
-        //Clicking the device section
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Devices"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Device connection is not happening.");
-        }
-
-        //Verify the burger menu is clickable.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("com.heartmonitor.android:id/imgMenu"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Clicking Burger menu is not working.");
-        }
-
-        //Disconnect the device
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.
-                    androidUIAutomator("new UiSelector().text(\"Disconnect Device\")"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Disconnecting device is not happening.");
-        }
-
-        //Confirmation of disconnect the device
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Confirmation of disconnect is not happening.");
-        }
-
-        //Verify the devices is disconnected by clicking burger menu.
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/message")));
-            WebElement message = driver.findElement(AppiumBy.id("android:id/message"));
-            LogUtil.info("Disconnected message : " + message.getText());
-        } catch (Exception e) {
-            LogUtil.warning("Device disconnect verification fail.");
-        }
-
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.id("android:id/button1"))).click();
-        } catch (Exception e) {
-            LogUtil.warning("Ok confirmation is not happening.");
-        }
+        Map<By, ElementTask> elementMap = new LinkedHashMap<>();
+        elementMap.put(DEVICE_BUTTON, DEVICE_BUTTON_TASK);
+        elementMap.put(DEVICE_COACH_MARK_FINISH_BUTTON, DEVICE_COACH_MARK_FINISH_BUTTON_TASK);
+        elementMap.put(DEVICE_KEBAB_MENU, DEVICE_KEBAB_MENU_TASK);
+        elementMap.put(DELETE_DEVICE_OPTION, new ElementTask.Builder(Activity.CLICK, "Delete Option").build());
+        elementMap.put(MODEL_TEXT, MODEL_TEXT_TASK);
+        elementMap.put(MODEL_CLOSE_CANCEL_BUTTON, MODEL_CLOSE_CANCEL_BUTTON_TASK);
+        performActions(elementMap, wait);
     }
 }

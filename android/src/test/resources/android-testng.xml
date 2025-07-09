@@ -76,8 +76,8 @@
             <!--Device connection-->
             <class name="Devices.Devices_Page_Android"> <!--In-Progress-->
                 <methods>
-                    <include  name="TC_023"/> <!--Only for real device-->
-                    <exclude  name="TC_024"/> <!--Only for real device-->
+                    <exclude  name="TC_023"/> <!--!!-->
+                    <include  name="TC_024"/> <!--Only for real device-->
                 </methods>
             </class>
 
