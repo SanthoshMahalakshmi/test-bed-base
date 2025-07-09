@@ -4,20 +4,20 @@
 
         <classes>
             <!--Welcome page-->
-            <class name="Welcome.Welcome_Page_Android" >
+            <class name="Welcome.Welcome_Page_Android" > <!--Done-->
                 <methods>
                     <exclude name="TC_001"/> <!--!!-->
                 </methods>
             </class>
 
             <!--Login pages-->
-            <class name="Login.Login_Page_Android">
+            <class name="Login.Login_Page_Android"> <!--Done-->
                 <methods>
                     <exclude  name="TC_002"/> <!--!!-->
                     <exclude  name="TC_003"/> <!--!!-->
                     <exclude  name="TC_004"/> <!--!!-->
                     <exclude  name="TC_005"/> <!--!!-->
-                    <exclude name="TC_006"/> <!--!!-->
+                    <exclude  name="TC_006"/> <!--!!-->
                     <exclude  name="TC_007"/> <!--!!-->
                     <exclude  name="TC_008"/> <!--!!-->
                     <exclude  name="TC_009"/> <!--!!-->
@@ -25,7 +25,7 @@
             </class>
 
             <!--Dashboard section-->
-            <class name="DashBoard.DashBoard_Page_Android">
+            <class name="DashBoard.DashBoard_Page_Android"> <!--Done-->
                 <methods>
                     <exclude  name="TC_010"/> <!--!!-->
                     <exclude  name="TC_011"/> <!--!!-->
@@ -39,14 +39,14 @@
                     <exclude  name="TC_019"/> <!--!!-->
                     <exclude  name="TC_025"/> <!--!!-->
                     <exclude  name="TC_026"/> <!--!!-->
-                    <include  name="TC_027"/>
+                    <exclude  name="TC_027"/> <!--!!-->
                     <exclude  name="TC_028"/> <!--!!-->
                     <exclude  name="TC_040"/> <!--!!-->
                     <exclude  name="TC_041"/> <!--!!-->
                 </methods>
             </class>
 
-            <class name="Profile.Profile_Page_Android">
+            <class name="Profile.Profile_Page_Android"> <!--Done-->
                 <methods>
                     <exclude  name="TC_029"/> <!--!!-->
                     <exclude  name="TC_030"/> <!--!!-->
@@ -74,10 +74,10 @@
             </class>
 
             <!--Device connection-->
-            <class name="Devices.Devices_Page_Android"> <!--Done-->
+            <class name="Devices.Devices_Page_Android"> <!--In-Progress-->
                 <methods>
-                    <exclude  name="TC_023"/> <!--Only for real device-->
-                    <exclude  name="TC_024"/> <!--Only for real device-->
+                    <exclude  name="TC_023"/> <!--!!-->
+                    <include  name="TC_024"/> <!--Only for real device-->
                 </methods>
             </class>
 
