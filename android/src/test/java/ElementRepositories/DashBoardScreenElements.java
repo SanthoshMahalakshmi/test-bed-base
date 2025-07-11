@@ -78,14 +78,14 @@ public class DashBoardScreenElements {
             new ElementTask.Builder(Activity.CLICK, "dependent user-4: Ramos Sergio").build();
 
     /*Care Circle label*/
-    public static final By DASHBOARD_CARE_CIRCLE_LABEL = AppiumBy.id("com.heartmonitor.android:id/txtCareCirclesLabel");
+    public static final By DASHBOARD_CARE_CIRCLE_LABEL = AppiumBy.id("com.heartmonitor.android:id/myCCText");
     public static final ElementTask DASHBOARD_CARE_CIRCLE_LABEL_TASK =
             new ElementTask.Builder(Activity.VERIFY, "Care circle label").build();
 
     /*Care Circle get started button*/
-    public static final By DASHBOARD_CARE_CIRCLE_GET_STARTED = AppiumBy.id("com.heartmonitor.android:id/txtCareCircle");
-    public static final ElementTask DASHBOARD_CARE_CIRCLE_GET_STARTED_TASK =
-            new ElementTask.Builder(Activity.CLICK, "Care circle get started").build();
+    public static final By DASHBOARD_CARE_CIRCLE_PLUS_BUTTON = AppiumBy.id("com.heartmonitor.android:id/txtCareCircle");
+    public static final ElementTask DASHBOARD_CARE_CIRCLE_PLUS_BUTTON_TASK =
+            new ElementTask.Builder(Activity.CLICK, "Care circle plus").build();
 
     /*Actual care circle group*/
     public static final By DASHBOARD_CARE_CIRCLE = AppiumBy.id("com.heartmonitor.android:id/imgOtherProfile");

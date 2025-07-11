@@ -77,7 +77,7 @@ public class DashBoard_Page_Android extends DriverManager {
         Map<By, ElementTask> elementMap = new LinkedHashMap<>();
         /*Actual test case*/
         elementMap.put(DASHBOARD_CARE_CIRCLE_LABEL, DASHBOARD_CARE_CIRCLE_LABEL_TASK);
-        elementMap.put(DASHBOARD_CARE_CIRCLE_GET_STARTED, DASHBOARD_CARE_CIRCLE_GET_STARTED_TASK);
+        elementMap.put(DASHBOARD_CARE_CIRCLE_PLUS_BUTTON, DASHBOARD_CARE_CIRCLE_PLUS_BUTTON_TASK);
         elementMap.put(ACCESS_CONTACT_DENY_BUTTON, ACCESS_CONTACT_DENY_BUTTON_TASK);
         elementMap.put(TOAST_CLOSE, TOAST_CLOSE_TASK);
         elementMap.put(CARE_CIRCLE_LABEL, CARE_CIRCLE_LABEL_TASK);
