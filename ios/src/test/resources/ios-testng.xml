@@ -33,7 +33,7 @@
             <!--Dashboard section-->
             <class name="DashBoard.DashBoard_Page_Ios">
                 <methods>
-                    <include  name="TC_010"/> <!--Not yet Done-->
+                    <exclude  name="TC_010"/> <!--Not yet Done-->
                     <exclude  name="TC_011"/> <!--Not Yet Done-->
                     <exclude  name="TC_012"/> <!--Not Yet Done-->
                     <exclude  name="TC_013"/> <!--Not Yet Done-->
@@ -82,7 +82,7 @@
             <class name="Devices.Devices_Page_Ios"> <!--Done-->
                 <methods>
                     <exclude  name="TC_023"/> <!--Only for real device-->
-                    <exclude  name="TC_024"/> <!--Only for real device-->
+                    <include  name="TC_024"/> <!--Only for real device-->
                 </methods>
             </class>
 

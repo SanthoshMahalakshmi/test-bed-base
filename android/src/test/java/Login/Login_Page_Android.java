@@ -206,7 +206,7 @@ public class Login_Page_Android extends DriverManager {
     }
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, enabled = true, groups = {"FirstTime login page"})
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void TC_008() throws Exception {
 
         bs.CoreLoginForAndroid(false);
@@ -239,7 +239,6 @@ public class Login_Page_Android extends DriverManager {
                         btn.click();
                         LogUtil.info("Clicked Continue button using locator: " + locator);
                         clicked = true;
-                        Thread.sleep(5000); // Wait for page transition
                         clickCount++;
                         break;
                     }
