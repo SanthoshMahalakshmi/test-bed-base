@@ -1,40 +1,40 @@
-#name: BrowserStack TestNG Tests on Final Branch
-#on:
-#  push:
-#    branches:
-#      - Final
-#jobs:
-#  test:
-#    runs-on: [self-hosted, Test_Bed]
-#    steps:
-#
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Cache Maven dependencies
-#        uses: actions/cache@v2
-#        with:
-#          path: ~/.m2/repository
-#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#          restore-keys: |
-#            ${{ runner.os }}-maven-
-#
-#      - name: Run Tests on BrowserStack(android)
-#        run: |
-#          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
-#          export PATH=$JAVA_HOME/bin:$PATH
-#          export PATH="~/apache-maven-3.9.9/bin:$PATH"
-#          cd android
-#          mvn test
-#        env:
-#          USER_NAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-#          ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-#          APP: ${{secrets.APP}}
-#      - name: Run Tests on BrowserStack(ios)
-#        run: |
-#          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
-#          export PATH=$JAVA_HOME/bin:$PATH
-#          export PATH="~/apache-maven-3.9.9/bin:$PATH"
-#          cd ios
-#          mvn test
-#
+name: BrowserStack TestNG Tests on Final Branch
+on:
+  push:
+    branches:
+      - Final
+jobs:
+  test:
+    runs-on: [self-hosted, Test_Bed]
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Run Tests on BrowserStack(android)
+        run: |
+          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
+          export PATH=$JAVA_HOME/bin:$PATH
+          export PATH="~/apache-maven-3.9.9/bin:$PATH"
+          cd android
+          mvn test
+        env:
+          USER_NAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          APP: ${{secrets.APP}}
+      - name: Run Tests on BrowserStack(ios)
+        run: |
+          export JAVA_HOME=/usr/lib/jvm/jdk-23.0.1
+          export PATH=$JAVA_HOME/bin:$PATH
+          export PATH="~/apache-maven-3.9.9/bin:$PATH"
+          cd ios
+          mvn test
+

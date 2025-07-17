@@ -32,15 +32,6 @@ public class DriverManager {
         DriverManager.driver = driver; // Assign to the static driver variable
     }
 
-    @SuppressWarnings("unchecked")
-    private Map<String, String> getPlatformDetails(Map<String, Object> config) {
-        List<Object> platformsList = (List<Object>) config.get("platforms");
-        if (platformsList == null || platformsList.isEmpty()) {
-            throw new IllegalArgumentException("No platforms defined in the configuration.");
-        }
-        return (Map<String, String>) platformsList.get(0);
-    }
-
     @BeforeMethod
     public void initializeDriverForIOS(ITestResult testResult) throws Exception {
         try {
@@ -76,9 +67,9 @@ public class DriverManager {
                 // Step 1: Use a temporary driver to uninstall app if already installed
                 DesiredCapabilities tempCaps = new DesiredCapabilities();
                 tempCaps.setCapability("platformName", "iOS");
-                tempCaps.setCapability("deviceName", "iPhone 16 Pro");
-                tempCaps.setCapability("udid", "54CCE476-1545-4764-980E-7A64215EB071");
-                tempCaps.setCapability("platformVersion", "18.3");
+                tempCaps.setCapability("deviceName", "iPhone 16 Pro Max");
+                tempCaps.setCapability("udid", "5D31EB65-EC00-481E-AC53-E556EAACB83B");
+                tempCaps.setCapability("platformVersion", "18.5");
                 tempCaps.setCapability("automationName", "XCUITest");
 
                 IOSDriver tempDriver = new IOSDriver(new URL(AppiumServerUrl), tempCaps);
@@ -86,22 +77,12 @@ public class DriverManager {
                 if (tempDriver.isAppInstalled(bundleId)) {
                     LogUtil.info("🔁 App already installed. Uninstalling...");
                     tempDriver.removeApp(bundleId);
-                    Thread.sleep(1000);
                 }
 
                 tempDriver.quit();
 
                 // Step 2: Set up real capabilities
-                DesiredCapabilities caps = new DesiredCapabilities();
-                caps.setCapability("platformName", "iOS");
-                caps.setCapability("deviceName", "iPhone 16 Pro");
-                caps.setCapability("udid", "54CCE476-1545-4764-980E-7A64215EB071");
-                caps.setCapability("platformVersion", "18.3");
-                caps.setCapability("automationName", "XCUITest");
-                caps.setCapability("bundleId", bundleId);
-                caps.setCapability("noReset", false); // Force clean install
-                caps.setCapability("autoAcceptAlerts", true); // Accept permission popups
-                caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor 5.app");
+                DesiredCapabilities caps = getDesiredCapabilities(bundleId);
 
                 URL url = new URL(AppiumServerUrl);
                 setDriverForIOS(driver = new IOSDriver(url, caps));
@@ -155,6 +136,20 @@ public class DriverManager {
         }
     }
 
+    private static DesiredCapabilities getDesiredCapabilities(String bundleId) {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("platformName", "iOS");
+        caps.setCapability("deviceName", "iPhone 16 Pro Max");
+        caps.setCapability("udid", "5D31EB65-EC00-481E-AC53-E556EAACB83B");
+        caps.setCapability("platformVersion", "18.5");
+        caps.setCapability("automationName", "XCUITest");
+        caps.setCapability("bundleId", bundleId);
+        caps.setCapability("noReset", false); // Force clean install
+        caps.setCapability("autoAcceptAlerts", true); // Accept permission popups
+        caps.setCapability("appium:app", "/Users/San/Downloads/Apps/Monitor 5.app");
+        return caps;
+    }
+
     @AfterMethod(alwaysRun = true)
     public void quitDriver(ITestResult testResult) {
         String testName = testResult.getMethod().getMethodName();
@@ -181,8 +176,6 @@ public class DriverManager {
                     }
 
                     try {
-                        // Wait a second before uninstall
-                        Thread.sleep(1000);
                         boolean removed = iosDriver.removeApp(bundleId);
                        LogUtil.info("🧹 App uninstalled: " + removed);
                     } catch (Exception e) {

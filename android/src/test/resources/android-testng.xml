@@ -6,14 +6,14 @@
             <!--Welcome page-->
             <class name="Welcome.Welcome_Page_Android" > <!--Done-->
                 <methods>
-                    <exclude name="TC_001"/> <!--!!-->
+                    <include name="TC_001"/> <!--!!-->
                 </methods>
             </class>
 
             <!--Login pages-->
             <class name="Login.Login_Page_Android"> <!--Done-->
                 <methods>
-                    <exclude  name="TC_002"/> <!--!!-->
+                    <include  name="TC_002"/> <!--!!-->
                     <exclude  name="TC_003"/> <!--!!-->
                     <exclude  name="TC_004"/> <!--!!-->
                     <exclude  name="TC_005"/> <!--!!-->
@@ -77,7 +77,7 @@
             <class name="Devices.Devices_Page_Android"> <!--In-Progress-->
                 <methods>
                     <exclude  name="TC_023"/> <!--!!-->
-                    <include  name="TC_024"/> <!--Only for real device-->
+                    <exclude  name="TC_024"/> <!--!!-->
                 </methods>
             </class>
 

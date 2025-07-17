@@ -22,6 +22,11 @@ public class iOSCommonElements {
     public static final iOSElementTask iOS_MODEL_CLOSE_CANCEL_BUTTON_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Model Confirm: Cancel").build();
 
+    /*Delete Device alert Model Text*/
+    public static final By iOS_DELETE_MODEL_TEXT = AppiumBy.accessibilityId("Are you sure want to delete device?");
+    public static final iOSElementTask iOS_DELETE_MODEL_TEXT_TASK =
+            new iOSElementTask.Builder(iOSActionType.VERIFY, "Delete Device Model text").build();
+
     /*Continue Button*/
     public static final By iOS_CONTINUE_BUTTON = AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Continue\"`]");
     public static final iOSElementTask iOS_CONTINUE_BUTTON_TASK =
@@ -41,4 +46,9 @@ public class iOSCommonElements {
     public static final By iOS_REPORT_SECTION = AppiumBy.accessibilityId("ic_report");
     public static final iOSElementTask iOS_REPORT_SECTION_TASK =
             new iOSElementTask.Builder(iOSActionType.CLICK, "Report Section").build();
+
+    /*Device section*/
+    public static final By iOS_DEVICE_SECTION = AppiumBy.accessibilityId("ic_device");
+    public static final iOSElementTask iOS_iOS_DEVICE_SECTION_TASK =
+            new iOSElementTask.Builder(iOSActionType.CLICK, "Device Section").build();
 }
